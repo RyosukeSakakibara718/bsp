@@ -1,3 +1,37 @@
-# bsp
-A project management tool that allows managers to track member work hours and calculate/forecast gross profit based on the tracked data. This app helps in efficient resource allocation and profitability analysis.
+# 案件概要
 
+### 目的
+* 粗利計算を自動で正確に行いたい
+
+### 課題
+* 手入力のため手間がかかる
+* メンバー毎の工数見れない
+* メンバー毎の単価が正確ではない
+
+### 必要な機能
+* freeeからの自動入力
+* グラフ化
+    * 原価
+* メンバー毎の単価入力機能
+* メンバー毎の工数取得機能(バッチ)
+* メンバー毎の原価取得機能
+* コメントのアーカイブ機能
+
+### 必要な画面
+* ログイン画面(SSO)
+* 案件情報画面(ホーム画面)
+* ユーザー管理画面
+* メンバー管理画面
+* 案件登録・編集画面
+
+### 必要なAPI
+* 案件 C・R・U・D
+* メンバー (C)・R・(U)・(D)
+* ユーザー U
+
+### DB - postgreSQL
+* users
+* projects
+* members
+* accounts
+* comments
