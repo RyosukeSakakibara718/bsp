@@ -1,13 +1,11 @@
-version: "3"
-
+version: '3'
 services:
-  # # webサーバー
-  front:
+  frontend:
     build:
-      dockerfile: ./frontend/Dockerfile
-    volumes:
-      - ./frontend/src:/usr/src/app
-      - /usr/src/app/node_modules
-    command: 'yarn dev'
+      context: .
+      dockerfile: docker/frontend/Dockerfile
     ports:
-      - "8000:3000"
+      - "127.0.0.1:5173:5173"
+    volumes:
+      - ./frontend:/usr/src/app/  # ホストマシンのfrontendディレクトリをコンテナの/usr/src/app/frontendにマウント
+      - /usr/src/app/node_modules

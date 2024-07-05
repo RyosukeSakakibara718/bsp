@@ -1,17 +1,20 @@
 # ベースイメージとして公式のnodeイメージを使用
 FROM node:20
 
-# アプリケーションのディレクトリを作成
-WORKDIR /usr/src/app
+# 作業ディレクトリを設定
+WORKDIR /usr/src/app/
 
-# package.jsonとpackage-lock.jsonをコピー
-COPY ../../frontend/package.json .
+# frontendディレクトリ内のpackage.jsonとpackage-lock.jsonをコピー
+COPY ./frontend/package.json ./ 
 
 # 必要なパッケージをインストール
 RUN npm install
 
-# アプリケーションのソースコードをコピー
-COPY ../../frontend/src .
+# frontendディレクトリ内のソースコードをコピー
+COPY ./frontend/src ./src
 
 # アプリケーションを起動するコマンドを指定
-CMD [ "npm", "run", "dev" ]
+ENTRYPOINT ["npm", "run", "dev"]
+
+# ポートを127.0.0.1:5173にバインドする
+EXPOSE 5173
