@@ -1,0 +1,13 @@
+version: "3"
+
+services:
+  # # webサーバー
+  front:
+    build:
+      dockerfile: ./frontend/Dockerfile
+    volumes:
+      - ./frontend/src:/usr/src/app
+      - /usr/src/app/node_modules
+    command: 'yarn dev'
+    ports:
+      - "8000:3000"
