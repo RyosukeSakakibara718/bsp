@@ -17,8 +17,10 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 # Laravel のインストールと設定
 COPY ./backend /var/www/html
 RUN composer install
-RUN cp .env.example .env
-RUN php artisan key:generate
+# dockerfile上で下記のコマンドが実行されないので、要調査(そもそもできないかも？)
+# 手動で行う → README参照
+# RUN cp env.example .env
+# RUN php artisan key:generate
 
 # ポートを指定してバインドする
 EXPOSE 8000
