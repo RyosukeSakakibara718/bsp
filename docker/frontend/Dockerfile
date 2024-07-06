@@ -17,4 +17,4 @@ COPY ./frontend/src ./src
 ENTRYPOINT ["npm", "run", "dev"]
 
 # ポートを127.0.0.1:5173にバインドする
-EXPOSE 5173
+EXPOSE 3000
