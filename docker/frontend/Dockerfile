@@ -14,7 +14,7 @@ RUN npm install
 COPY ./frontend/src ./src
 
 # アプリケーションを起動するコマンドを指定
-ENTRYPOINT ["npm", "run", "dev"]
+CMD ["npm", "run", "dev"]
 
 # ポートを127.0.0.1:5173にバインドする
 EXPOSE 3000
