@@ -1,3 +1,15 @@
-# bsp
-A project management tool that allows managers to track member work hours and calculate/forecast gross profit based on the tracked data. This app helps in efficient resource allocation and profitability analysis.
+# 環境構築手順
 
+### 1. Dockerコンテナの立ち上げ
+```
+$ docker compose up -d --build
+```
+※laravelに関して </br>
+コンテナに入る
+```
+docker exec -i -t laravel bash
+```
+コンテナ内でサーバー起動
+```
+root@fce0f02b6ca6:/var/www/html# php artisan serve --host 0.0.0.0
+```

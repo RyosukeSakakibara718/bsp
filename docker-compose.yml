@@ -1,0 +1,12 @@
+version: '3'
+services:
+  backend:
+    container_name: "laravel"
+    build:
+      context: .
+      dockerfile: docker/backend/Dockerfile
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./backend:/var/www/html
+      - ./docker/backend/php.ini:/usr/local/etc/php/php.ini
