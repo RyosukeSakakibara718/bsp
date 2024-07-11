@@ -3,12 +3,12 @@ docker-compose up -d --build
 この時に下記のように出ていればOK
 
 ```
- ✔ Network project-balancer_net1  Created                                  0.1s 
- ✔ Container db_01                Started                                  0.4s 
- ✔ Container apache               Started                                  0.5s 
+ ✔ Container db_01                     Running                              0.0s 
+ ✔ Container project-balancer-react-1  Running                              0.0s 
+ ✔ Container apache                    Started                              1.5s 
  ```
 
-## 2. 各種設定
+## 2. 各種設定とインストール
 ```
 $ docker-compose exec apache bash
 # chown www-data:www-data storage -R //apacheから操作を行えるように権限を変更する
@@ -25,6 +25,8 @@ $ cp backend/laravel/.env.example backend/laravel/.env
 ```
 $ docker-compose exec apache bash
 # php artisan migrate
+    ※ 失敗した場合
+    # php artisan migrate:fresh
 # exit
 ```
 
