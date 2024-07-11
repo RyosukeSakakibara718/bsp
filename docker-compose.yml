@@ -11,7 +11,7 @@ services:
     environment:
       COMPOSER_ALLOW_SUPERUSER: 1
     volumes:
-      - ./webapp:/var/www/html
+      - ./backend/laravel:/var/www/html
       - ./docker/apache/php.ini:/usr/local/etc/php/php.ini
     depends_on:
       - db
@@ -19,13 +19,15 @@ services:
       - net1
   db:
     container_name: db_01
+    restart: always
     build:
       context: .
       dockerfile: ./docker/db/Dockerfile
     environment:
-      MYSQL_ROOT_PASSWORD: secret
-      MYSQL_USER: docker
-      MYSQL_PASSWORD: docker
+      POSTGRES_USER: username
+      POSTGRES_PASSWORD: password
+      # POSTGRES_DB: app
+      POSTGRES_DB: postgres
       TZ: 'Asia/Tokyo'
     networks:
       - net1
