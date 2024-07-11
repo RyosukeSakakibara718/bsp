@@ -17,6 +17,17 @@ services:
       - db
     networks:
       - net1
+  react:
+    build:
+      context: .
+      dockerfile: docker/frontend/Dockerfile
+    ports:
+      - "3000:3000"
+    networks:
+      - net1
+    volumes:
+      - ./frontend/react:/usr/src/app/  # ホストマシンのfrontendディレクトリをコンテナの/usr/src/app/frontendにマウント
+      - /usr/src/app/node_modules
   db:
     container_name: db_01
     restart: always
@@ -26,7 +37,6 @@ services:
     environment:
       POSTGRES_USER: username
       POSTGRES_PASSWORD: password
-      # POSTGRES_DB: app
       POSTGRES_DB: postgres
       TZ: 'Asia/Tokyo'
     networks:

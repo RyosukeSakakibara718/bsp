@@ -4,13 +4,13 @@ FROM node:20
 WORKDIR /usr/src/app/
 
 # frontendディレクトリ内のpackage.jsonとpackage-lock.jsonをコピー
-COPY ./frontend/package.json ./ 
+COPY ./frontend/react/package.json ./ 
 
 # 必要なパッケージをインストール
 RUN npm install
 
 # frontendディレクトリ内のソースコードをコピー
-COPY ./frontend/src ./src
+COPY ./frontend/react/src ./src
 
 # アプリケーションを起動するコマンドを指定
 ENTRYPOINT ["npm", "run", "dev"]

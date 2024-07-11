@@ -52,3 +52,8 @@ $ docker-compose exec db bash
 
 
 ```
+## 表示確認
+### laravel
+http://localhost:80
+### react
+http://localhost:3000
