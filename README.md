@@ -59,3 +59,13 @@ $ docker-compose exec db bash
 http://localhost:80
 ### react
 http://localhost:3000
+
+## フロントエンド
+
+- [ディレクトリ構成](https://github.com/RyosukeSakakibara718/project-balancer_doc/blob/main/%E3%83%87%E3%82%A3%E3%83%AC%E3%82%AF%E3%83%88%E3%83%AA%E6%A7%8B%E6%88%90/frontend-directory.md)
+- [コーディング規約](https://github.com/RyosukeSakakibara718/project-balancer_doc/blob/f5ebbc5acde6ab918c45e4003ad4d4f0121e5c1e/%E3%82%B3%E3%83%BC%E3%83%87%E3%82%A3%E3%83%B3%E3%82%B0%E8%A6%8F%E7%B4%84/frontend-coding-rules.md)
+
+## バックエンド
+
+- [ディレクトリ構成](https://github.com/RyosukeSakakibara718/project-balancer_doc/blob/main/%E3%83%87%E3%82%A3%E3%83%AC%E3%82%AF%E3%83%88%E3%83%AA%E6%A7%8B%E6%88%90/backend-directory.md)
+- [コーディング規約](https://github.com/RyosukeSakakibara718/project-balancer_doc/blob/main/%E3%82%B3%E3%83%BC%E3%83%87%E3%82%A3%E3%83%B3%E3%82%B0%E8%A6%8F%E7%B4%84/backend-coding-rules.md)
