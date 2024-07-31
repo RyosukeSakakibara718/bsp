@@ -7,14 +7,25 @@ abstract class Controller
     //
 }
 
-class ExampleController extends Controller {
-    public function demo() {
-        echo "Hello, World!";
+class ExampleController extends Controller
+{
+    public function divide(int $a, int $b): float
+    {
+        if ($b === 0) {
+            return "division by zero"; // 返り値で定義しているfloatではなく、stringを返すのでエラーになる
+            // throw new \InvalidArgumentException('Division by zero');
+        }
+        return $a / $b;
     }
-}
 
-function add(int $a, int $b) {
-    return $a + $b;
-}
+    public function process(): void
+    {
+        $this->undefinedMethod(); // 存在しないメソッドを呼び出しているのでエラーになる
+    }
 
-echo add(2, '3'); // 出力: 5
+    // public function undefinedMethod(): string
+    // {
+    //     return "検証用";
+    // }
+    
+}

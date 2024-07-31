@@ -1,0 +1,11 @@
+parameters:
+    paths:
+        - app
+    level: 5
+#   ignoreErrors:
+#       - //無視するエラー
+#
+#   excludePaths:
+#       - //無視するファイル・ディレクトリ
+#
+#   checkMissingIterableValueType: false //型エラーを感知しない
