@@ -3,6 +3,6 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-Route::get('index', function() {
+Route::get('greeting', function() {
     return 'Hello, World';
-})->name('index');
+})->name('greeting');
