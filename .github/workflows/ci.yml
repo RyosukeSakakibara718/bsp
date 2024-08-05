@@ -35,3 +35,21 @@ jobs:
 
       - name: Run ESLint and fix code
         run: cd frontend/react && npm run lint -- --fix
+
+  vitest:
+      runs-on: ubuntu-latest
+      needs: prettier
+      steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+
+      - name: Install dependencies
+        run: cd frontend/react && npm install
+
+      - name: Run tests
+        run: cd frontend/react && npm test
