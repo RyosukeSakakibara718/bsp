@@ -31,7 +31,7 @@ jobs:
         run: cd frontend/react && npm install
 
       - name: Run Prettier and fix code
-        run: npm run format
+        run: cd frontend/react && npm run format
 
       - name: Run ESLint and fix code
-        run: npm run lint -- --fix
+        run: cd frontend/react && npm run lint -- --fix
