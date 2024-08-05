@@ -92,3 +92,4 @@ jobs:
         run: cd backend/laravel && php artisan migrate --force
 
       - name: Run PHPUnit tests
+        run: cd backend/laravel && ./vendor/bin/phpunit
