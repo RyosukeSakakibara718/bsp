@@ -88,8 +88,5 @@ jobs:
       - name: Generate application key
         run: cd backend/laravel && php artisan key:generate
 
-      - name: Run database migrations
-        run: cd backend/laravel && php artisan migrate --force
-
       - name: Run PHPUnit tests
         run: cd backend/laravel && ./vendor/bin/phpunit
