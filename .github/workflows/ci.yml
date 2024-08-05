@@ -20,7 +20,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: '20'
-          
+
       - name: Debug information
         run: |
           echo "Node version:"
@@ -28,7 +28,7 @@ jobs:
           ls
 
       - name: Install dependencies
-        run: cd frontend && npm install
+        run: cd frontend/react && npm install
 
       - name: Run Prettier and fix code
         run: npm run format
