@@ -2,9 +2,10 @@ name: Prettier Check
 
 on:
   push:
-    branches:
-      - main
-      - '**/feature/**'
+    # 検証時下記をコメントアウトし、push
+    # branches:
+    #   - main
+    #   - '**/feature/**'
   pull_request:
     branches:
       - develop
