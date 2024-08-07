@@ -3,9 +3,9 @@ name: Prettier Check
 on:
   push:
     # 検証時下記をコメントアウトし、push
-    # branches:
-    #   - main
-    #   - '**/feature/**'
+    branches:
+      - main
+      - '**/feature/**'
   pull_request:
     branches:
       - develop
@@ -35,7 +35,7 @@ jobs:
         run: cd frontend/react && npm run format
 
       - name: Run ESLint and fix code
-        run: cd frontend/react && npm run lint -- --fix
+        run: cd frontend/react && npm run lint
 
       - name: Set up PHP
         uses: shivammathur/setup-php@v2
@@ -48,6 +48,9 @@ jobs:
 
       - name: Run Pint
         run: cd backend/laravel && ./vendor/bin/pint
+
+      - name: Run Phpstan
+        run: cd backend/laravel && ./vendor/bin/phpstan analyse
 
   vitest:
       runs-on: ubuntu-latest
