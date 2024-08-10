@@ -8,6 +8,7 @@ use App\Http\Requests\MemberRequest;
 use App\Http\Resources\MemberResource;
 use App\Models\Member;
 use App\UseCases\Member\IndexAction;
+use App\UseCases\Member\ShowAction;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Routing\Controller;
 
@@ -26,14 +27,6 @@ class MemberController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      */
     public function store(MemberRequest $request)
@@ -44,17 +37,11 @@ class MemberController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Member $member)
+    public function show(ShowAction $action, string $id)
     {
-        //
-    }
+        $member = $action($id);
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Member $member)
-    {
-        //
+        return response()->json(MemberResource::make($member));
     }
 
     /**

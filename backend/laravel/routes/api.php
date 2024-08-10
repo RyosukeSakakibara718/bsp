@@ -9,4 +9,7 @@ Route::get('greeting', function () {
     return 'Hello, World';
 })->name('greeting');
 
-Route::get('/members', [MemberController::class, 'index']);
+Route::controller(MemberController::class)->group(function(){
+    Route::get('/members', [MemberController::class, 'index'])->name('メンバー一覧取得');
+    Route::get('/members/{id}', [MemberController::class, 'show'])->name('メンバー詳細取得');
+});
