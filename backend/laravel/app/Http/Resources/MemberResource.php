@@ -23,7 +23,7 @@ class MemberResource extends JsonResource
             'name' => $this->name,
             'base_cost' => $this->base_cost,
             'rank' => $this->rank,
-            'base_cost_start_date' => $this->base_cost_start_date->toISOString(),
+            'base_cost_start_date' => $this->base_cost_start_date->format('Y-m-d'),
         ];
     }
 }
