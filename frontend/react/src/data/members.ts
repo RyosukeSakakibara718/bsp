@@ -22,7 +22,7 @@ export const sampleMembersData = [
   },
 	{
     id: 4,
-    name: '高橋 桃太郎',
+    name: '高橋 花太郎',
     grade: 7,
     cost: 950000,
     startDate: '2024/07/18'

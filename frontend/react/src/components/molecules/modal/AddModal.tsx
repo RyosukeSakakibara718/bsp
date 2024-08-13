@@ -4,14 +4,7 @@ import Spacer from '../../atoms/Spacer';
 import CancelButton from '../../atoms/button/CancelButton';
 import AddTableRow from '../row/AddTableRow';
 import DecideAddButton from '../../atoms/button/DecideAddButton';
-
-type MemberData = {
-  id: number;
-  name: string;
-  grade: number;
-  cost: number;
-  startDate: string;
-};
+import { MemberData } from '../../../types/member';
 
 type AddModalProps = {
 	data: MemberData;

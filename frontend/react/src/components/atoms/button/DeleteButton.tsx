@@ -10,9 +10,9 @@ const DeleteButton: React.FC<DeleteButtonProps> = ({ id, onOpen, onClose }) => {
 
   const handleClick = () => {
     if (onOpen) {
-      onOpen(); // onOpen が存在する場合、呼び出す
+      onOpen();
     } else if (onClose) {
-      onClose(); // onOpen が存在しない場合、onClose を呼び出す
+      onClose();
     }
   }
 

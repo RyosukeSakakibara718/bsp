@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import RoundDecideButton from '../../atoms/button/RoundDecideButton';
 import CancelButton from '../../atoms/button/CancelButton';
 import TableHeader from '../TableHeader';
@@ -10,7 +10,6 @@ type MemberTableProps = {
   onClose: () => void;
   data: MemberData;
 };
-
 
 
 const EditModal: React.FC<MemberTableProps> = ({ onClose, data }) => {

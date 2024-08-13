@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import TableHeader from "../../../../components/molecules/TableHeader";
 import TableRow from "../../../../components/molecules/row/TableRow";
 import SearchBox from '../../../../components/atoms/SearchBox';
+import SearchBar from '../../../../components/molecules/SearchBar';
 import Spacer from '../../../../components/atoms/Spacer';
 import AddButton from '../../../../components/atoms/button/AddButton';
 import EditModal from '../../../../components/molecules/modal/EditModal';
@@ -19,11 +20,16 @@ const MemberTable: React.FC<MemberTableProps> = ({ data }) => {
     cost: 0,
     startDate: ''
   }
-
+  
   const [isEditModalOpen, setIsEditModalOpen] = useState(false)
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false)
   const [isAddModalOpen, seAddeteModalOpen] = useState(false)
-
+  const [targetDataId, setTargetDataId] = useState(0)
+  const [showData ,setShowData] = useState(data)
+  const [searchValue ,setSearchValue] = useState("")
+  const editData = showData[targetDataId]
+  const deleteData = showData[targetDataId]
+  
   const handleOpenEditModal = (id: number) => {
     setTargetDataId(id - 1);
     setIsEditModalOpen(true);
@@ -51,14 +57,25 @@ const MemberTable: React.FC<MemberTableProps> = ({ data }) => {
     seAddeteModalOpen(false);
   };
 
-  const [targetDataId, setTargetDataId] = useState(0)
-  const editData = data[targetDataId]
-  const deleteData = data[targetDataId]
+  const filteredMembers = showData.filter(member => 
+    Object.values(member).some(value => 
+      value.toString().toLowerCase().includes(searchValue.toLowerCase())
+    )
+  );
+
+  const changeShowData = () => {
+    setShowData(filteredMembers)
+  }
+
+  const clearShowData = () => {
+    setShowData(data)
+    setSearchValue('')
+  }
 
   return (
     <>
       <div className='shadow-lg rounded-lg overflow-hidden p-8'>
-        <SearchBox placeholder="検索ワードを入力してください..." />
+        <SearchBar searchValue={searchValue} setSearchValue={setSearchValue} clearSearchValue={clearShowData} setShowData={changeShowData} />
         <Spacer height="20px"></Spacer>
         <div className="flex justify-end mr-2.5">
           <AddButton onOpen={handleOpenAddModal}/>
@@ -70,7 +87,7 @@ const MemberTable: React.FC<MemberTableProps> = ({ data }) => {
               <TableHeader isShowing={true} />
             </thead>
             <tbody className="bg-white divide-y divide-gray-200">
-              {data.map(item => (
+              {showData.map(item => (
                 <TableRow 
                   key={item.id}
                   id={item.id}
@@ -78,7 +95,6 @@ const MemberTable: React.FC<MemberTableProps> = ({ data }) => {
                   grade={item.grade}
                   cost={item.cost}
                   startDate={item.startDate}
-                  isShowing={true}
                   isEditModalOpen={() => handleOpenEditModal(item.id)}
                   isDeleteModalOpen={() => handleOpenDeleteModal((item.id))}
                 />

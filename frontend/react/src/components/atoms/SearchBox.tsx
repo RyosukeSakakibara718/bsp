@@ -1,43 +1,38 @@
 import React, { useState } from 'react';
-import { IoSearch } from "react-icons/io5";
 
 type SearchBoxProps = {
+  searchValue: string;
   placeholder?: string;
+  setSearchValue: (value: string) => void;
+  setShowData: () => void;
 };
 
-const SearchBox: React.FC<SearchBoxProps> = ({ placeholder = "Search..." }) => {
-  const [query, setQuery] = useState('');
+const SearchBox: React.FC<SearchBoxProps> = ({ searchValue, setSearchValue, setShowData, placeholder = "Search..." }) => {
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setQuery(e.target.value);
+    setSearchValue(e.target.value);
   };
 
   const handleSearch = () => {
-    alert(`検索クエリ: ${query}`);
+    setShowData()
   };
 
-  const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
       handleSearch();
     }
   };
 
   return (
-    <div className="flex items-center w-[400px] bg-gray-100 rounded-lg p-2.5 shadow-md">
+    <div>
       <input
         type="text"
-        value={query}
+        value={searchValue}
         onChange={handleInputChange}
-        onKeyPress={handleKeyPress}
+        onKeyDown={handleKeyDown}
         placeholder={placeholder}
-        className="flex-grow border-none outline-none bg-transparent text-black text-base pl-2"
+        className="w-[400px] p-2.5 pr-12 bg-gray-100 rounded-lg outline-none"
       />
-      <button 
-        onClick={handleSearch} 
-        className="bg-transparent border-none cursor-pointer p-0"
-      >
-        <IoSearch className="w-5 h-5 text-black" />
-      </button>
     </div>
   );
 };

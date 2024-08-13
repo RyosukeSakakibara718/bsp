@@ -4,23 +4,18 @@ import CancelButton from '../../atoms/button/CancelButton';
 import TableHeader from '../TableHeader'
 import Spacer from '../../atoms/Spacer';
 import TableRowColumn from '../../atoms/column/TableRowColumn';
+import { MemberData } from '../../../types/member';
 
 
 type MemberTableProps = {
   onClose: () => void;
-  data: {
-    id: number;
-    name: string;
-    grade: number;
-    cost: number;
-    startDate: string;
-  };
+  data: MemberData;
 };
 
 const DeleteModal: React.FC<MemberTableProps> = ({onClose, data}) => {
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50 z-50">
-      <div className="bg-white shadow-lg rounded-lg p-6 w-full max-w-3xl mx-auto"> {/* max-w-3xlで幅を制限 */}
+      <div className="bg-white shadow-lg rounded-lg p-6 w-full max-w-3xl mx-auto"> 
         <div className="mb-4 text-left">
           <p className="text-xl font-bold">削除</p>
         </div>
