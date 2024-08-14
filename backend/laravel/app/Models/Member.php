@@ -29,6 +29,8 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|Member whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Member whereRank($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Member whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Member find($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Member create($value)
  *
  * @mixin \Illuminate\Database\Eloquent\Model
  */

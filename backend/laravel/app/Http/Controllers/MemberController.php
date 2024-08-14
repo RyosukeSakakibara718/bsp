@@ -9,6 +9,7 @@ use App\Http\Resources\MemberResource;
 use App\Models\Member;
 use App\UseCases\Member\IndexAction;
 use App\UseCases\Member\ShowAction;
+use App\UseCases\Member\StoreAction;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Routing\Controller;
 
@@ -29,9 +30,11 @@ class MemberController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(MemberRequest $request)
+    public function store(MemberRequest $request, StoreAction $action)
     {
-        //
+        $action($request);
+
+        return response()->json([], 201);
     }
 
     /**
