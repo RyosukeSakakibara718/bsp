@@ -11,7 +11,7 @@ type DeleteButtonProps = {
  * メンバー一覧の表から呼び出される際はモーダルを開くための関数を呼び出す。
  * モーダル内から呼び出される際は削除用のAPIを叩いた後、モーダルを閉じる関数を呼び出す。
  *
- * @param {AddModalProps} props - ボタンコンポーネントのプロパティ。
+ * @param {DeleteButtonProps} props - ボタンコンポーネントのプロパティ。
  * @param {number} props.id - 削除対象のメンバーのID
  * @param {function} props.onOpen - 削除モーダルを表示する関数。
  * @param {function} props.onClose - 削除モーダルを閉じる関数。
