@@ -8,7 +8,7 @@ type DecideAddButtonProps = {
  * メンバー追加モーダルで入力内容で追加を行うためのボタン。
  * ボタンがクリックされると、`hundleSubmit` 関数が実行されAPIを実行し、メンバーを追加します。
  *
- * @param {AddModalProps} props - ボタンコンポーネントのプロパティ。
+ * @param {DecideAddButtonProps} props - ボタンコンポーネントのプロパティ。
  * @param {function} props.hundleSubmit - メンバー登録用のAPIを実行する関数。
  * @returns {JSX.Element} メンバー追加用のボタン要素を返します。
  */
