@@ -11,13 +11,18 @@ type AddTableRowColumnProps = {
  * @param {AddTableRowColumnProps} props - ボタンコンポーネントに渡されるプロパティオブジェクト。
  * @param {string} props.width - セルの幅。
  * @param {function} props.onChange - 値が変更されるごとにaddModalコンポーネントで管理するstateを変更する関数。
- * @returns {JSX.Element} 編集モーダルで表示される行を構成するセルを返します。
+ * @returns {JSX.Element} 追加モーダルで表示される行を構成するセルを返します。
  */
 const AddTableRowColumn: React.FC<AddTableRowColumnProps> = ({ width, onChange }) => {
 
   const [value, setValue] = useState("");
 
-  
+  /**
+  * 値が変更されたときに呼び出されるハンドラ関数。
+  * 新しい値をstateに設定し、`onChange` コールバックを呼び出します。
+  *
+  * @param {React.ChangeEvent<HTMLInputElement>} event - 入力イベント。
+  */
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newValue = event.target.value;
     setValue(newValue);
