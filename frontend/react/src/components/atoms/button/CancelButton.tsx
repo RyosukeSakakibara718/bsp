@@ -10,7 +10,7 @@ type CancelButtonProps = {
  *
  * @param {CancelButtonProps} props - ボタンコンポーネントのプロパティ。
  * @param {function} props.onClose - モーダルを閉じるための関数。ボタンがクリックされたときに呼び出されます。
- * @returns {JSX.Element} メンバー追加用のボタン要素を返します。
+ * @returns {JSX.Element} モーダルを閉じる用ののボタン要素を返します。
  */
 const CancelButton: React.FC<CancelButtonProps> = ({onClose}) => {
   return (
