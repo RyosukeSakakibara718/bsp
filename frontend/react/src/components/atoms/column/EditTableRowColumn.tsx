@@ -6,9 +6,24 @@ type EditTableRowColumnProps = {
   onChange: (value: string) => void;
 };
 
+/**
+ * 編集モーダルに表示するメンバー情報の行を構成するセルコンポーネント。
+ *
+ * @param {EditTableRowColumnProps} props - ボタンコンポーネントに渡されるプロパティオブジェクト。
+ * @param {string} props.width - セルの幅。
+ * @param {string} props.initialValue - そのセルに表示される値の初期値。
+ * @param {function} props.onChange - 値が変更されるごとにEditModalコンポーネントで管理するstateを変更する関数。
+ * @returns {JSX.Element} 編集モーダルで表示される行を構成するセルを返します。
+ */
 const EditTableRowColumn: React.FC<EditTableRowColumnProps> = ({ width, initialValue, onChange }) => {
   const [value, setValue] = useState(initialValue);
 
+  /**
+  * セルの値が変更されたときに呼び出されるハンドラ関数。
+  * 新しい値をstateに設定し、`onChange` コールバックを呼び出します。
+  *
+  * @param {React.ChangeEvent<HTMLInputElement>} event - 入力イベント。
+  */
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newValue = event.target.value;
     setValue(newValue);
