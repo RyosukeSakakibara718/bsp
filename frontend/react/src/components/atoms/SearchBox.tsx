@@ -1,12 +1,5 @@
 import React from 'react';
 
-/**
- * @typedef {Object} SearchBoxProps
- * @property {string} searchValue - 現在の検索ボックスの値。
- * @property {string} [placeholder] - 入力フィールドのプレースホルダー。デフォルトは "Search..."。
- * @property {Function} setSearchValue - 検索ボックスの値を更新するための関数。
- * @property {Function} setShowData - データを表示するための関数。
- */
 type SearchBoxProps = {
   searchValue: string;
   placeholder?: string;
@@ -18,10 +11,14 @@ type SearchBoxProps = {
  * 検索ボックスコンポーネント。
  * ユーザーが入力した値を受け取り、Enterキーを押下または検索ボタン押下で検索データを表示します。
  *
- * @param {SearchBoxProps} props - 検索ボックスのプロパティ。
+ * @param {SearchBoxProps} props - 検索ボックスのプロパティ
+ * @param {string} props.searchValue - 現在の検索ボックスの値。
+ * @param {function} props.setSearchValue - 入力フィールドのプレースホルダー。デフォルトは "検索ワードを入力してください..."。
+ * @param {function} props.setShowData - 検索ボックスの値を更新するための関数。
+ * @param {string} props.placeholder - データを表示するための関数。
  * @returns {JSX.Element} 検索ボックスのJSX要素を返します。
  */
-const SearchBox: React.FC<SearchBoxProps> = ({ searchValue, setSearchValue, setShowData, placeholder = "検索ワードを入力してください..." }: SearchBoxProps): JSX.Element => {
+const SearchBox: React.FC<SearchBoxProps> = ({ searchValue, setSearchValue, setShowData, placeholder = "検索ワードを入力してください..." }) => {
 
   /**
    * 入力値の変更時に呼び出されるハンドラ関数。
