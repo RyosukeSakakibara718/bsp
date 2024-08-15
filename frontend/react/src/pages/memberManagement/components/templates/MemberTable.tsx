@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import TableHeader from "../../../../components/molecules/TableHeader";
 import TableRow from "../../../../components/molecules/row/TableRow";
-import SearchBox from '../../../../components/atoms/SearchBox';
 import SearchBar from '../../../../components/molecules/SearchBar';
 import Spacer from '../../../../components/atoms/Spacer';
 import AddButton from '../../../../components/atoms/button/AddButton';
@@ -27,8 +26,9 @@ const MemberTable: React.FC<MemberTableProps> = ({ data }) => {
   const [targetDataId, setTargetDataId] = useState(0)
   const [showData ,setShowData] = useState(data)
   const [searchValue ,setSearchValue] = useState("")
-  const editData = showData[targetDataId]
-  const deleteData = showData[targetDataId]
+
+  const editData = data[targetDataId]
+  const deleteData = data[targetDataId]
   
   const handleOpenEditModal = (id: number) => {
     setTargetDataId(id - 1);
@@ -57,7 +57,7 @@ const MemberTable: React.FC<MemberTableProps> = ({ data }) => {
     seAddeteModalOpen(false);
   };
 
-  const filteredMembers = showData.filter(member => 
+  const filteredMembers = data.filter(member => 
     Object.values(member).some(value => 
       value.toString().toLowerCase().includes(searchValue.toLowerCase())
     )
