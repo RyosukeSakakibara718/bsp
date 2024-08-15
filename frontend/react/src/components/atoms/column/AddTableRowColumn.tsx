@@ -8,7 +8,7 @@ type AddTableRowColumnProps = {
 /**
  * 追加モーダルに表示するメンバー情報の行を構成するセルコンポーネント。
  *
- * @param {AddTableRowColumnProps} props - ボタンコンポーネントに渡されるプロパティオブジェクト。
+ * @param {AddTableRowColumnProps} props - セルコンポーネントに渡されるプロパティオブジェクト。
  * @param {string} props.width - セルの幅。
  * @param {function} props.onChange - 値が変更されるごとにaddModalコンポーネントで管理するstateを変更する関数。
  * @returns {JSX.Element} 追加モーダルで表示される行を構成するセルを返します。
