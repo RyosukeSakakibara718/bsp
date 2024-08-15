@@ -9,7 +9,7 @@ type EditTableRowColumnProps = {
 /**
  * 編集モーダルに表示するメンバー情報の行を構成するセルコンポーネント。
  *
- * @param {EditTableRowColumnProps} props - ボタンコンポーネントに渡されるプロパティオブジェクト。
+ * @param {EditTableRowColumnProps} props - セルコンポーネントに渡されるプロパティオブジェクト。
  * @param {string} props.width - セルの幅。
  * @param {string} props.initialValue - そのセルに表示される値の初期値。
  * @param {function} props.onChange - 値が変更されるごとにEditModalコンポーネントで管理するstateを変更する関数。
