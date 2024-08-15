@@ -12,7 +12,7 @@ type AddModalProps = {
  * メンバーを追加するためのモーダルを開くボタンコンポーネント。
  * ボタンがクリックされると、`onOpen` 関数が実行され、モーダルが開きます。
  *
- * @param {onOpen} props - モーダル開閉の状態を変更(閉→開)する関数。
+ * @param {AddModalProps} props - ボタンコンポーネントのプロパティ。
  * @returns {JSX.Element} メンバー追加用のボタン要素を返します。
  */
 const AddButton: React.FC<AddModalProps> = ({onOpen}) => {
