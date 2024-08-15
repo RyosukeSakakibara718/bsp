@@ -1,9 +1,5 @@
 import React from 'react';
 
-/**
- * @typedef {Object} AddModalProps
- * @property {Function} onOpen - モーダルを開くための関数。ボタンがクリックされたときに呼び出されます。
- */
 type AddModalProps = {
   onOpen: () => void;
 }
@@ -13,6 +9,7 @@ type AddModalProps = {
  * ボタンがクリックされると、`onOpen` 関数が実行され、モーダルが開きます。
  *
  * @param {AddModalProps} props - ボタンコンポーネントのプロパティ。
+ * @param {function} props.onOpen - モーダルを開くための関数。ボタンがクリックされたときに呼び出されます。
  * @returns {JSX.Element} メンバー追加用のボタン要素を返します。
  */
 const AddButton: React.FC<AddModalProps> = ({onOpen}) => {
