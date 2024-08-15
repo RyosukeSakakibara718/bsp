@@ -1,10 +1,18 @@
 import React from 'react';
 
 type TableRowColumnProps = {
-  width?: string;  // 幅を指定するためのプロパティ
-  children: React.ReactNode;  // カラム内に表示するコンテンツ
+  width?: string;
+  children: React.ReactNode;
 };
 
+/**
+ * メンバー情報の行を構成するセルコンポーネント。
+ *
+ * @param {TableRowColumnProps} props - セルコンポーネントに渡されるプロパティオブジェクト。
+ * @param {string} props.width - セルの幅。
+ * @param {React.ReactNode} props.children - セル内に表示される要素。
+ * @returns {JSX.Element} メンバー情報を表示する行を構成するセルを返します。
+ */
 const TableRowColumn: React.FC<TableRowColumnProps> = ({ width, children }) => {
   return (
     <th
