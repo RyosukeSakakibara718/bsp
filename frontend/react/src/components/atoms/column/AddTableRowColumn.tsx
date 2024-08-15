@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-type EditTableRowColumnProps = {
+type AddTableRowColumnProps = {
   width?: string;
   onChange: (value: string) => void;
 };
@@ -8,21 +8,16 @@ type EditTableRowColumnProps = {
 /**
  * 追加モーダルに表示するメンバー情報の行を構成するセルコンポーネント。
  *
- * @param {EditTableRowColumnProps} props - ボタンコンポーネントに渡されるプロパティオブジェクト。
+ * @param {AddTableRowColumnProps} props - ボタンコンポーネントに渡されるプロパティオブジェクト。
  * @param {string} props.width - セルの幅。
  * @param {function} props.onChange - 値が変更されるごとにaddModalコンポーネントで管理するstateを変更する関数。
  * @returns {JSX.Element} 編集モーダルで表示される行を構成するセルを返します。
  */
-const EditTableRowColumn: React.FC<EditTableRowColumnProps> = ({ width, onChange }) => {
+const AddTableRowColumn: React.FC<AddTableRowColumnProps> = ({ width, onChange }) => {
 
   const [value, setValue] = useState("");
 
-  /**
-  * 入力が変更されたときに呼び出されるハンドラ関数。
-  * 新しい値をstateに設定し、`onChange` コールバックを呼び出します。
-  *
-  * @param {React.ChangeEvent<HTMLInputElement>} event - 入力イベント。
-  */
+  
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newValue = event.target.value;
     setValue(newValue);
@@ -44,4 +39,4 @@ const EditTableRowColumn: React.FC<EditTableRowColumnProps> = ({ width, onChange
   );
 };
 
-export default EditTableRowColumn;
+export default AddTableRowColumn;
