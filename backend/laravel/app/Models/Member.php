@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $name 名前
  * @property int $base_cost 原価
  * @property int $rank 等級
- * @property date $base_cost_start_date 原価開始日
+ * @property \Illuminate\Support\Carbon|null $base_cost_start_date 原価開始日
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property \Illuminate\Support\Carbon|null $deleted_at
