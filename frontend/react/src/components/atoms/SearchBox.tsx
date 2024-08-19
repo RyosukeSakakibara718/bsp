@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 type SearchBoxProps = {
   searchValue: string;
-  placeholder?: string;
+  placeholder: string;
   setSearchValue: (value: string) => void;
   setShowData: () => void;
 };
 
-const SearchBox: React.FC<SearchBoxProps> = ({ searchValue, setSearchValue, setShowData, placeholder = "Search..." }) => {
+const SearchBox: React.FC<SearchBoxProps> = ({ searchValue, setSearchValue, setShowData, placeholder }) => {
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchValue(e.target.value);
