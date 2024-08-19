@@ -28,7 +28,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ searchValue, setSearchValue, clea
           <IoSearch className="w-5 h-5 text-black" />
         </button>
         <button 
-				onClick={clearSearchValue}
+          onClick={clearSearchValue}
           className="bg-transparent border-none cursor-pointer p-0"
         >
           <FaTrashAlt className="w-5 h-5 text-black" />
