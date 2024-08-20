@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\UseCases\Member;
 
-use App\Models\Member;
 use App\Http\Requests\MemberRequest;
+use App\Models\Member;
 
 class UpdateAction
 {
@@ -23,5 +23,3 @@ class UpdateAction
         return $member;
     }
 }
-
-

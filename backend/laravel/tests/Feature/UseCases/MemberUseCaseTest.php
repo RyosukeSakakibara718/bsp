@@ -82,12 +82,12 @@ class MemberUseCaseTest extends TestCase
             'rank' => '2',
             'base_cost_start_date' => '2023-08-20',
         ]);
-    
+
         $newData = [
-            "name" => "新名　太郎",
-            "base_cost" => 10000000,
-            "rank" => "4",
-            "base_cost_start_date" => "2024-08-20"
+            'name' => '新名　太郎',
+            'base_cost' => 10000000,
+            'rank' => '4',
+            'base_cost_start_date' => '2024-08-20',
         ];
 
         $request = new MemberRequest($newData);
@@ -100,7 +100,6 @@ class MemberUseCaseTest extends TestCase
         $this->assertEquals($newData['base_cost'], $updatedMember->base_cost);
         $this->assertEquals($newData['rank'], $updatedMember->rank);
         $this->assertEquals($newData['base_cost_start_date'], $updatedMember->base_cost_start_date->toDateString());
-
 
         $this->assertDatabaseHas('members', [
             'id' => $initialMember->id,
