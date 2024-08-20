@@ -127,4 +127,46 @@ class MemberControllerTest extends TestCase
         $response->assertStatus(422);
 
     }
+
+    /**
+     * 目的：/members{$id}にPUTリクエストを送って正常に編集ができると、ステータスコード204が返ってくることを確認
+     */
+    public function test_メンバー編集が成功(): void
+    {
+        $members = Member::factory()->count(10)->create();
+
+        $member = $members[0];
+
+        $data = [
+            'name' => '田中太郎',
+            'base_cost' => 420000,
+            'rank' => 2,
+            'base_cost_start_date' => '2005-11-01',
+        ];
+
+        $response = $this->putJson("v1/members/{$member->id}", $data);
+        $response->assertStatus(204);
+
+    }
+
+    /**
+     * 目的：/members{$id}に不正なPUTリクエストを送ると、バリデーションにかかる。
+     */
+    public function test_メンバー編集時のバリデーション(): void
+    {
+        $members = Member::factory()->count(10)->create();
+
+        $member = $members[0];
+
+        $data = [
+            'name' => '',
+            'base_cost' => 420000,
+            'rank' => 2,
+            'base_cost_start_date' => '2005-11-01',
+        ];
+
+        $response = $this->putJson("v1/members/{$member->id}", $data);
+        $response->assertStatus(422);
+
+    }
 }

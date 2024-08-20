@@ -56,7 +56,7 @@ class MemberController extends Controller
 
         $member = $action($request, $id);
 
-        return $member;
+        return response()->json([], 204);
     }
 
     /**
