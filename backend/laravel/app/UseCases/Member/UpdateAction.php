@@ -12,12 +12,12 @@ class UpdateAction
     public function __invoke(MemberRequest $request, string $id)
     {
     $member = Member::find($id);
-    $validated = $request->validated();
+    // $validated = $request->validated();
 
-    $member->name = $validated['name'];
-    $member->base_cost = $validated['base_cost'];
-    $member->rank = $validated['rank'];
-    $member->base_cost_start_date = $validated['base_cost_start_date'];
+    $member->name = $request->input("name");
+    $member->base_cost = $request->input("base_cost");
+    $member->rank = $request->input("rank");
+    $member->base_cost_start_date = $request->input("base_cost_start_date");
 
     $member->save();
 
