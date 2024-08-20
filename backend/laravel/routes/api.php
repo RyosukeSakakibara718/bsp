@@ -9,4 +9,5 @@ Route::controller(MemberController::class)->group(function () {
     Route::get('/members', 'index')->name('メンバー一覧取得');
     Route::get('/members/{id}', 'show')->name('メンバー詳細取得');
     Route::post('/members', 'store')->name('メンバー登録');
+    Route::post('/members{id}', 'destroy')->name('メンバー削除');
 });
