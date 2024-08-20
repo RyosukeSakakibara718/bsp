@@ -10,6 +10,7 @@ use App\Models\Member;
 use App\UseCases\Member\IndexAction;
 use App\UseCases\Member\ShowAction;
 use App\UseCases\Member\StoreAction;
+use App\UseCases\Member\UpdateAction;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Routing\Controller;
 
@@ -50,9 +51,12 @@ class MemberController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(MemberRequest $request, Member $member)
+    public function update(UpdateAction $action, MemberRequest $request, string $id)
     {
-        //
+
+        $member = $action($request, $id);
+
+        return $member;
     }
 
     /**
