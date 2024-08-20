@@ -11,15 +11,17 @@ class UpdateAction
 {
     public function __invoke(MemberRequest $request, string $id)
     {
-        $member = Member::find($id);
+    $member = Member::find($id);
+    $validated = $request->validated();
 
-        $member->name = $request->name;
-        $member->base_cost = $request->base_cost;
-        $member->rank = $request->rank;
-        $member->base_cost_start_date = $request->base_cost_start_date;
+    $member->name = $validated['name'];
+    $member->base_cost = $validated['base_cost'];
+    $member->rank = $validated['rank'];
+    $member->base_cost_start_date = $validated['base_cost_start_date'];
 
-        $member->save();
+    $member->save();
 
-        return $member;
+    return $member;
     }
+
 }
