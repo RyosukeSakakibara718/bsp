@@ -12,6 +12,15 @@ type AddModalProps = {
 	index: number
 }
 
+/**
+ * 追加モーダル
+ *
+ * @param {AddModalProps} props - モーダルコンポーネントのプロパティ。
+ * @param {MemberData} props.data - 対象のデータ。
+ * @param {function} props.onClose - 追加モーダルを閉じる関数。
+ * @param {number} props.index - 選択行。
+ * @returns {JSX.Element} 追加モーダルを返します。
+ */
 const AddModal: React.FC<AddModalProps> = ({ data, onClose, index }) => {
 
 	const [formData, setFormData] = useState(data);
