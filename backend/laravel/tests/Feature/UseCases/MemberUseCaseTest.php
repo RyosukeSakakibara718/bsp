@@ -6,6 +6,7 @@ namespace Tests\Unit\UseCase;
 
 use App\Http\Requests\MemberRequest;
 use App\Models\Member;
+use App\UseCases\Member\DestroyAction;
 use App\UseCases\Member\IndexAction;
 use App\UseCases\Member\ShowAction;
 use App\UseCases\Member\StoreAction;
@@ -70,5 +71,17 @@ class MemberUseCaseTest extends TestCase
                 'base_cost_start_date' => '2005-11-01',
             ]
         );
+    }
+
+    public function test_UseCaseでメンバー削除(): void
+    {
+
+        $members = Member::factory()->count(10)->create();
+        $id = $members[0]->id;
+
+        $action = new DestroyAction();
+        $deletedMember = $action((string) $id);
+
+        $this->assertNotNull($deletedMember->deleted_at);
     }
 }
