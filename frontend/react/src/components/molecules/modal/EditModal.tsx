@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import RoundDecideButton from '../../atoms/button/RoundDecideButton';
+import DecideButton from '../../atoms/button/DecideButton';
 import CancelButton from '../../atoms/button/CancelButton';
 import TableHeader from '../TableHeader';
 import EditTableRow from '../row/EditTableRow';
@@ -48,7 +48,7 @@ const EditModal: React.FC<MemberTableProps> = ({ onClose, data }) => {
       <Spacer height="30px" />
       <div className="flex justify-center">
         <div className="flex space-x-4">
-          <RoundDecideButton onClose={() => onClose()} submitData={EditData}/>
+          <DecideButton onClose={() => onClose()} submitData={EditData}/>
           <CancelButton onClose={() => onClose()}/>
         </div>
       </div>
