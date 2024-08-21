@@ -127,4 +127,18 @@ class MemberControllerTest extends TestCase
         $response->assertStatus(422);
 
     }
+
+    /**
+     * 目的：/members/destroy{id}にPOSTリクエストを送ると、対象レコードのdeleted_atに現在時間が入力される。
+     */
+    public function test_メンバー削除(): void
+    {
+        $members = Member::factory()->count(10)->create();
+        $member = $members[0];
+        $id = $member->id;
+        $response = $this->delete("v1/members/$id");
+        $response->assertStatus(204);
+
+        $this->assertSoftDeleted($member);
+    }
 }
