@@ -2,10 +2,11 @@ import React from 'react';
 
 type SearchBoxProps = {
   searchValue: string;
-  placeholder?: string;
+  placeholder: string;
   setSearchValue: (value: string) => void;
   setShowData: () => void;
 };
+
 
 /**
  * 検索ボックスコンポーネント。
