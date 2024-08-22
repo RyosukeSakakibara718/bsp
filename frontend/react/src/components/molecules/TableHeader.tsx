@@ -8,25 +8,13 @@ type TableHeaderProps = {
 const TableHeader: React.FC<TableHeaderProps> = ({ isShowing }) => {
   return (
     <tr className="border-b border-gray-300">
-      <TableHeaderColumn width="5%">
-        ID
-      </TableHeaderColumn>
-      <TableHeaderColumn width="25%">
-        メンバー名
-      </TableHeaderColumn>
-      <TableHeaderColumn width="10%">
-        等級
-      </TableHeaderColumn>
-      <TableHeaderColumn width="25%">
-        原価
-      </TableHeaderColumn>
-      <TableHeaderColumn width="25%">
-        開始日
-      </TableHeaderColumn>
+      <TableHeaderColumn width="5%" value="ID" />
+      <TableHeaderColumn width="5%" value="メンバー名" />
+      <TableHeaderColumn width="5%" value="等級" />
+      <TableHeaderColumn width="5%" value="原価" />
+      <TableHeaderColumn width="5%" value="開始日" />
       {isShowing && (
-        <TableHeaderColumn width="10%">
-          操作
-        </TableHeaderColumn>
+        <TableHeaderColumn width="5%" value="操作" />
       )}
     </tr>
   );
