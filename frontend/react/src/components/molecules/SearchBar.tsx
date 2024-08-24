@@ -10,6 +10,18 @@ type SearchBarProps = {
   setShowData: () => void;
 };
 
+/**
+ * SearchBarコンポーネント
+ * ユーザーが検索ワードを入力し、検索やクリアアクションを行うためのコンポーネントです。
+ * 
+ * @param {SearchBarProps} props - 検索バーコンポーネントのプロパティ
+ * @param {string} props.searchValue - 現在の検索ワード
+ * @param {(value: string) => void} props.setSearchValue - 検索ワードを更新する関数
+ * @param {() => void} props.clearSearchValue - 検索ワードをクリアする関数
+ * @param {() => void} props.setShowData - 検索ボタンがクリックされたときにデータを表示するための関数
+ * @returns {JSX.Element} 検索ボックスと検索・クリアボタンを含む検索バーコンポーネントを返します。
+ */
+
 const SearchBar: React.FC<SearchBarProps> = ({ searchValue, setSearchValue, clearSearchValue, setShowData }) => {
 
   return (
