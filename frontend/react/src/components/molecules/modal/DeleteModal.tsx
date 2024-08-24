@@ -12,6 +12,16 @@ type MemberTableProps = {
   data: MemberData;
 };
 
+/**
+ * 削除モーダルコンポーネント
+ * メンバーの情報を削除するためのモーダルウィンドウを表示します。
+ * 
+ * @param {MemberTableProps} props - 削除モーダルのプロパティ。
+ * @param {() => void} props.onClose - モーダルを閉じるための関数。
+ * @param {MemberData} props.data - 削除対象のメンバーのデータ。
+ * @returns {JSX.Element} メンバー削除用のモーダルコンポーネントを返します。
+ */
+
 const DeleteModal: React.FC<MemberTableProps> = ({onClose, data}) => {
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50 z-50">
