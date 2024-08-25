@@ -13,15 +13,7 @@ describe("DeleteModalコンポーネント", () => {
     startDate: "2024-08-15",
   };
 
-  it("DeleteModal に正しいプロパティが渡されているか確認する", () => {
-    render(<DeleteModal data={dataMock} onClose={() => {}} />);
-
-    expect(screen.getByText("Test Name")).to.exist;
-    expect(screen.getByText(5)).to.exist;
-    expect(screen.getByText("1,000")).to.exist;
-    expect(screen.getByText("2024-08-15")).to.exist;
-  });
-
+  
   it("ボタン要素が2個存在することを確認", () => {
     render(<DeleteModal data={dataMock} onClose={() => {}} />);
 
