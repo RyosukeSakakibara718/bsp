@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import TableHeader from '../TableHeader';
-import Spacer from '../../atoms/Spacer';
-import CancelButton from '../../atoms/button/CancelButton';
-import AddTableRow from '../row/AddTableRow';
-import DecideAddButton from '../../atoms/button/DecideAddButton';
-import { MemberData } from '../../../types/member';
+import TableHeader from '@molecules/TableHeader';
+import Spacer from '@atoms/Spacer';
+import CancelButton from '@atoms/button/CancelButton';
+import AddTableRow from '@molecules/row/AddTableRow';
+import DecideAddButton from '@atoms/button/DecideAddButton';
+import { MemberData } from '@types/member';
 
 type AddModalProps = {
 	data: MemberData;

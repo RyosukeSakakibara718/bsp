@@ -1,25 +1,23 @@
 import React, { useState } from 'react';
-import RoundDecideButton from '../../atoms/button/RoundDecideButton';
-import CancelButton from '../../atoms/button/CancelButton';
-import TableHeader from '../TableHeader';
-import EditTableRow from '../row/EditTableRow';
-import Spacer from '../../atoms/Spacer';
-import { MemberData } from '../../../types/member';
+import RoundDecideButton from '@atoms/button/RoundDecideButton';
+import CancelButton from '@atoms/button/CancelButton';
+import TableHeader from '@molecules/TableHeader';
+import EditTableRow from '@molecules/row/EditTableRow';
+import Spacer from '@atoms/Spacer';
+import { MemberData } from '@types/member';
 
 type MemberTableProps = {
   onClose: () => void;
   data: MemberData;
 };
 
-
 const EditModal: React.FC<MemberTableProps> = ({ onClose, data }) => {
-  
-  const [EditData, setEditData] = useState(data)
-  
+  const [EditData, setEditData] = useState(data);
+
   const handleValueChange = (key: string, value: string) => {
-    setEditData(prevData => ({
+    setEditData((prevData) => ({
       ...prevData,
-      [key]: value
+      [key]: value,
     }));
   };
 
@@ -34,7 +32,7 @@ const EditModal: React.FC<MemberTableProps> = ({ onClose, data }) => {
             <TableHeader isShowing={false} />
           </thead>
           <tbody>
-            <EditTableRow 
+            <EditTableRow
               id={data.id}
               name={data.name}
               grade={data.grade}
@@ -48,8 +46,8 @@ const EditModal: React.FC<MemberTableProps> = ({ onClose, data }) => {
       <Spacer height="30px" />
       <div className="flex justify-center">
         <div className="flex space-x-4">
-          <RoundDecideButton onClose={() => onClose()} submitData={EditData}/>
-          <CancelButton onClose={() => onClose()}/>
+          <RoundDecideButton onClose={onClose} submitData={EditData} />
+          <CancelButton onClose={onClose} />
         </div>
       </div>
       <Spacer height="20px" />
@@ -58,4 +56,3 @@ const EditModal: React.FC<MemberTableProps> = ({ onClose, data }) => {
 };
 
 export default EditModal;
-

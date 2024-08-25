@@ -1,6 +1,6 @@
 import React from 'react';
-import EditTableRowColumn from '../../atoms/column/EditTableRowColumn';
-import TableRowColumn from '../../atoms/column/TableRowColumn';
+import EditTableRowColumn from '@atoms/column/EditTableRowColumn';
+import TableRowColumn from '@atoms/column/TableRowColumn';
 
 
 type TableRowProps = {

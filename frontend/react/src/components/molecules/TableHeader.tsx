@@ -1,5 +1,5 @@
 import React from 'react';
-import TableHeaderColumn from '../atoms/column/TableHeaderColumn';
+import TableHeaderColumn from '@atoms/column/TableHeaderColumn';
 
 type TableHeaderProps = {
   isShowing: boolean; // isShowing の型を boolean に設定
