@@ -13,7 +13,7 @@ describe("DeleteModalコンポーネント", () => {
     startDate: "2024-08-15",
   };
 
-  it("EditTableRow に正しいプロパティが渡されているか確認する", () => {
+  it("DeleteModal に正しいプロパティが渡されているか確認する", () => {
     render(<DeleteModal data={dataMock} onClose={() => {}} />);
 
     expect(screen.getByText("Test Name")).to.exist;
