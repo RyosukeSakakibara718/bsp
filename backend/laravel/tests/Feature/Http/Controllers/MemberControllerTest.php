@@ -147,9 +147,17 @@ class MemberControllerTest extends TestCase
         $response = $this->putJson("v1/members/{$member->id}", $data);
         $response->assertStatus(204);
 
+        // データベースから更新後のメンバー情報を取得
+        $updatedMember = Member::find($member->id);
+
+        // データがリクエスト内容と一致しているかを確認
+        $this->assertEquals($data['name'], $updatedMember->name);
+        $this->assertEquals($data['base_cost'], $updatedMember->base_cost);
+        $this->assertEquals($data['rank'], $updatedMember->rank);
+        $this->assertEquals($data['base_cost_start_date'], $updatedMember->base_cost_start_date->toDateString());
     }
 
-    /**
+   /**
      * 目的：/members{$id}に不正なPUTリクエストを送ると、バリデーションにかかる。
      */
     public function test_メンバー編集時のバリデーション(): void
@@ -157,6 +165,9 @@ class MemberControllerTest extends TestCase
         $members = Member::factory()->count(10)->create();
 
         $member = $members[0];
+
+        // リクエスト前のデータを取得
+        $originalData = $member->toArray();
 
         $data = [
             'name' => '',
@@ -168,5 +179,11 @@ class MemberControllerTest extends TestCase
         $response = $this->putJson("v1/members/{$member->id}", $data);
         $response->assertStatus(422);
 
+        $unchangedMember = Member::find($member->id);
+
+        $this->assertEquals($originalData['name'], $unchangedMember->name);
+        $this->assertEquals($originalData['base_cost'], $unchangedMember->base_cost);
+        $this->assertEquals($originalData['rank'], $unchangedMember->rank);
+        $this->assertEquals($originalData['base_cost_start_date'], $unchangedMember->base_cost_start_date->toDateString());
     }
 }
