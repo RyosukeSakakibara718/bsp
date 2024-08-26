@@ -6,6 +6,7 @@ namespace Tests\Unit\UseCase;
 
 use App\Http\Requests\MemberRequest;
 use App\Models\Member;
+use App\UseCases\Member\DestroyAction;
 use App\UseCases\Member\IndexAction;
 use App\UseCases\Member\ShowAction;
 use App\UseCases\Member\StoreAction;
@@ -107,6 +108,5 @@ class MemberUseCaseTest extends TestCase
             'base_cost' => $newData['base_cost'],
             'rank' => $newData['rank'],
             'base_cost_start_date' => $newData['base_cost_start_date'],
-        ]);
-    }
+        ]);    }
 }

@@ -7,6 +7,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\MemberRequest;
 use App\Http\Resources\MemberResource;
 use App\Models\Member;
+use App\UseCases\Member\DestroyAction;
 use App\UseCases\Member\IndexAction;
 use App\UseCases\Member\ShowAction;
 use App\UseCases\Member\StoreAction;
@@ -62,8 +63,10 @@ class MemberController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Member $member)
+    public function destroy(DestroyAction $action, string $id)
     {
-        //
+        $member = $action($id);
+
+        return response()->json([], 204);
     }
 }
