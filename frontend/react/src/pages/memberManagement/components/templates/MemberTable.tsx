@@ -26,7 +26,9 @@ const MemberTable: React.FC<MemberTableProps> = ({ data }) => {
     cost: 0,
     startDate: ''
   }
-  
+
+  const columns = ["ID", "メンバー名", "等級", "原価", "開始日", "操作"];
+
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [isAddModalOpen, seAddeteModalOpen] = useState(false);
@@ -36,7 +38,7 @@ const MemberTable: React.FC<MemberTableProps> = ({ data }) => {
 
   const editData = data[targetDataId];
   const deleteData = data[targetDataId];
-  
+
   /**
    * 編集モーダルを開く
    * @param {number} id - 編集対象のメンバーID
@@ -61,7 +63,7 @@ const MemberTable: React.FC<MemberTableProps> = ({ data }) => {
     setTargetDataId(id - 1);
     setIsDeleteModalOpen(true);
   };
-  
+
   /**
    * 削除モーダルを閉じる
    */
@@ -87,8 +89,8 @@ const MemberTable: React.FC<MemberTableProps> = ({ data }) => {
    * 検索条件に一致するメンバーをフィルタリング
    * @returns {Array} フィルタリングされたメンバーリスト
    */
-  const filteredMembers = data.filter(member => 
-    Object.values(member).some(value => 
+  const filteredMembers = data.filter(member =>
+    Object.values(member).some(value =>
       value.toString().toLowerCase().includes(searchValue.toLowerCase())
     )
   );
@@ -111,11 +113,11 @@ const MemberTable: React.FC<MemberTableProps> = ({ data }) => {
   return (
     <>
       <div className='shadow-lg rounded-lg overflow-hidden p-8'>
-        <SearchBar 
-          searchValue={searchValue} 
-          setSearchValue={setSearchValue} 
-          clearSearchValue={clearShowData} 
-          setShowData={changeShowData} 
+        <SearchBar
+          searchValue={searchValue}
+          setSearchValue={setSearchValue}
+          clearSearchValue={clearShowData}
+          setShowData={changeShowData}
         />
         <Spacer height="20px"></Spacer>
         <div className="flex justify-end mr-2.5">
@@ -125,11 +127,11 @@ const MemberTable: React.FC<MemberTableProps> = ({ data }) => {
         <div className="overflow-hidden rounded-lg shadow-md">
           <table className="min-w-full divide-y divide-gray-200">
             <thead className="bg-gray-50">
-              <TableHeader isShowing={true} />
+              <TableHeader columns={columns} />
             </thead>
             <tbody className="bg-white divide-y divide-gray-200">
               {showData.map(item => (
-                <TableRow 
+                <TableRow
                   key={item.id}
                   id={item.id}
                   name={item.name}
@@ -148,7 +150,7 @@ const MemberTable: React.FC<MemberTableProps> = ({ data }) => {
         <div className="fixed inset-0 flex items-center justify-center z-50">
           <div className="absolute inset-0 bg-black opacity-50"></div>
           <div className="relative bg-white rounded-lg p-8 shadow-lg z-10">
-            <AddModal onClose={handleCloseAddModal} data={initialFormData} index={data.length}/>
+            <AddModal onClose={handleCloseAddModal} data={initialFormData} index={data.length} />
           </div>
         </div>
       )}
