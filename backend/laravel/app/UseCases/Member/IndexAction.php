@@ -8,9 +8,15 @@ use App\Models\Member;
 
 class IndexAction
 {
-    public function __invoke()
+    public function __invoke($searchQuery = [], $cursor = null)
     {
-        $members = Member::all();
+        $query = Member::query();
+
+        if (isset($searchQuery['name'])) {
+            $query->where('name', 'like', '%' . $searchQuery['name'] . '%');
+        }
+
+        $members = $query->cursorPaginate(10, ['*'], 'cursor', $cursor);
 
         return $members;
     }

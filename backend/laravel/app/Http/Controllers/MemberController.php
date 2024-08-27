@@ -12,6 +12,7 @@ use App\UseCases\Member\IndexAction;
 use App\UseCases\Member\ShowAction;
 use App\UseCases\Member\StoreAction;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 
 class MemberController extends Controller
@@ -19,13 +20,18 @@ class MemberController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(IndexAction $action): JsonResponse
+    public function index(IndexAction $action, Request $request): JsonResponse
     {
-        $members = $action();
+        $searchQuery = $request->only(['name']);
+        $cursor = $request->input('cursor');
+
+        $members = $action($searchQuery, $cursor);
 
         return response()->json([
             'members' => MemberResource::collection($members),
-        ]);
+            'next_cursor' => $members->nextCursor(),
+            'previous_cursor' => $members->previousCursor(),
+        ], 200);
     }
 
     /**
