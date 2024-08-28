@@ -1,9 +1,9 @@
 import { describe, expect, it, vi } from "vitest";
-import RoundDecideButton from "../../../../src/components/atoms/button/RoundDecideButton";
+import DecideButton from "../../../../src/components/atoms/button/DecideButton";
 import { fireEvent, render, screen } from "@testing-library/react";
 import React from "react";
 
-describe("RoundDecideButtonコンポーネント", () => {
+describe("DecideButtonコンポーネント", () => {
   const mockMember = {
     id: 1,
     name: "榊原 涼介",
@@ -13,9 +13,7 @@ describe("RoundDecideButtonコンポーネント", () => {
   };
   it("決定ボタンが押下されたらonCloseが呼び出される", () => {
     const mockFunction = vi.fn(() => {});
-    render(
-      <RoundDecideButton onClose={mockFunction} submitData={mockMember} />,
-    );
+    render(<DecideButton onClose={mockFunction} submitData={mockMember} />);
     const buttonElement = screen.getByRole("button");
     fireEvent.click(buttonElement);
     expect(mockFunction).toHaveBeenCalled();

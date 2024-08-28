@@ -7,14 +7,14 @@ import "@testing-library/jest-dom";
 describe("TableHeaderColumnコンポーネント", () => {
   it("widthプロパティが正しく適用されることを確認する", () => {
     const testWidth = "5%";
-    render(<TableHeaderColumn width={testWidth}>ID</TableHeaderColumn>);
+    render(<TableHeaderColumn width="5%" value="ID" />);
     const thElement = screen.getByText("ID");
 
     expect(thElement).toHaveStyle(`width: ${testWidth}`);
   });
 
   it("渡された子要素が正しくレンダリングされることを確認する", () => {
-    render(<TableHeaderColumn>ID</TableHeaderColumn>);
+    render(<TableHeaderColumn width="5%" value="ID" />);
     const thElement = screen.getByText("ID");
 
     expect(thElement).toBeInTheDocument();
