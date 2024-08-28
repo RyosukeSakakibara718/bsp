@@ -13,7 +13,6 @@ describe("DeleteModalコンポーネント", () => {
     startDate: "2024-08-15",
   };
 
-  
   it("ボタン要素が2個存在することを確認", () => {
     render(<DeleteModal data={dataMock} onClose={() => {}} />);
 

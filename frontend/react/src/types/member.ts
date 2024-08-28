@@ -9,4 +9,3 @@ export type MemberData = {
 export type MemberTableProps = {
   data: MemberData[]; // data は MemberData 型の配列
 };
-  

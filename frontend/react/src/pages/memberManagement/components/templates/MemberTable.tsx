@@ -1,31 +1,30 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import TableHeader from "../../../../components/molecules/TableHeader";
 import TableRow from "../../../../components/molecules/row/TableRow";
-import SearchBar from '../../../../components/molecules/SearchBar';
-import Spacer from '../../../../components/atoms/Spacer';
-import AddButton from '../../../../components/atoms/button/AddButton';
-import EditModal from '../../../../components/molecules/modal/EditModal';
-import { MemberTableProps } from '../../../../types/member';
-import DeleteModal from '../../../../components/molecules/modal/DeleteModal';
-import AddModal from '../../../../components/molecules/modal/AddModal';
+import SearchBar from "../../../../components/molecules/SearchBar";
+import Spacer from "../../../../components/atoms/Spacer";
+import AddButton from "../../../../components/atoms/button/AddButton";
+import EditModal from "../../../../components/molecules/modal/EditModal";
+import { MemberTableProps } from "../../../../types/member";
+import DeleteModal from "../../../../components/molecules/modal/DeleteModal";
+import AddModal from "../../../../components/molecules/modal/AddModal";
 
 /**
  * メンバーの一覧を表示し、追加・編集・削除を行うテーブルコンポーネント。
- * 
+ *
  * @component
  * @param {MemberTableProps} props - コンポーネントに渡されるプロパティ。
  * @param {Array} props.data - メンバーのデータリスト。
  * @returns {JSX.Element} MemberTableコンポーネントを返します。
  */
 const MemberTable: React.FC<MemberTableProps> = ({ data }) => {
-
   const initialFormData = {
     id: 0,
-    name: '',
+    name: "",
     grade: 0,
     cost: 0,
-    startDate: ''
-  }
+    startDate: "",
+  };
 
   const columns = ["ID", "メンバー名", "等級", "原価", "開始日", "操作"];
 
@@ -91,8 +90,8 @@ const MemberTable: React.FC<MemberTableProps> = ({ data }) => {
    */
   const filteredMembers = data.filter(member =>
     Object.values(member).some(value =>
-      value.toString().toLowerCase().includes(searchValue.toLowerCase())
-    )
+      value.toString().toLowerCase().includes(searchValue.toLowerCase()),
+    ),
   );
 
   /**
@@ -100,19 +99,19 @@ const MemberTable: React.FC<MemberTableProps> = ({ data }) => {
    */
   const changeShowData = () => {
     setShowData(filteredMembers);
-  }
+  };
 
   /**
    * 検索結果をクリアし、すべてのメンバーを表示
    */
   const clearShowData = () => {
     setShowData(data);
-    setSearchValue('');
-  }
+    setSearchValue("");
+  };
 
   return (
     <>
-      <div className='shadow-lg rounded-lg overflow-hidden p-8'>
+      <div className="shadow-lg rounded-lg overflow-hidden p-8">
         <SearchBar
           searchValue={searchValue}
           setSearchValue={setSearchValue}
@@ -150,7 +149,11 @@ const MemberTable: React.FC<MemberTableProps> = ({ data }) => {
         <div className="fixed inset-0 flex items-center justify-center z-50">
           <div className="absolute inset-0 bg-black opacity-50"></div>
           <div className="relative bg-white rounded-lg p-8 shadow-lg z-10">
-            <AddModal onClose={handleCloseAddModal} data={initialFormData} index={data.length} />
+            <AddModal
+              onClose={handleCloseAddModal}
+              data={initialFormData}
+              index={data.length}
+            />
           </div>
         </div>
       )}

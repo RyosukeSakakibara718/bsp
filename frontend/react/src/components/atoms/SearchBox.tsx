@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 type SearchBoxProps = {
   searchValue: string;
@@ -6,7 +6,6 @@ type SearchBoxProps = {
   setSearchValue: (value: string) => void;
   setShowData: () => void;
 };
-
 
 /**
  * 検索ボックスコンポーネント。
@@ -19,8 +18,12 @@ type SearchBoxProps = {
  * @param {string} props.placeholder - データを表示するための関数。
  * @returns {JSX.Element} 検索ボックスのJSX要素を返します。
  */
-const SearchBox: React.FC<SearchBoxProps> = ({ searchValue, setSearchValue, setShowData, placeholder = "検索ワードを入力してください..." }) => {
-
+const SearchBox: React.FC<SearchBoxProps> = ({
+  searchValue,
+  setSearchValue,
+  setShowData,
+  placeholder = "検索ワードを入力してください...",
+}) => {
   /**
    * 入力値の変更時に呼び出されるハンドラ関数。
    * 検索値をstateに保存します。
@@ -36,8 +39,8 @@ const SearchBox: React.FC<SearchBoxProps> = ({ searchValue, setSearchValue, setS
    * @param {React.KeyboardEvent<HTMLInputElement>} e - 入力イベント。
    */
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter') {
-      setShowData()
+    if (e.key === "Enter") {
+      setShowData();
     }
   };
 

@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 type SpacerProps = {
   height: string | number; // 高さを指定できるように

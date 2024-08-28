@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 type DeleteButtonProps = {
   id: number;
@@ -18,7 +18,6 @@ type DeleteButtonProps = {
  * @returns {JSX.Element} 呼び出し元によって、削除モーダルを開く/閉じるボタン要素を返します。
  */
 const DeleteButton: React.FC<DeleteButtonProps> = ({ id, onOpen, onClose }) => {
-
   const handleClick = () => {
     if (onOpen) {
       onOpen();
@@ -26,10 +25,13 @@ const DeleteButton: React.FC<DeleteButtonProps> = ({ id, onOpen, onClose }) => {
       // APIを叩くようにする
       onClose();
     }
-  }
+  };
 
   return (
-    <button onClick={handleClick} className="bg-red-500 shadow text-white rounded-full py-1 px-4 hover:bg-red-700 transition-colors duration-300 ease-in-out">
+    <button
+      onClick={handleClick}
+      className="bg-red-500 shadow text-white rounded-full py-1 px-4 hover:bg-red-700 transition-colors duration-300 ease-in-out"
+    >
       削除
     </button>
   );

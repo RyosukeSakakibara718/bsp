@@ -1,7 +1,6 @@
-import React from 'react';
-import AddTableRowColumn from '../../atoms/column/AddTableRowColumn';
-import TableRowColumn from '../../atoms/column/TableRowColumn';
-
+import React from "react";
+import AddTableRowColumn from "../../atoms/column/AddTableRowColumn";
+import TableRowColumn from "../../atoms/column/TableRowColumn";
 
 type TableRowProps = {
   id: number;
@@ -14,23 +13,23 @@ type TableRowProps = {
 
 const AddTableRow: React.FC<TableRowProps> = ({ id, onValueChange }) => {
   return (
-    <tr className='bg-customPurple'>
+    <tr className="bg-customPurple">
       <TableRowColumn width="5%">{id}</TableRowColumn>
-      <AddTableRowColumn 
-        width="25%" 
-        onChange={(value) => onValueChange('name', value)}
+      <AddTableRowColumn
+        width="25%"
+        onChange={value => onValueChange("name", value)}
       />
-      <AddTableRowColumn 
-        width="10%" 
-        onChange={(value) => onValueChange('grade', value)}
+      <AddTableRowColumn
+        width="10%"
+        onChange={value => onValueChange("grade", value)}
       />
-      <AddTableRowColumn 
-        width="25%" 
-        onChange={(value) => onValueChange('cost', value.replace(/,/g, ''))} // カンマを取り除いて数値に変換できるようにする
+      <AddTableRowColumn
+        width="25%"
+        onChange={value => onValueChange("cost", value.replace(/,/g, ""))} // カンマを取り除いて数値に変換できるようにする
       />
-      <AddTableRowColumn 
-        width="25%" 
-        onChange={(value) => onValueChange('startDate', value)}
+      <AddTableRowColumn
+        width="25%"
+        onChange={value => onValueChange("startDate", value)}
       />
     </tr>
   );

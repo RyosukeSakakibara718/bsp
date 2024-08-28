@@ -1,8 +1,8 @@
-import React from 'react';
+import React from "react";
 
 type EditButtonProps = {
-  id: number; 
-  onOpen: () => void
+  id: number;
+  onOpen: () => void;
 };
 
 /**
@@ -16,7 +16,10 @@ type EditButtonProps = {
  */
 const EditButton: React.FC<EditButtonProps> = ({ id, onOpen }) => {
   return (
-    <button onClick={() => onOpen()} className="bg-indigo-600 shadow text-white rounded-full py-1 px-4 hover:bg-indigo-800 transition-colors duration-300 ease-in-out">
+    <button
+      onClick={() => onOpen()}
+      className="bg-indigo-600 shadow text-white rounded-full py-1 px-4 hover:bg-indigo-800 transition-colors duration-300 ease-in-out"
+    >
       編集
     </button>
   );

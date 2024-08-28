@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 type TableRowColumnProps = {
   width?: string;
@@ -25,4 +25,3 @@ const TableRowColumn: React.FC<TableRowColumnProps> = ({ width, children }) => {
 };
 
 export default TableRowColumn;
-
