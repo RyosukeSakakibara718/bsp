@@ -62,8 +62,6 @@ class MemberController extends Controller
     {
         $action($request, $id);
 
-        logger("到達");
-        
         return response()->json([], 204);
     }
     /**

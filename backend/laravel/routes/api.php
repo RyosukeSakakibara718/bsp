@@ -10,4 +10,5 @@ Route::controller(MemberController::class)->group(function () {
     Route::get('/members/{id}', 'show')->name('メンバー詳細取得');
     Route::post('/members', 'store')->name('メンバー登録');
     Route::put('/members/{id}', 'update')->name('メンバー編集');
+    Route::delete('/members/{id}', 'destroy')->name('メンバー削除');
 });
