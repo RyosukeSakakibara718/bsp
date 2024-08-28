@@ -10,6 +10,7 @@ use App\UseCases\Member\DestroyAction;
 use App\UseCases\Member\IndexAction;
 use App\UseCases\Member\ShowAction;
 use App\UseCases\Member\StoreAction;
+use App\UseCases\Member\UpdateAction;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -73,15 +74,39 @@ class MemberUseCaseTest extends TestCase
         );
     }
 
-    public function test_UseCaseでメンバー削除(): void
+    public function test_UseCaseでメンバー編集(): void
     {
+        $initialMember = Member::factory()->create([
+            'id' => '1',
+            'name' => '旧名　太郎',
+            'base_cost' => 5000000,
+            'rank' => '2',
+            'base_cost_start_date' => '2023-08-20',
+        ]);
 
-        $members = Member::factory()->count(10)->create();
-        $id = $members[0]->id;
+        $newData = [
+            'name' => '新名　太郎',
+            'base_cost' => 10000000,
+            'rank' => '4',
+            'base_cost_start_date' => '2024-08-20',
+        ];
 
-        $action = new DestroyAction();
-        $deletedMember = $action((string) $id);
+        $request = new MemberRequest($newData);
 
-        $this->assertNotNull($deletedMember->deleted_at);
-    }
+        $action = new UpdateAction();
+
+        $updatedMember = $action($request, (string) $initialMember->id);
+
+        $this->assertEquals($newData['name'], $updatedMember->name);
+        $this->assertEquals($newData['base_cost'], $updatedMember->base_cost);
+        $this->assertEquals($newData['rank'], $updatedMember->rank);
+        $this->assertEquals($newData['base_cost_start_date'], $updatedMember->base_cost_start_date->toDateString());
+
+        $this->assertDatabaseHas('members', [
+            'id' => $initialMember->id,
+            'name' => $newData['name'],
+            'base_cost' => $newData['base_cost'],
+            'rank' => $newData['rank'],
+            'base_cost_start_date' => $newData['base_cost_start_date'],
+        ]);    }
 }

@@ -129,16 +129,61 @@ class MemberControllerTest extends TestCase
     }
 
     /**
-     * 目的：/members/destroy{id}にPOSTリクエストを送ると、対象レコードのdeleted_atに現在時間が入力される。
+     * 目的：/members{$id}にPUTリクエストを送って正常に編集ができると、ステータスコード204が返ってくることを確認
      */
-    public function test_メンバー削除(): void
+    public function test_メンバー編集が成功(): void
     {
         $members = Member::factory()->count(10)->create();
+
         $member = $members[0];
-        $id = $member->id;
-        $response = $this->delete("v1/members/$id");
+
+        $data = [
+            'name' => '田中太郎',
+            'base_cost' => 420000,
+            'rank' => 2,
+            'base_cost_start_date' => '2005-11-01',
+        ];
+
+        $response = $this->putJson("v1/members/{$member->id}", $data);
         $response->assertStatus(204);
 
-        $this->assertSoftDeleted($member);
+        // データベースから更新後のメンバー情報を取得
+        $updatedMember = Member::find($member->id);
+
+        // データがリクエスト内容と一致しているかを確認
+        $this->assertEquals($data['name'], $updatedMember->name);
+        $this->assertEquals($data['base_cost'], $updatedMember->base_cost);
+        $this->assertEquals($data['rank'], $updatedMember->rank);
+        $this->assertEquals($data['base_cost_start_date'], $updatedMember->base_cost_start_date->toDateString());
+    }
+
+   /**
+     * 目的：/members{$id}に不正なPUTリクエストを送ると、バリデーションにかかる。
+     */
+    public function test_メンバー編集時のバリデーション(): void
+    {
+        $members = Member::factory()->count(10)->create();
+
+        $member = $members[0];
+
+        // リクエスト前のデータを取得
+        $originalData = $member->toArray();
+
+        $data = [
+            'name' => '',
+            'base_cost' => 420000,
+            'rank' => 2,
+            'base_cost_start_date' => '2005-11-01',
+        ];
+
+        $response = $this->putJson("v1/members/{$member->id}", $data);
+        $response->assertStatus(422);
+
+        $unchangedMember = Member::find($member->id);
+
+        $this->assertEquals($originalData['name'], $unchangedMember->name);
+        $this->assertEquals($originalData['base_cost'], $unchangedMember->base_cost);
+        $this->assertEquals($originalData['rank'], $unchangedMember->rank);
+        $this->assertEquals($originalData['base_cost_start_date'], $unchangedMember->base_cost_start_date->toDateString());
     }
 }
