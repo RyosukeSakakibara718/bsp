@@ -9,17 +9,27 @@ use App\Models\Member;
 
 class UpdateAction
 {
-    public function __invoke(MemberRequest $request, string $id)
-    {
-        $member = Member::find($id);
+	public function __invoke(MemberRequest $request, string $id)
+	{
 
-        $member->name = $request->input('name');
-        $member->base_cost = $request->input('base_cost');
-        $member->rank = $request->input('rank');
-        $member->base_cost_start_date = $request->input('base_cost_start_date');
+		logger("到達");
+		
+		Member::upsert(
+			[
+				[
+					'id' => $id, 
+					'name' => $request->input('name'), 
+					'base_cost' => $request->input('base_cost'), 
+					'rank' => $request->input('rank'), 
+					'base_cost_start_date' => $request->input('base_cost_start_date')
+				],
+			],
+			['id'],
+			['name', 'base_cost', 'rank', 'base_cost_start_date']
+		);
 
-        $member->save();
+		$member = Member::find($id);
 
-        return $member;
-    }
+		return $member;
+	}
 }

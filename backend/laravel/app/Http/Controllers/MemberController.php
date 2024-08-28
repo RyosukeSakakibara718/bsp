@@ -54,18 +54,18 @@ class MemberController extends Controller
      */
     public function update(UpdateAction $action, MemberRequest $request, string $id)
     {
+        $action($request, $id);
 
-        $member = $action($request, $id);
-
+        logger("到達");
+        
         return response()->json([], 204);
     }
-
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(DestroyAction $action, string $id)
     {
-        $member = $action($id);
+        $action($id);
 
         return response()->json([], 204);
     }
