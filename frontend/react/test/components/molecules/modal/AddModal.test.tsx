@@ -1,7 +1,8 @@
-import { describe, it, expect } from "vitest";
 import { render, screen } from "@testing-library/react";
-import AddModal from "../../../../src/components/molecules/modal/AddModal";
 import React from "react";
+import { describe, it, expect } from "vitest";
+
+import AddModal from "../../../../src/components/molecules/modal/AddModal";
 
 describe("AddModalコンポーネント", () => {
   const mockData = {

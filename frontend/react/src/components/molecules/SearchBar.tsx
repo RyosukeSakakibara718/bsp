@@ -1,7 +1,8 @@
 import React from "react";
-import SearchBox from "../atoms/SearchBox";
-import { IoSearch } from "react-icons/io5";
 import { FaTrashAlt } from "react-icons/fa";
+import { IoSearch } from "react-icons/io5";
+
+import SearchBox from "../atoms/SearchBox";
 
 type SearchBarProps = {
   searchValue: string;

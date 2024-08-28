@@ -23,6 +23,7 @@ const DeleteButton: React.FC<DeleteButtonProps> = ({ id, onOpen, onClose }) => {
       onOpen();
     } else if (onClose) {
       // APIを叩くようにする
+      console.log(id);
       onClose();
     }
   };

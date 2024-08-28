@@ -1,7 +1,8 @@
-import { describe, expect, it } from "vitest";
 import { render, screen } from "@testing-library/react";
-import TableHeader from "../../../src/components/molecules/TableHeader";
 import React from "react";
+import { describe, expect, it } from "vitest";
+
+import TableHeader from "../../../src/components/molecules/TableHeader";
 
 describe("TableHeaderコンポーネント", () => {
   it("渡したcolumnsが正しくレンダリングされることを確認する", () => {

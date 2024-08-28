@@ -1,7 +1,8 @@
-import { describe, expect, it, vi } from "vitest";
 import { render, screen, fireEvent } from "@testing-library/react";
-import SearchBar from "../../../src/components/molecules/SearchBar";
 import React from "react";
+import { describe, expect, it, vi } from "vitest";
+
+import SearchBar from "../../../src/components/molecules/SearchBar";
 
 describe("SearchBarコンポーネント", () => {
   it("検索ボタンをクリックしたときにsetShowDataが呼び出されるか確認する", () => {

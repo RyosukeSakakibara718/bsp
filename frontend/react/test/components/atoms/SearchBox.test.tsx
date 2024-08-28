@@ -1,8 +1,10 @@
 import { render, screen, fireEvent } from "@testing-library/react";
-import { describe, it, expect, vi } from "vitest";
-import SearchBox from "../../../src/components/atoms/SearchBox";
-import "@testing-library/jest-dom";
 import React from "react";
+import { describe, it, expect, vi } from "vitest";
+
+import SearchBox from "../../../src/components/atoms/SearchBox";
+
+import "@testing-library/jest-dom";
 
 describe("SearchBoxコンポーネント", () => {
   it("プレースホルダーが正しく設定されているか確認する", () => {

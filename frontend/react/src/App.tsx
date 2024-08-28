@@ -1,6 +1,6 @@
 import "./App.css";
-import MemberTable from "./pages/memberManagement/components/templates/MemberTable";
 import { sampleMembersData } from "./data/members";
+import MemberTable from "./pages/memberManagement/components/templates/MemberTable";
 
 function App() {
   return (

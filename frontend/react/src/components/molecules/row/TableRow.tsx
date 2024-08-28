@@ -1,8 +1,9 @@
 import React from "react";
-import TableRowColumn from "../../atoms/column/TableRowColumn";
+
+import { MemberData } from "../../../types/member";
 import DeleteButton from "../../atoms/button/DeleteButton";
 import EditButton from "../../atoms/button/EditButton";
-import { MemberData } from "../../../types/member";
+import TableRowColumn from "../../atoms/column/TableRowColumn";
 
 type TableRowProps = MemberData & {
   isEditModalOpen: () => void;

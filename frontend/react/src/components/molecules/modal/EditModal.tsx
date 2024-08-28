@@ -1,10 +1,11 @@
 import React, { useState } from "react";
-import DecideButton from "../../atoms/button/DecideButton";
-import CancelButton from "../../atoms/button/CancelButton";
-import TableHeader from "../TableHeader";
-import EditTableRow from "../row/EditTableRow";
-import Spacer from "../../atoms/Spacer";
+
 import { MemberData } from "../../../types/member";
+import CancelButton from "../../atoms/button/CancelButton";
+import DecideButton from "../../atoms/button/DecideButton";
+import Spacer from "../../atoms/Spacer";
+import EditTableRow from "../row/EditTableRow";
+import TableHeader from "../TableHeader";
 
 type MemberTableProps = {
   onClose: () => void;

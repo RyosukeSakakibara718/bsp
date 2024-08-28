@@ -1,7 +1,8 @@
-import { describe, it, expect } from "vitest";
 import { render, screen } from "@testing-library/react";
-import EditModal from "../../../../src/components/molecules/modal/EditModal";
 import React from "react";
+import { describe, it, expect } from "vitest";
+
+import EditModal from "../../../../src/components/molecules/modal/EditModal";
 
 describe("EditModalコンポーネント", () => {
   const dataMock = {

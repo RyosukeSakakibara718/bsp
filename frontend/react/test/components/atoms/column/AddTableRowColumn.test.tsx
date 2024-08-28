@@ -1,7 +1,8 @@
-import { describe, expect, it, vi } from "vitest";
 import { render, screen, fireEvent } from "@testing-library/react";
-import AddTableRowColumn from "../../../../src/components/atoms/column/AddTableRowColumn";
 import React from "react";
+import { describe, expect, it, vi } from "vitest";
+
+import AddTableRowColumn from "../../../../src/components/atoms/column/AddTableRowColumn";
 
 describe("AddTableRowColumnコンポーネント", () => {
   it("入力が変更されたときにonChangeが正しく呼び出されるか確認する", () => {

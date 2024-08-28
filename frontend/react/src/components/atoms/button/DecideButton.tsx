@@ -1,4 +1,5 @@
 import React from "react";
+
 import { MemberData } from "../../../types/member";
 
 type DecideButtonProps = {

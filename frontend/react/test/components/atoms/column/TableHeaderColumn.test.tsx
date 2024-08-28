@@ -1,7 +1,8 @@
 import { render, screen } from "@testing-library/react";
-import { describe, it, expect } from "vitest";
-import TableHeaderColumn from "../../../../src/components/atoms/column/TableHeaderColumn";
 import React from "react";
+import { describe, it, expect } from "vitest";
+
+import TableHeaderColumn from "../../../../src/components/atoms/column/TableHeaderColumn";
 import "@testing-library/jest-dom";
 
 describe("TableHeaderColumnコンポーネント", () => {

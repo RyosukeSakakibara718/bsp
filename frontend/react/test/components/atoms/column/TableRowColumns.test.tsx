@@ -1,7 +1,8 @@
-import { describe, expect, it, vi } from "vitest";
-import TableRowColumn from "../../../../src/components/atoms/column/TableRowColumn";
 import { render, screen } from "@testing-library/react";
 import React from "react";
+import { describe, expect, it } from "vitest";
+
+import TableRowColumn from "../../../../src/components/atoms/column/TableRowColumn";
 
 describe("TableRowColumnコンポーネント", () => {
   it("カラムが指定の幅で表示される", () => {
