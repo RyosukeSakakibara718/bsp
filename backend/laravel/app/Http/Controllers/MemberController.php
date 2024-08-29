@@ -6,7 +6,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\MemberRequest;
 use App\Http\Resources\MemberResource;
-use App\Models\Member;
 use App\UseCases\Member\DestroyAction;
 use App\UseCases\Member\IndexAction;
 use App\UseCases\Member\ShowAction;
@@ -64,6 +63,7 @@ class MemberController extends Controller
 
         return response()->json([], 204);
     }
+
     /**
      * Remove the specified resource from storage.
      */

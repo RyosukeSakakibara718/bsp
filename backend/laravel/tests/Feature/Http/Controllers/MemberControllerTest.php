@@ -157,7 +157,7 @@ class MemberControllerTest extends TestCase
         $this->assertEquals($data['base_cost_start_date'], $updatedMember->base_cost_start_date->toDateString());
     }
 
-   /**
+    /**
      * 目的：/members{$id}に不正なPUTリクエストを送ると、バリデーションにかかる。
      */
     public function test_メンバー編集時のバリデーション(): void

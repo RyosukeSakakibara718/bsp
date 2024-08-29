@@ -32,6 +32,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Eloquent\Builder|Member whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Member find($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Member create($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Member upsert($value, $uniqueBy, $update)
  *
  * @mixin \Illuminate\Database\Eloquent\Model
  */
