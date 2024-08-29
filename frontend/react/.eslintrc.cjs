@@ -18,11 +18,7 @@ module.exports = {
     ecmaVersion: 12,
     sourceType: "module",
   },
-  plugins: [
-    "react",
-    "@typescript-eslint",
-    "import",
-  ],
+  plugins: ["react", "@typescript-eslint", "import"],
   rules: {
     "react/react-in-jsx-scope": "off",
     "react/jsx-no-target-blank": ["error", { allowReferrer: true }],
@@ -45,7 +41,7 @@ module.exports = {
           "internal",
           ["parent", "sibling", "index"],
           "object",
-          "type", 
+          "type",
         ],
         "newlines-between": "always",
         alphabetize: {
