@@ -1,13 +1,15 @@
+import React from "react";
 import "./App.css";
-import { sampleMembersData } from "./data/members";
-import MemberTable from "./pages/memberManagement/components/templates/MemberTable";
+import { BrowserRouter as Router } from "react-router-dom";
 
-function App() {
+import AppRoutes from "./routes";
+
+const App: React.FC = () => {
   return (
-    <div className="main">
-      <MemberTable data={sampleMembersData}></MemberTable>
-    </div>
+    <Router>
+      <AppRoutes />
+    </Router>
   );
-}
+};
 
 export default App;
