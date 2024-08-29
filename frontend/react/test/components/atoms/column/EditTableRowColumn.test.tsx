@@ -16,7 +16,6 @@ describe("EditTableRowColumnコンポーネント", () => {
 
     const inputElement = screen.getByDisplayValue("初期値") as HTMLInputElement;
     expect(inputElement.value).toBe("初期値");
-
   });
 
   it("入力が変更されたときにonChangeが正しく呼び出されるか確認する", () => {
@@ -31,8 +30,8 @@ describe("EditTableRowColumnコンポーネント", () => {
   });
 
   it("入力された値がvalueとして保持されていることを確認する", () => {
-    render(<EditTableRowColumn width="" initialValue="" onChange={() => {}} />)
-    const inputElement = screen.getByRole("textbox") as HTMLInputElement
+    render(<EditTableRowColumn width="" initialValue="" onChange={() => {}} />);
+    const inputElement = screen.getByRole("textbox") as HTMLInputElement;
     fireEvent.change(inputElement, { target: { value: "入力テスト" } });
     const inputvalue = inputElement.value;
 
