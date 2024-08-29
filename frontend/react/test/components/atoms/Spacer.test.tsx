@@ -1,7 +1,6 @@
 import { render } from "@testing-library/react";
 // eslint-disable-next-line import/order
 import React from "react";
-import "@testing-library/jest-dom";
 
 import { describe, expect, it } from "vitest";
 
@@ -14,10 +13,10 @@ describe("Spacer", () => {
     const divElement = container.firstChild as HTMLElement;
 
     // div要素が存在することを確認
-    expect(divElement).toBeInTheDocument();
+    expect(divElement).not.toBeNull();
 
     // divの高さが指定された値になっていることを確認
-    expect(divElement).toHaveStyle("height: 20px");
+    expect(divElement?.style.height).toBe("20px");
   });
 
   it("高さに文字列を指定した場合も正しく適用されるべき", () => {
@@ -25,9 +24,9 @@ describe("Spacer", () => {
     const divElement = container.firstChild as HTMLElement;
 
     // div要素が存在することを確認
-    expect(divElement).toBeInTheDocument();
+    expect(divElement).not.toBeNull();
 
     // divの高さが指定された値になっていることを確認
-    expect(divElement).toHaveStyle("height: 50%");
+    expect(divElement?.style.height).toBe("50%");
   });
 });
