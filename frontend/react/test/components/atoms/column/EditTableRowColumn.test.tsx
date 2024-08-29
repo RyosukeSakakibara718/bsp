@@ -1,7 +1,6 @@
 import { render, screen, fireEvent } from "@testing-library/react";
 import React from "react";
 import { describe, expect, it, vi } from "vitest";
-import "@testing-library/jest-dom";
 
 import EditTableRowColumn from "../../../../src/components/atoms/column/EditTableRowColumn";
 
@@ -15,8 +14,9 @@ describe("EditTableRowColumnコンポーネント", () => {
       />,
     );
 
-    const inputElement = screen.getByDisplayValue("初期値");
-    expect(inputElement).toBeInTheDocument();
+    const inputElement = screen.getByDisplayValue("初期値") as HTMLInputElement;
+    expect(inputElement.value).toBe("初期値");
+
   });
 
   it("入力が変更されたときにonChangeが正しく呼び出されるか確認する", () => {
@@ -45,6 +45,7 @@ describe("EditTableRowColumnコンポーネント", () => {
     );
     const inputElement = screen.getByRole("columnheader");
     const ElementWidth = inputElement.style.width;
+
     expect(ElementWidth).toBe("100px");
   });
 });
