@@ -9,7 +9,7 @@ import TableRow from "../../../../components/molecules/row/TableRow";
 import SearchBar from "../../../../components/molecules/SearchBar";
 import TableHeader from "../../../../components/molecules/TableHeader";
 import { MemberTableProps } from "../../../../types/member";
-
+import Header from "../../../header/coomponents/templates/Header";
 /**
  * メンバーの一覧を表示し、追加・編集・削除を行うテーブルコンポーネント。
  *
@@ -112,6 +112,7 @@ const MemberTable: React.FC<MemberTableProps> = ({ data }) => {
 
   return (
     <>
+      <Header />
       <div className="shadow-lg rounded-lg overflow-hidden p-8">
         <SearchBar
           searchValue={searchValue}
