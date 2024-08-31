@@ -1,58 +1,40 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import AddButton from "../../../../components/atoms/button/AddButton";
 import Spacer from "../../../../components/atoms/Spacer";
-import AddModal from "../../../../components/molecules/modal/AddModal";
-import DeleteModal from "../../../../components/molecules/modal/DeleteModal";
-import EditModal from "../../../../components/molecules/modal/EditModal";
-import TableRow from "../../../../components/molecules/row/TableRow";
 import SearchBar from "../../../../components/molecules/SearchBar";
 import TableHeader from "../../../../components/molecules/TableHeader";
-import { MemberTableProps } from "../../../../types/member";
-
+import { ProjectDataProps } from "../../../../types/project";
+import DeleteModal from "../molecules/modal/DeleteModal";
+import TableRow from "../molecules/row/TableRow";
 /**
- * メンバーの一覧を表示し、追加・編集・削除を行うテーブルコンポーネント。
+ *  案件の一覧を表示し・検索できるコンポーネント。
  *
  * @component
- * @param {MemberTableProps} props - コンポーネントに渡されるプロパティ。
+ * @param {ProjectManagementProps} props - コンポーネントに渡されるプロパティ。
  * @param {Array} props.data - メンバーのデータリスト。
- * @returns {JSX.Element} MemberTableコンポーネントを返します。
+ * @returns {JSX.Element} ProjectManagementコンポーネントを返します。
  */
-const MemberTable: React.FC<MemberTableProps> = ({ data }) => {
-  const initialFormData = {
-    id: 0,
-    name: "",
-    grade: 0,
-    cost: 0,
-    startDate: "",
-  };
-
-  const columns = ["ID", "メンバー名", "等級", "原価", "開始日", "操作"];
-
-  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
-  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
-  const [isAddModalOpen, seAddeteModalOpen] = useState(false);
-  const [targetDataId, setTargetDataId] = useState(0);
+const ProjectManagement: React.FC<ProjectDataProps> = ({ data }) => {
+  const columns = ["案件ID", "案件名", "期間", "PM", ""];
+  // TODO PMの中身実装
   const [showData, setShowData] = useState(data);
   const [searchValue, setSearchValue] = useState("");
+  const navigate = useNavigate();
 
-  const editData = data[targetDataId];
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [targetDataId, setTargetDataId] = useState(0);
   const deleteData = data[targetDataId];
 
-  /**
-   * 編集モーダルを開く
-   * @param {number} id - 編集対象のメンバーID
-   */
-  const handleOpenEditModal = (id: number) => {
-    setTargetDataId(id - 1);
-    setIsEditModalOpen(true);
+  const handleAddButtonClick = () => {
+    // TODO新規案件作成パスを指定
+    navigate("/projectManagement/detail");
   };
 
-  /**
-   * 編集モーダルを閉じる
-   */
-  const handleCloseEditModal = () => {
-    setIsEditModalOpen(false);
+  const handleEditButtonClick = () => {
+    // TODO編集先のページのパスを指定
+    navigate("/projectManagement/detail");
   };
 
   /**
@@ -70,21 +52,6 @@ const MemberTable: React.FC<MemberTableProps> = ({ data }) => {
   const handleCloseDeleteModal = () => {
     setIsDeleteModalOpen(false);
   };
-
-  /**
-   * 追加モーダルを開く
-   */
-  const handleOpenAddModal = () => {
-    seAddeteModalOpen(true);
-  };
-
-  /**
-   * 追加モーダルを閉じる
-   */
-  const handleCloseAddModal = () => {
-    seAddeteModalOpen(false);
-  };
-
   /**
    * 検索条件に一致するメンバーをフィルタリング
    * @returns {Array} フィルタリングされたメンバーリスト
@@ -121,7 +88,7 @@ const MemberTable: React.FC<MemberTableProps> = ({ data }) => {
         />
         <Spacer height="20px"></Spacer>
         <div className="flex justify-end mr-2.5">
-          <AddButton onOpen={handleOpenAddModal} buttonText="メンバーを追加" />
+          <AddButton onOpen={handleAddButtonClick} buttonText="案件を追加" />
         </div>
         <Spacer height="20px"></Spacer>
         <div className="overflow-hidden rounded-lg shadow-md">
@@ -131,14 +98,13 @@ const MemberTable: React.FC<MemberTableProps> = ({ data }) => {
             </thead>
             <tbody className="bg-white divide-y divide-gray-200">
               {showData.map(item => (
+                // eslint-disable-next-line react/jsx-key
                 <TableRow
-                  key={item.id}
                   id={item.id}
-                  name={item.name}
-                  grade={item.grade}
-                  cost={item.cost}
+                  projectName={item.projectName}
                   startDate={item.startDate}
-                  isEditModalOpen={() => handleOpenEditModal(item.id)}
+                  endDate={item.endDate}
+                  isEditPageOpen={handleEditButtonClick}
                   isDeleteModalOpen={() => handleOpenDeleteModal(item.id)}
                 />
               ))}
@@ -146,26 +112,6 @@ const MemberTable: React.FC<MemberTableProps> = ({ data }) => {
           </table>
         </div>
       </div>
-      {isAddModalOpen && (
-        <div className="fixed inset-0 flex items-center justify-center z-50">
-          <div className="absolute inset-0 bg-black opacity-50"></div>
-          <div className="relative bg-white rounded-lg p-8 shadow-lg z-10">
-            <AddModal
-              onClose={handleCloseAddModal}
-              data={initialFormData}
-              index={data.length}
-            />
-          </div>
-        </div>
-      )}
-      {isEditModalOpen && editData && (
-        <div className="fixed inset-0 flex items-center justify-center z-50">
-          <div className="absolute inset-0 bg-black opacity-50"></div>
-          <div className="relative bg-white rounded-lg p-8 shadow-lg z-10">
-            <EditModal onClose={handleCloseEditModal} data={editData} />
-          </div>
-        </div>
-      )}
       {isDeleteModalOpen && deleteData && (
         <div className="fixed inset-0 flex items-center justify-center z-50">
           <div className="absolute inset-0 bg-black opacity-50"></div>
@@ -178,4 +124,4 @@ const MemberTable: React.FC<MemberTableProps> = ({ data }) => {
   );
 };
 
-export default MemberTable;
+export default ProjectManagement;
