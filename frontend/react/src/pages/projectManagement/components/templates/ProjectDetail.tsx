@@ -8,6 +8,7 @@ import TableHeader from "../../../../components/molecules/TableHeader";
 import Header from "../../../header/components/templates/Header";
 import OutsourcesRegistrationTableRow from "../molecules/row/OutsourcesRegistrationTableRow";
 import ProjectRegistrationTableRow from "../molecules/row/ProjectRegistrationTableRow";
+import TrashButton from "../../../../components/atoms/button/TrashButton";
 
 /**
  * 案件の登録・編集を表を行うテーブルコンポーネント。
@@ -31,10 +32,15 @@ const ProjectDetail: React.FC<{ id?: string }> = () => {
     { label: "終了日", label2: "見積工数" },
   ];
 
-  const OutsourceColumns = ["内容", "見積金額", "原価"];
+  const OutsourceColumns = ["内容", "見積金額", "原価",""];
 
   const handleAddRow = () => {
     setRows(prevRows => [...prevRows, prevRows.length]); // 行を追加
+  };
+
+  const handleDeleteRow = (row: number) => {
+    console.log(row);
+    setRows((prevRows) => prevRows.filter(rowId => rowId !== row)); // 行を削除
   };
 
   /**
@@ -94,7 +100,7 @@ const ProjectDetail: React.FC<{ id?: string }> = () => {
           </thead>
           <tbody>
             {rows.map((row, index) => (
-              <OutsourcesRegistrationTableRow key={index} />
+              <OutsourcesRegistrationTableRow key={row} onDelete={handleDeleteRow}/>
             ))}
           </tbody>
         </table>
