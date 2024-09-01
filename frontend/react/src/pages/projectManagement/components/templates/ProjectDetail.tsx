@@ -32,14 +32,13 @@ const ProjectDetail: React.FC<{ id?: string }> = () => {
     { label: "終了日", label2: "見積工数" },
   ];
 
-  const OutsourceColumns = ["内容", "見積金額", "原価",""];
+  const OutsourceColumns = ["内容", "見積金額", "原価", ""];
 
   const handleAddRow = () => {
     setRows(prevRows => [...prevRows, prevRows.length]); // 行を追加
   };
 
   const handleDeleteRow = (row: number) => {
-    console.log(row);
     setRows((prevRows) => prevRows.filter(rowId => rowId !== row)); // 行を削除
   };
 
@@ -99,8 +98,8 @@ const ProjectDetail: React.FC<{ id?: string }> = () => {
             <TableHeader columns={OutsourceColumns} />
           </thead>
           <tbody>
-            {rows.map((row, index) => (
-              <OutsourcesRegistrationTableRow key={row} onDelete={handleDeleteRow}/>
+            {rows.map((row) => (
+              <OutsourcesRegistrationTableRow key={row} row={row} onDelete={handleDeleteRow} />
             ))}
           </tbody>
         </table>
