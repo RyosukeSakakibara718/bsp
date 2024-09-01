@@ -1,0 +1,37 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+
+class AssignmentMember extends Model
+{
+    use SoftDeletes;
+
+    protected $fillable = [
+        'project_id',
+        'member_id',
+        'position',
+        'estimate_total_person_month',
+    ];
+
+    // リレーション: AssignmentMember は Project に属する
+    public function project()
+    {
+        return $this->belongsTo(Project::class);
+    }
+
+    // リレーション: AssignmentMember は Member に属する
+    public function member()
+    {
+        return $this->belongsTo(Member::class);
+    }
+
+    // リレーション: AssignmentMember は複数の WorkCost を持つ
+    public function workCosts()
+    {
+        return $this->hasMany(WorkCost::class);
+    }
+}
+
