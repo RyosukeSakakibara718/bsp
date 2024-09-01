@@ -24,7 +24,7 @@ $ cp backend/laravel/.env.example backend/laravel/.env
 ## 4. apacheコンテナからマイグレーションを行う
 ```
 $ docker-compose exec apache bash
-# php artisan migrate
+# php artisan migrate --seed
     ※ 失敗した場合
     # php artisan migrate:fresh
 # exit
