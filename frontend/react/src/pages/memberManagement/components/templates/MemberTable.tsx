@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import AddButton from "../../../../components/atoms/button/AddButton";
+import AddOpenButton from "../../../../components/atoms/button/AddOpenButton";
 import Spacer from "../../../../components/atoms/Spacer";
 import AddModal from "../../../../components/molecules/modal/AddModal";
 import DeleteModal from "../../../../components/molecules/modal/DeleteModal";
@@ -9,7 +9,7 @@ import TableRow from "../../../../components/molecules/row/TableRow";
 import SearchBar from "../../../../components/molecules/SearchBar";
 import TableHeader from "../../../../components/molecules/TableHeader";
 import { MemberTableProps } from "../../../../types/member";
-import Header from "../../../header/coomponents/templates/Header";
+import Header from "../../../header/components/templates/Header";
 /**
  * メンバーの一覧を表示し、追加・編集・削除を行うテーブルコンポーネント。
  *
@@ -122,7 +122,10 @@ const MemberTable: React.FC<MemberTableProps> = ({ data }) => {
         />
         <Spacer height="20px"></Spacer>
         <div className="flex justify-end mr-2.5">
-          <AddButton onOpen={handleOpenAddModal} buttonText="メンバーを追加" />
+          <AddOpenButton
+            onOpen={handleOpenAddModal}
+            buttonText="メンバーを追加"
+          />
         </div>
         <Spacer height="20px"></Spacer>
         <div className="overflow-hidden rounded-lg shadow-md">

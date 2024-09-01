@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import AddButton from "../../../../components/atoms/button/AddButton";
+import AddOpenButton from "../../../../components/atoms/button/AddOpenButton";
 import Spacer from "../../../../components/atoms/Spacer";
 import SearchBar from "../../../../components/molecules/SearchBar";
 import TableHeader from "../../../../components/molecules/TableHeader";
 import { ProjectDataProps } from "../../../../types/project";
+import Header from "../../../header/components/templates/Header";
 import DeleteModal from "../molecules/modal/DeleteModal";
 import TableRow from "../molecules/row/TableRow";
 /**
@@ -79,6 +80,7 @@ const ProjectManagement: React.FC<ProjectDataProps> = ({ data }) => {
 
   return (
     <>
+      <Header />
       <div className="shadow-lg rounded-lg overflow-hidden p-8">
         <SearchBar
           searchValue={searchValue}
@@ -88,7 +90,10 @@ const ProjectManagement: React.FC<ProjectDataProps> = ({ data }) => {
         />
         <Spacer height="20px"></Spacer>
         <div className="flex justify-end mr-2.5">
-          <AddButton onOpen={handleAddButtonClick} buttonText="案件を追加" />
+          <AddOpenButton
+            onOpen={handleAddButtonClick}
+            buttonText="案件を追加"
+          />
         </div>
         <Spacer height="20px"></Spacer>
         <div className="overflow-hidden rounded-lg shadow-md">
