@@ -1,13 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Project extends Model
 {
-    use SoftDeletes;
+    use HasFactory, SoftDeletes;
 
     protected $fillable = [
         'freee_project_code',
@@ -16,6 +19,11 @@ class Project extends Model
         'phase',
         'start_date',
         'end_date',
+    ];
+
+    protected $casts = [
+        'start_date' => 'date:Y-m-d',
+        'end_date' => 'date:Y-m-d',
     ];
 
     // リレーション: Project は複数の AssignmentMember を持つ
