@@ -5,25 +5,26 @@ declare(strict_types=1);
 namespace App\UseCases\Project;
 
 use App\Http\Requests\ProjectRequest;
-use App\Http\Resources\ProjectResource;
 use App\Models\Project;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class UpdateAction
 {
-    public function __invoke(ProjectRequest $request, string $id)
+    public function __invoke(ProjectRequest $request, string $id): void
     {
-        // プロジェクトをIDで検索
-        $project = Project::find($id);
-
-        if (!$project) {
-            throw new ModelNotFoundException('Project not found');
-        }
-
-        // リクエストデータでプロジェクトを更新
-        $project->update($request->validated());
-
-        // 更新後のプロジェクトをProjectResourceを使って返す
-        return new ProjectResource($project);
+        Project::upsert(
+            [
+                [
+                    'id' => $id,
+                    'freee_project_code' => $request->input('freee_project_code'),
+                    'name' => $request->input('name'),
+                    'contract' => $request->input('contract'),
+                    'phase' => $request->input('phase'),
+                    'start_date' => $request->input('start_date'),
+                    'end_date' => $request->input('end_date'),
+                ],
+            ],
+            ['id'],
+            ['freee_project_code', 'name', 'contract', 'phase', 'start_date', 'end_date']
+        );
     }
 }

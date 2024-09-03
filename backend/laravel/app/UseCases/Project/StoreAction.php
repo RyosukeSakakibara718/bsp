@@ -13,9 +13,8 @@ class StoreAction
     public function __invoke(ProjectRequest $request)
     {
         // リクエストデータで新しいプロジェクトを作成
-        $project = Project::create($request->validated());
+        Project::create($request->validated());
 
-        // 作成後のプロジェクトをProjectResourceを使って返す
-        return new ProjectResource($project);
+        // このアクションでは、作成後のリソースを返す必要はないため、voidを返すようにします。
     }
 }
