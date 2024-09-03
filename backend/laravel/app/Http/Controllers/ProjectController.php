@@ -13,7 +13,6 @@ use App\UseCases\Project\UpdateAction;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-use Illuminate\Support\Facades\Log;
 
 class ProjectController extends Controller
 {
@@ -24,14 +23,11 @@ class ProjectController extends Controller
     {
         // プロジェクト名で検索
         $searchQuery = $request->only(['name']);
-        Log::info('Search Query:', $searchQuery);  // 検索クエリの内容をログに出力
 
         $cursor = $request->input('cursor');
-        Log::info('Cursor:', ['cursor' => $cursor]);  // カーソルの値をログに出力
 
         // IndexActionに検索クエリを渡してプロジェクトを取得
         $projects = $action($searchQuery, $cursor);
-        Log::info('Projects Retrieved: ' . json_encode($projects->items()));
 
 
         // 直接返す
