@@ -5,7 +5,8 @@ declare(strict_types=1);
 namespace App\UseCases\Project;
 
 use App\Models\Project;
-use Illuminate\Support\Facades\Log;
+use Carbon\Carbon;
+
 
 class IndexAction
 {
@@ -19,8 +20,9 @@ class IndexAction
             $query->where('name', 'like', '%' . $searchQuery['name'] . '%');
         }
 
-        // 終了日でソート
-        $query->orderBy('end_date');
+        // 現在以降の終了日でフィルタリングし、終了日が最も近い順にソート
+        $query->where('end_date', '>=', Carbon::now())
+              ->orderBy('end_date');
 
         // カーソルによるページネーション
         $projects = $query->cursorPaginate(10, ['*'], 'cursor', $cursor);
