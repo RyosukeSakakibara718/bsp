@@ -45,7 +45,7 @@ class ProjectController extends Controller
     {
         $project = $action($request);
 
-        return response()->json(new ProjectResource($project), 201);
+        return response()->json([], 201);
     }
 
     /**
@@ -65,7 +65,7 @@ class ProjectController extends Controller
     {
         $project = $action($request, $id);
 
-        return response()->json(new ProjectResource($project), 204);
+        return response()->json([], 204);
     }
 
     /**
