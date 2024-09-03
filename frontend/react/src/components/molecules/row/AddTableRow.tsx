@@ -9,7 +9,7 @@ type TableRowProps = {
   rank: number;
   base_cost: number;
   base_cost_start_date: string;
-  handleAddValueChange: (key: string, value: string) => void; // 値変更時のコールバック
+  handleAddValueChange: (key: string, value: string | number) => void; // 値変更時のコールバック
 };
 
 const AddTableRow: React.FC<TableRowProps> = ({ id, handleAddValueChange }) => {

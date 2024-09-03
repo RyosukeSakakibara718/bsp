@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 type AddTableRowColumnProps = {
   width?: string;
-  onChange: (value: string) => void;
+  onChange: (value: string | number) => void;
   inputType?: string
 };
 
@@ -28,10 +28,19 @@ const AddTableRowColumn: React.FC<AddTableRowColumnProps> = ({
    * @param {React.ChangeEvent<HTMLInputElement>} event - 入力イベント。
    */
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const newValue = event.target.value;
-    setValue(newValue);
-    onChange(newValue);
+    let newValue: string | number = event.target.value;
+  
+    if (inputType === "number") {
+      newValue = parseFloat(newValue.replace(/,/g, "")); // カンマを取り除いて数値に変換
+      if (isNaN(newValue)) {
+        newValue = ""; // 無効な数値の場合、空文字列に戻す
+      }
+    }
+  
+    setValue(newValue.toString()); // ステートは文字列で保持
+    onChange(newValue); // 変換された数値または文字列をコールバックで返す
   };
+  
 
   return (
     <th

@@ -11,7 +11,7 @@ type AddModalProps = {
   data: MemberData;
   onClose: () => void;
   index: number;
-  handleAddValueChange: () => void;
+  handleAddValueChange: (fieldName: string, value: any) => void;
   handleAddMember: () => void;
 };
 
