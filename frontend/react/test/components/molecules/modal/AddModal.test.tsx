@@ -9,8 +9,8 @@ describe("AddModalコンポーネント", () => {
     id: 5,
     name: "",
     grade: 1,
-    cost: 1000,
-    startDate: "",
+    base_cost: 1000,
+    base_cost_start_date: "",
   };
 
   it("モーダルが表示されたときに、正しいUI要素が存在することを確認する", () => {

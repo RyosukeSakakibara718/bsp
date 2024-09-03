@@ -4,6 +4,7 @@ type DeleteButtonProps = {
   id: number;
   onOpen?: () => void;
   onClose?: () => void;
+  handleDeleteMember?: () => void;
 };
 
 /**
@@ -17,7 +18,7 @@ type DeleteButtonProps = {
  * @param {function} props.onClose - 削除モーダルを閉じる関数。
  * @returns {JSX.Element} 呼び出し元によって、削除モーダルを開く/閉じるボタン要素を返します。
  */
-const DeleteButton: React.FC<DeleteButtonProps> = ({ id, onOpen, onClose }) => {
+const DeleteButton: React.FC<DeleteButtonProps> = ({ id, onOpen, onClose, handleDeleteMember }) => {
   const handleClick = () => {
     if (onOpen) {
       onOpen();
@@ -30,7 +31,10 @@ const DeleteButton: React.FC<DeleteButtonProps> = ({ id, onOpen, onClose }) => {
 
   return (
     <button
-      onClick={handleClick}
+      onClick={() => {
+        handleClick()
+        handleDeleteMember()
+      }}
       className="bg-red-500 shadow text-white rounded-full py-1 px-4 hover:bg-red-700 transition-colors duration-300 ease-in-out"
     >
       削除

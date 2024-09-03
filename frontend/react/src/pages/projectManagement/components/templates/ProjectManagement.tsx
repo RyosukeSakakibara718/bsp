@@ -102,7 +102,7 @@ const ProjectManagement: React.FC<ProjectDataProps> = ({ data }) => {
                 <TableRow
                   id={item.id}
                   projectName={item.projectName}
-                  startDate={item.startDate}
+                  base_cost_start_date={item.base_cost_start_date}
                   endDate={item.endDate}
                   isEditPageOpen={handleEditButtonClick}
                   isDeleteModalOpen={() => handleOpenDeleteModal(item.id)}

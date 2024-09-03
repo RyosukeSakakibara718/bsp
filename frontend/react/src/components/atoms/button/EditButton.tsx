@@ -19,7 +19,6 @@ const EditButton: React.FC<EditButtonProps> = ({ id, onOpen }) => {
     <button
       onClick={() => {
         onOpen();
-        console.log(id);
       }}
       className="bg-indigo-600 shadow text-white rounded-full py-1 px-4 hover:bg-indigo-800 transition-colors duration-300 ease-in-out"
     >

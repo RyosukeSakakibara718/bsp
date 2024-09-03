@@ -2,8 +2,9 @@ import React, { useState } from "react";
 
 type EditTableRowColumnProps = {
   width?: string;
-  initialValue: string;
+  initialValue: string | number;
   onChange: (value: string) => void;
+  inputType?: string
 };
 
 /**
@@ -19,6 +20,7 @@ const EditTableRowColumn: React.FC<EditTableRowColumnProps> = ({
   width,
   initialValue,
   onChange,
+  inputType
 }) => {
   const [value, setValue] = useState(initialValue);
 
@@ -40,7 +42,7 @@ const EditTableRowColumn: React.FC<EditTableRowColumnProps> = ({
       style={{ width: width }}
     >
       <input
-        type="text"
+        type={inputType ? inputType : 'text'}
         value={value}
         onChange={handleChange}
         className="bg-customPurple w-full px-3 py-2 border border-black rounded-md box-border text-base text-gray-800 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200 placeholder-gray-400"

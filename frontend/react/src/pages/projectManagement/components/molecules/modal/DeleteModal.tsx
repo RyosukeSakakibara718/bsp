@@ -45,7 +45,7 @@ const DeleteModal: React.FC<ProjectManagementProps> = ({ onClose, data }) => {
                 <TableRowColumn width="5%">{data.id}</TableRowColumn>
                 <TableRowColumn width="25%">{data.projectName}</TableRowColumn>
                 <TableRowColumn width="25%">
-                  {data.startDate} ~{data.endDate}
+                  {data.base_cost_start_date} ~{data.endDate}
                 </TableRowColumn>
                 <TableRowColumn width="25%">{""}</TableRowColumn>
               </tbody>

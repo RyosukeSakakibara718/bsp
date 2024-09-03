@@ -1,7 +1,7 @@
 export type ProjectData = {
   id: number;
   projectName: string;
-  startDate: string;
+  base_cost_start_date: string;
   endDate: string;
 };
 

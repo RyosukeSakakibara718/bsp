@@ -9,8 +9,8 @@ describe("DeleteModalコンポーネント", () => {
     id: 1,
     name: "Test Name",
     grade: 5,
-    cost: 1000,
-    startDate: "2024-08-15",
+    base_cost: 1000,
+    base_cost_start_date: "2024-08-15",
   };
 
   it("ボタン要素が2個存在することを確認", () => {

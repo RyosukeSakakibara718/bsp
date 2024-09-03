@@ -7,25 +7,27 @@ import TableRowColumn from "../../atoms/column/TableRowColumn";
 
 type TableRowProps = MemberData & {
   isEditModalOpen: () => void;
+  index: number;
   isDeleteModalOpen: () => void;
 };
 
 const TableRow: React.FC<TableRowProps> = ({
   id,
+  index,
   name,
-  grade,
-  cost,
-  startDate,
+  rank,
+  base_cost,
+  base_cost_start_date,
   isEditModalOpen,
   isDeleteModalOpen,
 }) => {
   return (
     <tr className="hover:bg-customPurple transition-colors duration-200">
-      <TableRowColumn width="5%">{id}</TableRowColumn>
+      <TableRowColumn width="5%">{index + 1}</TableRowColumn>
       <TableRowColumn width="25%">{name}</TableRowColumn>
-      <TableRowColumn width="10%">{grade}</TableRowColumn>
-      <TableRowColumn width="25%">{cost.toLocaleString()}円</TableRowColumn>
-      <TableRowColumn width="25%">{startDate}</TableRowColumn>
+      <TableRowColumn width="10%">{rank}</TableRowColumn>
+      <TableRowColumn width="25%">{base_cost.toLocaleString()}円</TableRowColumn>
+      <TableRowColumn width="25%">{base_cost_start_date}</TableRowColumn>
       <TableRowColumn width="10%">
         <div className="flex space-x-2.5">
           <EditButton onOpen={isEditModalOpen} id={id}></EditButton>

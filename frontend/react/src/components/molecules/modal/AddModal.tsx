@@ -11,6 +11,8 @@ type AddModalProps = {
   data: MemberData;
   onClose: () => void;
   index: number;
+  handleAddValueChange: () => void;
+  handleAddMember: () => void;
 };
 
 /**
@@ -22,20 +24,8 @@ type AddModalProps = {
  * @param {number} props.index - 選択行。
  * @returns {JSX.Element} 追加モーダルを返します。
  */
-const AddModal: React.FC<AddModalProps> = ({ data, onClose, index }) => {
-  const [formData, setFormData] = useState(data);
+const AddModal: React.FC<AddModalProps> = ({ data, onClose, index, handleAddValueChange, handleAddMember }) => {
 
-  const handleValueChange = (field: string, value: string | number) => {
-    setFormData(prev => ({
-      ...prev,
-      [field]: value,
-    }));
-  };
-
-  const hundleSubmitData = () => {
-    handleValueChange("id", index + 1);
-    console.log(formData);
-  };
 
   return (
     <div className="bg-white shadow-lg rounded-lg p-6">
@@ -45,16 +35,16 @@ const AddModal: React.FC<AddModalProps> = ({ data, onClose, index }) => {
       <div className="mx-5 grid shadow-lg rounded-lg overflow-hidden">
         <table className="min-w-full border-collapse">
           <thead>
-            <TableHeader isShowing={false} />
+            <TableHeader />
           </thead>
           <tbody>
             <AddTableRow
               id={index + 1}
               name={data.name}
-              grade={data.grade}
-              cost={data.cost}
-              startDate={data.startDate}
-              onValueChange={handleValueChange}
+              rank={data.rank}
+              base_cost={data.base_cost}
+              base_cost_start_date={data.base_cost_start_date}
+              handleAddValueChange={handleAddValueChange}
             />
           </tbody>
         </table>
@@ -62,7 +52,7 @@ const AddModal: React.FC<AddModalProps> = ({ data, onClose, index }) => {
       <Spacer height="30px" />
       <div className="flex justify-center">
         <div className="flex space-x-4">
-          <DecideAddButton hundleSubmit={hundleSubmitData} />
+          <DecideAddButton handleAddMember={handleAddMember} onClose={onClose} />
           <CancelButton onClose={onClose} />
         </div>
       </div>

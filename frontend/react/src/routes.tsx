@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Routes, Route } from "react-router-dom";
 
 import { sampleMembersData } from "./data/members";
@@ -10,16 +10,15 @@ import ProjectDetail from "./pages/projectManagement/components/templates/Projec
 import ProjectManagement from "./pages/projectManagement/components/templates/ProjectManagement";
 import UserManagement from "./pages/userManagement/components/templates/UserManagement";
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-
 const AppRoutes: React.FC = () => {
+  
   return (
     <Routes>
       <Route path="/login" element={<Login />} />
       <Route path="/home" element={<Home />} />
       <Route
         path="/memberManagement"
-        element={<MemberTable data={sampleMembersData} />}
+        element={<MemberTable/>}
       />
       <Route
         path="/projectManagement"

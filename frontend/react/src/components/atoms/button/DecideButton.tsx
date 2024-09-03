@@ -3,8 +3,9 @@ import React from "react";
 import { MemberData } from "../../../types/member";
 
 type DecideButtonProps = {
-  submitData: MemberData;
+  editData: MemberData;
   onClose: () => void;
+  handleSubmitEditData: () => void;
 };
 
 /**
@@ -13,13 +14,14 @@ type DecideButtonProps = {
  *
  * @param {DecideButtonProps} props - ボタンコンポーネントに渡されるプロパティオブジェクト。
  * @param {Function} props.onClose - 編集モーダルを閉じるための関数。
- * @param {Function} props.submitData - 編集用のAPIを叩くための関数。
+ * @param {Function} props.editData - 編集用のAPIを叩くための関数。
+ * @param {Function} handleSubmitEditData - 編集データをAPIに投げる関数
  * @returns {JSX.Element} 決定用のボタン要素を返します。
  */
-const DecideButton: React.FC<DecideButtonProps> = ({ onClose, submitData }) => {
+const DecideButton: React.FC<DecideButtonProps> = ({ onClose, editData, handleSubmitEditData }) => {
   const hundleSubmit = () => {
     onClose();
-    console.log("submitData", submitData);
+    handleSubmitEditData()
   };
   return (
     <button

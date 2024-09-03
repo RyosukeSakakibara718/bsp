@@ -10,6 +10,7 @@ import TableHeader from "../TableHeader";
 type MemberTableProps = {
   onClose: () => void;
   data: MemberData;
+  handleDeleteMember: () => void;
 };
 
 /**
@@ -22,7 +23,7 @@ type MemberTableProps = {
  * @returns {JSX.Element} メンバー削除用のモーダルコンポーネントを返します。
  */
 
-const DeleteModal: React.FC<MemberTableProps> = ({ onClose, data }) => {
+const DeleteModal: React.FC<MemberTableProps> = ({ onClose, data, handleDeleteMember }) => {
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50 z-50">
       <div className="bg-white shadow-lg rounded-lg p-6 w-full max-w-3xl mx-auto">
@@ -38,23 +39,23 @@ const DeleteModal: React.FC<MemberTableProps> = ({ onClose, data }) => {
           <div className="bg-white shadow-md rounded-lg overflow-hidden">
             <table className="min-w-full border-collapse">
               <thead>
-                <TableHeader isShowing={false} />
+                <TableHeader />
               </thead>
               <tbody className="bg-customPurple">
                 <TableRowColumn width="5%">{data.id}</TableRowColumn>
                 <TableRowColumn width="25%">{data.name}</TableRowColumn>
-                <TableRowColumn width="10%">{data.grade}</TableRowColumn>
+                <TableRowColumn width="10%">{data.rank}</TableRowColumn>
                 <TableRowColumn width="25%">
-                  {data.cost.toLocaleString()}
+                  {data.base_cost.toLocaleString()}
                 </TableRowColumn>
-                <TableRowColumn width="25%">{data.startDate}</TableRowColumn>
+                <TableRowColumn width="25%">{data.base_cost_start_date}</TableRowColumn>
               </tbody>
             </table>
           </div>
         </div>
         <Spacer height="30px" />
         <div className="flex justify-center space-x-4">
-          <DeleteButton id={data.id} onClose={() => onClose()} />
+          <DeleteButton id={data.id} onClose={() => onClose()} handleDeleteMember={handleDeleteMember} />
           <CancelButton onClose={() => onClose()} />
         </div>
         <Spacer height="20px" />

@@ -3,6 +3,7 @@ import React, { useState } from "react";
 type AddTableRowColumnProps = {
   width?: string;
   onChange: (value: string) => void;
+  inputType?: string
 };
 
 /**
@@ -16,6 +17,7 @@ type AddTableRowColumnProps = {
 const AddTableRowColumn: React.FC<AddTableRowColumnProps> = ({
   width,
   onChange,
+  inputType
 }) => {
   const [value, setValue] = useState("");
 
@@ -37,7 +39,7 @@ const AddTableRowColumn: React.FC<AddTableRowColumnProps> = ({
       style={{ width: width }}
     >
       <input
-        type="text"
+        type={inputType? inputType : 'test'}
         value={value}
         onChange={handleChange}
         className="bg-customPurple w-full px-3 py-2 border border-black rounded-md box-border text-base text-gray-800 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200 placeholder-gray-400"

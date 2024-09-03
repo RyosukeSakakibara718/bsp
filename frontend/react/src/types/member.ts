@@ -1,9 +1,9 @@
 export type MemberData = {
   id: number;
   name: string;
-  grade: number;
-  cost: number;
-  startDate: string;
+  rank: number;
+  base_cost: number;
+  base_cost_start_date: string;
 };
 
 export type MemberTableProps = {
