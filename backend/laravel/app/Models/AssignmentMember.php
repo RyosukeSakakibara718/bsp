@@ -41,5 +41,11 @@ class AssignmentMember extends Model
     {
         return PositionConstants::getPositionName($this->position);
     }
+
+    // 月次見積もりとのリレーションを追加
+    public function monthlyEstimations()
+    {
+        return $this->hasMany(AssignmentMemberMonthlyEstimation::class, 'assignment_member_id');
+    }
 }
 

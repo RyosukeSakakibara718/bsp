@@ -37,4 +37,16 @@ class Project extends Model
     {
         return $this->hasMany(WorkCost::class);
     }
+
+    // リレーション: Project は複数の Outsource を持つ
+    public function outsources()
+    {
+        return $this->hasMany(Outsource::class);
+    }
+
+    // リレーション: Project は複数の Estimation を持つ
+    public function estimations()
+    {
+        return $this->hasMany(Estimation::class);
+    }
 }
