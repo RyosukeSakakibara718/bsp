@@ -11,6 +11,7 @@ type AddModalProps = {
   data: MemberData;
   onClose: () => void;
   index: number;
+  columns: string[];
 };
 
 /**
@@ -20,9 +21,10 @@ type AddModalProps = {
  * @param {MemberData} props.data - 対象のデータ。
  * @param {function} props.onClose - 追加モーダルを閉じる関数。
  * @param {number} props.index - 選択行。
+ * @param {string[]} props.columns - モーダルのヘッダー項目データ
  * @returns {JSX.Element} 追加モーダルを返します。
  */
-const AddModal: React.FC<AddModalProps> = ({ data, onClose, index }) => {
+const AddModal: React.FC<AddModalProps> = ({ data, onClose, index, columns }) => {
   const [formData, setFormData] = useState(data);
 
   const handleValueChange = (field: string, value: string | number) => {
@@ -45,7 +47,7 @@ const AddModal: React.FC<AddModalProps> = ({ data, onClose, index }) => {
       <div className="mx-5 grid shadow-lg rounded-lg overflow-hidden">
         <table className="min-w-full border-collapse">
           <thead>
-            <TableHeader isShowing={false} />
+            <TableHeader columns={columns} />
           </thead>
           <tbody>
             <AddTableRow
