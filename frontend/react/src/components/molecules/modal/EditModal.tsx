@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 import { MemberData } from "../../../types/member";
 import CancelButton from "../../atoms/button/CancelButton";
@@ -10,7 +10,7 @@ import TableHeader from "../TableHeader";
 type MemberTableProps = {
   onClose: () => void;
   editData: MemberData;
-  handleValueChange: (fieldName: string, value: any) => void;
+  handleValueChange: (fieldName: string, value: string | number | Date) => void;
   handleSubmitEditData: () => void;
 };
 
@@ -20,13 +20,17 @@ type MemberTableProps = {
  *
  * @param {MemberTableProps} props - 編集モーダルのプロパティ。
  * @param {() => void} props.onClose - モーダルを閉じるための関数。
- * @param {() => void} props.editData - 編集対象のメンバーの値。
- * @param {Function} handleValueChange - 編集モーダル内で値が変更された際にstateを変更する関数
- * @param {Function} handleSubmitEditData - 編集データをAPIに投げる関数
+ * @param {MemberData} props.editData - 編集対象のメンバーの値。
+ * @param {Function} props.handleValueChange - 編集モーダル内で値が変更された際にstateを変更する関数
+ * @param {Function} props.handleSubmitEditData - 編集データをAPIに投げる関数
  * @returns {JSX.Element} メンバー編集用のモーダルコンポーネントを返します。
  */
-const EditModal: React.FC<MemberTableProps> = ({ onClose, editData, handleValueChange, handleSubmitEditData }) => {
-// const EditModal: React.FC<MemberTableProps> = ({ handleValueChange, onClose, data, onEdit, editValue }) => {
+const EditModal: React.FC<MemberTableProps> = ({
+  onClose,
+  editData,
+  handleValueChange,
+  handleSubmitEditData,
+}) => {
 
   /**
    * フォームのフィールドが変更されたときに呼び出される関数
@@ -46,21 +50,28 @@ const EditModal: React.FC<MemberTableProps> = ({ onClose, editData, handleValueC
             <TableHeader />
           </thead>
           <tbody>
-            <EditTableRow
-              id={editData.id}
-              name={editData.name}
-              rank={editData.rank}
-              base_cost={editData.base_cost}
-              base_cost_start_date={editData.base_cost_start_date}
-              onValueChange={handleValueChange}
-            />
+            {
+              editData && ( 
+                <EditTableRow
+                  id={editData.id}
+                  name={editData.name}
+                  rank={editData.rank}
+                  base_cost={editData.base_cost}
+                  base_cost_start_date={editData.base_cost_start_date}
+                  onValueChange={handleValueChange}
+                />
+              )
+            }
           </tbody>
         </table>
       </div>
       <Spacer height="30px" />
       <div className="flex justify-center">
         <div className="flex space-x-4">
-          <DecideButton onClose={() => onClose()} editData={editData} handleSubmitEditData={handleSubmitEditData} />
+          <DecideButton
+            onClose={() => onClose()}
+            handleSubmitEditData={handleSubmitEditData}
+          />
           <CancelButton onClose={() => onClose()} />
         </div>
       </div>

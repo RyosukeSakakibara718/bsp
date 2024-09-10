@@ -28,8 +28,7 @@ const AddTableRow: React.FC<TableRowProps> = ({ id, handleAddValueChange }) => {
       <AddTableRowColumn
         width="25%"
         onChange={value => {
-          handleAddValueChange("base_cost", value)
-          console.log(typeof(value));
+          handleAddValueChange("base_cost", value);
         }} // カンマを取り除いて数値に変換できるようにする
         inputType="number"
       />

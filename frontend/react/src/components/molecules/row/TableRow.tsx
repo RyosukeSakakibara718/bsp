@@ -23,7 +23,9 @@ const TableRow: React.FC<TableRowProps> = ({
     <tr className="hover:bg-customPurple transition-colors duration-200">
       <TableRowColumn width="25%">{name}</TableRowColumn>
       <TableRowColumn width="10%">{rank}</TableRowColumn>
-      <TableRowColumn width="25%">{base_cost.toLocaleString()}円</TableRowColumn>
+      <TableRowColumn width="25%">
+        {base_cost.toLocaleString()}円
+      </TableRowColumn>
       <TableRowColumn width="25%">{base_cost_start_date}</TableRowColumn>
       <TableRowColumn width="10%">
         <div className="flex space-x-2.5">

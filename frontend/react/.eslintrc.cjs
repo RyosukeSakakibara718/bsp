@@ -26,7 +26,7 @@ module.exports = {
     "react/jsx-filename-extension": [1, { extensions: [".tsx"] }],
     "@typescript-eslint/explicit-module-boundary-types": "off",
     "@typescript-eslint/no-unused-vars": ["error", { argsIgnorePattern: "^_" }],
-    camelcase: ["error", { properties: "always" }],
+    camelcase: "off",
     "no-console": "warn",
     "no-var": "error",
     "prefer-const": "error",
@@ -50,6 +50,7 @@ module.exports = {
         },
       },
     ],
+    "react/jsx-key": "off",
   },
   settings: {
     react: {

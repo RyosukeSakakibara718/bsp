@@ -3,7 +3,7 @@ import React, { useState } from "react";
 type AddTableRowColumnProps = {
   width?: string;
   onChange: (value: string | number) => void;
-  inputType?: string
+  inputType?: string;
 };
 
 /**
@@ -17,7 +17,7 @@ type AddTableRowColumnProps = {
 const AddTableRowColumn: React.FC<AddTableRowColumnProps> = ({
   width,
   onChange,
-  inputType
+  inputType,
 }) => {
   const [value, setValue] = useState("");
 
@@ -29,18 +29,17 @@ const AddTableRowColumn: React.FC<AddTableRowColumnProps> = ({
    */
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     let newValue: string | number = event.target.value;
-  
+
     if (inputType === "number") {
       newValue = parseFloat(newValue.replace(/,/g, "")); // カンマを取り除いて数値に変換
       if (isNaN(newValue)) {
         newValue = ""; // 無効な数値の場合、空文字列に戻す
       }
     }
-  
+
     setValue(newValue.toString()); // ステートは文字列で保持
     onChange(newValue); // 変換された数値または文字列をコールバックで返す
   };
-  
 
   return (
     <th
@@ -48,7 +47,7 @@ const AddTableRowColumn: React.FC<AddTableRowColumnProps> = ({
       style={{ width: width }}
     >
       <input
-        type={inputType? inputType : 'test'}
+        type={inputType ? inputType : "text"}
         value={value}
         onChange={handleChange}
         className="bg-customPurple w-full px-3 py-2 border border-black rounded-md box-border text-base text-gray-800 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200 placeholder-gray-400"

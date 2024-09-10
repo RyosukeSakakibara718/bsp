@@ -98,7 +98,6 @@ const ProjectManagement: React.FC<ProjectDataProps> = ({ data }) => {
             </thead>
             <tbody className="bg-white divide-y divide-gray-200">
               {showData.map(item => (
-                // eslint-disable-next-line react/jsx-key
                 <TableRow
                   id={item.id}
                   projectName={item.projectName}

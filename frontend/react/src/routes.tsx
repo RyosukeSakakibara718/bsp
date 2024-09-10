@@ -10,15 +10,11 @@ import ProjectManagement from "./pages/projectManagement/components/templates/Pr
 import UserManagement from "./pages/userManagement/components/templates/UserManagement";
 
 const AppRoutes: React.FC = () => {
-  
   return (
     <Routes>
       <Route path="/login" element={<Login />} />
       <Route path="/home" element={<Home />} />
-      <Route
-        path="/memberManagement"
-        element={<MemberTable/>}
-      />
+      <Route path="/memberManagement" element={<MemberTable />} />
       <Route
         path="/projectManagement"
         element={<ProjectManagement data={sampleProjectData} />}

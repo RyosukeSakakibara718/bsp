@@ -23,7 +23,11 @@ type MemberTableProps = {
  * @returns {JSX.Element} メンバー削除用のモーダルコンポーネントを返します。
  */
 
-const DeleteModal: React.FC<MemberTableProps> = ({ onClose, data, handleDeleteMember }) => {
+const DeleteModal: React.FC<MemberTableProps> = ({
+  onClose,
+  data,
+  handleDeleteMember,
+}) => {
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50 z-50">
       <div className="bg-white shadow-lg rounded-lg p-6 w-full max-w-3xl mx-auto">
@@ -47,17 +51,19 @@ const DeleteModal: React.FC<MemberTableProps> = ({ onClose, data, handleDeleteMe
                 <TableRowColumn width="25%">
                   {data.base_cost.toLocaleString()}
                 </TableRowColumn>
-                <TableRowColumn width="25%">{data.base_cost_start_date}</TableRowColumn>
+                <TableRowColumn width="25%">
+                  {data.base_cost_start_date}
+                </TableRowColumn>
               </tbody>
             </table>
           </div>
         </div>
         <Spacer height="30px" />
         <div className="flex justify-center space-x-4">
-          <DeleteButton 
-            id={data.id} 
-            onClose={() => onClose()} 
-            handleDeleteMember={handleDeleteMember} 
+          <DeleteButton
+            id={data.id}
+            onClose={() => onClose()}
+            handleDeleteMember={handleDeleteMember}
           />
           <CancelButton onClose={() => onClose()} />
         </div>

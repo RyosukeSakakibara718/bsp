@@ -8,9 +8,15 @@ import EditModal from "../../../../components/molecules/modal/EditModal";
 import TableRow from "../../../../components/molecules/row/TableRow";
 import SearchBar from "../../../../components/molecules/SearchBar";
 import TableHeader from "../../../../components/molecules/TableHeader";
+import {
+  getMemberAll,
+  editMember,
+  deleteMember,
+  addMember,
+} from "../../../../hooks/useMember";
 import Header from "../../../header/coomponents/templates/Header";
-import type { MemberData } from "../../../../types/member"
-import { getMemberAll, editMember, deleteMember, addMember } from "../../../../hooks/useMember";
+
+import type { MemberData } from "../../../../types/member";
 
 /**
  * メンバーの一覧を表示し、追加・編集・削除を行うテーブルコンポーネント。
@@ -32,40 +38,39 @@ const MemberTable: React.FC = () => {
   const [memberData, setMemberData] = useState<MemberData[]>([]);
   const [loading, setLoading] = useState(true);
   const columns = ["メンバー名", "等級", "原価", "開始日", "操作"];
-  
+
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [isAddModalOpen, seAddeteModalOpen] = useState(false);
   const [showData, setShowData] = useState(memberData);
   const [searchValue, setSearchValue] = useState("");
-  const [targetData, setTargetData] = useState<MemberData>(initialFormData)
-  const [addData, setAddData] = useState<MemberData>(initialFormData)
+  const [targetData, setTargetData] = useState<MemberData>(initialFormData);
+  const [addData, setAddData] = useState<MemberData>(initialFormData);
 
   // モーダルオープン時の表示用
-  
+
   useEffect(() => {
     getMemberAll()
       .then(members => {
         if (members !== null) {
-          setMemberData(members);  // データがnullでない場合にセット
-          setShowData(members)
+          setMemberData(members); // データがnullでない場合にセット
+          setShowData(members);
         }
-        setLoading(false);  // ローディングを終了
+        setLoading(false); // ローディングを終了
       })
       .catch(error => {
-        console.error('Error fetching member data:', error);
-        setLoading(false);  // エラーが発生してもローディングを終了
+        console.error("Error fetching member data:", error);
+        setLoading(false); // エラーが発生してもローディングを終了
       });
   }, []);
-
 
   /**
    * 編集モーダルを開く
    * @param {number} id - 編集対象のメンバーID
    */
   const handleOpenEditModal = (id: number) => {
-    setIsEditModalOpen(true)
-    setTargetData(memberData[id])
+    setIsEditModalOpen(true);
+    setTargetData(memberData[id]);
   };
 
   /**
@@ -81,7 +86,7 @@ const MemberTable: React.FC = () => {
    */
   const handleOpenDeleteModal = (id: number) => {
     setIsDeleteModalOpen(true);
-    setTargetData(memberData[id])
+    setTargetData(memberData[id]);
   };
 
   /**
@@ -134,7 +139,7 @@ const MemberTable: React.FC = () => {
    * fetchが完了するまで表示するDOM
    */
   if (loading) {
-    return <div >Loading...</div>;
+    return <div>Loading...</div>;
   }
 
   /**
@@ -159,74 +164,74 @@ const MemberTable: React.FC = () => {
   const handleSubmitEditData = () => {
     editMember(targetData.id, targetData)
       .then(response => {
-        console.log('Edit successful:', response);
+        console.log("Edit successful:", response);
         // 編集が成功したら、メンバーリストを再取得
         getMemberAll()
           .then(members => {
             if (members !== null) {
-              setMemberData(members);  // データがnullでない場合にセット
+              setMemberData(members); // データがnullでない場合にセット
               setShowData(members);
             }
-            setLoading(false);  // ローディングを終了
+            setLoading(false); // ローディングを終了
           })
           .catch(error => {
-            console.error('Error fetching member data:', error);
-            setLoading(false);  // エラーが発生してもローディングを終了
+            console.error("Error fetching member data:", error);
+            setLoading(false); // エラーが発生してもローディングを終了
           });
       })
       .catch(error => {
-        console.error('Error during edit:', error);
+        console.error("Error during edit:", error);
         // エラー時の処理
       });
   };
 
   const handleDeleteMember = () => {
     deleteMember(targetData.id)
-    .then(response => {
-      console.log('Edit successful:', response);
-      // 編集が成功したら、メンバーリストを再取得
-      getMemberAll()
-        .then(members => {
-          if (members !== null) {
-            setMemberData(members);  // データがnullでない場合にセット
-            setShowData(members);
-          }
-          setLoading(false);  // ローディングを終了
-        })
-        .catch(error => {
-          console.error('Error fetching member data:', error);
-          setLoading(false);  // エラーが発生してもローディングを終了
-        });
-    })
-    .catch(error => {
-      console.error('Error during edit:', error);
-      // エラー時の処理
-    });
-  }
+      .then(response => {
+        console.log("Edit successful:", response);
+        // 編集が成功したら、メンバーリストを再取得
+        getMemberAll()
+          .then(members => {
+            if (members !== null) {
+              setMemberData(members); // データがnullでない場合にセット
+              setShowData(members);
+            }
+            setLoading(false); // ローディングを終了
+          })
+          .catch(error => {
+            console.error("Error fetching member data:", error);
+            setLoading(false); // エラーが発生してもローディングを終了
+          });
+      })
+      .catch(error => {
+        console.error("Error during edit:", error);
+        // エラー時の処理
+      });
+  };
 
   const handleAddMember = () => {
     addMember(addData)
-    .then(response => {
-      console.log('Edit successful:', response);
-      // 編集が成功したら、メンバーリストを再取得
-      getMemberAll()
-        .then(members => {
-          if (members !== null) {
-            setMemberData(members);  // データがnullでない場合にセット
-            setShowData(members);
-          }
-          setLoading(false);  // ローディングを終了
-        })
-        .catch(error => {
-          console.error('Error fetching member data:', error);
-          setLoading(false);  // エラーが発生してもローディングを終了
-        });
-    })
-    .catch(error => {
-      console.error('Error during edit:', error);
-      // エラー時の処理
-    });
-  }
+      .then(response => {
+        console.log("Edit successful:", response);
+        // 編集が成功したら、メンバーリストを再取得
+        getMemberAll()
+          .then(members => {
+            if (members !== null) {
+              setMemberData(members); // データがnullでない場合にセット
+              setShowData(members);
+            }
+            setLoading(false); // ローディングを終了
+          })
+          .catch(error => {
+            console.error("Error fetching member data:", error);
+            setLoading(false); // エラーが発生してもローディングを終了
+          });
+      })
+      .catch(error => {
+        console.error("Error during edit:", error);
+        // エラー時の処理
+      });
+  };
 
   return (
     <>
@@ -260,9 +265,8 @@ const MemberTable: React.FC = () => {
                     isEditModalOpen={() => handleOpenEditModal(index)}
                     isDeleteModalOpen={() => handleOpenDeleteModal(index)}
                   />
-                )
-              }
-              )}
+                );
+              })}
             </tbody>
           </table>
         </div>
@@ -285,7 +289,12 @@ const MemberTable: React.FC = () => {
         <div className="fixed inset-0 flex items-center justify-center z-50">
           <div className="absolute inset-0 bg-black opacity-50"></div>
           <div className="relative bg-white rounded-lg p-8 shadow-lg z-10">
-          <EditModal onClose={handleCloseEditModal} editData={targetData} handleValueChange={handleValueChange} handleSubmitEditData={handleSubmitEditData} />
+            <EditModal
+              onClose={handleCloseEditModal}
+              editData={targetData}
+              handleValueChange={handleValueChange}
+              handleSubmitEditData={handleSubmitEditData}
+            />
           </div>
         </div>
       )}
@@ -293,7 +302,11 @@ const MemberTable: React.FC = () => {
         <div className="fixed inset-0 flex items-center justify-center z-50">
           <div className="absolute inset-0 bg-black opacity-50"></div>
           <div className="relative bg-white rounded-lg p-8 shadow-lg z-10">
-            <DeleteModal onClose={handleCloseDeleteModal} data={targetData} handleDeleteMember={handleDeleteMember} />
+            <DeleteModal
+              onClose={handleCloseDeleteModal}
+              data={targetData}
+              handleDeleteMember={handleDeleteMember}
+            />
           </div>
         </div>
       )}

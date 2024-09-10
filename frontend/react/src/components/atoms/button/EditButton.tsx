@@ -1,7 +1,6 @@
 import React from "react";
 
 type EditButtonProps = {
-  id: number;
   onOpen: () => void;
 };
 
@@ -10,11 +9,10 @@ type EditButtonProps = {
  * 対象のメンバーの情報を編集するためのモーダルを開くための関数を呼び出す。
  *
  * @param {EditButtonProps} props - ボタンコンポーネントのプロパティ。
- * @param {number} props.id - 編集対象のメンバーのID
  * @param {function} props.onOpen - 編集モーダルを表示する関数。
  * @returns {JSX.Element} 編集ボタンを開くためのボタン要素を返します。
  */
-const EditButton: React.FC<EditButtonProps> = ({ id, onOpen }) => {
+const EditButton: React.FC<EditButtonProps> = ({ onOpen }) => {
   return (
     <button
       onClick={() => {
