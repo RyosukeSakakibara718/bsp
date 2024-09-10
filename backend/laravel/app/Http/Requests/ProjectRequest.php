@@ -18,14 +18,35 @@ class ProjectRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required', 'string', 'max:255'],
-            'freee_project_code' => ['nullable', 'string', 'max:50'],
-            'contract' => ['required', 'integer', 'min:1'],
-            'phase' => ['required', 'integer', 'min:1'],
-            'start_date' => ['required', 'date'],
-            'end_date' => ['required', 'date', 'after_or_equal:start_date'],
+            // 案件情報
+            'projects.projects_data.name' => ['required', 'string', 'max:255'],
+            'projects.projects_data.contract' => ['required', 'integer', 'min:1'],
+            'projects.projects_data.phase' => ['required', 'integer', 'min:1'],
+            'projects.projects_data.start_date' => ['required', 'date', 'date_format:Y-m-d'],
+            'projects.projects_data.end_date' => ['required', 'date', 'after_or_equal:projects.projects_data.start_date', 'date_format:Y-m-d'],
+            'projects.projects_data.freee_project_code' => ['nullable', 'string', 'max:50'],
+
+            // 見積情報
+            'projects.estimations.order_price' => ['required', 'integer', 'min:0'], // 例: XXX,XXX,XXXのような形式を整数として扱う
+            'projects.estimations.estimate_cost' => ['required', 'integer', 'min:0'],
+            'projects.estimations.estimate_person_month' => ['required', 'numeric', 'min:0', 'regex:/^\d+(\.\d{1,2})?$/'], // 例: xxx.xx
+
+            // メンバー情報
+            'projects.assignment_members.*.member_id' => ['required', 'integer', 'exists:members,id'], // メンバーIDは存在する必要あり
+            'projects.assignment_members.*.position' => ['required', 'integer'],
+            'projects.assignment_members.*.estimate_total_person_month' => ['required', 'numeric', 'min:0', 'regex:/^\d+(\.\d{1,2})?$/'], // 人月の小数点2桁まで
+
+            // 月次見積情報
+            'projects.assignment_members.*.assignment_member_monthly_estimations.*.target_month' => ['required', 'string', 'regex:/^\d{4}-\d{2}$/'], // YYYY-MM形式
+            'projects.assignment_members.*.assignment_member_monthly_estimations.*.estimate_person_month' => ['required', 'numeric', 'min:0', 'regex:/^\d+(\.\d{1,2})?$/'],
+
+            // 外注情報
+            'projects.outsources.*.name' => ['required', 'string', 'max:100'], // 100文字以内
+            'projects.outsources.*.estimate_cost' => ['required', 'integer', 'min:0'],
+            'projects.outsources.*.cost' => ['nullable', 'integer', 'min:0'],
         ];
     }
+
 
     public function messages()
     {

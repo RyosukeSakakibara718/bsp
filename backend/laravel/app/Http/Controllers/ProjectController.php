@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ProjectRequest;
 use App\Http\Resources\ProjectResource;
 use App\UseCases\Project\DestroyAction;
 use App\UseCases\Project\IndexAction;
@@ -41,9 +42,9 @@ class ProjectController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request, StoreAction $action)
+    public function store(ProjectRequest $request, StoreAction $action)
     {
-        $project = $action($request);
+        $action($request);
 
         return response()->json([], 201);
     }
