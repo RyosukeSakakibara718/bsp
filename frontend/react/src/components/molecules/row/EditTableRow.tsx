@@ -1,7 +1,6 @@
 import React from "react";
 
 import EditTableRowColumn from "../../atoms/column/EditTableRowColumn";
-import TableRowColumn from "../../atoms/column/TableRowColumn";
 
 type TableRowProps = {
   id: number;
@@ -13,7 +12,6 @@ type TableRowProps = {
 };
 
 const EditTableRow: React.FC<TableRowProps> = ({
-  id,
   name,
   rank,
   base_cost,
@@ -22,7 +20,6 @@ const EditTableRow: React.FC<TableRowProps> = ({
 }) => {
   return (
     <tr className="bg-customPurple">
-      <TableRowColumn width="5%">{id}</TableRowColumn>
       <EditTableRowColumn
         width="25%"
         initialValue={name}

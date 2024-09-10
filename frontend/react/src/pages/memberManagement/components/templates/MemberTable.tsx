@@ -31,19 +31,17 @@ const MemberTable: React.FC = () => {
 
   const [memberData, setMemberData] = useState<MemberData[]>([]);
   const [loading, setLoading] = useState(true);
-  const columns = ["ID", "メンバー名", "等級", "原価", "開始日", "操作"];
+  const columns = ["メンバー名", "等級", "原価", "開始日", "操作"];
   
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [isAddModalOpen, seAddeteModalOpen] = useState(false);
-  const [targetDataId, setTargetDataId] = useState(0);
   const [showData, setShowData] = useState(memberData);
   const [searchValue, setSearchValue] = useState("");
-  const [editData, setEditData] = useState<MemberData>(initialFormData)
+  const [targetData, setTargetData] = useState<MemberData>(initialFormData)
   const [addData, setAddData] = useState<MemberData>(initialFormData)
 
   // モーダルオープン時の表示用
-  const deleteData = memberData[targetDataId];
   
   useEffect(() => {
     getMemberAll()
@@ -66,9 +64,8 @@ const MemberTable: React.FC = () => {
    * @param {number} id - 編集対象のメンバーID
    */
   const handleOpenEditModal = (id: number) => {
-    setTargetDataId(id - 1);
-    setIsEditModalOpen(true);
-    setEditData(showData[id - 1])
+    setIsEditModalOpen(true)
+    setTargetData(memberData[id])
   };
 
   /**
@@ -83,8 +80,8 @@ const MemberTable: React.FC = () => {
    * @param {number} id - 削除対象のメンバーID
    */
   const handleOpenDeleteModal = (id: number) => {
-    setTargetDataId(id - 1);
     setIsDeleteModalOpen(true);
+    setTargetData(memberData[id])
   };
 
   /**
@@ -146,7 +143,7 @@ const MemberTable: React.FC = () => {
    * @param {string | number} value - 変更する値
    */
   const handleValueChange = (fieldName: string, value: string | number) => {
-    setEditData(prevData => ({
+    setTargetData(prevData => ({
       ...prevData,
       [fieldName]: value, // フィールド名をキーとして、新しい値をセット
     }));
@@ -160,7 +157,7 @@ const MemberTable: React.FC = () => {
   };
 
   const handleSubmitEditData = () => {
-    editMember(editData.id, editData)
+    editMember(targetData.id, targetData)
       .then(response => {
         console.log('Edit successful:', response);
         // 編集が成功したら、メンバーリストを再取得
@@ -184,7 +181,7 @@ const MemberTable: React.FC = () => {
   };
 
   const handleDeleteMember = () => {
-    deleteMember(deleteData.id)
+    deleteMember(targetData.id)
     .then(response => {
       console.log('Edit successful:', response);
       // 編集が成功したら、メンバーリストを再取得
@@ -255,14 +252,13 @@ const MemberTable: React.FC = () => {
               {showData.map((item, index) => {
                 return (
                   <TableRow
-                    index={index}
                     id={item.id}
                     name={item.name}
                     rank={item.rank}
                     base_cost={item.base_cost}
                     base_cost_start_date={item.base_cost_start_date}
-                    isEditModalOpen={() => handleOpenEditModal(item.id)}
-                    isDeleteModalOpen={() => handleOpenDeleteModal(item.id)}
+                    isEditModalOpen={() => handleOpenEditModal(index)}
+                    isDeleteModalOpen={() => handleOpenDeleteModal(index)}
                   />
                 )
               }
@@ -285,19 +281,19 @@ const MemberTable: React.FC = () => {
           </div>
         </div>
       )}
-      {isEditModalOpen && editData && (
+      {isEditModalOpen && targetData && (
         <div className="fixed inset-0 flex items-center justify-center z-50">
           <div className="absolute inset-0 bg-black opacity-50"></div>
           <div className="relative bg-white rounded-lg p-8 shadow-lg z-10">
-          <EditModal onClose={handleCloseEditModal} editData={editData} handleValueChange={handleValueChange} handleSubmitEditData={handleSubmitEditData} />
+          <EditModal onClose={handleCloseEditModal} editData={targetData} handleValueChange={handleValueChange} handleSubmitEditData={handleSubmitEditData} />
           </div>
         </div>
       )}
-      {isDeleteModalOpen && deleteData && (
+      {isDeleteModalOpen && targetData && (
         <div className="fixed inset-0 flex items-center justify-center z-50">
           <div className="absolute inset-0 bg-black opacity-50"></div>
           <div className="relative bg-white rounded-lg p-8 shadow-lg z-10">
-            <DeleteModal onClose={handleCloseDeleteModal} data={deleteData} handleDeleteMember={handleDeleteMember} />
+            <DeleteModal onClose={handleCloseDeleteModal} data={targetData} handleDeleteMember={handleDeleteMember} />
           </div>
         </div>
       )}

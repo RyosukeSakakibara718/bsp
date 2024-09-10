@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Routes, Route } from "react-router-dom";
 
-import { sampleMembersData } from "./data/members";
 import { sampleProjectData } from "./data/projects";
 import Home from "./pages/home/components/templates/Home";
 import Login from "./pages/login/components/templates/Login";

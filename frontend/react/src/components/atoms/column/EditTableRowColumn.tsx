@@ -12,7 +12,7 @@ type EditTableRowColumnProps = {
  *
  * @param {EditTableRowColumnProps} props - セルコンポーネントに渡されるプロパティオブジェクト。
  * @param {string} props.width - セルの幅。
- * @param {string} props.initialValue - そのセルに表示される値の初期値。
+ * @param {string | number} props.initialValue - そのセルに表示される値の初期値。
  * @param {function} props.onChange - 値が変更されるごとにEditModalコンポーネントで管理するstateを変更する関数。
  * @returns {JSX.Element} 編集モーダルで表示される行を構成するセルを返します。
  */

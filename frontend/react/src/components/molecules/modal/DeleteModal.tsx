@@ -42,7 +42,6 @@ const DeleteModal: React.FC<MemberTableProps> = ({ onClose, data, handleDeleteMe
                 <TableHeader />
               </thead>
               <tbody className="bg-customPurple">
-                <TableRowColumn width="5%">{data.id}</TableRowColumn>
                 <TableRowColumn width="25%">{data.name}</TableRowColumn>
                 <TableRowColumn width="10%">{data.rank}</TableRowColumn>
                 <TableRowColumn width="25%">
@@ -55,7 +54,11 @@ const DeleteModal: React.FC<MemberTableProps> = ({ onClose, data, handleDeleteMe
         </div>
         <Spacer height="30px" />
         <div className="flex justify-center space-x-4">
-          <DeleteButton id={data.id} onClose={() => onClose()} handleDeleteMember={handleDeleteMember} />
+          <DeleteButton 
+            id={data.id} 
+            onClose={() => onClose()} 
+            handleDeleteMember={handleDeleteMember} 
+          />
           <CancelButton onClose={() => onClose()} />
         </div>
         <Spacer height="20px" />

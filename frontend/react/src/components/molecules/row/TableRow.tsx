@@ -7,13 +7,11 @@ import TableRowColumn from "../../atoms/column/TableRowColumn";
 
 type TableRowProps = MemberData & {
   isEditModalOpen: () => void;
-  index: number;
   isDeleteModalOpen: () => void;
 };
 
 const TableRow: React.FC<TableRowProps> = ({
   id,
-  index,
   name,
   rank,
   base_cost,
@@ -23,7 +21,6 @@ const TableRow: React.FC<TableRowProps> = ({
 }) => {
   return (
     <tr className="hover:bg-customPurple transition-colors duration-200">
-      <TableRowColumn width="5%">{index + 1}</TableRowColumn>
       <TableRowColumn width="25%">{name}</TableRowColumn>
       <TableRowColumn width="10%">{rank}</TableRowColumn>
       <TableRowColumn width="25%">{base_cost.toLocaleString()}円</TableRowColumn>
