@@ -3,12 +3,12 @@ import { useParams } from "react-router-dom";
 
 import Spacer from "../../../../../src/components/atoms/Spacer";
 import AddButton from "../../../../components/atoms/button/AddButton";
-import TableCaptionColumn from "../../../../components/atoms/column/TableCaptionColumn ";
+import TableCaptionRow from "../../../../components/molecules/row/TableCaptionRow";
 import TableHeader from "../../../../components/molecules/TableHeader";
 import Header from "../../../header/components/templates/Header";
-import OutsourcesRegistrationTableRow from "../molecules/row/OutsourcesRegistrationTableRow";
-import ProjectRegistrationTableRow from "../molecules/row/ProjectRegistrationTableRow";
-import TrashButton from "../../../../components/atoms/button/TrashButton";
+import MemberInfo from "../molecules/row/MemberInfo";
+import Outsources from "../molecules/row/Outsources";
+import Project from "../molecules/row/Project";
 
 /**
  * 案件の登録・編集を表を行うテーブルコンポーネント。
@@ -21,25 +21,15 @@ import TrashButton from "../../../../components/atoms/button/TrashButton";
 
 const ProjectDetail: React.FC<{ id?: string }> = () => {
   const { id } = useParams<{ id?: string }>();
-  const [rows, setRows] = useState<number[]>([0]);
+  const [outSouRegRows, setOutSouRegRows] = useState<number[]>([0]);
   // TODO詳細ページ、idがあれば編集で、なければ、create
   console.log(id);
 
-  const projectLabel = [
-    { label: "案件名", label2: "作業フェーズ" },
-    { label: "freeeプロジェクトID", label2: "受注額" },
-    { label: "開始日", label2: "見積原価" },
-    { label: "終了日", label2: "見積工数" },
-  ];
-
   const OutsourceColumns = ["内容", "見積金額", "原価", ""];
+  const membrInfoColumns = ["名前", "役職", "4月", "5月", "見積総工数"];
 
   const handleAddRow = () => {
-    setRows(prevRows => [...prevRows, prevRows.length]); // 行を追加
-  };
-
-  const handleDeleteRow = (row: number) => {
-    setRows((prevRows) => prevRows.filter(rowId => rowId !== row)); // 行を削除
+    setOutSouRegRows(prevRows => [...prevRows, prevRows.length]);
   };
 
   /**
@@ -49,67 +39,47 @@ const ProjectDetail: React.FC<{ id?: string }> = () => {
     // 登録処理をここに記述
   };
 
+  const handleAddMember = () => {
+    // メンバー追加処理
+  };
+
   return (
     <>
       <Header />
       <Spacer height="30px"></Spacer>
       <div className="overflow-hidden rounded-lg shadow-md">
         <table className="min-w-full divide-y ">
-          <thead className="bg-[#EEE3FF]">
-            <TableCaptionColumn value={"案件情報登録"} />
-          </thead>
-          <tbody>
-            {projectLabel.map((item, index) => (
-              <ProjectRegistrationTableRow
-                key={index}
-                label={item.label}
-                label2={item.label2}
-              />
-            ))}
-          </tbody>
+          <TableCaptionRow value={"案件情報登録"} />
+          <Project />
         </table>
       </div>
       <Spacer height="30px"></Spacer>
       <div className="overflow-hidden rounded-lg shadow-md">
         <table className="min-w-full divide-y">
-          <thead>
-            <tr>
-              <TableCaptionColumn value={"メンバー情報登録"} />
-            </tr>
-          </thead>
+          <TableCaptionRow value={"メンバー情報登録"} />
+          <TableHeader columns={membrInfoColumns} />
+          <MemberInfo />
         </table>
         <div className="text-left mt-2 ml-4">
-          <button
-            // onClick={handleAddRow}
-            className="p-2 bg-blue-500 text-white rounded"
-          >
-            メンバーの追加
-          </button>
+          <AddButton
+            buttonText="メンバーの追加"
+            handleClick={handleAddMember}
+          />
           <Spacer height="10px"></Spacer>
         </div>
       </div>
       <Spacer height="30px"></Spacer>
       <div className="overflow-hidden rounded-lg shadow-md">
         <table className="min-w-full divide-y">
-          <thead>
-            <tr>
-              <TableCaptionColumn value={"外注費登録"} />
-            </tr>
-            <TableHeader columns={OutsourceColumns} />
-          </thead>
-          <tbody>
-            {rows.map((row) => (
-              <OutsourcesRegistrationTableRow key={row} row={row} onDelete={handleDeleteRow} />
-            ))}
-          </tbody>
+          <TableCaptionRow value={"外注費登録"} />
+          <TableHeader columns={OutsourceColumns} />
+          <Outsources
+            outSouRegRows={outSouRegRows}
+            setOutSouRegRows={setOutSouRegRows}
+          />
         </table>
         <div className="text-left mt-2 ml-4">
-          <button
-            onClick={handleAddRow}
-            className="p-2 bg-blue-500 text-white rounded"
-          >
-            追加
-          </button>
+          <AddButton buttonText="追加" handleClick={handleAddRow} />
           <Spacer height="10px"></Spacer>
         </div>
       </div>

@@ -21,6 +21,7 @@ module.exports = {
   plugins: ["react", "@typescript-eslint", "import"],
   rules: {
     "react/react-in-jsx-scope": "off",
+    "react/prop-types": "off",
     "react/jsx-no-target-blank": ["error", { allowReferrer: true }],
     "prettier/prettier": "error",
     "react/jsx-filename-extension": [1, { extensions: [".tsx"] }],

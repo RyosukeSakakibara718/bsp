@@ -16,7 +16,9 @@ type TableRowColumnProps = {
 const TableRowColumn: React.FC<TableRowColumnProps> = ({ width, children }) => {
   return (
     <th
-      className={"font-bold px-4 py-3 text-left border-b border-[#e1cfff] text-gray-800 whitespace-nowrap flex items-center"}
+      className={
+        "font-bold px-4 py-3 text-left border-b border-[#e1cfff] text-gray-800 whitespace-nowrap"
+      }
       style={{ width: width }}
     >
       {children}
