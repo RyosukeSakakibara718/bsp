@@ -9,6 +9,7 @@ import Header from "../../../header/components/templates/Header";
 import MemberInfo from "../molecules/row/MemberInfo";
 import Outsources from "../molecules/row/Outsources";
 import Project from "../molecules/row/Project";
+import OutsourcesHead from "../molecules/row/OutsourcesHeader";
 
 /**
  * 案件の登録・編集を表を行うテーブルコンポーネント。
@@ -22,13 +23,27 @@ import Project from "../molecules/row/Project";
 const ProjectDetail: React.FC<{ id?: string }> = () => {
   const { id } = useParams<{ id?: string }>();
   const [outSouRegRows, setOutSouRegRows] = useState<number[]>([0]);
+  const [memberInfoRows, setMemberInfoRows] = useState<number[]>([0]);
   // TODO詳細ページ、idがあれば編集で、なければ、create
   console.log(id);
 
-  const OutsourceColumns = ["内容", "見積金額", "原価", ""];
-  const membrInfoColumns = ["名前", "役職", "4月", "5月", "見積総工数"];
+  const OutsourceColumns = [
+    { label: "内容", width: 400 },
+    { label: "見積金額", width: 200 },
+    { label: "原価", width: 200 },
+    { label: "", width: 50 },
+  ];
+  const membrInfoColumns = [
+    { label: "名前", width: 40 },
+    { label: "役職", width: 40 },
+    { label: "4月", width: 40 },
+    { label: "5月", width: 40 },
+    { label: "6月", width: 40 },
+    { label: "見積総合工数", width: 50 },
+    { label: "", width: 5 },
+  ];
 
-  const handleAddRow = () => {
+  const handleAddOutSouRegRow = () => {
     setOutSouRegRows(prevRows => [...prevRows, prevRows.length]);
   };
 
@@ -39,8 +54,9 @@ const ProjectDetail: React.FC<{ id?: string }> = () => {
     // 登録処理をここに記述
   };
 
-  const handleAddMember = () => {
+  const handleAddMemberInfoRow = () => {
     // メンバー追加処理
+    setMemberInfoRows(prevRows => [...prevRows, prevRows.length]);
   };
 
   return (
@@ -57,13 +73,16 @@ const ProjectDetail: React.FC<{ id?: string }> = () => {
       <div className="overflow-hidden rounded-lg shadow-md">
         <table className="min-w-full divide-y">
           <TableCaptionRow value={"メンバー情報登録"} />
-          <TableHeader columns={membrInfoColumns} />
-          <MemberInfo />
+          <OutsourcesHead columns={membrInfoColumns} />
+          <MemberInfo
+            memberInfoRows={memberInfoRows}
+            setMemberInfoRows={setMemberInfoRows}
+          />
         </table>
         <div className="text-left mt-2 ml-4">
           <AddButton
             buttonText="メンバーの追加"
-            handleClick={handleAddMember}
+            handleClick={handleAddMemberInfoRow}
           />
           <Spacer height="10px"></Spacer>
         </div>
@@ -72,14 +91,14 @@ const ProjectDetail: React.FC<{ id?: string }> = () => {
       <div className="overflow-hidden rounded-lg shadow-md">
         <table className="min-w-full divide-y">
           <TableCaptionRow value={"外注費登録"} />
-          <TableHeader columns={OutsourceColumns} />
+          <OutsourcesHead columns={OutsourceColumns} />
           <Outsources
             outSouRegRows={outSouRegRows}
             setOutSouRegRows={setOutSouRegRows}
           />
         </table>
         <div className="text-left mt-2 ml-4">
-          <AddButton buttonText="追加" handleClick={handleAddRow} />
+          <AddButton buttonText="追加" handleClick={handleAddOutSouRegRow} />
           <Spacer height="10px"></Spacer>
         </div>
       </div>

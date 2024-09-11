@@ -32,23 +32,15 @@ const Project = () => {
 
   const renderInputField = (field: string) => {
     if (isDateField(field)) {
-      return <TableInputDate labelText={field} width="50%" />;
+      return <TableInputDate labelText={field} />;
     } else if (isCurrencyField(field)) {
-      return <TableInputField labelText={field} width="50%" placeholder="¥" />;
+      return <TableInputField labelText={field} placeholder="¥" />;
     } else if (isEffortField(field)) {
-      return (
-        <TableInputNumField labelText={field} width="50%" suffix="人/月" />
-      );
+      return <TableInputNumField labelText={field} suffix="人/月" />;
     } else if (isPhaseField(field)) {
-      return (
-        <TableSelectField
-          labelText={field}
-          width="50%"
-          options={phaseOptions}
-        />
-      );
+      return <TableSelectField labelText={field} options={phaseOptions} />;
     } else {
-      return <TableInputField labelText={field} width="50%" />;
+      return <TableInputField labelText={field} />;
     }
   };
 

@@ -15,7 +15,7 @@ type TrashButtonProps = {
  */
 const TrashButton: React.FC<TrashButtonProps> = ({ onDelete, row }) => {
   return (
-    <td className="font-bold px-4 py-3 text-left border-b border-[#e1cfff] text-gray-800 whitespace-nowrap">
+    <td className="font-bold px-4 py-3 text-left text-gray-800 whitespace-nowrap">
       <button
         onClick={() => onDelete(row)}
         className="bg-transparent border-none cursor-pointer p-0"
