@@ -13,7 +13,7 @@ class AssignmentMemberMonthlyEstimation extends Model
     protected $fillable = [
         'assignment_member_id',
         'target_month',
-        'estimated_person_month',
+        'estimate_person_month',
     ];
 
     // AssignmentMember とのリレーション

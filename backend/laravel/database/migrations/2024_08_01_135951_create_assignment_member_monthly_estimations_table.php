@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('assignment_member_id')->constrained();
             $table->string('target_month', 7)->comment('該当月');
-            $table->decimal('estimated_person_month', 5, 2)->comment('メンバーあたり見積人月');
+            $table->decimal('estimate_person_month', 5, 2)->comment('メンバーあたり見積人月');
             $table->timestamps();
             $table->timestamp('deleted_at')->nullable();
         });
