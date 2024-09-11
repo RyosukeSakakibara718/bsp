@@ -28,9 +28,9 @@ const memberInfo: React.FC<memberInfoProps> = ({
   // TODO　月の工数入力の横スクロールの実装が思いつかなかったので一旦
   return (
     <>
-      {memberInfoRows?.map((column, row) => (
+      {memberInfoRows?.map((row) => (
         <tbody>
-          <tr className="font-bold px-4 py-3 text-left border-b border-[#e1cfff] text-gray-800 whitespace-nowrap">
+          <tr className="font-bold px-4 py-3 text-left border-b border-[#e1cfff] text-gray-800 whitespace-nowrap" key={row}>
             <td>
               <TableSelectField options={memberName} />
             </td>
