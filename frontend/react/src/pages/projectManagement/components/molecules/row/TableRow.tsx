@@ -13,7 +13,7 @@ type TableRowProps = ProjectData & {
 const TableRow: React.FC<TableRowProps> = ({
   id,
   projectName,
-  startDate,
+  base_cost_start_date,
   endDate,
   isEditPageOpen,
   isDeleteModalOpen,
@@ -23,7 +23,7 @@ const TableRow: React.FC<TableRowProps> = ({
       <TableRowColumn width="5%">{id}</TableRowColumn>
       <TableRowColumn width="25%">{projectName}</TableRowColumn>
       <TableRowColumn width="25%">
-        {startDate}~{endDate}
+        {base_cost_start_date}~{endDate}
       </TableRowColumn>
       <TableRowColumn width="25%">{""}</TableRowColumn>
       <TableRowColumn width="10%">

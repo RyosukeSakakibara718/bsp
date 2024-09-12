@@ -99,11 +99,10 @@ const ProjectManagement: React.FC<ProjectDataProps> = ({ data }) => {
             </thead>
             <tbody className="bg-white divide-y divide-gray-200">
               {showData.map(item => (
-                // eslint-disable-next-line react/jsx-key
                 <TableRow
                   id={item.id}
                   projectName={item.projectName}
-                  startDate={item.startDate}
+                  base_cost_start_date={item.base_cost_start_date}
                   endDate={item.endDate}
                   isEditPageOpen={handleEditButtonClick}
                   isDeleteModalOpen={() => handleOpenDeleteModal(item.id)}

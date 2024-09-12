@@ -1,28 +1,25 @@
 import React from "react";
 
 import EditTableRowColumn from "../../atoms/column/EditTableRowColumn";
-import TableRowColumn from "../../atoms/column/TableRowColumn";
 
 type TableRowProps = {
   id: number;
   name: string;
-  grade: number;
-  cost: number;
-  startDate: string;
+  rank: number;
+  base_cost: number;
+  base_cost_start_date: string;
   onValueChange: (key: string, value: string) => void; // 値変更時のコールバック
 };
 
 const EditTableRow: React.FC<TableRowProps> = ({
-  id,
   name,
-  grade,
-  cost,
-  startDate,
+  rank,
+  base_cost,
+  base_cost_start_date,
   onValueChange,
 }) => {
   return (
     <tr className="bg-customPurple">
-      <TableRowColumn width="5%">{id}</TableRowColumn>
       <EditTableRowColumn
         width="25%"
         initialValue={name}
@@ -30,18 +27,21 @@ const EditTableRow: React.FC<TableRowProps> = ({
       />
       <EditTableRowColumn
         width="10%"
-        initialValue={grade.toString()} // grade も数値なので文字列に変換
-        onChange={value => onValueChange("grade", value)}
+        initialValue={rank} // rank も数値なので文字列に変換
+        onChange={value => onValueChange("rank", value)}
+        inputType="number"
       />
       <EditTableRowColumn
         width="25%"
-        initialValue={cost.toLocaleString()} // cost をローカライズされた文字列として渡す
-        onChange={value => onValueChange("cost", value.replace(/,/g, ""))} // カンマを取り除いて数値に変換できるようにする
+        initialValue={base_cost} // base_cost をローカライズされた文字列として渡す
+        onChange={value => onValueChange("base_cost", value.replace(/,/g, ""))} // カンマを取り除いて数値に変換できるようにする
+        inputType="number"
       />
       <EditTableRowColumn
         width="25%"
-        initialValue={startDate}
-        onChange={value => onValueChange("startDate", value)}
+        initialValue={base_cost_start_date}
+        onChange={value => onValueChange("base_cost_start_date", value)}
+        inputType="date"
       />
     </tr>
   );

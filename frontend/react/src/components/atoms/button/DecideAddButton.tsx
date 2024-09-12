@@ -1,7 +1,8 @@
 import React from "react";
 
 type DecideAddButtonProps = {
-  hundleSubmit: () => void;
+  onClose: () => void;
+  handleAddMember: () => void;
 };
 
 /**
@@ -12,10 +13,16 @@ type DecideAddButtonProps = {
  * @param {function} props.hundleSubmit - メンバー登録用のAPIを実行する関数。
  * @returns {JSX.Element} メンバー追加用のボタン要素を返します。
  */
-const DecideAddButton: React.FC<DecideAddButtonProps> = ({ hundleSubmit }) => {
+const DecideAddButton: React.FC<DecideAddButtonProps> = ({
+  onClose,
+  handleAddMember,
+}) => {
   return (
     <button
-      onClick={hundleSubmit}
+      onClick={() => {
+        onClose();
+        handleAddMember();
+      }}
       className="rounded-full bg-indigo-600 shadow text-white py-2 px-6 hover:bg-indigo-800 transition-colors duration-300 ease-in-out"
     >
       追加する

@@ -9,8 +9,8 @@ describe("DecideButtonコンポーネント", () => {
     id: 1,
     name: "榊原 涼介",
     grade: 2,
-    cost: 300000,
-    startDate: "2024/08/04",
+    base_cost: 300000,
+    base_cost_start_date: "2024/08/04",
   };
   it("決定ボタンが押下されたらonCloseが呼び出される", () => {
     const mockFunction = vi.fn(() => {});
