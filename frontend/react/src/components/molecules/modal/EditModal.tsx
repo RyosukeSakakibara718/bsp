@@ -10,6 +10,7 @@ import TableHeader from "../TableHeader";
 type MemberTableProps = {
   onClose: () => void;
   data: MemberData;
+  columns: string[];
 };
 
 /**
@@ -19,9 +20,10 @@ type MemberTableProps = {
  * @param {MemberTableProps} props - 編集モーダルのプロパティ。
  * @param {() => void} props.onClose - モーダルを閉じるための関数。
  * @param {MemberData} props.data - 編集対象のメンバーのデータ。
+ * @param {string[]} props.columns - モーダルのヘッダー項目データ
  * @returns {JSX.Element} メンバー編集用のモーダルコンポーネントを返します。
  */
-const EditModal: React.FC<MemberTableProps> = ({ onClose, data }) => {
+const EditModal: React.FC<MemberTableProps> = ({ onClose, data, columns }) => {
   const [EditData, setEditData] = useState(data);
 
   /**
@@ -45,7 +47,7 @@ const EditModal: React.FC<MemberTableProps> = ({ onClose, data }) => {
       <div className="mx-5 grid shadow-lg rounded-lg overflow-hidden">
         <table className="min-w-full border-collapse">
           <thead>
-            <TableHeader isShowing={false} />
+            <TableHeader columns={columns}/>
           </thead>
           <tbody>
             <EditTableRow

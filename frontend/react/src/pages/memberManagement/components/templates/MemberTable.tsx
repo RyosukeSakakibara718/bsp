@@ -9,7 +9,6 @@ import TableRow from "../../../../components/molecules/row/TableRow";
 import SearchBar from "../../../../components/molecules/SearchBar";
 import TableHeader from "../../../../components/molecules/TableHeader";
 import { MemberTableProps } from "../../../../types/member";
-import Header from "../../../header/coomponents/templates/Header";
 /**
  * メンバーの一覧を表示し、追加・編集・削除を行うテーブルコンポーネント。
  *
@@ -28,6 +27,7 @@ const MemberTable: React.FC<MemberTableProps> = ({ data }) => {
   };
 
   const columns = ["ID", "メンバー名", "等級", "原価", "開始日", "操作"];
+  const modalColumns = ["ID", "メンバー名", "等級", "原価", "開始日"];
 
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
@@ -112,7 +112,6 @@ const MemberTable: React.FC<MemberTableProps> = ({ data }) => {
 
   return (
     <>
-      <Header />
       <div className="shadow-lg rounded-lg overflow-hidden p-8">
         <SearchBar
           searchValue={searchValue}
@@ -155,6 +154,7 @@ const MemberTable: React.FC<MemberTableProps> = ({ data }) => {
               onClose={handleCloseAddModal}
               data={initialFormData}
               index={data.length}
+              columns={modalColumns}
             />
           </div>
         </div>
@@ -163,7 +163,7 @@ const MemberTable: React.FC<MemberTableProps> = ({ data }) => {
         <div className="fixed inset-0 flex items-center justify-center z-50">
           <div className="absolute inset-0 bg-black opacity-50"></div>
           <div className="relative bg-white rounded-lg p-8 shadow-lg z-10">
-            <EditModal onClose={handleCloseEditModal} data={editData} />
+            <EditModal onClose={handleCloseEditModal} data={editData} columns={modalColumns}/>
           </div>
         </div>
       )}
@@ -171,7 +171,7 @@ const MemberTable: React.FC<MemberTableProps> = ({ data }) => {
         <div className="fixed inset-0 flex items-center justify-center z-50">
           <div className="absolute inset-0 bg-black opacity-50"></div>
           <div className="relative bg-white rounded-lg p-8 shadow-lg z-10">
-            <DeleteModal onClose={handleCloseDeleteModal} data={deleteData} />
+            <DeleteModal onClose={handleCloseDeleteModal} data={deleteData} columns={modalColumns} />
           </div>
         </div>
       )}
