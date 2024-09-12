@@ -20,6 +20,7 @@ type MemberTableProps = {
  * @param {MemberTableProps} props - 削除モーダルのプロパティ。
  * @param {() => void} props.onClose - モーダルを閉じるための関数。
  * @param {MemberData} props.data - 削除対象のメンバーのデータ。
+ * @param {string[]} props.columns - モーダルのヘッダー項目データ
  * @returns {JSX.Element} メンバー削除用のモーダルコンポーネントを返します。
  */
 

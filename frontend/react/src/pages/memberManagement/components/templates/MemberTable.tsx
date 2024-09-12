@@ -235,7 +235,6 @@ const MemberTable: React.FC = () => {
 
   return (
     <>
-      <Header />
       <div className="shadow-lg rounded-lg overflow-hidden p-8">
         <SearchBar
           searchValue={searchValue}
