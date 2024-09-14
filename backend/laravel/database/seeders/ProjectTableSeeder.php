@@ -4,17 +4,16 @@ declare(strict_types=1);
 
 namespace Database\Seeders;
 
-use App\Models\Member;
+use App\Models\Project;
 use Illuminate\Database\Seeder;
 
-class MemberTableSeeder extends Seeder
+class ProjectTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        // 10人のメンバーを作成
-        Member::factory()->count(10)->create();
+        Project::factory()->count(5)->create();
     }
 }
