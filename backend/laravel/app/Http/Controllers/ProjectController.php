@@ -62,10 +62,12 @@ class ProjectController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, UpdateAction $action, string $id)
+    public function update(ProjectRequest $request, UpdateAction $action, string $id) // ProjectRequestに変更
     {
-        $project = $action($request, $id);
+        // UpdateActionでプロジェクトを更新
+        $action($request, $id);
 
+        // 更新成功時に204 No Contentを返す
         return response()->json([], 204);
     }
 
