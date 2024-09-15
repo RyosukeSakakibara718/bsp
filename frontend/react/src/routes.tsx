@@ -8,7 +8,7 @@ import MemberTable from "./pages/memberManagement/components/templates/MemberTab
 import ProjectDetail from "./pages/projectManagement/components/templates/ProjectDetail";
 import ProjectManagement from "./pages/projectManagement/components/templates/ProjectManagement";
 import UserManagement from "./pages/userManagement/components/templates/UserManagement";
-import ProjectsAchievements from "./pages/projectsAchievements/ProjectsAchievements";
+import ProjectsAchievements from "./pages/projectsAchievements/components/templates/ProjectsAchievements";
 
 const AppRoutes: React.FC = () => {
   return (
