@@ -6,8 +6,3 @@ abstract class Controller
 {
     //
 }
-
-class ExampleController extends Controller
-{
-
-}

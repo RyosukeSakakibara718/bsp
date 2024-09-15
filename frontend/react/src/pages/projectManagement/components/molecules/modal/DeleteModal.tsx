@@ -11,6 +11,7 @@ import { ProjectData } from "../../../../../types/project";
 type ProjectManagementProps = {
   onClose: () => void;
   data: ProjectData;
+  columns: string[];
 };
 
 /**
@@ -20,10 +21,11 @@ type ProjectManagementProps = {
  * @param {ProjectManagementProps} props - 削除モーダルのプロパティ。
  * @param {() => void} props.onClose - モーダルを閉じるための関数。
  * @param {MemberData} props.data - 削除対象のメンバーのデータ。
+ * @param {string[]} props.columns - モーダルのヘッダー項目データ
  * @returns {JSX.Element} メンバー削除用のモーダルコンポーネントを返します。
  */
 
-const DeleteModal: React.FC<ProjectManagementProps> = ({ onClose, data }) => {
+const DeleteModal: React.FC<ProjectManagementProps> = ({ onClose, data, columns }) => {
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50 z-50">
       <div className="bg-white shadow-lg rounded-lg p-6 w-full max-w-3xl mx-auto">
@@ -39,13 +41,13 @@ const DeleteModal: React.FC<ProjectManagementProps> = ({ onClose, data }) => {
           <div className="bg-white shadow-md rounded-lg overflow-hidden">
             <table className="min-w-full border-collapse">
               <thead>
-                <TableHeader />
+                <TableHeader columns={columns}/>
               </thead>
               <tbody className="bg-customPurple">
                 <TableRowColumn width="5%">{data.id}</TableRowColumn>
                 <TableRowColumn width="25%">{data.projectName}</TableRowColumn>
                 <TableRowColumn width="25%">
-                  {data.startDate} ~{data.endDate}
+                  {data.base_cost_start_date} ~{data.endDate}
                 </TableRowColumn>
                 <TableRowColumn width="25%">{""}</TableRowColumn>
               </tbody>

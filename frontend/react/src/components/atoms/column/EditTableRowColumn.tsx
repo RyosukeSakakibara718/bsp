@@ -2,8 +2,9 @@ import React, { useState } from "react";
 
 type EditTableRowColumnProps = {
   width?: string;
-  initialValue: string;
+  initialValue: string | number;
   onChange: (value: string) => void;
+  inputType?: string;
 };
 
 /**
@@ -11,7 +12,7 @@ type EditTableRowColumnProps = {
  *
  * @param {EditTableRowColumnProps} props - セルコンポーネントに渡されるプロパティオブジェクト。
  * @param {string} props.width - セルの幅。
- * @param {string} props.initialValue - そのセルに表示される値の初期値。
+ * @param {string | number} props.initialValue - そのセルに表示される値の初期値。
  * @param {function} props.onChange - 値が変更されるごとにEditModalコンポーネントで管理するstateを変更する関数。
  * @returns {JSX.Element} 編集モーダルで表示される行を構成するセルを返します。
  */
@@ -19,6 +20,7 @@ const EditTableRowColumn: React.FC<EditTableRowColumnProps> = ({
   width,
   initialValue,
   onChange,
+  inputType,
 }) => {
   const [value, setValue] = useState(initialValue);
 
@@ -40,7 +42,7 @@ const EditTableRowColumn: React.FC<EditTableRowColumnProps> = ({
       style={{ width: width }}
     >
       <input
-        type="text"
+        type={inputType ? inputType : "text"}
         value={value}
         onChange={handleChange}
         className="bg-customPurple w-full px-3 py-2 border border-black rounded-md box-border text-base text-gray-800 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200 placeholder-gray-400"
