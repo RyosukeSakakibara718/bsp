@@ -8,6 +8,7 @@ import MemberTable from "./pages/memberManagement/components/templates/MemberTab
 import ProjectDetail from "./pages/projectManagement/components/templates/ProjectDetail";
 import ProjectManagement from "./pages/projectManagement/components/templates/ProjectManagement";
 import UserManagement from "./pages/userManagement/components/templates/UserManagement";
+import ProjectsAchievements from "./pages/projectsAchievements/ProjectsAchievements";
 
 const AppRoutes: React.FC = () => {
   return (
@@ -23,6 +24,10 @@ const AppRoutes: React.FC = () => {
       <Route
         path="/projectManagement/detail/:id?"
         element={<ProjectDetail />}
+      />
+      <Route
+        path="/projectsAchievements"
+        element={<ProjectsAchievements />}
       />
       <Route path="/userManagement" element={<UserManagement />} />
     </Routes>
