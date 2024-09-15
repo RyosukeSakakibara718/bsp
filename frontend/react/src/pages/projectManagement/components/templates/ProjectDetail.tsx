@@ -61,7 +61,6 @@ const ProjectDetail: React.FC<{ id?: string }> = () => {
 
   return (
     <>
-      <Header />
       <Spacer height="30px"></Spacer>
       <div className="overflow-hidden rounded-lg shadow-md">
         <table className="min-w-full divide-y ">
@@ -90,8 +89,10 @@ const ProjectDetail: React.FC<{ id?: string }> = () => {
       <Spacer height="30px"></Spacer>
       <div className="overflow-hidden rounded-lg shadow-md">
         <table className="min-w-full divide-y">
-          <TableCaptionRow value={"外注費登録"} />
-          <OutsourcesHead columns={OutsourceColumns} />
+          <thead>
+            <TableCaptionRow value={"外注費登録"} />
+            <OutsourcesHead columns={OutsourceColumns} />
+          </thead>
           <Outsources
             outSouRegRows={outSouRegRows}
             setOutSouRegRows={setOutSouRegRows}

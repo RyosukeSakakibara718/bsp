@@ -25,10 +25,7 @@ const AppRoutes: React.FC = () => {
         path="/projectManagement/detail/:id?"
         element={<ProjectDetail />}
       />
-      <Route
-        path="/projectsAchievements"
-        element={<ProjectsAchievements />}
-      />
+      <Route path="/projectsAchievements" element={<ProjectsAchievements />} />
       <Route path="/userManagement" element={<UserManagement />} />
     </Routes>
   );
