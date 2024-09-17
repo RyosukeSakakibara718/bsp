@@ -1,10 +1,12 @@
 import React from "react";
+import CommentBox from "../molecules/CommentBox";
+import Spacer from "../../../../components/atoms/Spacer";
 
 const Home: React.FC = () => {
   return (
     <div>
-      {/* 詳細ページのコンテンツ */}
-      Home画面を表示します。
+      <Spacer height="40px"></Spacer>
+      <CommentBox />
     </div>
   );
 };
