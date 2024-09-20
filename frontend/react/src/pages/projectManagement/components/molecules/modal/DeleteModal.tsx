@@ -25,7 +25,11 @@ type ProjectManagementProps = {
  * @returns {JSX.Element} メンバー削除用のモーダルコンポーネントを返します。
  */
 
-const DeleteModal: React.FC<ProjectManagementProps> = ({ onClose, data, columns }) => {
+const DeleteModal: React.FC<ProjectManagementProps> = ({
+  onClose,
+  data,
+  columns,
+}) => {
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50 z-50">
       <div className="bg-white shadow-lg rounded-lg p-6 w-full max-w-3xl mx-auto">
@@ -41,7 +45,7 @@ const DeleteModal: React.FC<ProjectManagementProps> = ({ onClose, data, columns 
           <div className="bg-white shadow-md rounded-lg overflow-hidden">
             <table className="min-w-full border-collapse">
               <thead>
-                <TableHeader columns={columns}/>
+                <TableHeader columns={columns} />
               </thead>
               <tbody className="bg-customPurple">
                 <TableRowColumn width="5%">{data.id}</TableRowColumn>

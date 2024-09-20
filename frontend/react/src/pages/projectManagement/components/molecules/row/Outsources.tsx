@@ -14,14 +14,14 @@ const Outsources: React.FC<OutsourcesProps> = ({
 }) => {
   const handleDeleteRow = (row: number) => {
     console.log(row);
-    
+
     setOutSouRegRows(prevRows => prevRows.filter(rowId => rowId !== row));
   };
   console.log(outSouRegRows);
-  
+
   return (
     <tbody>
-      {outSouRegRows.map((row) => (
+      {outSouRegRows.map(row => (
         <tr
           key={row}
           className="font-bold px-4 py-3 text-left border-b border-[#e1cfff] text-gray-800 whitespace-nowrap"

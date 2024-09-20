@@ -14,7 +14,14 @@ describe("EditModalコンポーネント", () => {
   };
 
   it("EditTableRow に正しいプロパティが渡されているか確認する", () => {
-    render(<EditModal editData={dataMock} onClose={() => {}} handleValueChange={() =>{}} handleSubmitEditData={() => {}}/>);
+    render(
+      <EditModal
+        editData={dataMock}
+        onClose={() => {}}
+        handleValueChange={() => {}}
+        handleSubmitEditData={() => {}}
+      />,
+    );
 
     expect(screen.getByDisplayValue("Test Name")).to.exist;
     expect(screen.getByDisplayValue(5)).to.exist;
@@ -23,7 +30,14 @@ describe("EditModalコンポーネント", () => {
   });
 
   it("ボタン要素が2個存在することを確認", () => {
-    render(<EditModal editData={dataMock} onClose={() => {}} handleValueChange={() =>{}} handleSubmitEditData={() => {}} />);
+    render(
+      <EditModal
+        editData={dataMock}
+        onClose={() => {}}
+        handleValueChange={() => {}}
+        handleSubmitEditData={() => {}}
+      />,
+    );
 
     const buttonElements = screen.getAllByRole("button");
     expect(buttonElements).toHaveLength(2);
