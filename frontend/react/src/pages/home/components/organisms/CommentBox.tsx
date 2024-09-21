@@ -6,7 +6,6 @@ import TextArea from "../../../../components/atoms/box/TextArea";
 const CommentBox = () => {
   /**
    * コメントを表示、追加・編集・削除を行うコンポーネント。
-   *
    * @component
    * @param {CommentBoxProps} props - コンポーネントに渡されるプロパティ。
    * @returns {JSX.Element} CommentBox コンポーネントを返します。
