@@ -1,5 +1,5 @@
 import TableTd from "../../../../../components/atoms/field/TableTd";
-import { MemberInfoDataProps } from "../../../../../types/home/MemberInfoDataProps";
+import { MemberInfoDataProps } from "../../../../../types/home";
 const MemberInfoRow = ({ MembersData }: MemberInfoDataProps) => {
   /**
    * メンバー情報rowを表示し、追加・テーブコンポーネント。

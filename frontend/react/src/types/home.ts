@@ -12,3 +12,14 @@ export type Member = {
 export type MemberInfoDataProps = {
   MembersData: Member[];
 };
+
+export type OrderInfo = {
+  cost: number;
+  estimate_cost: number;
+  crude_rate: number;
+  estimate_person_month: number;
+};
+
+export type OrderInfoDataProps = {
+  OrderInfoData: OrderInfo[];
+};
