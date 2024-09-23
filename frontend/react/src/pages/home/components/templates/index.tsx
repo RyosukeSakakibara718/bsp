@@ -4,6 +4,7 @@ import Spacer from "../../../../components/atoms/Spacer";
 import { sampleMembersData, sampleOrderInfo } from "../../../../data/home";
 import CommentBox from "../organisms/CommentBox";
 import EstimatedLanding from "../organisms/EstimatedLanding";
+import HomeHeader from "../organisms/HomeHeader";
 import MemberInfo from "../organisms/MemberInfo";
 import OrderInfo from "../organisms/OrderInfo";
 
@@ -16,6 +17,8 @@ const Home: React.FC = () => {
    */
   return (
     <div>
+      <Spacer height="40px"></Spacer>
+      <HomeHeader />
       <Spacer height="40px"></Spacer>
       <div style={{ display: "flex", gap: "40px" }}>
         <OrderInfo OrderInfoData={sampleOrderInfo} />

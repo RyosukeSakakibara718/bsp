@@ -45,3 +45,15 @@ export const sampleOrderInfo = [
     estimate_person_month: 15,
   },
 ];
+
+export const sampleProjectName = [
+  "プロジェクトバランサー",
+  "プロジェクトバランサー2",
+  "testetst",
+];
+
+export const sampleDate = {
+  id: 1,
+  start_date: new Date("2024-01-01"),
+  end_date: new Date("2024-10-31"),
+};
