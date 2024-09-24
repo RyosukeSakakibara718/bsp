@@ -1,8 +1,9 @@
 export type ProjectData = {
   id: number;
-  projectName: string;
-  base_cost_start_date: string;
-  endDate: string;
+  name: string;
+  start_date: string;
+  end_date: string;
+  project_manager: string;
 };
 
 export type ProjectDataProps = {
