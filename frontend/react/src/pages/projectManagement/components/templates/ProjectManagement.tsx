@@ -19,7 +19,7 @@ import TableRow from "../molecules/row/TableRow";
  */
 const ProjectManagement: React.FC<ProjectDataProps> = ({ data }) => {
   const columns = ["案件ID", "案件名", "期間", "PM", "操作"];
-  const modalColumns = ["案件ID", "案件名", "期間", "PM"]
+  const modalColumns = ["案件ID", "案件名", "期間", "PM"];
   // TODO PMの中身実装
   const [showData, setShowData] = useState(data);
   const [searchValue, setSearchValue] = useState("");
@@ -121,7 +121,11 @@ const ProjectManagement: React.FC<ProjectDataProps> = ({ data }) => {
         <div className="fixed inset-0 flex items-center justify-center z-50">
           <div className="absolute inset-0 bg-black opacity-50"></div>
           <div className="relative bg-white rounded-lg p-8 shadow-lg z-10">
-            <DeleteModal onClose={handleCloseDeleteModal} data={deleteData} columns={modalColumns}/>
+            <DeleteModal
+              onClose={handleCloseDeleteModal}
+              data={deleteData}
+              columns={modalColumns}
+            />
           </div>
         </div>
       )}

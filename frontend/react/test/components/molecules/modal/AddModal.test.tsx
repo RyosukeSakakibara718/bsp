@@ -14,7 +14,15 @@ describe("AddModalコンポーネント", () => {
   };
 
   it("モーダルが表示されたときに、正しいUI要素が存在することを確認する", () => {
-    render(<AddModal data={mockData} onClose={() => { } } index={4} handleAddValueChange={() =>{}} handleAddMember={() => {}} />);
+    render(
+      <AddModal
+        data={mockData}
+        onClose={() => {}}
+        index={4}
+        handleAddValueChange={() => {}}
+        handleAddMember={() => {}}
+      />,
+    );
 
     // モーダルのタイトルが表示されていることを確認
     expect(screen.getByText("メンバー追加")).toBeTruthy();

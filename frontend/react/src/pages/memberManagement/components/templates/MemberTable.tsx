@@ -8,13 +8,13 @@ import EditModal from "../../../../components/molecules/modal/EditModal";
 import TableRow from "../../../../components/molecules/row/TableRow";
 import SearchBar from "../../../../components/molecules/SearchBar";
 import TableHeader from "../../../../components/molecules/TableHeader";
-import { MemberTableProps } from "../../../../types/member";
 import {
   getMemberAll,
   editMember,
   deleteMember,
   addMember,
 } from "../../../../hooks/useMember";
+import { MemberTableProps } from "../../../../types/member";
 import Header from "../../../header/coomponents/templates/Header";
 
 import type { MemberData } from "../../../../types/member";

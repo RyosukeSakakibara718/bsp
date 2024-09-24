@@ -31,7 +31,6 @@ const EditModal: React.FC<MemberTableProps> = ({
   handleValueChange,
   handleSubmitEditData,
 }) => {
-
   /**
    * フォームのフィールドが変更されたときに呼び出される関数
    *
@@ -50,18 +49,16 @@ const EditModal: React.FC<MemberTableProps> = ({
             <TableHeader />
           </thead>
           <tbody>
-            {
-              editData && ( 
-                <EditTableRow
-                  id={editData.id}
-                  name={editData.name}
-                  rank={editData.rank}
-                  base_cost={editData.base_cost}
-                  base_cost_start_date={editData.base_cost_start_date}
-                  onValueChange={handleValueChange}
-                />
-              )
-            }
+            {editData && (
+              <EditTableRow
+                id={editData.id}
+                name={editData.name}
+                rank={editData.rank}
+                base_cost={editData.base_cost}
+                base_cost_start_date={editData.base_cost_start_date}
+                onValueChange={handleValueChange}
+              />
+            )}
           </tbody>
         </table>
       </div>
