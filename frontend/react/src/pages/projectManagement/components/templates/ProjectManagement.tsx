@@ -8,7 +8,7 @@ import TableHeader from "../../../../components/molecules/TableHeader";
 import { ProjectData, ProjectDataProps } from "../../../../types/project";
 import DeleteModal from "../molecules/modal/DeleteModal";
 import TableRow from "../molecules/row/TableRow";
-import { getProjectsAll } from "../../../../hooks/useProjects";
+import { getProjectsAll, deleteProjects } from "../../../../hooks/useProjects";
 /**
  *  案件の一覧を表示し・検索できるコンポーネント。
  *
@@ -22,20 +22,20 @@ const ProjectManagement: React.FC<ProjectDataProps> = ({ data }) => {
   const modalColumns = ["案件ID", "案件名", "期間", "PM"]
   // TODO PMの中身実装
   const [showData, setShowData] = useState<ProjectData[]>(data);
+  const [projectsData, setProjectsData] = useState<ProjectData[]>([]);
   const [searchValue, setSearchValue] = useState("");
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
 
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
-  const [targetDataId, setTargetDataId] = useState(0);
-  const deleteData = data[targetDataId];
+  const [targetData, setTargetData] = useState<ProjectData>();
 
   useEffect(() => {
     getProjectsAll()
       .then(projects => {
         if (projects !== null) {
+          setProjectsData(projects);
           setShowData(projects);
-          console.log('projects: ', projects);
         }
         setLoading(false); // ローディングを終了
       })
@@ -44,6 +44,32 @@ const ProjectManagement: React.FC<ProjectDataProps> = ({ data }) => {
         setLoading(false); // エラーが発生してもローディングを終了
       });
   }, []);
+
+  const handleDeleteProjects = () => {
+    if (targetData){
+      deleteProjects(targetData.id)
+        .then(response => {
+          console.log("Edit successful:", response);
+          // 編集が成功したら、メンバーリストを再取得
+          getProjectsAll()
+            .then(projects => {
+              if (projects !== null) {
+                setProjectsData(projects);
+                setShowData(projects);
+              }
+              setLoading(false); // ローディングを終了
+            })
+            .catch(error => {
+              console.error("Error fetching member data:", error);
+              setLoading(false); // エラーが発生してもローディングを終了
+            });
+        })
+        .catch(error => {
+          console.error("Error during edit:", error);
+          // エラー時の処理
+        });
+    }
+  };
 
   const handleAddButtonClick = () => {
     // TODO新規案件作成パスを指定
@@ -60,7 +86,7 @@ const ProjectManagement: React.FC<ProjectDataProps> = ({ data }) => {
    * @param {number} id - 削除対象のメンバーID
    */
   const handleOpenDeleteModal = (id: number) => {
-    setTargetDataId(id - 1);
+    setTargetData(projectsData[id])
     setIsDeleteModalOpen(true);
   };
 
@@ -122,7 +148,7 @@ const ProjectManagement: React.FC<ProjectDataProps> = ({ data }) => {
               <TableHeader columns={columns} />
             </thead>
             <tbody className="bg-white divide-y divide-gray-200">
-              {showData.map(item => (
+              {showData.map((item,index) => (
                 <TableRow
                   id={item.id}
                   name={item.name}
@@ -130,18 +156,18 @@ const ProjectManagement: React.FC<ProjectDataProps> = ({ data }) => {
                   end_date={item.end_date}
                   project_manager={item.project_manager}
                   isEditPageOpen={handleEditButtonClick}
-                  isDeleteModalOpen={() => handleOpenDeleteModal(item.id)}
+                  isDeleteModalOpen={() => handleOpenDeleteModal(index)}
                 />
               ))}
             </tbody>
           </table>
         </div>
       </div>
-      {isDeleteModalOpen && deleteData && (
+      {isDeleteModalOpen && targetData && (
         <div className="fixed inset-0 flex items-center justify-center z-50">
           <div className="absolute inset-0 bg-black opacity-50"></div>
           <div className="relative bg-white rounded-lg p-8 shadow-lg z-10">
-            <DeleteModal onClose={handleCloseDeleteModal} data={deleteData} columns={modalColumns}/>
+            <DeleteModal handleDelete={handleDeleteProjects} onClose={handleCloseDeleteModal} data={targetData} columns={modalColumns}/>
           </div>
         </div>
       )}

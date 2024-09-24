@@ -308,7 +308,7 @@ const MemberTable: React.FC = () => {
             <DeleteModal
               onClose={handleCloseDeleteModal}
               data={targetData}
-              handleDeleteMember={handleDeleteMember}
+              handleDelete={handleDeleteMember}
             />
           </div>
         </div>

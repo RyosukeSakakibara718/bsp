@@ -10,7 +10,7 @@ import TableHeader from "../TableHeader";
 type MemberTableProps = {
   onClose: () => void;
   data: MemberData;
-  handleDeleteMember: () => void;
+  handleDelete: () => void;
 };
 
 /**
@@ -27,7 +27,7 @@ type MemberTableProps = {
 const DeleteModal: React.FC<MemberTableProps> = ({
   onClose,
   data,
-  handleDeleteMember,
+  handleDelete,
 }) => {
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50 z-50">
@@ -64,7 +64,7 @@ const DeleteModal: React.FC<MemberTableProps> = ({
           <DeleteButton
             id={data.id}
             onClose={() => onClose()}
-            handleDeleteMember={handleDeleteMember}
+            handleDelete={handleDelete}
           />
           <CancelButton onClose={() => onClose()} />
         </div>
