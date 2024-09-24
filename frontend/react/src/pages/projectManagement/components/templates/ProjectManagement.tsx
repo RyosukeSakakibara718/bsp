@@ -30,7 +30,7 @@ const ProjectManagement: React.FC<ProjectDataProps> = ({ data }) => {
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [targetData, setTargetData] = useState<ProjectData>();
 
-  useEffect(() => {
+  const getProjectsData = () => {
     getProjectsAll()
       .then(projects => {
         if (projects !== null) {
@@ -43,6 +43,10 @@ const ProjectManagement: React.FC<ProjectDataProps> = ({ data }) => {
         console.error("Error fetching member data:", error);
         setLoading(false); // エラーが発生してもローディングを終了
       });
+  }
+
+  useEffect(() => {
+    getProjectsData()
   }, []);
 
   const handleDeleteProjects = () => {
@@ -50,19 +54,8 @@ const ProjectManagement: React.FC<ProjectDataProps> = ({ data }) => {
       deleteProjects(targetData.id)
         .then(response => {
           console.log("Edit successful:", response);
-          // 編集が成功したら、メンバーリストを再取得
-          getProjectsAll()
-            .then(projects => {
-              if (projects !== null) {
-                setProjectsData(projects);
-                setShowData(projects);
-              }
-              setLoading(false); // ローディングを終了
-            })
-            .catch(error => {
-              console.error("Error fetching member data:", error);
-              setLoading(false); // エラーが発生してもローディングを終了
-            });
+          // 削除が変更したら再度取得し直し、再レンダリングするようにする
+          getProjectsData()
         })
         .catch(error => {
           console.error("Error during edit:", error);
