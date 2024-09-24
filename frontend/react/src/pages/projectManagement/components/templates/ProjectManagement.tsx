@@ -1,14 +1,14 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import AddOpenButton from "../../../../components/atoms/button/AddOpenButton";
 import Spacer from "../../../../components/atoms/Spacer";
 import SearchBar from "../../../../components/molecules/SearchBar";
 import TableHeader from "../../../../components/molecules/TableHeader";
-import { ProjectDataProps } from "../../../../types/project";
-import Header from "../../../header/components/templates/Header";
+import { ProjectData, ProjectDataProps } from "../../../../types/project";
 import DeleteModal from "../molecules/modal/DeleteModal";
 import TableRow from "../molecules/row/TableRow";
+import { getProjectsAll } from "../../../../hooks/useProjects";
 /**
  *  案件の一覧を表示し・検索できるコンポーネント。
  *
@@ -21,13 +21,29 @@ const ProjectManagement: React.FC<ProjectDataProps> = ({ data }) => {
   const columns = ["案件ID", "案件名", "期間", "PM", "操作"];
   const modalColumns = ["案件ID", "案件名", "期間", "PM"]
   // TODO PMの中身実装
-  const [showData, setShowData] = useState(data);
+  const [showData, setShowData] = useState<ProjectData[]>(data);
   const [searchValue, setSearchValue] = useState("");
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(true);
 
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [targetDataId, setTargetDataId] = useState(0);
   const deleteData = data[targetDataId];
+
+  useEffect(() => {
+    getProjectsAll()
+      .then(projects => {
+        if (projects !== null) {
+          setShowData(projects);
+          console.log('projects: ', projects);
+        }
+        setLoading(false); // ローディングを終了
+      })
+      .catch(error => {
+        console.error("Error fetching member data:", error);
+        setLoading(false); // エラーが発生してもローディングを終了
+      });
+  }, []);
 
   const handleAddButtonClick = () => {
     // TODO新規案件作成パスを指定
@@ -36,7 +52,7 @@ const ProjectManagement: React.FC<ProjectDataProps> = ({ data }) => {
 
   const handleEditButtonClick = () => {
     // TODO編集先のページのパスを指定
-    navigate("/projectManagement/detail");
+    navigate("/projectManagement/detail/{}");
   };
 
   /**
@@ -79,9 +95,12 @@ const ProjectManagement: React.FC<ProjectDataProps> = ({ data }) => {
     setSearchValue("");
   };
 
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <>
-      <Header />
       <div className="shadow-lg rounded-lg overflow-hidden p-8">
         <SearchBar
           searchValue={searchValue}
@@ -106,9 +125,10 @@ const ProjectManagement: React.FC<ProjectDataProps> = ({ data }) => {
               {showData.map(item => (
                 <TableRow
                   id={item.id}
-                  projectName={item.projectName}
-                  base_cost_start_date={item.base_cost_start_date}
-                  endDate={item.endDate}
+                  name={item.name}
+                  start_date={item.start_date}
+                  end_date={item.end_date}
+                  project_manager={item.project_manager}
                   isEditPageOpen={handleEditButtonClick}
                   isDeleteModalOpen={() => handleOpenDeleteModal(item.id)}
                 />

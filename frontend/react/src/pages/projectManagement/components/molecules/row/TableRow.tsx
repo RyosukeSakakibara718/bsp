@@ -12,23 +12,24 @@ type TableRowProps = ProjectData & {
 
 const TableRow: React.FC<TableRowProps> = ({
   id,
-  projectName,
-  base_cost_start_date,
-  endDate,
+  name,
+  start_date,
+  end_date,
+  project_manager,
   isEditPageOpen,
   isDeleteModalOpen,
 }) => {
   return (
     <tr className="hover:bg-customPurple transition-colors duration-200">
       <TableRowColumn width="5%">{id}</TableRowColumn>
-      <TableRowColumn width="25%">{projectName}</TableRowColumn>
+      <TableRowColumn width="25%">{name}</TableRowColumn>
       <TableRowColumn width="25%">
-        {base_cost_start_date}~{endDate}
+        {start_date} ~ {end_date}
       </TableRowColumn>
-      <TableRowColumn width="25%">{""}</TableRowColumn>
+      <TableRowColumn width="25%">{project_manager}</TableRowColumn>
       <TableRowColumn width="10%">
         <div className="flex space-x-2.5">
-          <EditButton onOpen={isEditPageOpen} id={id}></EditButton>
+          <EditButton onOpen={isEditPageOpen}></EditButton>
           <DeleteButton onOpen={isDeleteModalOpen} id={id} />
         </div>
       </TableRowColumn>
