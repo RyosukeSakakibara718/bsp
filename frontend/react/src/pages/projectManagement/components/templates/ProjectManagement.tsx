@@ -19,7 +19,7 @@ import { getProjectsAll, deleteProjects } from "../../../../hooks/useProjects";
  */
 const ProjectManagement: React.FC<ProjectDataProps> = ({ data }) => {
   const columns = ["案件ID", "案件名", "期間", "PM", "操作"];
-  const modalColumns = ["案件ID", "案件名", "期間", "PM"]
+  const modalColumns = ["案件ID", "案件名", "期間", "PM"];
   // TODO PMの中身実装
   const [showData, setShowData] = useState<ProjectData[]>(data);
   const [projectsData, setProjectsData] = useState<ProjectData[]>([]);

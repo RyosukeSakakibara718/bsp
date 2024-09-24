@@ -43,7 +43,7 @@ const DeleteModal: React.FC<ProjectManagementProps> = ({ handleDelete, onClose, 
           <div className="bg-white shadow-md rounded-lg overflow-hidden">
             <table className="min-w-full border-collapse">
               <thead>
-                <TableHeader columns={columns}/>
+                <TableHeader columns={columns} />
               </thead>
               <tbody className="bg-customPurple">
                 <TableRowColumn width="5%">{data.id}</TableRowColumn>
