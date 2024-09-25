@@ -43,6 +43,63 @@ const ProjectDetail: React.FC<{ id?: string }> = () => {
     { label: "", width: 5 },
   ];
 
+  function getMonthsBetweenDates(start_date, end_date) {
+    const start = new Date(start_date);
+    const end = new Date(end_date);
+    const result = [];
+
+    // startがendを超えるまでループ
+    while (start <= end) {
+      // 現在の年月を "YYYY-MM" の形式で配列に追加
+      const year = start.getFullYear();
+      const month = String(start.getMonth() + 1).padStart(2, '0'); // 月を2桁に
+      result.push(`${year}-${month}`);
+
+      // 次の月に進む
+      start.setMonth(start.getMonth() + 1);
+    }
+
+    return result;
+  }
+
+  const projects = {
+    projects_data: {
+      name: "プロジェクトバランサー",
+      phase: 1,
+      start_date: "2024-08-01",
+      end_date: "2025-05-31",
+    },
+    estimations: {
+      order_price: 300000000,
+      estimate_cost: 20000000,
+      estimate_person_month: 23,
+    },
+    assignment_members: [
+      {
+        member_id: 1,
+        position: 1,
+        estimate_total_person_month: 6, // プロパティ名を修正
+        assignment_member_monthly_estimations: [
+          {
+            target_month: 5,
+            estimate_person_month: 1.0,
+          },
+        ],
+      },
+    ],
+    outsources: [
+      {
+        name: "デザイン外注",
+        estimate_cost: 400000,
+        cost: 300000,
+      },
+    ],
+  };
+
+  const months = getMonthsBetweenDates(projects.projects_data.start_date, projects.projects_data.end_date);
+
+  console.log(months);
+
   const handleAddOutSouRegRow = () => {
     setOutSouRegRows(prevRows => [...prevRows, prevRows.length]);
   };
@@ -70,13 +127,37 @@ const ProjectDetail: React.FC<{ id?: string }> = () => {
       </div>
       <Spacer height="30px"></Spacer>
       <div className="overflow-hidden rounded-lg shadow-md">
-        <table className="min-w-full divide-y">
+        <table className="min-w-full max-w-screen-lg divide-y">
           <TableCaptionRow value={"メンバー情報登録"} />
-          <OutsourcesHead columns={membrInfoColumns} />
-          <MemberInfo
-            memberInfoRows={memberInfoRows}
-            setMemberInfoRows={setMemberInfoRows}
-          />
+          <tbody>
+            <tr className="flex">
+              <th className="flex-1">A</th>
+              <th className="flex-2">B</th>
+              <th className="flex-1">C</th>
+            </tr>
+            <tr className="flex">
+              <td className="flex-1 overflow-x-scroll">BD</td>
+              <td className="flex-2 overflow-x-scroll">
+                <div className="w-1/2 overflow-x-scroll whitespace-nowrap">
+                  <table>
+                    <tbody className="flex">
+                      {months.map(row => (
+                        <div key={row}>
+                          <tr>
+                            <th>{row}</th>
+                          </tr>
+                          <td>
+                            <input type="text" className="border" />
+                          </td>
+                        </div>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </td>
+              <td className="flex-1 overflow-x-scroll">BD</td>
+            </tr>
+          </tbody>
         </table>
         <div className="text-left mt-2 ml-4">
           <AddButton
