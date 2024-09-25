@@ -6,48 +6,27 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ProjectAchievementRequest;
 use App\Http\Resources\ProjectAchievementResource;
-use App\Models\ProjectAchievement;
+use App\UseCases\ProjectAchievement\UpdateAction;
+use App\Models\WorkCost;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controller;
 
 class ProjectAchievementController extends Controller
 {
     /**
-     * 特定の案件に関連する実績一覧を表示
+     * 案件実績の一覧を表示
      *
-     * @param int $projectId
      * @return JsonResponse
      */
-    public function index($projectId): JsonResponse
+    public function index(): JsonResponse
     {
-        // 指定されたプロジェクトIDの案件実績を取得
-        $achievements = ProjectAchievement::where('project_id', $projectId)->get();
+        // すべての案件実績を取得
+        $achievements = WorkCost::all();
 
         return response()->json([
             'achievements' => ProjectAchievementResource::collection($achievements)
         ], 200);
-    }
-
-    /**
-     * 新しい案件実績の作成画面を表示
-     */
-    public function create()
-    {
-        // 新しい案件実績を作成するためのレスポンスまたはビューを返す
-    }
-
-    /**
-     * 新しい案件実績を保存
-     *
-     * @param ProjectAchievementRequest $request
-     * @return JsonResponse
-     */
-    public function store(ProjectAchievementRequest $request): JsonResponse
-    {
-        // 新しい案件実績を作成
-        $achievement = ProjectAchievement::create($request->validated());
-
-        return response()->json(new ProjectAchievementResource($achievement), 201);
     }
 
     /**
@@ -59,33 +38,23 @@ class ProjectAchievementController extends Controller
     public function show($id): JsonResponse
     {
         // 指定されたIDの案件実績を取得
-        $achievement = ProjectAchievement::findOrFail($id);
+        $achievement = WorkCost::findOrFail($id);
 
         return response()->json(new ProjectAchievementResource($achievement));
     }
 
     /**
-     * 特定の案件実績の編集画面を表示
-     *
-     * @param int $id
-     */
-    public function edit($id)
-    {
-        // 指定された案件実績の編集フォームを返す
-    }
-
-    /**
-     * 特定の案件実績を更新
+     * 案件実績を更新または新規作成
      *
      * @param ProjectAchievementRequest $request
      * @param int $id
+     * @param UpdateAction $action
      * @return JsonResponse
      */
-    public function update(ProjectAchievementRequest $request, $id): JsonResponse
+    public function update(ProjectAchievementRequest $request, int $id, UpdateAction $action): JsonResponse
     {
-        // 指定されたIDの案件実績を更新
-        $achievement = ProjectAchievement::findOrFail($id);
-        $achievement->update($request->validated());
+        // UpdateAction を実行し、案件実績を更新または作成
+        $action($request, $id);
 
         return response()->json([], 204);
     }
@@ -99,7 +68,7 @@ class ProjectAchievementController extends Controller
     public function destroy($id): JsonResponse
     {
         // 指定されたIDの案件実績を削除
-        ProjectAchievement::destroy($id);
+        WorkCost::destroy($id);
 
         return response()->json([], 204);
     }
