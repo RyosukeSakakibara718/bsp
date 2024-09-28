@@ -19,6 +19,12 @@ export type ProjectsData = {
   end_date: Date,
 }
 
+export type MemberList = {
+  id: number,
+  name: string,
+  label: string
+}
+
 export type Estimations = {
   order_price: number,
   estimate_cost: number,
@@ -33,7 +39,7 @@ export type AssignmentMembers = {
 }
 
 export type AssignmentMemberMonthlyEstimations = {
-  target_month: number,
+  target_month: string,
   estimate_person_month: number,
 }
 
@@ -47,4 +53,16 @@ export type InitialAssignmentMembers = {
   position : number,
   estaimate_total_person_month : number,
   assignment_member_monthly_estimations : AssignmentMemberMonthlyEstimations[] | []
+}
+
+export type InitialProjectInfo = {
+  name: string,
+  phase: string,
+  freeeProjectId: string,
+  orderPrice: number | undefined,
+  startDate: string,
+  endDate: string,
+  estimateCost: number | undefined,
+  estimatePersonMonth: number | undefined,
+  contractType: string,
 }

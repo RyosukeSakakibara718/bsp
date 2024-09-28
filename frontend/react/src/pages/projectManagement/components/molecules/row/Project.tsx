@@ -1,8 +1,6 @@
+import React, { useState } from 'react';
+import { phases, contractType } from '../../../../../data/projectDetail';
 
-import TableInputDate from "../../../../../components/atoms/field/TableInputDateField";
-import TableInputField from "../../../../../components/atoms/field/TableInputField";
-import TableInputNumField from "../../../../../components/atoms/field/TableInputNumField";
-import TableSelectField from "../../../../../components/atoms/field/TableSelectField";
 import SelectBoxColumn from '../../../../../components/atoms/column/inputBox/SelectBoxColumn';
 import InputStringBoxColumn from '../../../../../components/atoms/column/inputBox/InputStringBoxColumn';
 import InputNumberBoxColumn from '../../../../../components/atoms/column/inputBox/InputNumberBoxColumn';
@@ -10,39 +8,25 @@ import InputDateBoxColumn from '../../../../../components/atoms/column/inputBox/
 
 import ProjectInfoRow from './ProjectInfoRow';
 
-type ProjectProps = {
+type FormData = {
   name: string,            // プロジェクト名
   phase: string,           // フェーズ名
   freeeProjectId: string,  // freeeのプロジェクトID
   orderPrice: number | undefined,  // 受注額（任意でundefined）
-  startDate: Date,         // 開始日
-  endDate: Date,           // 終了日
+  startDate: string,         // 開始日
+  endDate: string,           // 終了日
   estimateCost: number | undefined,  // 見積原価（任意でundefined）
   estimatePersonMonth: number | undefined,  // 見積工数（任意でundefined）
   contractType: string     // 契約種別
 };
 
+type ProjectProps = {
+  formData: FormData
+  handleInputChange: (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void;
+}
 
-const Project: React.FC<ProjectProps> = (data) => {
-  const [formData, setFormData] = useState({
-    name: '',
-    phase: '',
-    freeeProjectId: '',
-    orderPrice: undefined,
-    startDate: '2023-04-01',
-    endDate: '2028-08-30',
-    estimateCost: undefined,
-    estimatePersonMonth: undefined,
-    contractType: '準委任契約',
-  });
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-    const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
-  };
+const Project: React.FC<ProjectProps> = ({formData, handleInputChange}) => {
 
   return (
     <div className="container mx-auto rounded-lg">

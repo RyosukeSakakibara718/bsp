@@ -82,12 +82,24 @@ export const projectDetailData = {
 }
 
 export const rank = [
-  { value: "PM", label: "PM" },
-  { value: "PL", label: "PL" },
-  { value: "PG", label: "PG" },
+  { id: 1, name: "PM", label: "PM" },
+  { id: 2, name: "PL", label: "PL" },
+  { id: 3, name: "PG", label: "PG" },
 ];
 
-export const initialAssignmentMembers = [
+export const initialProjectInfo = {
+  name: '',
+  phase: '',
+  freeeProjectId: '',
+  orderPrice: undefined,
+  startDate: '2024-09-01',
+  endDate: '2024-09-30',
+  estimateCost: undefined,
+  estimatePersonMonth: undefined,
+  contractType: '準委任契約',
+}
+
+export const initialAssignmentMembersArray = [
   {
     member_id : 1,
     position : 1,
@@ -102,3 +114,38 @@ export const initialAssignmentMembersInfo = {
   estaimate_total_person_month : 0,
   assignment_member_monthly_estimations : []
 }
+
+export const initialOutsourcingInfo = {
+  name: "",
+  estimate_cost: undefined,
+  cost: undefined,
+}
+
+export const phases = [
+  "要件定義",
+  "基本設計",
+  "詳細設計",
+  "製造",
+  "単体試験",
+  "結合試験",
+  "総合試験",
+  "リリース",
+  "終了"
+];
+
+export const contractType = [
+  "準委任契約",
+  "請負契約"
+]
+
+export const OutsourceColumns = [
+  { label: "内容", width: 400 },
+  { label: "見積金額", width: 200 },
+  { label: "原価", width: 200 },
+  { label: "", width: 50 },
+];
+
+export const memberList = [
+  { id: 1, value: "山田 涼介", label: "山田 涼介" },
+  { id: 2, value: "山下 智久", label: "山下 智久" },
+];
