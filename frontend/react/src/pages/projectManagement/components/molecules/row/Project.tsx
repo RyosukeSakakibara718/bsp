@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
-import { phases, contractType } from '../../../../../data/projectDetail';
 
+import TableInputDate from "../../../../../components/atoms/field/TableInputDateField";
+import TableInputField from "../../../../../components/atoms/field/TableInputField";
+import TableInputNumField from "../../../../../components/atoms/field/TableInputNumField";
+import TableSelectField from "../../../../../components/atoms/field/TableSelectField";
 import SelectBoxColumn from '../../../../../components/atoms/column/inputBox/SelectBoxColumn';
 import InputStringBoxColumn from '../../../../../components/atoms/column/inputBox/InputStringBoxColumn';
 import InputNumberBoxColumn from '../../../../../components/atoms/column/inputBox/InputNumberBoxColumn';

@@ -1,5 +1,5 @@
 import TableInputNumField from "../../../../../components/atoms/field/TableInputNumField";
-import TableSelectField from "../../../../../components/atoms/field/TableSelecField";
+import TableSelectField from "../../../../../components/atoms/field/TableSelectField";
 import TrashButton from "../../../../../components/atoms/button/TrashButton";
 
 type memberInfoProps = {
