@@ -1,7 +1,7 @@
 import TableInputDate from "../../../../../components/atoms/field/TableInputDateField";
 import TableInputField from "../../../../../components/atoms/field/TableInputField";
 import TableInputNumField from "../../../../../components/atoms/field/TableInputNumField";
-import TableSelectField from "../../../../../components/atoms/field/TableSelecField";
+import TableSelectField from "../../../../../components/atoms/field/TableSelectField";
 
 const Project = () => {
   const isDateField = (field: string) =>

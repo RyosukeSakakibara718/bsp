@@ -27,7 +27,7 @@ const TableSelectField: React.FC<TableSelectFieldProps> = ({
           {labelText}
         </label>
       )}
-      <select className="border rounded p-2 py-3 w-2/3" style={{ flex: 4 }}>
+      <select className="border rounded  w-2/3 h-[30px]" style={{ flex: 4 }}>
         {options.map(item => (
           <option key={item.value} value={item.value}>
             {item.label}

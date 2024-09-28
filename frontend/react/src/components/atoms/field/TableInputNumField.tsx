@@ -11,7 +11,7 @@ const TableInputNumField: React.FC<TableInputNumFieldProps> = ({
 }) => {
   return (
     <td
-      className={`font-bold px-4 py-3 text-left text-gray-800`}
+      className={`font-bold px-4 text-left text-gray-800`}
       style={{ display: "flex", alignItems: "center" }}
     >
       {labelText && (
@@ -23,7 +23,7 @@ const TableInputNumField: React.FC<TableInputNumFieldProps> = ({
         <>
           <input
             type="number"
-            className="border rounded p-2 py-3 w-2/3"
+            className="border rounded p-2 py-3 w-[100px] h-[30px]"
             style={{ flex: 3.5 }}
           />
           <span style={{ flex: 0.5 }}>{suffix}</span>
@@ -31,7 +31,7 @@ const TableInputNumField: React.FC<TableInputNumFieldProps> = ({
       ) : (
         <input
           type="number"
-          className="border rounded p-2 py-3 w-2/3"
+          className="border rounded p-2 py-3 w-[100px] h-[30px]"
           style={{ flex: 4 }}
         />
       )}
