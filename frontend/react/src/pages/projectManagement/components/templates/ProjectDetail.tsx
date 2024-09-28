@@ -4,8 +4,6 @@ import { useParams } from "react-router-dom";
 import Spacer from "../../../../../src/components/atoms/Spacer";
 import AddButton from "../../../../components/atoms/button/AddButton";
 import TableCaptionRow from "../../../../components/molecules/row/TableCaptionRow";
-import TableHeader from "../../../../components/molecules/TableHeader";
-import Header from "../../../header/components/templates/Header";
 import MemberInfo from "../molecules/row/MemberInfo";
 import Outsources from "../molecules/row/Outsources";
 import Project from "../molecules/row/Project";
@@ -43,6 +41,19 @@ const ProjectDetail: React.FC<{ id?: string }> = () => {
     { label: "", width: 5 },
   ];
 
+  const [formData, setFormData] = useState({
+    name: '',
+    phase: '',
+    freeeProjectId: '',
+    orderPrice: undefined,
+    startDate: '2023-04-01',
+    endDate: '2028-08-30',
+    estimateCost: undefined,
+    estimatePersonMonth: undefined,
+    contractType: '準委任契約',
+  });
+
+
   const handleAddOutSouRegRow = () => {
     setOutSouRegRows(prevRows => [...prevRows, prevRows.length]);
   };
@@ -65,7 +76,7 @@ const ProjectDetail: React.FC<{ id?: string }> = () => {
       <div className="overflow-hidden rounded-lg shadow-md">
         <table className="min-w-full divide-y ">
           <TableCaptionRow value={"案件情報登録"} />
-          <Project />
+          <Project data={formData} />
         </table>
       </div>
       <Spacer height="30px"></Spacer>
