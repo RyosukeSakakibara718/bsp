@@ -114,7 +114,6 @@ const ProjectDetail: React.FC<{ id?: string }> = () => {
    * メンバー情報登録内の選択行の削除
    */
   const deleteAssignmentMembersInfoRow = (index: number) => {
-    console.log(index);
     setAssignmentMembersInfo(prevRows =>
       prevRows.filter((_, i) => i !== index),
     );
