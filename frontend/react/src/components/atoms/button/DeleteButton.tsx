@@ -20,7 +20,6 @@ type DeleteButtonProps = {
  * @returns {JSX.Element} 呼び出し元によって、削除モーダルを開く/閉じるボタン要素を返します。
  */
 const DeleteButton: React.FC<DeleteButtonProps> = ({
-  id,
   onOpen,
   onClose,
   handleDelete,
@@ -30,7 +29,6 @@ const DeleteButton: React.FC<DeleteButtonProps> = ({
       onOpen();
     } else if (onClose) {
       // APIを叩くようにする
-      console.log(id);
       onClose();
     }
   };

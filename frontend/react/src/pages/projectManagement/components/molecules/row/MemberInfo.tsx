@@ -1,6 +1,7 @@
 import TableInputNumField from "../../../../../components/atoms/field/TableInputNumField";
-import TableSelectField from "../../../../../components/atoms/field/TableSelecField";
+import TableSelectField from "../../../../../components/atoms/field/TableSelectField";
 import TrashButton from "../../../../../components/atoms/button/TrashButton";
+import { memberList } from "../../../../../data/projectDetail";
 
 type memberInfoProps = {
   memberInfoRows: number[];
@@ -15,17 +16,12 @@ const memberInfo: React.FC<memberInfoProps> = ({
     setMemberInfoRows(prevRows => prevRows.filter(rowId => rowId !== row));
   };
 
-  const memberName = [
-    { value: "山田 涼介", label: "山田 涼介" },
-    { value: "山下 智久", label: "山下 智久" },
-  ];
-
   const rank = [
     { value: "PM", label: "PM" },
     { value: "PL", label: "PL" },
     { value: "PG", label: "PG" },
   ];
-  // TODO　月の工数入力の横スクロールの実装が思いつかなかったので一旦
+
   return (
     <>
       {memberInfoRows?.map(row => (
@@ -35,7 +31,7 @@ const memberInfo: React.FC<memberInfoProps> = ({
             key={row}
           >
             <td>
-              <TableSelectField options={memberName} />
+              <TableSelectField options={memberList} />
             </td>
             <td>
               <TableSelectField options={rank} />

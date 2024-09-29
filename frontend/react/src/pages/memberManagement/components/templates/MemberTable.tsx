@@ -14,9 +14,6 @@ import {
   deleteMember,
   addMember,
 } from "../../../../hooks/useMember";
-import { MemberTableProps } from "../../../../types/member";
-import Header from "../../../header/coomponents/templates/Header";
-
 import type { MemberData } from "../../../../types/member";
 
 /**
