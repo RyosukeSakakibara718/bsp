@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
+use App\Models\Estimation;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -18,6 +20,7 @@ class DatabaseSeeder extends Seeder
             ProjectTableSeeder::class,
             MemberTableSeeder::class,
             AssignmentMemberTableSeeder::class,
+            EstimationSeeder::class
         ]);
     }
 }
