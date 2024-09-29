@@ -1,6 +1,7 @@
+import TrashButton from "../../../../../components/atoms/button/TrashButton";
 import TableInputNumField from "../../../../../components/atoms/field/TableInputNumField";
 import TableSelectField from "../../../../../components/atoms/field/TableSelectField";
-import TrashButton from "../../../../../components/atoms/button/TrashButton";
+import { RANK } from "../../../../../constants";
 import { memberList } from "../../../../../data/projectDetail";
 
 type memberInfoProps = {
@@ -16,12 +17,6 @@ const memberInfo: React.FC<memberInfoProps> = ({
     setMemberInfoRows(prevRows => prevRows.filter(rowId => rowId !== row));
   };
 
-  const rank = [
-    { value: "PM", label: "PM" },
-    { value: "PL", label: "PL" },
-    { value: "PG", label: "PG" },
-  ];
-
   return (
     <>
       {memberInfoRows?.map(row => (
@@ -34,7 +29,7 @@ const memberInfo: React.FC<memberInfoProps> = ({
               <TableSelectField options={memberList} />
             </td>
             <td>
-              <TableSelectField options={rank} />
+              <TableSelectField options={RANK} />
             </td>
             <td>
               <TableInputNumField />
