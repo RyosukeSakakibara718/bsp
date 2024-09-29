@@ -3,7 +3,7 @@ import React from "react";
 type InputDateBoxColumnProps = {
   title: string,
   name: string,
-  value: string,
+  value: Date,
   handleInputChange: (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void;
 }
 
@@ -17,7 +17,7 @@ const InputDateBoxColumn: React.FC<InputDateBoxColumnProps> = ({ title, name, va
         <input
           type="date"
           name={name}
-          value={value}
+          value={value.toISOString().split("T")[0]}
           onChange={handleInputChange}
           className="border rounded py-2 w-full text-xl"
         />

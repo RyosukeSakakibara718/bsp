@@ -1,11 +1,11 @@
 import {
   getMemberAll,
 } from "../../../hooks/useMember"
-import { MemberList } from "../../../types/project";
+import { OptionList } from "../../../types/project";
 
 // getMemberList の型定義
 type GetMemberListProps = {
-  handleChange: (members: MemberList[]) => void;
+  handleChange: (members: OptionList[]) => void;
 };
 
 // getMemberList は非同期関数として定義する

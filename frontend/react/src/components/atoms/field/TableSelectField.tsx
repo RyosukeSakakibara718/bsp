@@ -1,9 +1,9 @@
 import React from "react";
-import { MemberList } from "../../../types/project";
+import { OptionList } from "../../../types/project";
 
 // コンポーネントのプロパティの型定義
 type TableSelectFieldProps = {
-  options: MemberList[]; // 'options' として PhaseOption 型の配列を指定
+  options: OptionList[]; // 'options' として PhaseOption 型の配列を指定
   name: string;
   value: number | string;
   index: number

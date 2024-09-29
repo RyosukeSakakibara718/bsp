@@ -3,11 +3,6 @@ import { useParams } from "react-router-dom";
 
 import Spacer from "../../../../../src/components/atoms/Spacer";
 import AddButton from "../../../../components/atoms/button/AddButton";
-import TableCaptionRow from "../../../../components/molecules/row/TableCaptionRow";
-import Outsources from "../molecules/row/Outsources";
-import Project from "../molecules/row/Project";
-import OutsourcesHead from "../molecules/row/OutsourcesHeader";
-import TableSelectField from "../../../../components/atoms/field/TableSelectField";
 import {
   rank,
   initialAssignmentMembersArray,
@@ -15,14 +10,19 @@ import {
   initialOutsourcingInfo,
   OutsourceColumns,
   initialProjectInfo,
+  requestBody
 } from "../../../../data/projectDetail";
 import type {
   InitialAssignmentMembers,
-  InitialProjectInfo,
-  MemberList,
+  OptionList,
+  Outsource,
+  ProjectInfomation,
+  RequestBody
 } from "../../../../types/project";
-import { FaTrashAlt } from "react-icons/fa";
 import { getMemberList } from "../../hooks/projectDetail";
+import ProjectInfo from "../organisms/ProjectInfo";
+import MemberInfo from "../organisms/MemberInfo";
+import OutsourcingCost from "../organisms/OutsourcingCost";
 
 /**
  * 案件の登録・編集を表を行うテーブルコンポーネント。
@@ -43,7 +43,7 @@ const ProjectDetail: React.FC<{ id?: string }> = () => {
    * 案件情報登録用のstate作成
    */
   const [projectInfo, setProjectInfo] =
-    useState<InitialProjectInfo>(initialProjectInfo);
+    useState<ProjectInfomation>(initialProjectInfo);
 
   /**
    * 案件情報登録用のstate変更用関数
@@ -52,10 +52,30 @@ const ProjectDetail: React.FC<{ id?: string }> = () => {
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
   ) => {
     const { name, value } = e.target;
-    setProjectInfo({
-      ...projectInfo,
-      [name]: value,
-    });
+  
+    // projects_data フィールドか estimations フィールドかを区別する
+    if (name in projectInfo.projects_data) {
+      setProjectInfo(prevState => ({
+        ...prevState,
+        projects_data: {
+          ...prevState.projects_data,
+          [name]:
+            name === 'start_date' || name === 'end_date'
+              ? new Date(value) // 日付を Date オブジェクトに変換
+              : name === 'phase' || name === 'contract'
+              ? Number(value)    // 数値フィールドの場合は Number 型に変換
+              : value,           // それ以外はそのまま
+        },
+      }));
+    } else if (name in projectInfo.estimations) {
+      setProjectInfo(prevState => ({
+        ...prevState,
+        estimations: {
+          ...prevState.estimations,
+          [name]: Number(value),
+        },
+      }));
+    }
   };
 
   //-----------------------------------------------------メンバー情報登録エリアの記載-----------------------------------------------------
@@ -63,7 +83,7 @@ const ProjectDetail: React.FC<{ id?: string }> = () => {
   /**
    * メンバー情報登録用のstate作成
    */
-  const [memberName, setMemberName] = useState<MemberList[]>([]);
+  const [memberName, setMemberName] = useState<OptionList[]>([]);
 
   /**
    * 初回レンダリングにメンバー一覧を取得
@@ -113,9 +133,9 @@ const ProjectDetail: React.FC<{ id?: string }> = () => {
   /**
    * メンバー情報登録内の選択行の削除
    */
-  const deleteAssignmentMembersInfoRow = (index: number) => {
+  const deleteAssignmentMembersInfoRow = (index: number, member_id: number) => {
     setAssignmentMembersInfo(prevRows =>
-      prevRows.filter((_, i) => i !== index),
+      prevRows.filter((item, i) => !(i === index && item.member_id === member_id))
     );
   };
 
@@ -175,8 +195,8 @@ const ProjectDetail: React.FC<{ id?: string }> = () => {
    * メンバーの工数入力の期間を案件開始日~終了日を参照して配列として作成する関数
    */
   function getMonthsBetweenDates(
-    start_date: string,
-    end_date: string,
+    start_date: Date,
+    end_date: Date,
   ): string[] {
     const start = new Date(start_date);
     const end = new Date(end_date);
@@ -198,8 +218,8 @@ const ProjectDetail: React.FC<{ id?: string }> = () => {
 
   // 案件開始日~終了日の中に含まれる月を要素として持つ配列
   const months = getMonthsBetweenDates(
-    projectInfo.startDate,
-    projectInfo.endDate,
+    projectInfo.projects_data.start_date,
+    projectInfo.projects_data.end_date,
   );
 
   //-----------------------------------------------------外注費登録エリアの記載-----------------------------------------------------
@@ -207,7 +227,7 @@ const ProjectDetail: React.FC<{ id?: string }> = () => {
   /**
    * 外注費登録用のstate作成
    */
-  const [outsourcingInfo, setOutsourcingInfo] = useState([
+  const [outsourcingInfo, setOutsourcingInfo] = useState<Outsource[]>([
     {
       name: "",
       estimate_cost: undefined,
@@ -247,6 +267,21 @@ const ProjectDetail: React.FC<{ id?: string }> = () => {
     setOutsourcingInfo(prevRows => prevRows.filter((_, i) => i !== index));
   };
 
+  //--------------------------------------------------------全体のstate管理--------------------------------------------------------
+
+    const [request, setRequest] = useState<RequestBody>(requestBody)
+
+    useEffect(() => {
+      setRequest({
+        projects: {
+          projects_data: projectInfo.projects_data, // 配列にラップ
+          estimations: projectInfo.estimations, // 配列にラップ
+          assignment_members: assignmentMembersInfo,
+          outsources: outsourcingInfo,
+        },
+      });
+    }, [projectInfo, assignmentMembersInfo, outsourcingInfo]);
+
   //-----------------------------------------------------------------------------------------------------------------------------
 
   /**
@@ -254,188 +289,43 @@ const ProjectDetail: React.FC<{ id?: string }> = () => {
    */
   const handleRegister = () => {
     // 登録処理をここに記述
+    console.log('projectInfo: ', projectInfo)
+    console.log('assignmentMembersInfo: ', assignmentMembersInfo)
+    console.log('outsourcingInfo: ', outsourcingInfo)
+    console.log('request: ', request);
   };
+
 
   return (
     <>
-      <Spacer height="30px"></Spacer>
-      <div className="overflow-hidden rounded-lg shadow-md">
-        <table className="min-w-full divide-y ">
-          <TableCaptionRow value={"案件情報登録"} />
-          <Project
-            formData={projectInfo}
-            handleInputChange={handleProjectInfoInputChange}
-          />
-        </table>
-      </div>
-      <Spacer height="30px"></Spacer>
-      <div className="overflow-hidden rounded-lg shadow-md">
-        <table className="min-w-full max-w-screen-lg divide-y">
-          <TableCaptionRow value={"メンバー情報登録"} />
-          <div className="rounded-lg shadow-md">
-            <div className="flex p-5">
-              <div className="flex rounded-lg shadow-md w-[100%]">
-                <div className="w-[30%]">
-                  <table className="w-full">
-                    <thead className="bg-gray-200">
-                      <tr>
-                        <th className="py-2">名前</th>
-                        <th className="py-2">役職</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {assignmentMembersInfo.map((item, index) => (
-                        <>
-                          <tr className="border-b border-gray-300">
-                              <TableSelectField
-                                options={memberName}
-                                name={"member_id"}
-                                value={item.member_id}
-                                index={index}
-                                handleInputChange={
-                                  handleAssignmentMembersInfoInputChange
-                                }
-                              />
-                            <td>
-                              <TableSelectField
-                                options={rank}
-                                name={"position"}
-                                value={item.position}
-                                index={index}
-                                handleInputChange={
-                                  handleAssignmentMembersInfoInputChange
-                                }
-                              />
-                            </td>
-                          </tr>
-                        </>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
-                <div className="w-[1000px] border-l-[1px] border-r-[1px] border-gray-400 overflow-x-auto">
-                  <div className="min-w-max">
-                    {/* ヘッダー部分 */}
-                    <div className="flex bg-gray-200">
-                      {months.map((row, index) => (
-                        <div key={index} className="w-[100px] py-2 text-center">
-                          <p>{row}</p>
-                        </div>
-                      ))}
-                    </div>
-                    {/* 入力部分 */}
-                    <div>
-                      {assignmentMembersInfo.map((member, memberIndex) => (
-                        <div key={member.member_id} className="flex py-3 border-b border-gray-300">
-                          {months.map(monthIndex => (
-                            <div
-                              key={monthIndex}
-                              className="w-[100px] text-center"
-                              id={member.member_id.toString()}
-                            >
-                              <input
-                                type="number"
-                                name="target_month"
-                                className="border border-gray-300 w-[70px] h-[32px] rounded"
-                                onChange={e =>
-                                  handleInputChange(
-                                    memberIndex,
-                                    monthIndex,
-                                    Number(e.target.value),
-                                  )
-                                }
-                              />
-                            </div>
-                          ))}
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-                <div className="w-[15%] ">
-                  <table className="w-full h-full">
-                    <thead className="bg-gray-200">
-                      <tr>
-                        <th className="py-2 w-[100%]">見積総工数</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {assignmentMembersInfo.map(info => (
-                        <tr className="py-3 border-b border-gray-300">
-                          <td>
-                            <div className="h-[30px] py-3 contents">
-                              <p className="font-bold">{info.estaimate_total_person_month} 人/月</p>
-                            </div>
-                          </td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
-                <div className="w-[5%]">
-                  <table className="w-full h-full">
-                    <thead className="bg-gray-200">
-                      <tr>
-                        <th className="py-2 w-[100%]">　</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {assignmentMembersInfo.map((_, index) => (
-                        <tr className="py-3 border-b border-gray-300">
-                          <td>
-                            <button
-                              onClick={() =>
-                                deleteAssignmentMembersInfoRow(index)
-                              }
-                              className="bg-transparent border-none cursor-pointer p-0"
-                            >
-                              <FaTrashAlt className="w-5 h-5 text-black" />
-                            </button>
-                          </td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
-            <div className="text-left mt-2 ml-4">
-              <AddButton
-                buttonText="メンバーの追加"
-                handleClick={handleAddMemberInfoRow}
-              />
-              <Spacer height="10px"></Spacer>
-            </div>
-          </div>
-        </table>
-      </div>
-      <Spacer height="30px"></Spacer>
-      <div className="overflow-hidden rounded-lg shadow-md">
-        <table className="min-w-full divide-y">
-          <thead>
-            <TableCaptionRow value={"外注費登録"} />
-            <OutsourcesHead columns={OutsourceColumns} />
-          </thead>
-          <Outsources
-            formData={outsourcingInfo}
-            handleInputChange={handleOutsourcingInfoInputChange}
-            onDelete={deleteOutsourcingInfoRow}
-          />
-        </table>
-        <div className="text-left mt-2 ml-4">
-          <AddButton
-            buttonText="追加"
-            handleClick={handleAddOutsourcingInfoRow}
-          />
-
-          <Spacer height="10px"></Spacer>
-        </div>
-      </div>
+      <button onClick={() => console.log(projectInfo)}>確認</button>
+      <Spacer height="30px" />
+      <ProjectInfo projectInfo={projectInfo} handleProjectInfoInputChange={handleProjectInfoInputChange}/>
+      <Spacer height="30px" />
+      <MemberInfo 
+        assignmentMembersInfo={assignmentMembersInfo}
+        handleAssignmentMembersInfoInputChange={handleAssignmentMembersInfoInputChange}
+        handleAddMemberInfoRow={handleAddMemberInfoRow}
+        memberName={memberName}
+        rank={rank}
+        months={months} 
+        handleInputChange={handleInputChange}
+        deleteAssignmentMembersInfoRow={deleteAssignmentMembersInfoRow}        
+      />
+      <Spacer height="30px" />
+      {/* organisms */}
+      <OutsourcingCost 
+        OutsourceColumns={OutsourceColumns}
+        outsourcingInfo={outsourcingInfo}
+        handleOutsourcingInfoInputChange={handleOutsourcingInfoInputChange}
+        deleteOutsourcingInfoRow={deleteOutsourcingInfoRow}
+        handleAddOutsourcingInfoRow={handleAddOutsourcingInfoRow}
+      />
       <Spacer height="40px"></Spacer>
       <div className="justify-center">
         <AddButton
           buttonText="登録する"
-          handleClick={() => handleAddOutsourcingInfoRow}
+          handleClick={handleRegister}
         />
       </div>
     </>
