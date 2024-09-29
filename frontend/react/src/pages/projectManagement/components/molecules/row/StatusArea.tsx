@@ -1,11 +1,13 @@
 import TableSelectField from "../../../../../components/atoms/field/TableSelectField";
-import { InitialAssignmentMembers, OptionList } from "../../../../../types/project";
-
+import {
+  InitialAssignmentMembers,
+  OptionList,
+} from "../../../../../types/project";
 
 type StatusAreaProps = {
   memberName: OptionList[];
   rank: OptionList[];
-  item: InitialAssignmentMembers
+  item: InitialAssignmentMembers;
   index: number;
   handleAssignmentMembersInfoInputChange: (
     index: number,
@@ -13,7 +15,13 @@ type StatusAreaProps = {
   ) => void;
 };
 
-const StatusArea: React.FC<StatusAreaProps> = ({memberName, rank, item, index, handleAssignmentMembersInfoInputChange}) => {
+const StatusArea: React.FC<StatusAreaProps> = ({
+  memberName,
+  rank,
+  item,
+  index,
+  handleAssignmentMembersInfoInputChange,
+}) => {
   return (
     <>
       <tr className="border-b border-gray-300">

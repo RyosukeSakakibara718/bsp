@@ -13,7 +13,11 @@ type TrashButtonProps = {
  * @param {TrashButtonProps} props - 削除ボタンのプロパティ。
  * @returns {JSX.Element} 行を削除するボタン。
  */
-const TrashButton: React.FC<TrashButtonProps> = ({ onDelete, row, member_id }) => {
+const TrashButton: React.FC<TrashButtonProps> = ({
+  onDelete,
+  row,
+  member_id,
+}) => {
   return (
     <td className="font-bold px-4 py-3 text-left text-gray-800 whitespace-nowrap">
       <button

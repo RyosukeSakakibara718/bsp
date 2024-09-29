@@ -1,13 +1,20 @@
 import React from "react";
 
 type InputDateBoxColumnProps = {
-  title: string,
-  name: string,
-  value: Date,
-  handleInputChange: (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void;
-}
+  title: string;
+  name: string;
+  value: Date;
+  handleInputChange: (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
+  ) => void;
+};
 
-const InputDateBoxColumn: React.FC<InputDateBoxColumnProps> = ({ title, name, value, handleInputChange }) => (
+const InputDateBoxColumn: React.FC<InputDateBoxColumnProps> = ({
+  title,
+  name,
+  value,
+  handleInputChange,
+}) => (
   <div className="flex py-2">
     <div className="w-1/2">
       <td className="p-2 font-bold text-left">{title}</td>

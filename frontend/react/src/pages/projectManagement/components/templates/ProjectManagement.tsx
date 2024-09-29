@@ -43,19 +43,19 @@ const ProjectManagement: React.FC<ProjectDataProps> = ({ data }) => {
         console.error("Error fetching member data:", error);
         setLoading(false); // エラーが発生してもローディングを終了
       });
-  }
+  };
 
   useEffect(() => {
-    getProjectsData()
+    getProjectsData();
   }, []);
 
   const handleDeleteProjects = () => {
-    if (targetData){
+    if (targetData) {
       deleteProjects(targetData.id)
         .then(response => {
           console.log("Edit successful:", response);
           // 削除が変更したら再度取得し直し、再レンダリングするようにする
-          getProjectsData()
+          getProjectsData();
         })
         .catch(error => {
           console.error("Error during edit:", error);
@@ -79,7 +79,7 @@ const ProjectManagement: React.FC<ProjectDataProps> = ({ data }) => {
    * @param {number} id - 削除対象のメンバーID
    */
   const handleOpenDeleteModal = (id: number) => {
-    setTargetData(projectsData[id])
+    setTargetData(projectsData[id]);
     setIsDeleteModalOpen(true);
   };
 
@@ -141,7 +141,7 @@ const ProjectManagement: React.FC<ProjectDataProps> = ({ data }) => {
               <TableHeader columns={columns} />
             </thead>
             <tbody className="bg-white divide-y divide-gray-200">
-              {showData.map((item,index) => (
+              {showData.map((item, index) => (
                 <TableRow
                   id={item.id}
                   name={item.name}
@@ -160,7 +160,12 @@ const ProjectManagement: React.FC<ProjectDataProps> = ({ data }) => {
         <div className="fixed inset-0 flex items-center justify-center z-50">
           <div className="absolute inset-0 bg-black opacity-50"></div>
           <div className="relative bg-white rounded-lg p-8 shadow-lg z-10">
-            <DeleteModal handleDelete={handleDeleteProjects} onClose={handleCloseDeleteModal} data={targetData} columns={modalColumns}/>
+            <DeleteModal
+              handleDelete={handleDeleteProjects}
+              onClose={handleCloseDeleteModal}
+              data={targetData}
+              columns={modalColumns}
+            />
           </div>
         </div>
       )}

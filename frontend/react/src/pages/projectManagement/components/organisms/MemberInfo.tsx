@@ -1,16 +1,16 @@
-import TableCaptionRow from "../../../../components/molecules/row/TableCaptionRow";
 import AddButton from "../../../../components/atoms/button/AddButton";
+import TrashButton from "../../../../components/atoms/button/TrashButton";
 import Spacer from "../../../../components/atoms/Spacer";
+import TableCaptionRow from "../../../../components/molecules/row/TableCaptionRow";
 import {
   InitialAssignmentMembers,
   OptionList,
 } from "../../../../types/project";
+import CostArea from "../molecules/row/CostArea";
+import CostAreaHeader from "../molecules/row/CostAreaHeader";
 import StatusArea from "../molecules/row/StatusArea";
 import StatusAreaHeader from "../molecules/row/StatusAreaHeader";
-import CostAreaHeader from "../molecules/row/CostAreaHeader";
-import CostArea from "../molecules/row/CostArea";
 import TotalCostArea from "../molecules/row/TotalCostArea";
-import TrashButton from "../../../../components/atoms/button/TrashButton";
 
 type MemberInfoProps = {
   assignmentMembersInfo: InitialAssignmentMembers[];
@@ -113,11 +113,13 @@ const MemberInfo: React.FC<MemberInfoProps> = ({
                         key={`${item.member_id}-${index}`}
                         className="border-b border-gray-300"
                       >
-                        <TrashButton 
-                          onDelete={() => deleteAssignmentMembersInfoRow(
-                            index,
-                            item.member_id,
-                          )} 
+                        <TrashButton
+                          onDelete={() =>
+                            deleteAssignmentMembersInfoRow(
+                              index,
+                              item.member_id,
+                            )
+                          }
                           row={index}
                           member_id={item.member_id}
                         />

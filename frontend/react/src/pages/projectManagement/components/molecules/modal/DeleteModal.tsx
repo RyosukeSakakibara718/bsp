@@ -27,7 +27,12 @@ type ProjectManagementProps = {
  * @returns {JSX.Element} メンバー削除用のモーダルコンポーネントを返します。
  */
 
-const DeleteModal: React.FC<ProjectManagementProps> = ({ handleDelete, onClose, data, columns }) => {
+const DeleteModal: React.FC<ProjectManagementProps> = ({
+  handleDelete,
+  onClose,
+  data,
+  columns,
+}) => {
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50 z-50">
       <div className="bg-white shadow-lg rounded-lg p-6 w-full max-w-3xl mx-auto">
@@ -51,14 +56,20 @@ const DeleteModal: React.FC<ProjectManagementProps> = ({ handleDelete, onClose, 
                 <TableRowColumn width="25%">
                   {data.start_date} ~{data.end_date}
                 </TableRowColumn>
-                <TableRowColumn width="25%">{data.project_manager}</TableRowColumn>
+                <TableRowColumn width="25%">
+                  {data.project_manager}
+                </TableRowColumn>
               </tbody>
             </table>
           </div>
         </div>
         <Spacer height="30px" />
         <div className="flex justify-center space-x-4">
-          <DeleteButton handleDelete={handleDelete} id={data.id} onClose={() => onClose()} />
+          <DeleteButton
+            handleDelete={handleDelete}
+            id={data.id}
+            onClose={() => onClose()}
+          />
           <CancelButton onClose={() => onClose()} />
         </div>
         <Spacer height="20px" />

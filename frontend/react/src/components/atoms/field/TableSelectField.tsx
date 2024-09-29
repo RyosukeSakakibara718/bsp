@@ -6,8 +6,11 @@ type TableSelectFieldProps = {
   options: OptionList[]; // 'options' として PhaseOption 型の配列を指定
   name: string;
   value: number | string;
-  index: number
-  handleInputChange: (index: number, e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void;
+  index: number;
+  handleInputChange: (
+    index: number,
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
+  ) => void;
 };
 
 // TableSelectColumn コンポーネント
@@ -26,7 +29,7 @@ const TableSelectField: React.FC<TableSelectFieldProps> = ({
       <select
         name={name}
         value={value}
-        onChange={(e) =>handleInputChange(index, e)}
+        onChange={e => handleInputChange(index, e)}
         className="border rounded  w-2/3 h-[30px]"
         style={{ flex: 4 }}
       >

@@ -11,22 +11,22 @@ export type ProjectDataProps = {
 };
 
 export type OptionList = {
-  id: number,
-  name: string,
-  label: string
-}
+  id: number;
+  name: string;
+  label: string;
+};
 
 export type InitialProjectInfo = {
-  name: string,
-  phase: string,
-  freeeProjectId: string,
-  orderPrice: number | undefined,
-  startDate: string,
-  endDate: string,
-  estimateCost: number | undefined,
-  estimatePersonMonth: number | undefined,
-  contractType: string,
-}
+  name: string;
+  phase: string;
+  freeeProjectId: string;
+  orderPrice: number | undefined;
+  startDate: string;
+  endDate: string;
+  estimateCost: number | undefined;
+  estimatePersonMonth: number | undefined;
+  contractType: string;
+};
 
 // 全体の型定義
 export type ProjectInfomation = {
@@ -35,50 +35,52 @@ export type ProjectInfomation = {
 };
 
 export type AssignmentMembers = {
-  member_id: number,
-  position: number,
-  estimate_total_person_month: number,
-  assignment_member_monthly_estimations: AssignmentMemberMonthlyEstimations[]
-}
+  member_id: number;
+  position: number;
+  estimate_total_person_month: number;
+  assignment_member_monthly_estimations: AssignmentMemberMonthlyEstimations[];
+};
 
 export type ProjectsData = {
-  name: string,
-  phase: number | undefined,
-  freee_project_code: string,
-  contract: number | undefined,
-  start_date: Date,
-  end_date: Date,
-}
+  name: string;
+  phase: number | undefined;
+  freee_project_code: string;
+  contract: number | undefined;
+  start_date: Date;
+  end_date: Date;
+};
 
 export type Estimations = {
-  order_price: number | undefined,
-  estimate_cost: number | undefined,
-  estimate_person_month: number | undefined,
-}
+  order_price: number | undefined;
+  estimate_cost: number | undefined;
+  estimate_person_month: number | undefined;
+};
 
 export type InitialAssignmentMembers = {
-  member_id : number,
-  position : number,
-  estaimate_total_person_month : number,
-  assignment_member_monthly_estimations : AssignmentMemberMonthlyEstimations[] | []
-}
+  member_id: number;
+  position: number;
+  estaimate_total_person_month: number;
+  assignment_member_monthly_estimations:
+    | AssignmentMemberMonthlyEstimations[]
+    | [];
+};
 
 export type AssignmentMemberMonthlyEstimations = {
-  target_month: string | number,
-  estimate_person_month: number,
-}
+  target_month: string | number;
+  estimate_person_month: number;
+};
 
 export type Outsource = {
-  name: string,
-  estimate_cost: number | undefined,
-  cost: number | undefined,
-}
+  name: string;
+  estimate_cost: number | undefined;
+  cost: number | undefined;
+};
 
 export type RequestBody = {
-  projects:  {
-    projects_data:  ProjectsData,
-    estimations: Estimations,
-    assignment_members: InitialAssignmentMembers[],
-    outsources: Outsource[],
-  }
-}
+  projects: {
+    projects_data: ProjectsData;
+    estimations: Estimations;
+    assignment_members: InitialAssignmentMembers[];
+    outsources: Outsource[];
+  };
+};
