@@ -405,7 +405,6 @@ const ProjectDetail: React.FC<{ id?: string }> = () => {
                 buttonText="メンバーの追加"
                 handleClick={handleAddMemberInfoRow}
               />
-              <button onClick={() => console.log(assignmentMembersInfo)}>確認</button>
               <Spacer height="10px"></Spacer>
             </div>
           </div>
