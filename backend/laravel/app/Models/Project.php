@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Carbon;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class Project extends Model
 {
@@ -91,6 +92,9 @@ class Project extends Model
         // 残工数
         $remainingPersonMonth = $this->remainingPersonMonth();
         // 着地原価 = 実績原価/実績工数*残工数 + 実績原価
+        if($achievementPersonMonth * $remainingPersonMonth + $achievementCost == 0){
+            throw new ModelNotFoundException('必要な情報が登録されていません');
+        }
         $forecastCost = $achievementCost / $achievementPersonMonth * $remainingPersonMonth + $achievementCost;
 
         return round($forecastCost, 0);

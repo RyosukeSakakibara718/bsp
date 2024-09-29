@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\HomeResource;
-use App\Models\Project;
+use App\UseCases\HomeAction;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 
@@ -12,9 +12,9 @@ class HomeController extends Controller
     /**
      * Handle the incoming request.
      */
-    public function __invoke(Request $request, string $id)
+    public function __invoke(HomeAction $action, Request $request, string $id)
     {
-        $project = Project::findOrFail($id);
+        $project = $action($id);
 
         return response()->json(HomeResource::make($project));
     }
