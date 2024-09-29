@@ -3,12 +3,12 @@ import { Routes, Route, Navigate } from "react-router-dom";
 
 import { sampleProjectData } from "./data/projects";
 import Home from "./pages/home/components/templates";
-import Login from "./pages/login/components/templates/Login";
-import MemberTable from "./pages/memberManagement/components/templates/MemberTable";
+import Login from "./pages/login/components/templates";
+import MemberTable from "./pages/memberManagement/components/templates";
 import ProjectDetail from "./pages/projectManagement/components/templates/ProjectDetail";
 import ProjectManagement from "./pages/projectManagement/components/templates/ProjectManagement";
-import ProjectsAchievements from "./pages/projectsAchievements/components/templates/ProjectsAchievements";
-import UserManagement from "./pages/userManagement/components/templates/UserManagement";
+import ProjectsAchievements from "./pages/projectsAchievements/components/templates";
+import UserManagement from "./pages/userManagement/components/templates";
 
 const AppRoutes: React.FC = () => {
   return (
