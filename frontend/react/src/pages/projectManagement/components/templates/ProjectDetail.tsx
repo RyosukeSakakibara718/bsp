@@ -10,19 +10,20 @@ import {
   initialOutsourcingInfo,
   OutsourceColumns,
   initialProjectInfo,
-  requestBody
+  requestBody,
 } from "../../../../data/projectDetail";
+import { getMemberList } from "../../hooks/projectDetail";
+import MemberInfo from "../organisms/MemberInfo";
+import OutsourcingCost from "../organisms/OutsourcingCost";
+import ProjectInfo from "../organisms/ProjectInfo";
+
 import type {
   InitialAssignmentMembers,
   OptionList,
   Outsource,
   ProjectInfomation,
-  RequestBody
+  RequestBody,
 } from "../../../../types/project";
-import { getMemberList } from "../../hooks/projectDetail";
-import ProjectInfo from "../organisms/ProjectInfo";
-import MemberInfo from "../organisms/MemberInfo";
-import OutsourcingCost from "../organisms/OutsourcingCost";
 
 /**
  * 案件の登録・編集を表を行うテーブルコンポーネント。
@@ -52,7 +53,7 @@ const ProjectDetail: React.FC<{ id?: string }> = () => {
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
   ) => {
     const { name, value } = e.target;
-  
+
     // projects_data フィールドか estimations フィールドかを区別する
     if (name in projectInfo.projects_data) {
       setProjectInfo(prevState => ({
@@ -60,11 +61,11 @@ const ProjectDetail: React.FC<{ id?: string }> = () => {
         projects_data: {
           ...prevState.projects_data,
           [name]:
-            name === 'start_date' || name === 'end_date'
+            name === "start_date" || name === "end_date"
               ? new Date(value) // 日付を Date オブジェクトに変換
-              : name === 'phase' || name === 'contract'
-              ? Number(value)    // 数値フィールドの場合は Number 型に変換
-              : value,           // それ以外はそのまま
+              : name === "phase" || name === "contract"
+                ? Number(value) // 数値フィールドの場合は Number 型に変換
+                : value, // それ以外はそのまま
         },
       }));
     } else if (name in projectInfo.estimations) {
@@ -107,12 +108,13 @@ const ProjectDetail: React.FC<{ id?: string }> = () => {
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
   ) => {
     const { name, value } = e.target;
-  
+
     setAssignmentMembersInfo(prevState =>
       prevState.map((item, i) => {
         if (i === index) {
           // member_id もしくは position が数値の場合、適切に型変換を行う
-          const newValue = name === 'member_id' || name === 'position' ? Number(value) : value;
+          const newValue =
+            name === "member_id" || name === "position" ? Number(value) : value;
           return { ...item, [name]: newValue };
         }
         return item;
@@ -135,7 +137,9 @@ const ProjectDetail: React.FC<{ id?: string }> = () => {
    */
   const deleteAssignmentMembersInfoRow = (index: number, member_id: number) => {
     setAssignmentMembersInfo(prevRows =>
-      prevRows.filter((item, i) => !(i === index && item.member_id === member_id))
+      prevRows.filter(
+        (item, i) => !(i === index && item.member_id === member_id),
+      ),
     );
   };
 
@@ -147,13 +151,13 @@ const ProjectDetail: React.FC<{ id?: string }> = () => {
     setAssignmentMembersInfo(prevState =>
       prevState.map((member, index) => {
         if (index !== memberIndex) return member; // 他のメンバーのデータはそのまま保持
-  
+
         // 現在のメンバーの月別データを更新
         const existingEstimationIndex =
           member.assignment_member_monthly_estimations.findIndex(
             estimation => estimation.target_month === monthIndex,
           );
-  
+
         let updatedEstimations;
         if (existingEstimationIndex !== -1) {
           // すでに同じ月のデータがある場合は更新
@@ -173,13 +177,13 @@ const ProjectDetail: React.FC<{ id?: string }> = () => {
             },
           ];
         }
-  
+
         // 合計値を計算して estimate_total_person_month を更新
         const totalPersonMonth = updatedEstimations.reduce(
           (sum, estimation) => sum + estimation.estimate_person_month,
           0, // 初期値として 0 を指定
         );
-  
+
         // メンバーごとのデータを更新して返す
         return {
           ...member,
@@ -189,15 +193,11 @@ const ProjectDetail: React.FC<{ id?: string }> = () => {
       }),
     );
   };
-  
 
   /**
    * メンバーの工数入力の期間を案件開始日~終了日を参照して配列として作成する関数
    */
-  function getMonthsBetweenDates(
-    start_date: Date,
-    end_date: Date,
-  ): string[] {
+  function getMonthsBetweenDates(start_date: Date, end_date: Date): string[] {
     const start = new Date(start_date);
     const end = new Date(end_date);
 
@@ -269,18 +269,18 @@ const ProjectDetail: React.FC<{ id?: string }> = () => {
 
   //--------------------------------------------------------全体のstate管理--------------------------------------------------------
 
-    const [request, setRequest] = useState<RequestBody>(requestBody)
+  const [request, setRequest] = useState<RequestBody>(requestBody);
 
-    useEffect(() => {
-      setRequest({
-        projects: {
-          projects_data: projectInfo.projects_data, // 配列にラップ
-          estimations: projectInfo.estimations, // 配列にラップ
-          assignment_members: assignmentMembersInfo,
-          outsources: outsourcingInfo,
-        },
-      });
-    }, [projectInfo, assignmentMembersInfo, outsourcingInfo]);
+  useEffect(() => {
+    setRequest({
+      projects: {
+        projects_data: projectInfo.projects_data, // 配列にラップ
+        estimations: projectInfo.estimations, // 配列にラップ
+        assignment_members: assignmentMembersInfo,
+        outsources: outsourcingInfo,
+      },
+    });
+  }, [projectInfo, assignmentMembersInfo, outsourcingInfo]);
 
   //-----------------------------------------------------------------------------------------------------------------------------
 
@@ -289,32 +289,35 @@ const ProjectDetail: React.FC<{ id?: string }> = () => {
    */
   const handleRegister = () => {
     // 登録処理をここに記述
-    console.log('projectInfo: ', projectInfo)
-    console.log('assignmentMembersInfo: ', assignmentMembersInfo)
-    console.log('outsourcingInfo: ', outsourcingInfo)
-    console.log('request: ', request);
+    console.log("projectInfo: ", projectInfo);
+    console.log("assignmentMembersInfo: ", assignmentMembersInfo);
+    console.log("outsourcingInfo: ", outsourcingInfo);
+    console.log("request: ", request);
   };
-
 
   return (
     <>
-      <button onClick={() => console.log(projectInfo)}>確認</button>
       <Spacer height="30px" />
-      <ProjectInfo projectInfo={projectInfo} handleProjectInfoInputChange={handleProjectInfoInputChange}/>
+      <ProjectInfo
+        projectInfo={projectInfo}
+        handleProjectInfoInputChange={handleProjectInfoInputChange}
+      />
       <Spacer height="30px" />
-      <MemberInfo 
+      <MemberInfo
         assignmentMembersInfo={assignmentMembersInfo}
-        handleAssignmentMembersInfoInputChange={handleAssignmentMembersInfoInputChange}
+        handleAssignmentMembersInfoInputChange={
+          handleAssignmentMembersInfoInputChange
+        }
         handleAddMemberInfoRow={handleAddMemberInfoRow}
         memberName={memberName}
         rank={rank}
-        months={months} 
+        months={months}
         handleInputChange={handleInputChange}
-        deleteAssignmentMembersInfoRow={deleteAssignmentMembersInfoRow}        
+        deleteAssignmentMembersInfoRow={deleteAssignmentMembersInfoRow}
       />
       <Spacer height="30px" />
       {/* organisms */}
-      <OutsourcingCost 
+      <OutsourcingCost
         OutsourceColumns={OutsourceColumns}
         outsourcingInfo={outsourcingInfo}
         handleOutsourcingInfoInputChange={handleOutsourcingInfoInputChange}
@@ -323,10 +326,7 @@ const ProjectDetail: React.FC<{ id?: string }> = () => {
       />
       <Spacer height="40px"></Spacer>
       <div className="justify-center">
-        <AddButton
-          buttonText="登録する"
-          handleClick={handleRegister}
-        />
+        <AddButton buttonText="登録する" handleClick={handleRegister} />
       </div>
     </>
   );
