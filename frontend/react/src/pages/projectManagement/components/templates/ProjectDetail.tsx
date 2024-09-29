@@ -87,10 +87,16 @@ const ProjectDetail: React.FC<{ id?: string }> = () => {
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
   ) => {
     const { name, value } = e.target;
+  
     setAssignmentMembersInfo(prevState =>
-      prevState.map((item, i) =>
-        i === index ? { ...item, [name]: value } : item,
-      ),
+      prevState.map((item, i) => {
+        if (i === index) {
+          // member_id もしくは position が数値の場合、適切に型変換を行う
+          const newValue = name === 'member_id' || name === 'position' ? Number(value) : value;
+          return { ...item, [name]: newValue };
+        }
+        return item;
+      }),
     );
   };
 
@@ -100,7 +106,7 @@ const ProjectDetail: React.FC<{ id?: string }> = () => {
   const handleAddMemberInfoRow = () => {
     setAssignmentMembersInfo(prevRows => [
       ...prevRows,
-      initialAssignmentMembersInfo,
+      { ...initialAssignmentMembersInfo },
     ]);
   };
 
@@ -280,8 +286,7 @@ const ProjectDetail: React.FC<{ id?: string }> = () => {
                     <tbody>
                       {assignmentMembersInfo.map((item, index) => (
                         <>
-                          <tr>
-                            <td>
+                          <tr className="border-b border-gray-300">
                               <TableSelectField
                                 options={memberName}
                                 name={"member_id"}
@@ -291,7 +296,6 @@ const ProjectDetail: React.FC<{ id?: string }> = () => {
                                   handleAssignmentMembersInfoInputChange
                                 }
                               />
-                            </td>
                             <td>
                               <TableSelectField
                                 options={rank}
@@ -319,20 +323,20 @@ const ProjectDetail: React.FC<{ id?: string }> = () => {
                         </div>
                       ))}
                     </div>
-
                     {/* 入力部分 */}
                     <div>
                       {assignmentMembersInfo.map((member, memberIndex) => (
-                        <div key={member.member_id} className="flex py-3">
+                        <div key={member.member_id} className="flex py-3 border-b border-gray-300">
                           {months.map(monthIndex => (
                             <div
                               key={monthIndex}
                               className="w-[100px] text-center"
+                              id={member.member_id.toString()}
                             >
                               <input
                                 type="number"
                                 name="target_month"
-                                className="border border-gray-300 w-[70px] h-[30px] rounded"
+                                className="border border-gray-300 w-[70px] h-[32px] rounded"
                                 onChange={e =>
                                   handleInputChange(
                                     memberIndex,
@@ -357,7 +361,7 @@ const ProjectDetail: React.FC<{ id?: string }> = () => {
                     </thead>
                     <tbody>
                       {assignmentMembersInfo.map(info => (
-                        <tr className="py-3">
+                        <tr className="py-3 border-b border-gray-300">
                           <td>
                             <div className="h-[30px] py-3 contents">
                               <p className="font-bold">{info.estaimate_total_person_month} 人/月</p>
@@ -377,7 +381,7 @@ const ProjectDetail: React.FC<{ id?: string }> = () => {
                     </thead>
                     <tbody>
                       {assignmentMembersInfo.map((_, index) => (
-                        <tr className="py-3">
+                        <tr className="py-3 border-b border-gray-300">
                           <td>
                             <button
                               onClick={() =>
