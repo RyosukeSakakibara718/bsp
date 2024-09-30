@@ -5,10 +5,14 @@ import AddOpenButton from "../../../../components/atoms/button/AddOpenButton";
 import Spacer from "../../../../components/atoms/Spacer";
 import SearchBar from "../../../../components/molecules/SearchBar";
 import TableHeader from "../../../../components/molecules/TableHeader";
+import {
+  PROJEÇT_MANAGEMENT_TABLE_HEADER,
+  PROJEÇT_MANAGEMENT_MODAL_COLUMNS,
+} from "../../../../constants/index";
+import { getProjectsAll, deleteProjects } from "../../../../hooks/useProjects";
 import { ProjectData, ProjectDataProps } from "../../../../types/project";
 import DeleteModal from "../molecules/modal/DeleteModal";
 import TableRow from "../molecules/row/TableRow";
-import { getProjectsAll, deleteProjects } from "../../../../hooks/useProjects";
 /**
  *  案件の一覧を表示し・検索できるコンポーネント。
  *
@@ -18,8 +22,6 @@ import { getProjectsAll, deleteProjects } from "../../../../hooks/useProjects";
  * @returns {JSX.Element} ProjectManagementコンポーネントを返します。
  */
 const ProjectManagement: React.FC<ProjectDataProps> = ({ data }) => {
-  const columns = ["案件ID", "案件名", "期間", "PM", "操作"];
-  const modalColumns = ["案件ID", "案件名", "期間", "PM"];
   // TODO PMの中身実装
   const [showData, setShowData] = useState<ProjectData[]>(data);
   const [projectsData, setProjectsData] = useState<ProjectData[]>([]);
@@ -138,7 +140,7 @@ const ProjectManagement: React.FC<ProjectDataProps> = ({ data }) => {
         <div className="overflow-hidden rounded-lg shadow-md">
           <table className="min-w-full divide-y divide-gray-200">
             <thead className="bg-gray-50">
-              <TableHeader columns={columns} />
+              <TableHeader columns={PROJEÇT_MANAGEMENT_TABLE_HEADER} />
             </thead>
             <tbody className="bg-white divide-y divide-gray-200">
               {showData.map((item, index) => (
@@ -164,7 +166,7 @@ const ProjectManagement: React.FC<ProjectDataProps> = ({ data }) => {
               handleDelete={handleDeleteProjects}
               onClose={handleCloseDeleteModal}
               data={targetData}
-              columns={modalColumns}
+              columns={PROJEÇT_MANAGEMENT_MODAL_COLUMNS}            
             />
           </div>
         </div>

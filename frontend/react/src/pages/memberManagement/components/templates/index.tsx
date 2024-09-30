@@ -8,14 +8,15 @@ import EditModal from "../../../../components/molecules/modal/EditModal";
 import TableRow from "../../../../components/molecules/row/TableRow";
 import SearchBar from "../../../../components/molecules/SearchBar";
 import TableHeader from "../../../../components/molecules/TableHeader";
+import { MEMBER_MANAGEMENT_TABLE_HEADER } from "../../../../constants/index";
 import {
   getMemberAll,
   editMember,
   deleteMember,
   addMember,
 } from "../../../../hooks/useMember";
-import type { MemberData } from "../../../../types/member";
 
+import type { MemberData } from "../../../../types/member";
 /**
  * メンバーの一覧を表示し、追加・編集・削除を行うテーブルコンポーネント。
  *
@@ -35,8 +36,6 @@ const MemberTable: React.FC = () => {
 
   const [memberData, setMemberData] = useState<MemberData[]>([]);
   const [loading, setLoading] = useState(true);
-  const columns = ["メンバー名", "等級", "原価", "開始日", "操作"];
-
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [isAddModalOpen, seAddeteModalOpen] = useState(false);
@@ -251,7 +250,7 @@ const MemberTable: React.FC = () => {
         <div className="overflow-hidden rounded-lg shadow-md">
           <table className="min-w-full divide-y divide-gray-200">
             <thead className="bg-gray-50">
-              <TableHeader columns={columns} />
+              <TableHeader columns={MEMBER_MANAGEMENT_TABLE_HEADER} />
             </thead>
             <tbody className="bg-white divide-y divide-gray-200">
               {showData.map((item, index) => {
