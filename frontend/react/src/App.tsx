@@ -2,8 +2,8 @@ import React from "react";
 import "./App.css";
 import { BrowserRouter as Router } from "react-router-dom";
 
-import AppRoutes from "./routes";
 import Header from "./pages/header/components/templates/Header";
+import AppRoutes from "./routes";
 
 const App: React.FC = () => {
   return (

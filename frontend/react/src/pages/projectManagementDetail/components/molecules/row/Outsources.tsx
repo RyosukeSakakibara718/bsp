@@ -14,7 +14,7 @@ type OutsourcesProps = {
     index: number,
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
   ) => void;
-  onDelete: (index:number) => void;
+  onDelete: (index: number) => void;
 };
 
 const Outsources: React.FC<OutsourcesProps> = ({
@@ -24,7 +24,7 @@ const Outsources: React.FC<OutsourcesProps> = ({
 }) => {
   return (
     <tbody>
-      {formData.map((item,index) => (
+      {formData.map((item, index) => (
         <tr
           key={index}
           className="font-bold px-4 py-3 text-left border-b border-[#e1cfff] text-gray-800 whitespace-nowrap"
@@ -39,7 +39,7 @@ const Outsources: React.FC<OutsourcesProps> = ({
                 name="name"
                 value={item.name}
                 placeholder=""
-                onChange={(e) => handleInputChange(index, e)}
+                onChange={e => handleInputChange(index, e)}
                 className="border rounded p-2 w-fill-available text-xl"
               />
             </td>
@@ -51,7 +51,7 @@ const Outsources: React.FC<OutsourcesProps> = ({
                 name="estimate_cost"
                 value={item.estimate_cost}
                 placeholder="¥"
-                onChange={(e) => handleInputChange(index, e)}
+                onChange={e => handleInputChange(index, e)}
                 className="border rounded py-2 w-fill-available text-xl"
               />
             </td>
@@ -63,7 +63,7 @@ const Outsources: React.FC<OutsourcesProps> = ({
                 name="cost"
                 value={item.cost}
                 placeholder="¥"
-                onChange={(e) => handleInputChange(index, e)}
+                onChange={e => handleInputChange(index, e)}
                 className="border rounded py-2 w-fill-available text-xl"
               />
             </td>
