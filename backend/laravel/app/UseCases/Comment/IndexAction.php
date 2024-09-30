@@ -5,11 +5,12 @@ declare(strict_types=1);
 namespace App\UseCases\Comment;
 
 use App\Models\Comment;
+use App\Models\Project;
 
 class IndexAction
 {
-    public function __invoke(string $project_id)
+    public function __invoke(Project $project)
     {
-        return Comment::where('project_id', $project_id)->orderby('created_at', 'desc')->get();
+        return $project->comments()->orderby('created_at', 'desc')->get();
     }
 }

@@ -89,4 +89,9 @@ class Project extends Model
     {
         return $this->hasMany(Estimation::class);
     }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
 }

@@ -6,17 +6,16 @@ namespace App\UseCases\Comment;
 
 use App\Http\Requests\CommentRequest;
 use App\Models\Comment;
+use App\Models\Project;
 
 class UpdateAction
 {
-    public function __invoke(CommentRequest $request, string $id)
+    public function __invoke(CommentRequest $request, Project $project, Comment $comment)
     {
-        $comment = Comment::find($id);
-
         Comment::upsert(
             [
                 [
-                    'id' => $id,
+                    'id' => $comment->id,
                     'project_id' => $comment->project_id,
                     'comment' => $request->input('comment'),
                     'created_at' => now(),

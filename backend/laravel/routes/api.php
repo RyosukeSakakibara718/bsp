@@ -9,5 +9,5 @@ use Illuminate\Support\Facades\Route;
 
 Route::apiResource('members', MemberController::class);
 Route::apiResource('projects', ProjectController::class);
-Route::apiResource('comments', CommentController::class);
+Route::apiResource('projects.comments', CommentController::class);
 

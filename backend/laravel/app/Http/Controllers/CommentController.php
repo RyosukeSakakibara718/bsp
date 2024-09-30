@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CommentRequest;
 use App\Http\Resources\CommentResource;
+use App\Models\Project;
+use App\Models\Comment;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
@@ -18,10 +20,9 @@ class CommentController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(IndexAction $action, Request $request):JsonResponse
+    public function index(IndexAction $action, Request $request, Project $project):JsonResponse
     {
-        $project_id = $request->input('project_id');
-        $comments = $action($project_id);
+        $comments = $action($project);
 
         return response()->json(CommentResource::collection($comments));
     }
@@ -29,9 +30,9 @@ class CommentController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(CommentRequest $request, StoreAction $action)
+    public function store(CommentRequest $request, StoreAction $action, Project $project)
     {
-        $action($request);
+        $action($request, $project);
 
         return response()->json([], 201);
     }
@@ -39,9 +40,9 @@ class CommentController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(ShowAction $action, Request $request, string $id):JsonResponse
+    public function show(ShowAction $action, Project $project, Comment $comment):JsonResponse
     {
-        $comment = $action($id);
+        $comment = $action($project, $comment);
 
         return response()->json(CommentResource::make($comment));
     }
@@ -49,9 +50,9 @@ class CommentController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(CommentRequest $request, UpdateAction $action, string $id)
+    public function update(CommentRequest $request, UpdateAction $action, Project $project, Comment $comment)
     {
-        $action($request, $id);
+        $action($request, $project, $comment);
 
         return response()->json([], 201);
     }
@@ -59,9 +60,9 @@ class CommentController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(DestroyAction $action, string $id)
+    public function destroy(DestroyAction $action, Project $project, Comment $comment): JsonResponse
     {
-        $action($id);
+        $action($project, $comment);
 
         return response()->json([], 204);
     }

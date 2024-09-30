@@ -5,12 +5,12 @@ declare(strict_types=1);
 namespace App\UseCases\Comment;
 
 use App\Models\Comment;
+use App\Models\Project;
 
 class DestroyAction
 {
-    public function __invoke(string $id)
+    public function __invoke(Project $project, Comment $comment)
     {
-        $Comment = Comment::find($id);
-        $Comment->delete();
+        $comment->delete();
     }
 }

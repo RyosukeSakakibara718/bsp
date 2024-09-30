@@ -6,13 +6,13 @@ namespace App\UseCases\Comment;
 
 use App\Http\Requests\CommentRequest;
 use App\Models\Comment;
+use App\Models\Project;
 
 class StoreAction
 {
-    public function __invoke(CommentRequest $request): void
+    public function __invoke(CommentRequest $request, Project $project): Comment
     {
-        Comment::create([
-            'project_id' => $request->input('project_id'),
+        return $project->comments()->create([
             'comment' => $request->input('comment'),
         ]);
     }

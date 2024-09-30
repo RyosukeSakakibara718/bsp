@@ -6,18 +6,13 @@ namespace App\UseCases\Comment;
 
 use App\Http\Resources\CommentResource;
 use App\Models\Comment;
+use App\Models\Project;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class ShowAction
 {
-    public function __invoke(string $id)
+    public function __invoke(Project $project, Comment $comment): Comment
     {
-        $project = Comment::find($id);
-
-        if (!$project) {
-            throw new ModelNotFoundException('Comment not found');
-        }
-
-        return new CommentResource($project);
+        return $comment;
     }
 }
