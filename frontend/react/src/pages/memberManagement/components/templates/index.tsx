@@ -8,7 +8,7 @@ import EditModal from "../../../../components/molecules/modal/EditModal";
 import TableRow from "../../../../components/molecules/row/TableRow";
 import SearchBar from "../../../../components/molecules/SearchBar";
 import TableHeader from "../../../../components/molecules/TableHeader";
-import { MEMBER_MANAGEMENT_TABLE_HEADER } from "../../../../constants/index" 
+// import { MEMBER_MANAGEMENT_TABLE_HEADER } from "../../../../constants/index" 
 import {
   getMemberAll,
   editMember,
@@ -33,6 +33,8 @@ const MemberTable: React.FC = () => {
     base_cost: 0,
     base_cost_start_date: "",
   };
+
+  const MEMBER_MANAGEMENT_TABLE_HEADER = ["メンバー名", "等級", "原価", "開始日", "操作"];
 
   const [memberData, setMemberData] = useState<MemberData[]>([]);
   const [loading, setLoading] = useState(true);
