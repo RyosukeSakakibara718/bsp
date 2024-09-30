@@ -8,7 +8,7 @@ import EditModal from "../../../../components/molecules/modal/EditModal";
 import TableRow from "../../../../components/molecules/row/TableRow";
 import SearchBar from "../../../../components/molecules/SearchBar";
 import TableHeader from "../../../../components/molecules/TableHeader";
-import { MEMBER_MANAGEMENT_TABLE_HEADER } from "../../../../constants/index" 
+import { MEMBER_MANAGEMENT_TABLE_HEADER } from "../../../../constants/index";
 import {
   getMemberAll,
   editMember,
