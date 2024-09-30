@@ -2,16 +2,22 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\CommentResource;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controller;
+use App\UseCases\Comment\IndexAction;
 
 class CommentController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(IndexAction $action, Request $request):JsonResponse
     {
-        //
+        $project_id = $request->input('project_id');
+        $comment = $action($project_id);
+        return response()->json(CommentResource::collection($comment));
     }
 
     /**
