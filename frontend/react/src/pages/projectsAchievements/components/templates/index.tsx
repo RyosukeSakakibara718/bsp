@@ -1,4 +1,4 @@
-import Spacer from "../../../../../src/components/atoms/Spacer";
+import Spacer from "../../../../components/atoms/Spacer";
 import BigSelectBox from "../../../../components/atoms/box/BigSelectBox";
 import SmallSelectBox from "../../../../components/atoms/box/SmallSelectBox";
 import AddButton from "../../../../components/atoms/button/AddButton";
