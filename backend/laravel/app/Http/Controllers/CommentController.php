@@ -9,6 +9,9 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use App\UseCases\Comment\IndexAction;
 use App\UseCases\Comment\StoreAction;
+use App\UseCases\Comment\ShowAction;
+use App\UseCases\Comment\UpdateAction;
+use App\UseCases\Comment\DestroyAction;
 
 class CommentController extends Controller
 {
@@ -18,8 +21,9 @@ class CommentController extends Controller
     public function index(IndexAction $action, Request $request):JsonResponse
     {
         $project_id = $request->input('project_id');
-        $comment = $action($project_id);
-        return response()->json(CommentResource::collection($comment));
+        $comments = $action($project_id);
+
+        return response()->json(CommentResource::collection($comments));
     }
 
     /**
@@ -28,30 +32,37 @@ class CommentController extends Controller
     public function store(CommentRequest $request, StoreAction $action)
     {
         $action($request);
+
         return response()->json([], 201);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(ShowAction $action, Request $request, string $id):JsonResponse
     {
-        //
+        $comment = $action($id);
+
+        return response()->json(CommentResource::make($comment));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(CommentRequest $request, UpdateAction $action, string $id)
     {
-        //
+        $action($request, $id);
+
+        return response()->json([], 201);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(DestroyAction $action, string $id)
     {
-        //
+        $action($id);
+
+        return response()->json([], 204);
     }
 }
