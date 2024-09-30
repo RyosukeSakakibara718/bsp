@@ -90,9 +90,9 @@ export const rank = [
 export const initialProjectInfo = {
   projects_data: {
     name: "",
-    phase: undefined,
+    phase: 1,
     freee_project_code: "",
-    contract: undefined,
+    contract: 1,
     start_date: new Date(), // 現在の日付
     end_date: new Date(new Date().setMonth(new Date().getMonth() + 20)),
   },
