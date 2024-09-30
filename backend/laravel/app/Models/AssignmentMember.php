@@ -7,6 +7,41 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
+/**
+ * 
+ *
+ * @property int $id
+ * @property int $project_id
+ * @property int $member_id
+ * @property int $position 役職
+ * @property string $estimate_total_person_month 総見積人月
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @property-read mixed $position_name
+ * @property-read \App\Models\Member $member
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\AssignmentMemberMonthlyEstimation> $monthlyEstimations
+ * @property-read int|null $monthly_estimations_count
+ * @property-read \App\Models\Project $project
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\WorkCost> $workCosts
+ * @property-read int|null $work_costs_count
+ * @method static \Database\Factories\AssignmentMemberFactory factory($count = null, $state = [])
+ * @method static \Illuminate\Database\Eloquent\Builder|AssignmentMember newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|AssignmentMember newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|AssignmentMember onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|AssignmentMember query()
+ * @method static \Illuminate\Database\Eloquent\Builder|AssignmentMember whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|AssignmentMember whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|AssignmentMember whereEstimateTotalPersonMonth($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|AssignmentMember whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|AssignmentMember whereMemberId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|AssignmentMember wherePosition($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|AssignmentMember whereProjectId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|AssignmentMember whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|AssignmentMember withTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|AssignmentMember withoutTrashed()
+ * @mixin \Eloquent
+ */
 class AssignmentMember extends Model
 {
     use HasFactory, SoftDeletes;
