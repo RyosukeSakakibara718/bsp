@@ -38,28 +38,32 @@ export const projectsInitialData = {
   contract: 0,
   start_date: new Date(), // 現在の日付
   end_date: new Date(new Date().setMonth(new Date().getMonth() + 1)),
-}
+};
 
 export const estimationsInitialData = {
   order_price: 0,
   estimate_cost: 0,
   estimate_person_month: 0,
-}
-export const assignmentMemberMonthlyEstimationsInitialData = [{
-  target_month: 0,
-  estimate_person_month: 0,
-}]
+};
+export const assignmentMemberMonthlyEstimationsInitialData = [
+  {
+    target_month: 0,
+    estimate_person_month: 0,
+  },
+];
 
-export const assignmentMembersInitialData = [{
-  member_id: 0,
-  position: 0,
-  estimate_total_person_month: 0,
-  assignment_member_monthly_estimations: assignmentMemberMonthlyEstimationsInitialData
-}]
-
+export const assignmentMembersInitialData = [
+  {
+    member_id: 0,
+    position: 0,
+    estimate_total_person_month: 0,
+    assignment_member_monthly_estimations:
+      assignmentMemberMonthlyEstimationsInitialData,
+  },
+];
 
 export const outsourcingInitialData = {
   name: "",
   estimate_cost: 0,
   cost: 0,
-}
+};

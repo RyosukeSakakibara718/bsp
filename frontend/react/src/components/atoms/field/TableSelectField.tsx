@@ -1,13 +1,16 @@
 import React from "react";
-import { MemberList } from "../../../types/project";
+import { OptionList } from "../../../types/project";
 
 // コンポーネントのプロパティの型定義
 type TableSelectFieldProps = {
-  options: MemberList[]; // 'options' として PhaseOption 型の配列を指定
+  options: OptionList[]; // 'options' として PhaseOption 型の配列を指定
   name: string;
   value: number | string;
-  index: number
-  handleInputChange: (index: number, e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void;
+  index: number;
+  handleInputChange: (
+    index: number,
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
+  ) => void;
 };
 
 // TableSelectColumn コンポーネント
@@ -26,7 +29,7 @@ const TableSelectField: React.FC<TableSelectFieldProps> = ({
       <select
         name={name}
         value={value}
-        onChange={(e) =>handleInputChange(index, e)}
+        onChange={e => handleInputChange(index, e)}
         className="border rounded  w-2/3 h-[30px]"
         style={{ flex: 4 }}
       >

@@ -45,19 +45,19 @@ const ProjectManagement: React.FC<ProjectDataProps> = ({ data }) => {
         console.error("Error fetching member data:", error);
         setLoading(false); // エラーが発生してもローディングを終了
       });
-  }
+  };
 
   useEffect(() => {
-    getProjectsData()
+    getProjectsData();
   }, []);
 
   const handleDeleteProjects = () => {
-    if (targetData){
+    if (targetData) {
       deleteProjects(targetData.id)
         .then(response => {
           console.log("Edit successful:", response);
           // 削除が変更したら再度取得し直し、再レンダリングするようにする
-          getProjectsData()
+          getProjectsData();
         })
         .catch(error => {
           console.error("Error during edit:", error);
@@ -81,7 +81,7 @@ const ProjectManagement: React.FC<ProjectDataProps> = ({ data }) => {
    * @param {number} id - 削除対象のメンバーID
    */
   const handleOpenDeleteModal = (id: number) => {
-    setTargetData(projectsData[id])
+    setTargetData(projectsData[id]);
     setIsDeleteModalOpen(true);
   };
 
@@ -143,7 +143,7 @@ const ProjectManagement: React.FC<ProjectDataProps> = ({ data }) => {
               <TableHeader columns={PROJEÇT_MANAGEMENT_TABLE_HEADER} />
             </thead>
             <tbody className="bg-white divide-y divide-gray-200">
-              {showData.map((item,index) => (
+              {showData.map((item, index) => (
                 <TableRow
                   id={item.id}
                   name={item.name}
@@ -166,7 +166,7 @@ const ProjectManagement: React.FC<ProjectDataProps> = ({ data }) => {
               handleDelete={handleDeleteProjects}
               onClose={handleCloseDeleteModal}
               data={targetData}
-              columns={PROJEÇT_MANAGEMENT_MODAL_COLUMNS}
+              columns={PROJEÇT_MANAGEMENT_MODAL_COLUMNS}            
             />
           </div>
         </div>
