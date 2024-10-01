@@ -81,12 +81,6 @@ export const projectDetailData = {
   },
 };
 
-export const rank = [
-  { id: 1, name: "PM", label: "PM" },
-  { id: 2, name: "PL", label: "PL" },
-  { id: 3, name: "PG", label: "PG" },
-];
-
 export const initialProjectInfo = {
   projects_data: {
     name: "",
@@ -124,23 +118,6 @@ export const initialOutsourcingInfo = {
   estimate_cost: undefined,
   cost: undefined,
 };
-
-export const phases = [
-  { id: 1, label: "要件定義" },
-  { id: 2, label: "基本設計" },
-  { id: 3, label: "詳細設計" },
-  { id: 4, label: "製造" },
-  { id: 5, label: "単体試験" },
-  { id: 6, label: "結合試験" },
-  { id: 7, label: "総合試験" },
-  { id: 8, label: "リリース" },
-  { id: 9, label: "終了" },
-];
-
-export const contractType = [
-  { id: 1, label: "準委任契約" },
-  { id: 2, label: "請負契約" },
-];
 
 export const OutsourceColumns = [
   { label: "内容", width: 400 },

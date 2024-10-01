@@ -1,13 +1,11 @@
-import React, { useState } from "react";
-import { phases, contractType } from "../../../../../data/projectDetail";
-
-import SelectBoxColumn from "../../../../../components/atoms/column/inputBox/SelectBoxColumn";
-import InputStringBoxColumn from "../../../../../components/atoms/column/inputBox/InputStringBoxColumn";
-import InputNumberBoxColumn from "../../../../../components/atoms/column/inputBox/InputNumberBoxColumn";
-import InputDateBoxColumn from "../../../../../components/atoms/column/inputBox/InputDateBoxColumn";
+import React from "react";
 
 import ProjectInfoRow from "./ProjectInfoRow";
-
+import InputDateBoxColumn from "../../../../../components/atoms/column/inputBox/InputDateBoxColumn";
+import InputNumberBoxColumn from "../../../../../components/atoms/column/inputBox/InputNumberBoxColumn";
+import InputStringBoxColumn from "../../../../../components/atoms/column/inputBox/InputStringBoxColumn";
+import SelectBoxColumn from "../../../../../components/atoms/column/inputBox/SelectBoxColumn";
+import { PHASES, CONTRACT_TYPE } from "../../../../../constants";
 import { ProjectInfomation } from "../../../../../types/project";
 
 type ProjectProps = {
@@ -34,7 +32,7 @@ const Project: React.FC<ProjectProps> = ({ formData, handleInputChange }) => {
               name="phase"
               value={formData.projects_data.phase}
               handleInputChange={handleInputChange}
-              array={phases}
+              array={PHASES}
             />
           </ProjectInfoRow>
           <ProjectInfoRow>
@@ -88,7 +86,7 @@ const Project: React.FC<ProjectProps> = ({ formData, handleInputChange }) => {
               name="contract"
               value={formData.projects_data.contract}
               handleInputChange={handleInputChange}
-              array={contractType}
+              array={CONTRACT_TYPE}
             />
           </ProjectInfoRow>
         </tbody>

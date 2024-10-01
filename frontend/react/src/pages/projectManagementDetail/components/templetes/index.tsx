@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
 
-import Spacer from "../../../../../src/components/atoms/Spacer";
 import AddButton from "../../../../components/atoms/button/AddButton";
+import Spacer from "../../../../components/atoms/Spacer";
+import { RANK } from "../../../../constants/index";
 import {
-  rank,
   initialAssignmentMembersArray,
   initialAssignmentMembersInfo,
   initialOutsourcingInfo,
@@ -14,7 +13,7 @@ import {
 } from "../../../../data/projectDetail";
 import { getMemberList } from "../../hooks/projectDetail";
 import MemberInfo from "../organisms/MemberInfo";
-import OutsourcingCost from "../organisms/OutsourcingCost";
+import OutsourcingInfo from "../organisms/OutsourcingInfo";
 import ProjectInfo from "../organisms/ProjectInfo";
 
 import type {
@@ -35,7 +34,7 @@ import type {
  */
 
 const ProjectDetail: React.FC<{ id?: string }> = () => {
-  const { id } = useParams<{ id?: string }>();
+  // const { id } = useParams<{ id?: string }>();
 
   // TODO詳細ページ、idがあれば編集で、なければ、create
 
@@ -245,7 +244,15 @@ const ProjectDetail: React.FC<{ id?: string }> = () => {
     const { name, value } = e.target;
     setOutsourcingInfo(prevState =>
       prevState.map((item, i) =>
-        i === index ? { ...item, [name]: value } : item,
+        i === index
+          ? {
+              ...item,
+              [name]:
+                name === "estimate_cost" || name === "cost"
+                  ? parseFloat(value) || 0
+                  : value,
+            }
+          : item,
       ),
     );
   };
@@ -310,14 +317,14 @@ const ProjectDetail: React.FC<{ id?: string }> = () => {
         }
         handleAddMemberInfoRow={handleAddMemberInfoRow}
         memberName={memberName}
-        rank={rank}
+        rank={RANK}
         months={months}
         handleInputChange={handleInputChange}
         deleteAssignmentMembersInfoRow={deleteAssignmentMembersInfoRow}
       />
       <Spacer height="30px" />
       {/* organisms */}
-      <OutsourcingCost
+      <OutsourcingInfo
         OutsourceColumns={OutsourceColumns}
         outsourcingInfo={outsourcingInfo}
         handleOutsourcingInfoInputChange={handleOutsourcingInfoInputChange}

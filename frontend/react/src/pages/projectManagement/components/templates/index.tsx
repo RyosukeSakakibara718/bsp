@@ -13,6 +13,7 @@ import { getProjectsAll, deleteProjects } from "../../../../hooks/useProjects";
 import { ProjectData, ProjectDataProps } from "../../../../types/project";
 import DeleteModal from "../molecules/modal/DeleteModal";
 import TableRow from "../molecules/row/TableRow";
+
 /**
  *  案件の一覧を表示し・検索できるコンポーネント。
  *
@@ -166,7 +167,7 @@ const ProjectManagement: React.FC<ProjectDataProps> = ({ data }) => {
               handleDelete={handleDeleteProjects}
               onClose={handleCloseDeleteModal}
               data={targetData}
-              columns={PROJEÇT_MANAGEMENT_MODAL_COLUMNS}            
+              columns={PROJEÇT_MANAGEMENT_MODAL_COLUMNS}
             />
           </div>
         </div>

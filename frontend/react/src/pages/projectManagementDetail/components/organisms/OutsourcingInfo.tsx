@@ -5,7 +5,7 @@ import { Outsource } from "../../../../types/project";
 import Outsources from "../molecules/row/Outsources";
 import OutsourcesHead from "../molecules/row/OutsourcesHeader";
 
-type OutsourcingCostProps = {
+type OutsourcingInfoProps = {
   OutsourceColumns: Array<{ label: string; width: number }>;
   outsourcingInfo: Outsource[];
   handleOutsourcingInfoInputChange: (
@@ -16,7 +16,7 @@ type OutsourcingCostProps = {
   handleAddOutsourcingInfoRow: () => void;
 };
 
-const OutsourcingCost: React.FC<OutsourcingCostProps> = ({
+const OutsourcingInfo: React.FC<OutsourcingInfoProps> = ({
   OutsourceColumns,
   outsourcingInfo,
   handleOutsourcingInfoInputChange,
@@ -47,4 +47,4 @@ const OutsourcingCost: React.FC<OutsourcingCostProps> = ({
   );
 };
 
-export default OutsourcingCost;
+export default OutsourcingInfo;
