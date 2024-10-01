@@ -1,6 +1,16 @@
 import MonthNavigator from "../../../../../components/atoms/navigator/MonthNavigator";
 import TableCaptionRow from "../../../../../components/molecules/row/TableCaptionRow";
-const ProjectsAchieveHeader = () => {
+
+// index.tsxでも使ってる
+
+type ProjectsAchieveHeaderProps = {
+  between: {
+    id: number;
+    label : string;
+  }
+}
+
+const ProjectsAchieveHeader: React.FC<ProjectsAchieveHeaderProps> = ({between}) => {
   /**
    * テーブルヘッダーを構成するセルコンポーネント
    *
@@ -17,7 +27,7 @@ const ProjectsAchieveHeader = () => {
           <th>氏名</th>
           <th>役職</th>
           <th className="border-r border-gray-300 px-4 py-2">原価</th>
-          <MonthNavigator />
+          <MonthNavigator between={between}/>
         </tr>
       </thead>
     </>
