@@ -1,9 +1,9 @@
 import React from "react";
 
 import ProjectInfoRow from "./ProjectInfoRow";
-import InputDateBoxColumn from "../../../../../components/atoms/column/inputBox/InputDateBoxColumn";
-import InputNumberBoxColumn from "../../../../../components/atoms/column/inputBox/InputNumberBoxColumn";
-import InputStringBoxColumn from "../../../../../components/atoms/column/inputBox/InputStringBoxColumn";
+import InputDateColumn from "../../../../../components/atoms/column/inputBox/InputDateColumn";
+import InputNumberColumn from "../../../../../components/atoms/column/inputBox/InputNumberColumn";
+import InputStringColumn from "../../../../../components/atoms/column/inputBox/InputStringColumn";
 import SelectBoxColumn from "../../../../../components/atoms/column/inputBox/SelectBoxColumn";
 import { PHASES, CONTRACT_TYPE } from "../../../../../constants";
 import { ProjectInfomation } from "../../../../../types/project";
@@ -21,7 +21,7 @@ const Project: React.FC<ProjectProps> = ({ formData, handleInputChange }) => {
       <table className="min-w-full">
         <tbody>
           <ProjectInfoRow>
-            <InputStringBoxColumn
+            <InputStringColumn
               title={"案件名"}
               name="name"
               value={formData.projects_data.name}
@@ -36,13 +36,13 @@ const Project: React.FC<ProjectProps> = ({ formData, handleInputChange }) => {
             />
           </ProjectInfoRow>
           <ProjectInfoRow>
-            <InputStringBoxColumn
+            <InputStringColumn
               title={"freeeプロジェクトID"}
               name="freee_project_code"
               value={formData.projects_data.freee_project_code}
               handleInputChange={handleInputChange}
             />
-            <InputNumberBoxColumn
+            <InputNumberColumn
               title={"受注額"}
               name="order_price"
               value={formData.estimations.order_price}
@@ -51,13 +51,13 @@ const Project: React.FC<ProjectProps> = ({ formData, handleInputChange }) => {
             />
           </ProjectInfoRow>
           <ProjectInfoRow>
-            <InputDateBoxColumn
+            <InputDateColumn
               title={"開始日"}
               name="start_date"
               value={formData.projects_data.start_date}
               handleInputChange={handleInputChange}
             />
-            <InputNumberBoxColumn
+            <InputNumberColumn
               title={"見積原価"}
               name="estimate_cost"
               value={formData.estimations.estimate_cost}
@@ -66,13 +66,13 @@ const Project: React.FC<ProjectProps> = ({ formData, handleInputChange }) => {
             />
           </ProjectInfoRow>
           <ProjectInfoRow>
-            <InputDateBoxColumn
+            <InputDateColumn
               title={"終了日"}
               name="end_date"
               value={formData.projects_data.end_date}
               handleInputChange={handleInputChange}
             />
-            <InputNumberBoxColumn
+            <InputNumberColumn
               title={"見積工数"}
               name="estimate_person_month"
               value={formData.estimations.estimate_person_month}

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-type AddTableRowColumnProps = {
+type AddTableColumnProps = {
   width?: string;
   onChange: (value: string | number) => void;
   inputType?: string;
@@ -9,12 +9,12 @@ type AddTableRowColumnProps = {
 /**
  * 追加モーダルに表示するメンバー情報の行を構成するセルコンポーネント。
  *
- * @param {AddTableRowColumnProps} props - セルコンポーネントに渡されるプロパティオブジェクト。
+ * @param {AddTableColumnProps} props - セルコンポーネントに渡されるプロパティオブジェクト。
  * @param {string} props.width - セルの幅。
  * @param {function} props.onChange - 値が変更されるごとにaddModalコンポーネントで管理するstateを変更する関数。
  * @returns {JSX.Element} 追加モーダルで表示される行を構成するセルを返します。
  */
-const AddTableRowColumn: React.FC<AddTableRowColumnProps> = ({
+const AddTableColumn: React.FC<AddTableColumnProps> = ({
   width,
   onChange,
   inputType,
@@ -56,4 +56,4 @@ const AddTableRowColumn: React.FC<AddTableRowColumnProps> = ({
   );
 };
 
-export default AddTableRowColumn;
+export default AddTableColumn;

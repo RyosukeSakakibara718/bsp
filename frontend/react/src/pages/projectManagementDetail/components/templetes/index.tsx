@@ -323,7 +323,6 @@ const ProjectDetail: React.FC<{ id?: string }> = () => {
         deleteAssignmentMembersInfoRow={deleteAssignmentMembersInfoRow}
       />
       <Spacer height="30px" />
-      {/* organisms */}
       <OutsourcingInfo
         OutsourceColumns={OutsourceColumns}
         outsourcingInfo={outsourcingInfo}
