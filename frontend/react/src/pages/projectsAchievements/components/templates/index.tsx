@@ -17,7 +17,7 @@ const ProjectsAchievements = () => {
   const [currentPage, setCurrentPage] = useState(0);
   const Period = getDatesBetween(
     projectDetailData.projects.projects_data.start_date,
-    projectDetailData.projects.projects_data.end_date,
+    projectDetailData.projects.projects_data.end_date
   );
   const itemsPerPage = 7;
   const startIndex = currentPage * itemsPerPage;
