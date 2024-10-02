@@ -1,7 +1,4 @@
-type OptionList = {
-  id: number;
-  label: string;
-}
+import { OptionList } from "../../../types/project";
 
 type SmallSelectBoxProps = {
   optionArray: OptionList[];

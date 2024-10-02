@@ -1,3 +1,5 @@
+import { OptionList } from "../types/project";
+
 export const PROJEÇT_MANAGEMENT_TABLE_HEADER = [
   "案件ID",
   "案件名",
@@ -51,4 +53,10 @@ export const PHASES = [
 export const CONTRACT_TYPE = [
   { id: 1, label: "準委任契約" },
   { id: 2, label: "請負契約" },
+];
+
+export const OPTIONS_ARRAY: OptionList[] = [
+  { id: 1, name: "日毎", label: "日毎" },
+  { id: 2, name: "週毎", label: "週毎" },
+  { id: 3, name: "月毎", label: "月毎" },
 ];

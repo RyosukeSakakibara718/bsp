@@ -84,3 +84,39 @@ export type RequestBody = {
     outsources: Outsource[];
   };
 };
+
+export type WorkCost = {
+  daily_cost: number;
+  work_time: number;
+  work_date: string;
+};
+
+export type optionsArrayProps = {
+  id: number;
+  label: string;
+}
+
+export type AssignmentMember = {
+  assignment_member_id: number;
+  position: number;
+  base_cost: number;
+  work_costs: WorkCost[]; // never[]ではなく、適切な型にする
+};
+
+export type ProjectAchievementsData = {
+  projects: {
+    projects_id: number;
+    assignment_members: AssignmentMember[];
+  };
+};
+
+export type ProjectsAchievementsMember = {
+  assignment_member_id: number;
+  position: number;
+  base_cost: number;
+  work_costs: {
+    daily_cost: number;
+    work_time: number;
+    work_date: string;
+  }[];
+};

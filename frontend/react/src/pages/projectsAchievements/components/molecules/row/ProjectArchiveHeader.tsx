@@ -8,9 +8,15 @@ type ProjectsAchieveHeaderProps = {
     id: number;
     label : string;
   }
+  showPeriod: {
+    dayOfWeek: number;
+    day: string;
+  }[]
+  handleNext: () => void;
+  handlePrev: () => void;
 }
 
-const ProjectsAchieveHeader: React.FC<ProjectsAchieveHeaderProps> = ({between}) => {
+const ProjectsAchieveHeader: React.FC<ProjectsAchieveHeaderProps> = ({between, showPeriod, handleNext, handlePrev}) => {
   /**
    * テーブルヘッダーを構成するセルコンポーネント
    *
@@ -20,17 +26,15 @@ const ProjectsAchieveHeader: React.FC<ProjectsAchieveHeaderProps> = ({between}) 
    */
 
   return (
-    <>
       <thead className="w-full">
         <TableCaptionRow value={"案件実績"} />
         <tr>
           <th>氏名</th>
           <th>役職</th>
           <th className="border-r border-gray-300 px-4 py-2">原価</th>
-          <MonthNavigator between={between}/>
+          <MonthNavigator between={between} showPeriod={showPeriod} handleNext={handleNext} handlePrev={handlePrev}/>
         </tr>
       </thead>
-    </>
   );
 };
 export default ProjectsAchieveHeader;
