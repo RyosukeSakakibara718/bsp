@@ -7,20 +7,11 @@ import BigSelectBox from "../../../../components/atoms/box/BigSelectBox";
 import ProjectArchiveBody from "../molecules/row/ProjectArchiveBody";
 import { projectDetailData } from "../../../../data/projectDetail";
 import { sampleProjectArchivementsData, ProjectName, initialBetween } from "../../../../data/projectsArchivements";
-import { countBusinessDaysInMonth, getDatesBetween } from "../../../../utils/projectsAchievements";
+import { countBusinessDaysInMonth } from "../../../../utils/projectsAchievements";
 import { OPTIONS_ARRAY } from "../../../../constants";
 import { optionsArrayProps, ProjectAchievementsData, WorkCost } from "../../../../types/project";
 
 const ProjectsAchievements = () => {
-  /**
-   * 特定の案件のメンバー別の日単位の日単位の稼働時間の登録/編集ができる。
-   * 特定の案件のメンバー別の日/週/月単位の稼働時間と金額を確認できる。
-   *
-   * @component
-   * @param {ProjectsAchievements} props - コンポーネントに渡されるプロパティ。
-   * @returns {JSX.Element} ProjectsAchievementsコンポーネントを返します。
-   */
-  
   const [projectData, setProjectData] = useState<ProjectAchievementsData>(sampleProjectArchivementsData);
   const [between, setBetween] = useState<optionsArrayProps>(initialBetween);
   const [currentPage, setCurrentPage] = useState(0);
@@ -93,7 +84,7 @@ const ProjectsAchievements = () => {
       };
     });
   };  
-  
+
   // 期間セレクトボックスの値を管理するstateを更新する関数
   const handleChangeBetween = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const selectedId = Number(e.target.value);
@@ -175,11 +166,57 @@ const ProjectsAchievements = () => {
     return result;
   }
 
+  /**
+ * 指定された開始日から終了日までの全ての日付と曜日を取得する関数。
+ * 日曜日から土曜日を 1 〜 7 として、それに対応する曜日とフォーマットされた日付を配列で返す。
+ * 開始日の前の日曜日も含めて配列に追加される。
+ */
+  function getDatesBetween(startDate: Date, endDate: Date) {
+    let start = new Date(startDate);
+    const end = new Date(endDate);
+    // 1を日曜日としてそこから7を土曜日と見立てる
+    const daysOfWeek = [1, 2, 3, 4, 5, 6, 7];
+    let result = [];
+    let firstDayOfWeek = daysOfWeek[start.getDay()];
+  
+    if (firstDayOfWeek !== 1) {
+      let previousSunday = new Date(start);
+      previousSunday.setDate(start.getDate() - (firstDayOfWeek - 1));
+  
+      for (
+        let date = new Date(previousSunday);
+        date < start;
+        date.setDate(date.getDate() + 1)
+      ) {
+        let dayOfWeek = daysOfWeek[date.getDay()];
+        let formattedDate = `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}`;
+        result.push({
+          dayOfWeek: dayOfWeek,
+          day: formattedDate,
+        });
+      }
+    }
+  
+    for (
+      let date = new Date(start);
+      date <= end;
+      date.setDate(date.getDate() + 1)
+    ) {
+      let dayOfWeek = daysOfWeek[date.getDay()];
+      let formattedDate = `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}`;
+      result.push({
+        dayOfWeek: dayOfWeek,
+        day: formattedDate,
+      });
+    }
+  
+    return result;
+  }
+
   return (
     <>
       <Spacer height="40px" />
       <div className="text-left">
-        {/* BigSelectBox を使用する場合はここに記述 */}
         <BigSelectBox optionArray={ProjectName} />
       </div>
       <Spacer height="20px" />
@@ -200,7 +237,7 @@ const ProjectsAchievements = () => {
               showPeriod={showPeriod}
               member={member}
               onWorkTimeChange={handleWorkCostChange}
-          />
+            />
           ))}
         </table>
       </div>

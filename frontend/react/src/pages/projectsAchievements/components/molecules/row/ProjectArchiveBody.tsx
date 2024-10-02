@@ -19,27 +19,29 @@ const ProjectArchiveBody: React.FC<ProjectArchiveBodyProps> = ({
   member,
   onWorkTimeChange,
 }) => {
+
   const [memberList, setMemberList] = useState<OptionList[]>();
 
   useEffect(() => {
     getMemberAll()
-      .then((members) => {
+      .then(members => {
         if (members !== null) {
           setMemberList(members);
         }
       })
-      .catch((error) => {
+      .catch(error => {
         console.error("Error fetching member data:", error);
       });
   }, []);
 
-  const memberInfo = memberList?.find((item) => item.id == member.assignment_member_id);
-  const rank = RANK.find((item) => item.id == member.position);
+  const memberInfo = memberList?.find(item => item.id == member.assignment_member_id);
+  const rank = RANK.find(item => item.id == member.position);
 
   // 金額計算を行う関数
   const calculateAmount = (workTime: number, workDate: string) => {
     const businessDays = countBusinessDaysInMonth(workDate);
-    return Math.ceil((member.base_cost / businessDays) * workTime);
+    
+    return Math.ceil((member.base_cost / businessDays) * workTime)
   };
 
   return (
@@ -49,22 +51,24 @@ const ProjectArchiveBody: React.FC<ProjectArchiveBodyProps> = ({
           <tr>
             <td>{memberInfo.name}</td>
             <td>{rank.name}</td>
-            <td>¥{member.base_cost}</td>
+            <td>¥{member.base_cost.toLocaleString()}</td> {/* base_cost もカンマ区切りに */}
             <td className="border-l border-gray-300">時間</td>
-            {showPeriod.map((item) => {
+            {showPeriod.map(item => {
               // 対応する日付のwork_costを検索
-              const workCost = member.work_costs.find((cost) => cost.work_date === item.day);
+              const workCost = member.work_costs.find(
+                cost => cost.work_date === item.day
+              );
               // work_timeがあれば表示、なければ空欄
               const workTime = workCost ? workCost.work_time : '';
-              
+
               return (
                 <td className="py-[10px]" key={item.day}>
                   <input
                     name="target_month"
                     className="border border-gray-300 w-[70%] h-[32px] rounded"
                     type="number"
-                    value={workTime}
-                    onChange={(e) => {
+                    value={workTime} // work_timeを表示
+                    onChange={e => {
                       onWorkTimeChange(
                         member.assignment_member_id,
                         item.day,
@@ -81,9 +85,11 @@ const ProjectArchiveBody: React.FC<ProjectArchiveBodyProps> = ({
             <td></td>
             <td></td>
             <td className="border-l border-gray-300">金額</td>
-            {showPeriod.map((item) => {
+            {showPeriod.map(item => {
               // 対応する日付のwork_costを再度検索し、workTimeを定義
-              const workCost = member.work_costs.find((cost) => cost.work_date === item.day);
+              const workCost = member.work_costs.find(
+                cost => cost.work_date === item.day
+              );
               // work_timeが無い場合は0に設定
               const workTime = workCost ? workCost.work_time : 0;
               // 計算した金額を呼び出す
@@ -91,7 +97,8 @@ const ProjectArchiveBody: React.FC<ProjectArchiveBodyProps> = ({
 
               return (
                 <td className="py-[10px]" key={item.day}>
-                  <p>{amount ? amount : ''}</p>
+                  {/* amountをカンマ区切りで表示 */}
+                  <p>{amount ? "¥" + amount.toLocaleString() : ""}</p>
                 </td>
               );
             })}
