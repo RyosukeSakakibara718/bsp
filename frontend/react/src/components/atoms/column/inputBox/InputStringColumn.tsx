@@ -1,15 +1,15 @@
 import React from "react";
 
-type InputDateBoxColumnProps = {
+type InputStringColumnProps = {
   title: string;
   name: string;
-  value: Date;
+  value: string;
   handleInputChange: (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
   ) => void;
 };
 
-const InputDateBoxColumn: React.FC<InputDateBoxColumnProps> = ({
+const InputStringColumn: React.FC<InputStringColumnProps> = ({
   title,
   name,
   value,
@@ -22,15 +22,15 @@ const InputDateBoxColumn: React.FC<InputDateBoxColumnProps> = ({
     <div className="w-1/2">
       <td className="w-1/2">
         <input
-          type="date"
+          type="text"
           name={name}
-          value={value.toISOString().split("T")[0]}
+          value={value}
           onChange={handleInputChange}
-          className="border rounded py-2 w-full text-xl"
+          className="border rounded p-2 w-fill-available text-xl"
         />
       </td>
     </div>
   </div>
 );
 
-export default InputDateBoxColumn;
+export default InputStringColumn;

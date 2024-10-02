@@ -1,6 +1,6 @@
 import React from "react";
 
-import AddTableRowColumn from "../../atoms/column/AddTableRowColumn";
+import AddTableColumn from "../../atoms/column/AddTableColumn";
 import TableRowColumn from "../../atoms/column/TableRowColumn";
 
 type TableRowProps = {
@@ -16,23 +16,23 @@ const AddTableRow: React.FC<TableRowProps> = ({ id, handleAddValueChange }) => {
   return (
     <tr className="bg-customPurple">
       <TableRowColumn width="5%">{id}</TableRowColumn>
-      <AddTableRowColumn
+      <AddTableColumn
         width="25%"
         onChange={value => handleAddValueChange("name", value)}
       />
-      <AddTableRowColumn
+      <AddTableColumn
         width="10%"
         onChange={value => handleAddValueChange("rank", value)}
         inputType="number"
       />
-      <AddTableRowColumn
+      <AddTableColumn
         width="25%"
         onChange={value => {
           handleAddValueChange("base_cost", value);
         }} // カンマを取り除いて数値に変換できるようにする
         inputType="number"
       />
-      <AddTableRowColumn
+      <AddTableColumn
         width="25%"
         onChange={value => handleAddValueChange("base_cost_start_date", value)}
         inputType="date"

@@ -15,6 +15,7 @@ import { getMemberList } from "../../hooks/projectDetail";
 import MemberInfo from "../organisms/MemberInfo";
 import OutsourcingInfo from "../organisms/OutsourcingInfo";
 import ProjectInfo from "../organisms/ProjectInfo";
+import { getMonthsBetweenDates } from "../../../../hooks";
 
 import type {
   InitialAssignmentMembers,
@@ -193,28 +194,6 @@ const ProjectDetail: React.FC<{ id?: string }> = () => {
     );
   };
 
-  /**
-   * メンバーの工数入力の期間を案件開始日~終了日を参照して配列として作成する関数
-   */
-  function getMonthsBetweenDates(start_date: Date, end_date: Date): string[] {
-    const start = new Date(start_date);
-    const end = new Date(end_date);
-
-    const result = [];
-
-    // startがendを超えるまでループ
-    while (start <= end) {
-      // 現在の年月を "YYYY-MM" の形式で配列に追加
-      const year = start.getFullYear();
-      const month = String(start.getMonth() + 1).padStart(2, "0"); // 月を2桁に
-      result.push(`${year}-${month}`);
-
-      // 次の月に進む
-      start.setMonth(start.getMonth() + 1);
-    }
-    return result;
-  }
-
   // 案件開始日~終了日の中に含まれる月を要素として持つ配列
   const months = getMonthsBetweenDates(
     projectInfo.projects_data.start_date,
@@ -323,7 +302,6 @@ const ProjectDetail: React.FC<{ id?: string }> = () => {
         deleteAssignmentMembersInfoRow={deleteAssignmentMembersInfoRow}
       />
       <Spacer height="30px" />
-      {/* organisms */}
       <OutsourcingInfo
         OutsourceColumns={OutsourceColumns}
         outsourcingInfo={outsourcingInfo}
