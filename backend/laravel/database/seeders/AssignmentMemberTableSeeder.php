@@ -7,6 +7,8 @@ namespace Database\Seeders;
 use App\Models\AssignmentMember;
 use App\Models\Member;
 use App\Models\Project;
+use App\Models\WorkCost;
+use App\Models\AssignmentMemberMonthlyEstimation;
 use App\Constants\PositionConstants;
 use Illuminate\Database\Seeder;
 use Carbon\Carbon;
@@ -40,12 +42,49 @@ class AssignmentMemberTableSeeder extends Seeder
             $positions = [PositionConstants::POSITION_PM, PositionConstants::POSITION_MEMBER, PositionConstants::POSITION_MGR];
 
             foreach ($randomMembers as $key => $member) {
-                AssignmentMember::create([
+                $assignmentMember = AssignmentMember::create([
                     'project_id' => $project->id,
                     'member_id' => $member->id,
                     'position' => $positions[$key],
-                    'estimate_total_person_month' => round(rand(1, 120) / 10, 2), // 1.0〜12.0のランダムな値
+                    'estimate_total_person_month' => round(rand(1, 120) / 10, 2),
                 ]);
+
+                // プロジェクトの開始日と終了日から月ごとの期間を取得
+                $startDate = Carbon::parse($project->start_date)->startOfMonth();
+                $endDate = Carbon::parse($project->end_date)->endOfMonth();
+
+                // 開始月から終了月までの各月をループ
+                $currentDate = $startDate->copy();
+                while ($currentDate->lte($endDate)) {
+                    $estimate_person_month = round(rand(1, 10) / 10, 2);
+                    $base_cost = $member->base_cost;
+                    AssignmentMemberMonthlyEstimation::create([
+                        'assignment_member_id' => $assignmentMember->id,
+                        'target_month' => $currentDate->format('Y/m'), // "YYYY/MM"の形式
+                        'estimate_person_month' => $estimate_person_month,
+                        'estimate_cost' => round($estimate_person_month*$base_cost, 0),
+                        'created_at' => Carbon::now(),
+                        'updated_at' => Carbon::now(),
+                    ]);
+                    $daysInMonth = $currentDate->daysInMonth;
+                    for ($day = 1; $day <= $daysInMonth; $day++) {
+                        $workDate = $currentDate->copy()->day($day);
+
+                        // 平日のみ作業日とする（オプション）
+                        if ($workDate->isWeekend()) {
+                            continue;
+                        }
+
+                        // WorkCostFactoryを使用してレコードを作成
+                        WorkCost::factory()->create([
+                            'project_id' => $project->id,
+                            'assignment_member_id' => $assignmentMember->id,
+                            'work_date' => $workDate->format('Y-m-d'),
+                        ]);
+                    }
+
+                    $currentDate->addMonth();
+                }
             }
         }
     }
