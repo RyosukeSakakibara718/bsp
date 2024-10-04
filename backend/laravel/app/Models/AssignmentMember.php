@@ -42,10 +42,47 @@ class AssignmentMember extends Model
         return PositionConstants::getPositionName($this->position);
     }
 
+    // 名前を取得するメソッド
+    public function getMemberName()
+    {
+        return Member::find($this->member_id)->name;
+    }
+
+    // 原価を取得するメソッド
+    public function getMemberBaseCost()
+    {
+        return Member::find($this->member_id)->base_cost;
+    }
+
     // 月次見積もりとのリレーションを追加
     public function monthlyEstimations()
     {
         return $this->hasMany(AssignmentMemberMonthlyEstimation::class, 'assignment_member_id');
     }
-}
 
+    public function estimateTotalPersonMonth()
+    {
+        $estimationsTotalPersonMonth =
+            AssignmentMemberMonthlyEstimation::where('assignment_member_id', $this->member_id)
+            ->sum('estimate_person_month');
+        return $estimationsTotalPersonMonth;
+    }
+
+    public function achievementTotalPersonMonth()
+    {
+        $totalWorkTime =
+            WorkCost::where('assignment_member_id', $this->member_id)
+            ->sum('work_time');
+        $totalWorkTime = (float) $totalWorkTime;
+        $achievementTotalPersonMonth = round($totalWorkTime / 160, 1);
+        return $achievementTotalPersonMonth;
+    }
+
+    public function achievementTotalCost()
+    {
+        $totalWorkCost =
+            WorkCost::where('assignment_member_id', $this->member_id)
+            ->sum('daily_cost');
+        return $totalWorkCost;
+    }
+}
