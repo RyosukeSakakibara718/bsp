@@ -21,8 +21,10 @@ class ProjectDetailResource extends JsonResource
             'project' => [
                 'projects_data' => [
                     'id' => $this->id,
-                    'freee_project_code' => $this->freee_project_code,
                     'name' => $this->name,
+                    'phase' => $this->phase,
+                    'freee_project_code' => $this->freee_project_code,
+                    "contract" => $this->contract,
                     'start_date' => $this->start_date->format('Y-m-d'),
                     'end_date' => $this->end_date->format('Y-m-d'),
                 ],
