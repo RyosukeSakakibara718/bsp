@@ -22,14 +22,8 @@ class ProjectAchievementResource extends JsonResource
             'position' => $this->assignmentMember->position, // 役職
             'daily_cost' => $this->daily_cost,
             'work_time' => $this->work_time,
-            'work_date' => $this->work_date->format('Y-m-d'), // 日付フォーマット調整
-            'cost' => $this->calculateCost() // コスト計算ロジックがあればここに実装
+            'work_date' => $this->work_date ? $this->work_date->format('Y-m-d') : null, // 日付フォーマット調整
         ];
     }
 
-    protected function calculateCost()
-    {
-        // コスト計算の具体的なロジックをここに実装
-        return $this->daily_cost * $this->work_time;
-    }
 }

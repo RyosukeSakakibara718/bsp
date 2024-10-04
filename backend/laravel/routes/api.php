@@ -10,4 +10,3 @@ use Illuminate\Support\Facades\Route;
 Route::apiResource('members', MemberController::class);
 Route::apiResource('projects', ProjectController::class);
 Route::apiResource('projectsAchievements', ProjectAchievementController::class);
-
