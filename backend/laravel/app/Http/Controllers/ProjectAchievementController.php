@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProjectAchievementRequest;
+use App\Http\Resources\ProjectAchievementResource;
 use App\UseCases\ProjectAchievement\UpdateAction;
 use App\UseCases\ProjectAchievement\ShowAction;
 use Illuminate\Http\JsonResponse;

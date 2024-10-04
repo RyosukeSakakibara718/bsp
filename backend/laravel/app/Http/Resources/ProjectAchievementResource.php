@@ -15,14 +15,12 @@ class ProjectAchievementResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'project_id' => $this->project_id,
-            'project_name' => $this->project->name,  // プロジェクト名
-            'assignment_member_id' => $this->assignment_member_id,
-            'member_name' => $this->assignmentMember->member->name, // メンバー名
-            'position' => $this->assignmentMember->position, // 役職
-            'daily_cost' => $this->daily_cost,
-            'work_time' => $this->work_time,
-            'work_date' => $this->work_date ? $this->work_date->format('Y-m-d') : null, // 日付フォーマット調整
+            'project' =>[
+                'id' => $this->id,
+                'assignment_members' => [
+                    AchievementAssignmentMemberResource::collection($this->assignmentMembers)
+                ]
+            ]
         ];
     }
 
