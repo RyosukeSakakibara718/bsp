@@ -1,9 +1,14 @@
 type BigSelectBoxProps = {
   optionArray: string[];
   labelText?: string;
+  handleSelectChange: (value: string) => void;
 };
 
-const BigSelectBox = ({ optionArray, labelText }: BigSelectBoxProps) => {
+const BigSelectBox = ({
+  optionArray,
+  labelText,
+  handleSelectChange,
+}: BigSelectBoxProps) => {
   /**
    * セレクトボックス
    *
@@ -20,6 +25,7 @@ const BigSelectBox = ({ optionArray, labelText }: BigSelectBoxProps) => {
         name="dateSelect"
         id="dateSelect"
         defaultValue={optionArray[0]}
+        onChange={e => handleSelectChange(e.target.value)}
       >
         {optionArray.map(value => (
           <option value={value}>{value}</option>
