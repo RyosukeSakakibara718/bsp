@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
             MemberTableSeeder::class,
             AssignmentMemberTableSeeder::class,
             CommentSeeder::class,
+            EstimationSeeder::class
         ]);
     }
 }

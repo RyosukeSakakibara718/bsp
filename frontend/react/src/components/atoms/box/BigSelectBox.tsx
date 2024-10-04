@@ -1,5 +1,8 @@
 type BigSelectBoxProps = {
-  optionArray: string[];
+  optionArray: {
+    id: number;
+    label: string;
+  }[];
   labelText?: string;
 };
 
@@ -19,7 +22,7 @@ const BigSelectBox = ({ optionArray, labelText }: BigSelectBoxProps) => {
         className="border-2 rounded-lg pl-5 pr-20 py-3 text-left"
         name="dateSelect"
         id="dateSelect"
-        defaultValue={optionArray[0]}
+        defaultValue={optionArray[0].label}
       >
         {optionArray.map(value => (
           <option value={value}>{value}</option>

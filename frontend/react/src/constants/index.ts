@@ -13,12 +13,6 @@ export const PROJEÇT_MANAGEMENT_MODAL_COLUMNS = [
   "PM",
 ];
 
-export const RANK = [
-  { value: "PM", label: "PM" },
-  { value: "PL", label: "PL" },
-  { value: "PG", label: "PG" },
-];
-
 export const MEMBER_MANAGEMENT_TABLE_HEADER = [
   "メンバー名",
   "等級",
@@ -34,4 +28,27 @@ export const HOME_MEMBERINFO_TABLE_HEADER = [
   "予定工数",
   "生産工数",
   "積算原価",
+];
+
+export const RANK = [
+  { id: 1, name: "PM", label: "PM" },
+  { id: 2, name: "PL", label: "PL" },
+  { id: 3, name: "PG", label: "PG" },
+];
+
+export const PHASES = [
+  { id: 1, label: "要件定義" },
+  { id: 2, label: "基本設計" },
+  { id: 3, label: "詳細設計" },
+  { id: 4, label: "製造" },
+  { id: 5, label: "単体試験" },
+  { id: 6, label: "結合試験" },
+  { id: 7, label: "総合試験" },
+  { id: 8, label: "リリース" },
+  { id: 9, label: "終了" },
+];
+
+export const CONTRACT_TYPE = [
+  { id: 1, label: "準委任契約" },
+  { id: 2, label: "請負契約" },
 ];

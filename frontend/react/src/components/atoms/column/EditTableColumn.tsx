@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-type EditTableRowColumnProps = {
+type EditTableColumnProps = {
   width?: string;
   initialValue: string | number;
   onChange: (value: string) => void;
@@ -10,13 +10,13 @@ type EditTableRowColumnProps = {
 /**
  * 編集モーダルに表示するメンバー情報の行を構成するセルコンポーネント。
  *
- * @param {EditTableRowColumnProps} props - セルコンポーネントに渡されるプロパティオブジェクト。
+ * @param {EditTableColumnProps} props - セルコンポーネントに渡されるプロパティオブジェクト。
  * @param {string} props.width - セルの幅。
  * @param {string | number} props.initialValue - そのセルに表示される値の初期値。
  * @param {function} props.onChange - 値が変更されるごとにEditModalコンポーネントで管理するstateを変更する関数。
  * @returns {JSX.Element} 編集モーダルで表示される行を構成するセルを返します。
  */
-const EditTableRowColumn: React.FC<EditTableRowColumnProps> = ({
+const EditTableColumn: React.FC<EditTableColumnProps> = ({
   width,
   initialValue,
   onChange,
@@ -51,4 +51,4 @@ const EditTableRowColumn: React.FC<EditTableRowColumnProps> = ({
   );
 };
 
-export default EditTableRowColumn;
+export default EditTableColumn;

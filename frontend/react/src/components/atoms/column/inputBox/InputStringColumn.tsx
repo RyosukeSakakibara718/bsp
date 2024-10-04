@@ -1,13 +1,20 @@
 import React from "react";
 
-type InputStringBoxColumnProps = {
-  title: string,
-  name: string,
-  value: string,
-  handleInputChange: (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void;
-}
+type InputStringColumnProps = {
+  title: string;
+  name: string;
+  value: string;
+  handleInputChange: (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
+  ) => void;
+};
 
-const InputStringBoxColumn: React.FC<InputStringBoxColumnProps> = ({ title, name, value, handleInputChange }) => (
+const InputStringColumn: React.FC<InputStringColumnProps> = ({
+  title,
+  name,
+  value,
+  handleInputChange,
+}) => (
   <div className="flex py-2">
     <div className="w-1/2">
       <td className="p-2 font-bold text-left">{title}</td>
@@ -26,4 +33,4 @@ const InputStringBoxColumn: React.FC<InputStringBoxColumnProps> = ({ title, name
   </div>
 );
 
-export default InputStringBoxColumn;
+export default InputStringColumn;

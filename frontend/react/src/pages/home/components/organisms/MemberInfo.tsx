@@ -1,6 +1,6 @@
 import TableCaptionRow from "../../../../components/molecules/row/TableCaptionRow";
 import TableHeader from "../../../../components/molecules/TableHeader";
-import { HOME_MEMBERINFO_TABLE_HEADER } from "../../../../constants/index"
+import { HOME_MEMBERINFO_TABLE_HEADER } from "../../../../constants/index";
 import { MemberInfoDataProps } from "../../../../types/home";
 import MemberInfoRow from "../molecules/row/MemberInfoRow";
 const MemberInfo = ({ MembersData }: MemberInfoDataProps) => {

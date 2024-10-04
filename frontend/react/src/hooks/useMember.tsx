@@ -1,6 +1,8 @@
+import { OptionList } from "../types/project";
+
 import type { MemberData } from "../types/member";
 
-export const getMemberAll = (): Promise<[]> => {
+export const getMemberAll = (): Promise<OptionList[]> => {
   return fetch("http://localhost/v1/members")
     .then(response => {
       if (!response.ok) {

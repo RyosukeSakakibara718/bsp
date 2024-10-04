@@ -1,20 +1,20 @@
-import {
-  getMemberAll,
-} from "../../../hooks/useMember"
-import { MemberList } from "../../../types/project";
+import { getMemberAll } from "../../../hooks/useMember";
+import { OptionList } from "../../../types/project";
 
 // getMemberList の型定義
 type GetMemberListProps = {
-  handleChange: (members: MemberList[]) => void;
+  handleChange: (memberName: OptionList[]) => void;
 };
 
 // getMemberList は非同期関数として定義する
-export const getMemberList = (handleChange: GetMemberListProps['handleChange']): void => {
+export const getMemberList = (
+  handleChange: GetMemberListProps["handleChange"],
+): void => {
   getMemberAll()
     .then(members => {
       const memberName = members.map(member => ({
         id: member.id,
-        value: member.name,
+        name: member.name,
         label: member.name,
       }));
       handleChange(memberName);
