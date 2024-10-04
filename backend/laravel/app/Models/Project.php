@@ -10,6 +10,46 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Carbon;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
+/**
+ * 
+ *
+ * @property int $id
+ * @property string|null $freee_project_code freeeプロジェクトコード
+ * @property string $name プロジェクト名
+ * @property int $contract 契約
+ * @property int $phase 工程
+ * @property \Illuminate\Support\Carbon $start_date プロジェクト開始日
+ * @property \Illuminate\Support\Carbon $end_date プロジェクト終了日
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\AssignmentMember> $assignmentMembers
+ * @property-read int|null $assignment_members_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Estimation> $estimations
+ * @property-read int|null $estimations_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Outsource> $outsources
+ * @property-read int|null $outsources_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\WorkCost> $workCosts
+ * @property-read int|null $work_costs_count
+ * @method static \Database\Factories\ProjectFactory factory($count = null, $state = [])
+ * @method static \Illuminate\Database\Eloquent\Builder|Project newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Project newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Project onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|Project query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Project whereContract($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Project whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Project whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Project whereEndDate($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Project whereFreeeProjectCode($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Project whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Project whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Project wherePhase($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Project whereStartDate($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Project whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Project withTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|Project withoutTrashed()
+ * @mixin \Eloquent
+ */
 class Project extends Model
 {
     use HasFactory, SoftDeletes;
@@ -183,5 +223,10 @@ class Project extends Model
 
 
         return $result;
+    }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
     }
 }
