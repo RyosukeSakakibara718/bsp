@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
-use App\Http\Resources\AssignmentMemberResource;
+use App\Http\Resources\HomeAssignmentMemberResource;
 
 class HomeResource extends JsonResource
 {
@@ -34,7 +34,7 @@ class HomeResource extends JsonResource
                 'Remaining_person_month' => $this->remainingPersonMonth(),
                 'graph' => $this->graph()
             ],
-            'assignment_members' => AssignmentMemberResource::collection($this->assignmentMembers),
+            'assignment_members' => HomeAssignmentMemberResource::collection($this->assignmentMembers),
             'outsources' => $this->outsources,
         ];
     }
