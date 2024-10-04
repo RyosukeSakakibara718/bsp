@@ -5,6 +5,9 @@ const config = {
       colors: {
         customPurple: "#eee3ff",
       },
+      width: {
+        "fill-available": "-webkit-fill-available",
+      },
     },
   },
   plugins: [],
