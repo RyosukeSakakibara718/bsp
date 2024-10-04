@@ -1,5 +1,8 @@
 type BigSelectBoxProps = {
-  optionArray: string[];
+  optionArray: {
+    id: number;
+    label: string;
+  }[];
   labelText?: string;
   handleSelectChange: (value: string) => void;
 };

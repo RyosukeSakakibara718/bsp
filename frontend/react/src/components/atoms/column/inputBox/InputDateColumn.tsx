@@ -1,20 +1,18 @@
 import React from "react";
 
-type InputNumberBoxColumnProps = {
+type InputDateColumnProps = {
   title: string;
   name: string;
-  value: number | undefined;
-  moneyFlug?: boolean;
+  value: Date;
   handleInputChange: (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
   ) => void;
 };
 
-const InputNumberBoxColumn: React.FC<InputNumberBoxColumnProps> = ({
+const InputDateColumn: React.FC<InputDateColumnProps> = ({
   title,
   name,
   value,
-  moneyFlug,
   handleInputChange,
 }) => (
   <div className="flex py-2">
@@ -24,16 +22,15 @@ const InputNumberBoxColumn: React.FC<InputNumberBoxColumnProps> = ({
     <div className="w-1/2">
       <td className="w-1/2">
         <input
-          type="number"
+          type="date"
           name={name}
-          value={value}
-          placeholder={moneyFlug ? "¥" : ""}
+          value={value.toISOString().split("T")[0]}
           onChange={handleInputChange}
-          className="border rounded py-2 w-fill-available text-xl"
+          className="border rounded py-2 w-full text-xl"
         />
       </td>
     </div>
   </div>
 );
 
-export default InputNumberBoxColumn;
+export default InputDateColumn;

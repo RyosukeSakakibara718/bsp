@@ -5,8 +5,8 @@ export const projectDetailData = {
       phase: 1,
       freee_project_code: "1111-1111-1111",
       contract: 4,
-      start_date: "2024-08-01",
-      end_date: "2030-08-30",
+      start_date:  new Date(), // 現在の日付
+      end_date: new Date(new Date().setMonth(new Date().getMonth() + 20)),
     },
     estimations: {
       order_price: 300000000,
