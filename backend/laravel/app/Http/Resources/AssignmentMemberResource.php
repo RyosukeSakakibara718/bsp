@@ -15,13 +15,10 @@ class AssignmentMemberResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'member_id' => $this->member_id,
+            'member_id' => $this->id,
             'position' => $this->position,
-            'name' => $this->getMemberName(),
-            'base_cost' => $this->getMemberBaseCost(),
-            'estimate_total_person_month' => $this->estimateTotalPersonMonth(),
-            'achievement_total_person_month' => $this->achievementTotalPersonMonth(),
-            'achievement_total_cost' => $this->achievementTotalCost(),
+            'estimate_person_month' => $this->estimate_total_person_month,
+            'assignment_member_monthly_estimations' => AssignmentMemberMonthlyEstimationResource::collection($this->monthlyEstimations),
         ];
     }
 }

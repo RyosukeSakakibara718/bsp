@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ProjectRequest;
 use App\Http\Resources\ProjectResource;
+use App\Http\Resources\ProjectDetailResource;
 use App\UseCases\Project\DestroyAction;
 use App\UseCases\Project\IndexAction;
 use App\UseCases\Project\ShowAction;
@@ -56,7 +57,7 @@ class ProjectController extends Controller
     {
         $project = $action($id);
 
-        return response()->json(ProjectResource::make($project));
+        return response()->json(ProjectDetailResource::make($project));
     }
 
     /**
