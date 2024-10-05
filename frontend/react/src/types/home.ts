@@ -1,12 +1,15 @@
+import { Key } from "react";
+
 // types/home/MemberInfoDataProps.ts
 export type Member = {
-  id: number;
-  name: string;
-  rank: number;
+  id: Key | null | undefined;
+  achievement_total_cost: number;
+  achievement_total_person_month: number;
   base_cost: number;
-  estimate_person_month: number;
-  daily_cost: number;
-  cost: number;
+  estimate_total_person_month: number;
+  member_id: number;
+  name: string;
+  position: number;
 };
 
 export type MemberInfoDataProps = {

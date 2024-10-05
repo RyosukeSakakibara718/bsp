@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from "react";
 
+import { getHomeData } from "../../../../api/home";
 import Spacer from "../../../../components/atoms/Spacer";
-import { sampleMembersData, sampleOrderInfo } from "../../../../data/home";
+import { sampleOrderInfo } from "../../../../data/home";
 import CommentBox from "../organisms/CommentBox";
 import EstimatedLanding from "../organisms/EstimatedLanding";
 import HomeHeader from "../organisms/HomeHeader";
 import MemberInfo from "../organisms/MemberInfo";
 import OrderInfo from "../organisms/OrderInfo";
 import { getProjectsAll } from "../../../../hooks/useProjects";
+import { Member } from "../../../../types/home";
 
 export interface Project {
   id: number;
@@ -30,12 +32,19 @@ const Home: React.FC = () => {
   const [selectedProject, setSelectedProject] = useState<string>(
     projects[0]?.name,
   );
+  const [assignmentMember,setAssignmentMember] = useState<Member[]>([])
 
   const handleSelectChange = (value: string) => {
     setSelectedProject(value);
   };
 
   useEffect(() => {
+    const fetchData = async () => {
+      const homeData = await getHomeData();
+      setAssignmentMember(homeData.data.assignment_members)
+    };
+    fetchData();
+
     getProjectsAll()
       .then((projects: Project[]) => {
         if (projects !== null) {
@@ -75,8 +84,8 @@ const Home: React.FC = () => {
         <OrderInfo OrderInfoData={sampleOrderInfo} />
         <EstimatedLanding OrderInfoData={sampleOrderInfo} />
       </div>
-      <Spacer height="40px"></Spacer>
-      <MemberInfo MembersData={sampleMembersData} />
+      <Spacer  height="40px"></Spacer>
+      <MemberInfo MembersData={assignmentMember} />
       <Spacer height="40px"></Spacer>
       <CommentBox />
     </div>
