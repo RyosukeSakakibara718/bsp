@@ -16,13 +16,23 @@ export type MemberInfoDataProps = {
   MembersData: Member[];
 };
 
-export type OrderInfo = {
-  cost: number;
-  estimate_cost: number;
-  crude_rate: number;
-  estimate_person_month: number;
+export type ForeCast = {
+    achievement_person_month: number;  // 予測工数（人月）
+    forecast_cost: number;             // 着地原価
+    forecast_profit: number;
 };
 
 export type OrderInfoDataProps = {
-  OrderInfoData: OrderInfo[];
+  foreCast: ForeCast;
 };
+
+export type EstimateDataProps = {
+  estimation: Estimation;
+};
+
+export type Estimation = {
+  estimate_cost: number;
+  estimate_person_month: string;
+  order_price: number;
+};
+
