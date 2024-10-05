@@ -1,7 +1,7 @@
 export const sampleProjectArchivementsData = {
-  "projects": {
-    "projects_id": 1,
-    "assignment_members": [
+  projects: {
+    projects_id: 1,
+    assignment_members: [
       {
         assignment_member_id: 1,
         position: 1,
@@ -126,5 +126,5 @@ export const sampleProjectArchivementsData = {
         ],
       },
     ],
-  }
+  },
 };

@@ -20,7 +20,7 @@ const DecideButton: React.FC<DecideButtonProps> = ({
 }) => {
   const hundleSubmit = () => {
     onClose();
-    handleSubmitEditData? handleSubmitEditData(): null;
+    handleSubmitEditData ? handleSubmitEditData() : null;
   };
   return (
     <button

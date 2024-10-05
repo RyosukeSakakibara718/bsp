@@ -1,9 +1,24 @@
+type OptionList = {
+  id: number;
+  label: string;
+}
+
 type SmallSelectBoxProps = {
-  optionArray: string[];
+  optionArray: OptionList[];
   labelText?: string;
+  between: {
+    id: number
+    label: string
+  };
+  onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
 };
 
-const SmallSelectBox = ({ optionArray, labelText }: SmallSelectBoxProps) => {
+const SmallSelectBox: React.FC<SmallSelectBoxProps> = ({
+  optionArray, 
+  labelText, 
+  between, 
+  onChange
+}) => {
   /**
    * セレクトボックス
    *
@@ -19,10 +34,13 @@ const SmallSelectBox = ({ optionArray, labelText }: SmallSelectBoxProps) => {
         className="border-2 rounded-lg pl-2 pr-5 py-1"
         name="dateSelect"
         id="dateSelect"
-        defaultValue={optionArray[0]}
+        value={between.id} // 選択された値を表示する
+        onChange={onChange}
       >
         {optionArray.map(value => (
-          <option value={value}>{value}</option>
+          <option key={value.id} value={value.id}> {/* value.idを使用 */}
+            {value.label}
+          </option>
         ))}
       </select>
     </>

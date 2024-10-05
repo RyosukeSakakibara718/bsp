@@ -20,6 +20,8 @@ class DatabaseSeeder extends Seeder
             ProjectTableSeeder::class,
             MemberTableSeeder::class,
             AssignmentMemberTableSeeder::class,
+            CommentSeeder::class,
+            EstimationSeeder::class
             WorkCostTableSeeder::class,
         ]);
     }

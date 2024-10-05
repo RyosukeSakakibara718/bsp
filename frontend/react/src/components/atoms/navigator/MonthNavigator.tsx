@@ -1,56 +1,146 @@
-import React, { useState } from "react";
+import { useEffect, useState } from "react";
+import { projectDetailData } from "../../../data/projectDetail";
 
-const MonthNavigater = () => {
+type MonthNavigaterProps  = {
+  between: {
+    id: number;
+    label : string;
+  }
+}
+
+const MonthNavigater: React.FC<MonthNavigaterProps> = ( {between} ) => {
   // 現在の日付から初期値を設定
-  const today = new Date();
-  const currentYear = today.getFullYear();
-  const currentMonth = today.getMonth() + 1;
+  const [currentPage, setCurrentPage] = useState(0);
+  const itemsPerPage = 7;
+  const startIndex = currentPage * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
 
-  // 現在の月から6ヶ月分を表示するための初期値を設定
-  const [startYear, setStartYear] = useState<number>(currentYear);
-  const [startMonth, setStartMonth] = useState<number>(currentMonth);
+  const Period = getDatesBetween(
+    projectDetailData.projects.projects_data.start_date,
+    projectDetailData.projects.projects_data.end_date
+  );
 
-  /**
-   * 6か月分の月を計算してリストを返す関数
-   */
-  const getMonths = (year: number, month: number): string[] => {
-    const months = [];
-    for (let i = 0; i < 6; i++) {
-      const newMonth = ((month + i - 1) % 12) + 1;
-      const newYear = year + Math.floor((month + i - 1) / 12);
-      months.push(`${newYear}/${newMonth}`);
+  const currentDates = Period.slice(startIndex, endIndex);
+  const [showPeriod, setShowPeriod] = useState(currentDates)
+
+  useEffect(() => {
+    if (between.id === 1) {
+      // between.id が 1 の場合は日付をそのまま表示
+      setShowPeriod(currentDates);
+    } else if (between.id === 2) {
+      // between.id が 2 の場合は7日ごとの要素を表示
+      setShowPeriod(getEvery7thElementFromFirst(Period).slice(startIndex, endIndex));
+    } else if (between.id == 3) {
+      setShowPeriod(extractMonths(Period).slice(startIndex, endIndex))
     }
-    return months;
-  };
-
-  // 現在の6ヶ月分の月リストを取得
-  const dates = getMonths(startYear, startMonth);
+  },[between])
 
   // 次の1ヶ月分を表示するための関数
-  const handleNextMonth = () => {
-    const nextStartMonth = (startMonth % 12) + 1;
-    const nextStartYear = startMonth === 12 ? startYear + 1 : startYear;
-    setStartYear(nextStartYear);
-    setStartMonth(nextStartMonth);
+  const handleNext = () => {
+    if (endIndex < Period.length) {
+      setCurrentPage(currentPage + 1);
+    }
   };
 
   // 前の1ヶ月分を表示するための関数
-  const handlePrevMonth = () => {
-    const prevStartMonth = startMonth === 1 ? 12 : startMonth - 1;
-    const prevStartYear = startMonth === 1 ? startYear - 1 : startYear;
-    setStartYear(prevStartYear);
-    setStartMonth(prevStartMonth);
+  const handlePrev = () => {
+    if (startIndex > 0) {
+      setCurrentPage(currentPage - 1);
+    }
   };
+
+  function getDatesBetween(startDate: Date, endDate: Date) {
+    let start = new Date(startDate);
+    const end = new Date(endDate);
+    // 1を日曜日としてそこから7を土曜日と見立てる
+    const daysOfWeek = [1, 2, 3, 4, 5, 6, 7];
+    let result = [];
+    let firstDayOfWeek = daysOfWeek[start.getDay()];
+
+    if (firstDayOfWeek !== 1) {
+      let previousSunday = new Date(start);
+      previousSunday.setDate(start.getDate() - (firstDayOfWeek - 1));
+
+      for (let date = new Date(previousSunday); date < start; date.setDate(date.getDate() + 1)) {
+        let dayOfWeek = daysOfWeek[date.getDay()];
+        let formattedDate = `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}`;
+        result.push({
+          dayOfWeek: dayOfWeek,
+          day: formattedDate
+        });
+      }
+    }
+
+    for (let date = new Date(start); date <= end; date.setDate(date.getDate() + 1)) {
+      let dayOfWeek = daysOfWeek[date.getDay()];
+      let formattedDate = `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}`;
+      result.push({
+        dayOfWeek: dayOfWeek,
+        day: formattedDate
+      });
+    }
+
+    return result;
+  }
+
+  // 7日ごとの要素を取得し、dayOfWeekを全て8に変更する関数
+  function getEvery7thElementFromFirst(arr: any[]): any[] {
+    return arr
+      .filter((_, index) => index % 7 === 0)
+      .map(item => ({
+        ...item,
+        dayOfWeek: 8, // dayOfWeekを8に強制変更
+      }));
+  }
+
+  // 月ごとの要素を取得し、dayOfWeekを全て8に変更する関数
+  function extractMonths(
+    data: Array<{ dayOfWeek: number; day: string }>
+  ): Array<{ dayOfWeek: number; day: string }> {
+    const monthsSet = new Set<string>();
+    const result: Array<{ dayOfWeek: number; day: string }> = [];
+
+    data.forEach(item => {
+      // dayを "yyyy/mm" 形式に変換 (月を二桁にする)
+      const [year, month, _] = item.day.split("/");
+      const formattedMonth = `${year}/${month.padStart(2, "0")}`; // 月が一桁なら0埋め
+
+      // Setで重複チェック
+      if (!monthsSet.has(formattedMonth)) {
+        monthsSet.add(formattedMonth);
+        result.push({
+          dayOfWeek: 8, // dayOfWeekを8に強制変更
+          day: formattedMonth,
+        });
+      }
+    });
+
+    return result;
+  }
 
   return (
     <>
-      <button className="p-2" onClick={handlePrevMonth}>
+      <button className="p-2 w-[0px]" onClick={handlePrev}>
         &lt;
       </button>
-      {dates.map((item, index) => (
-        <th key={index}>{item}</th>
-      ))}
-      <button className="p-2" onClick={handleNextMonth}>
+      {showPeriod.map((date, index) => {
+        let style = {};
+        if(between.id == 1){
+          // 日曜日はdayOfWeekが1、土曜日はdayOfWeekが7
+          if (date.dayOfWeek === 1) {
+            style = { color: "#EA7777" }; // 日曜日のスタイル
+          } else if (date.dayOfWeek === 7) {
+            style = { color: "#78C6DE" }; // 土曜日のスタイル
+          }
+        }
+        return (
+          <th key={index} style={style} className="w-[10%]">
+            {date.day}
+            {between.id !== 1 && ' ~'}
+          </th>
+        );
+      })}
+      <button className="p-2 w-[0px]" onClick={handleNext}>
         &gt;
       </button>
     </>
