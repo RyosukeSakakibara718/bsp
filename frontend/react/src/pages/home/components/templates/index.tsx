@@ -80,9 +80,9 @@ const Home: React.FC = () => {
       if (selectedProjectObj) {
         const fetchData = async () => {
           const homeData = await getHomeData(selectedProjectObj.id);
-          setAssignmentMember(homeData.data.assignment_members);
-          setForeCast(homeData.data.forecast);
-          setEstimation(homeData.data.estimation);
+          setAssignmentMember(homeData.assignment_members);
+          setForeCast(homeData.forecast);
+          setEstimation(homeData.estimation);
         };
         fetchData();
       }
