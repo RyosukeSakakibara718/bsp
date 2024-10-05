@@ -1,7 +1,10 @@
 /**
-   * 案件開始日~終了日を参照して期間内の日にちの配列を作成する関数
-   */
-export function getMonthsBetweenDates(start_date: Date, end_date: Date): string[] {
+ * 案件開始日~終了日を参照して期間内の日にちの配列を作成する関数
+ */
+export function getMonthsBetweenDates(
+  start_date: Date,
+  end_date: Date,
+): string[] {
   const start = new Date(start_date);
   const end = new Date(end_date);
 

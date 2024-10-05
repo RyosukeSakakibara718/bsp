@@ -17,9 +17,9 @@ export type MemberInfoDataProps = {
 };
 
 export type ForeCast = {
-    achievement_person_month: number;  // 予測工数（人月）
-    forecast_cost: number;             // 着地原価
-    forecast_profit: number;
+  achievement_person_month: number; // 予測工数（人月）
+  forecast_cost: number; // 着地原価
+  forecast_profit: number;
 };
 
 export type OrderInfoDataProps = {
@@ -35,4 +35,3 @@ export type Estimation = {
   estimate_person_month: string;
   order_price: number;
 };
-

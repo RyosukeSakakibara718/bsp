@@ -1,6 +1,6 @@
 import TableTd from "../../../../../components/atoms/field/TableTd";
 import { MemberInfoDataProps } from "../../../../../types/home";
-import {RANK} from "../../../../../constants/index"
+import { RANK } from "../../../../../constants/index";
 
 const MemberInfoRow = ({ MembersData }: MemberInfoDataProps) => {
   /**
@@ -14,7 +14,8 @@ const MemberInfoRow = ({ MembersData }: MemberInfoDataProps) => {
   return (
     <>
       {MembersData.map(MemberData => {
-        const positionName = RANK.find(rank => rank.id === MemberData.position)?.name || "Unknown";
+        const positionName =
+          RANK.find(rank => rank.id === MemberData.position)?.name || "Unknown";
         return (
           <tr key={MemberData.name}>
             <TableTd text={MemberData.name} />

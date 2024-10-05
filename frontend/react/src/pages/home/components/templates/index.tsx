@@ -32,31 +32,24 @@ const Home: React.FC = () => {
   const [selectedProject, setSelectedProject] = useState<string>(
     projects[0]?.name,
   );
-  const [assignmentMember,setAssignmentMember] = useState<Member[]>([])
+
+  const [assignmentMember, setAssignmentMember] = useState<Member[]>([]);
   const [foreCast, setForeCast] = useState({
     achievement_person_month: 0,
     forecast_cost: 0,
     forecast_profit: 0,
-  })
-  const [estimation,setEstimation] = useState({
-    estimate_cost: 0
-    ,estimate_person_month : "0"
-    ,order_price: 0
-    })
+  });
+  const [estimation, setEstimation] = useState({
+    estimate_cost: 0,
+    estimate_person_month: "0",
+    order_price: 0,
+  });
 
   const handleSelectChange = (value: string) => {
     setSelectedProject(value);
   };
 
   useEffect(() => {
-    const fetchData = async () => {
-      const homeData = await getHomeData();
-      setAssignmentMember(homeData.data.assignment_members)
-      setForeCast(homeData.data.forecast)
-      setEstimation(homeData.data.estimation);
-    };
-    fetchData();
-
     getProjectsAll()
       .then((projects: Project[]) => {
         if (projects !== null) {
@@ -79,6 +72,23 @@ const Home: React.FC = () => {
     }
   }, [projects]);
 
+  useEffect(() => {
+    if (projects.length > 0) {
+      const selectedProjectObj = projects.find(
+        project => project.name === selectedProject,
+      );
+      if (selectedProjectObj) {
+        const fetchData = async () => {
+          const homeData = await getHomeData(selectedProjectObj.id);
+          setAssignmentMember(homeData.data.assignment_members);
+          setForeCast(homeData.data.forecast);
+          setEstimation(homeData.data.estimation);
+        };
+        fetchData();
+      }
+    }
+  }, [selectedProject]);
+
   if (loading) {
     return <div>Loading...</div>;
   }
@@ -93,10 +103,10 @@ const Home: React.FC = () => {
       />
       <Spacer height="40px"></Spacer>
       <div style={{ display: "flex", gap: "40px" }}>
-        <OrderInfo estimation={estimation}/>
-        <EstimatedLanding foreCast={foreCast}/>
+        <OrderInfo estimation={estimation} />
+        <EstimatedLanding foreCast={foreCast} />
       </div>
-      <Spacer  height="40px"></Spacer>
+      <Spacer height="40px"></Spacer>
       <MemberInfo MembersData={assignmentMember} />
       <Spacer height="40px"></Spacer>
       <CommentBox />

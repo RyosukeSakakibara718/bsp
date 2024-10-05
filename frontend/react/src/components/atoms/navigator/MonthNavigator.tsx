@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
 import { projectDetailData } from "../../../data/projectDetail";
 
-type MonthNavigaterProps  = {
+type MonthNavigaterProps = {
   between: {
     id: number;
-    label : string;
-  }
-}
+    label: string;
+  };
+};
 
-const MonthNavigater: React.FC<MonthNavigaterProps> = ( {between} ) => {
+const MonthNavigater: React.FC<MonthNavigaterProps> = ({ between }) => {
   // 現在の日付から初期値を設定
   const [currentPage, setCurrentPage] = useState(0);
   const itemsPerPage = 7;
@@ -17,11 +17,11 @@ const MonthNavigater: React.FC<MonthNavigaterProps> = ( {between} ) => {
 
   const Period = getDatesBetween(
     projectDetailData.projects.projects_data.start_date,
-    projectDetailData.projects.projects_data.end_date
+    projectDetailData.projects.projects_data.end_date,
   );
 
   const currentDates = Period.slice(startIndex, endIndex);
-  const [showPeriod, setShowPeriod] = useState(currentDates)
+  const [showPeriod, setShowPeriod] = useState(currentDates);
 
   useEffect(() => {
     if (between.id === 1) {
@@ -29,11 +29,13 @@ const MonthNavigater: React.FC<MonthNavigaterProps> = ( {between} ) => {
       setShowPeriod(currentDates);
     } else if (between.id === 2) {
       // between.id が 2 の場合は7日ごとの要素を表示
-      setShowPeriod(getEvery7thElementFromFirst(Period).slice(startIndex, endIndex));
+      setShowPeriod(
+        getEvery7thElementFromFirst(Period).slice(startIndex, endIndex),
+      );
     } else if (between.id == 3) {
-      setShowPeriod(extractMonths(Period).slice(startIndex, endIndex))
+      setShowPeriod(extractMonths(Period).slice(startIndex, endIndex));
     }
-  },[between])
+  }, [between]);
 
   // 次の1ヶ月分を表示するための関数
   const handleNext = () => {
@@ -61,22 +63,30 @@ const MonthNavigater: React.FC<MonthNavigaterProps> = ( {between} ) => {
       let previousSunday = new Date(start);
       previousSunday.setDate(start.getDate() - (firstDayOfWeek - 1));
 
-      for (let date = new Date(previousSunday); date < start; date.setDate(date.getDate() + 1)) {
+      for (
+        let date = new Date(previousSunday);
+        date < start;
+        date.setDate(date.getDate() + 1)
+      ) {
         let dayOfWeek = daysOfWeek[date.getDay()];
         let formattedDate = `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}`;
         result.push({
           dayOfWeek: dayOfWeek,
-          day: formattedDate
+          day: formattedDate,
         });
       }
     }
 
-    for (let date = new Date(start); date <= end; date.setDate(date.getDate() + 1)) {
+    for (
+      let date = new Date(start);
+      date <= end;
+      date.setDate(date.getDate() + 1)
+    ) {
       let dayOfWeek = daysOfWeek[date.getDay()];
       let formattedDate = `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}`;
       result.push({
         dayOfWeek: dayOfWeek,
-        day: formattedDate
+        day: formattedDate,
       });
     }
 
@@ -95,7 +105,7 @@ const MonthNavigater: React.FC<MonthNavigaterProps> = ( {between} ) => {
 
   // 月ごとの要素を取得し、dayOfWeekを全て8に変更する関数
   function extractMonths(
-    data: Array<{ dayOfWeek: number; day: string }>
+    data: Array<{ dayOfWeek: number; day: string }>,
   ): Array<{ dayOfWeek: number; day: string }> {
     const monthsSet = new Set<string>();
     const result: Array<{ dayOfWeek: number; day: string }> = [];
@@ -125,7 +135,7 @@ const MonthNavigater: React.FC<MonthNavigaterProps> = ( {between} ) => {
       </button>
       {showPeriod.map((date, index) => {
         let style = {};
-        if(between.id == 1){
+        if (between.id == 1) {
           // 日曜日はdayOfWeekが1、土曜日はdayOfWeekが7
           if (date.dayOfWeek === 1) {
             style = { color: "#EA7777" }; // 日曜日のスタイル
@@ -136,7 +146,7 @@ const MonthNavigater: React.FC<MonthNavigaterProps> = ( {between} ) => {
         return (
           <th key={index} style={style} className="w-[10%]">
             {date.day}
-            {between.id !== 1 && ' ~'}
+            {between.id !== 1 && " ~"}
           </th>
         );
       })}
