@@ -13,11 +13,11 @@ const ProjectsAchievements = () => {
    * @param {ProjectsAchievements} props - コンポーネントに渡されるプロパティ。
    * @returns {JSX.Element} ProjectsAchievementsコンポーネントを返します。
    */
-  
+
   type optionsArrayProps = {
     id: number;
     label: string;
-  }
+  };
 
   const optionsArray: optionsArrayProps[] = [
     { id: 1, label: "日毎" },
@@ -27,8 +27,8 @@ const ProjectsAchievements = () => {
 
   const initialBetween = {
     id: 1,
-    label: "日毎"
-  }
+    label: "日毎",
+  };
 
   const [between, setBetween] = useState<optionsArrayProps>(initialBetween);
 
@@ -36,7 +36,9 @@ const ProjectsAchievements = () => {
 
   const handleChangeBetween = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const selectedId = Number(e.target.value);
-    const selectedOption = optionsArray.find(option => option.id === selectedId);
+    const selectedOption = optionsArray.find(
+      option => option.id === selectedId,
+    );
 
     if (selectedOption) {
       setBetween(selectedOption); // 状態を更新する
@@ -71,7 +73,7 @@ const ProjectsAchievements = () => {
       <Spacer height="40px"></Spacer>
       <div className="overflow-hidden rounded-lg border-2">
         <table className="min-w-full divide-y rounded-lg">
-          <ProjectArchiveHeader between={between}/>
+          <ProjectArchiveHeader between={between} />
         </table>
       </div>
       <Spacer height="40px"></Spacer>
