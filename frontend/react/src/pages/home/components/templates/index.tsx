@@ -8,6 +8,7 @@ import HomeHeader from "../organisms/HomeHeader";
 import MemberInfo from "../organisms/MemberInfo";
 import OrderInfo from "../organisms/OrderInfo";
 import { getProjectsAll } from "../../../../hooks/useProjects";
+import Graph from "../libs/infragistics/Graph";
 
 export interface Project {
   id: number;
@@ -77,6 +78,8 @@ const Home: React.FC = () => {
       </div>
       <Spacer height="40px"></Spacer>
       <MemberInfo MembersData={sampleMembersData} />
+      <Spacer height="40px"></Spacer>
+      <Graph />
       <Spacer height="40px"></Spacer>
       <CommentBox />
     </div>
