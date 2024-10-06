@@ -43,9 +43,9 @@ export const InitialProjectData = {
 };
 
 export const ProjectName = [
-  "プロジェクトバランサー",
-  "プロジェクトバランサー2",
-  "testetst",
+  {id: 1, label: "プロジェクトバランサー"},
+  {id: 2, label: "プロジェクトバランサー2"},
+  {id: 3, label: "testetst"},
 ];
 
 export const initialBetween = {
