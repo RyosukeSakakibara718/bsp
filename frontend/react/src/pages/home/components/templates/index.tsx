@@ -2,14 +2,14 @@ import React, { useEffect, useState } from "react";
 
 import { getHomeData } from "../../../../api/home";
 import Spacer from "../../../../components/atoms/Spacer";
+import { getProjectsAll } from "../../../../hooks/useProjects";
+import { Member, Graph } from "../../../../types/home";
+import ChartGraph from "../libs/chartjs/ChartGraph";
 import CommentBox from "../organisms/CommentBox";
 import EstimatedLanding from "../organisms/EstimatedLanding";
 import HomeHeader from "../organisms/HomeHeader";
 import MemberInfo from "../organisms/MemberInfo";
 import OrderInfo from "../organisms/OrderInfo";
-import { getProjectsAll } from "../../../../hooks/useProjects";
-import Graph from "../libs/infragistics/Graph";
-import { Member } from "../../../../types/home";
 
 export interface Project {
   id: number;
@@ -45,6 +45,7 @@ const Home: React.FC = () => {
     estimate_person_month: "0",
     order_price: 0,
   });
+  const [graph, setGraph] = useState<Graph[]>([]);
 
   const handleSelectChange = (value: string) => {
     setSelectedProject(value);
@@ -84,6 +85,7 @@ const Home: React.FC = () => {
           setAssignmentMember(homeData.assignment_members);
           setForeCast(homeData.forecast);
           setEstimation(homeData.estimation);
+          setGraph(homeData.summary.graph);
         };
         fetchData();
       }
@@ -110,7 +112,7 @@ const Home: React.FC = () => {
       <Spacer height="40px"></Spacer>
       <MemberInfo MembersData={assignmentMember} />
       <Spacer height="40px"></Spacer>
-      <Graph />
+      <ChartGraph graph={graph} />
       <Spacer height="40px"></Spacer>
       <CommentBox />
     </div>

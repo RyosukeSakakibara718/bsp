@@ -35,3 +35,13 @@ export type Estimation = {
   estimate_person_month: string;
   order_price: number;
 };
+
+export type GraphDataProps = {
+  graph: Graph[];
+};
+
+export type Graph = {
+  target_month: string;
+  achievement_cost: number;
+  estimate_cost: number;
+};
