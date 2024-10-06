@@ -17,13 +17,16 @@ const HomeHeader = ({
    * @component
    * @returns {JSX.Element} HomeHeader コンポーネントを返します。
    */
-  const projectNames = projects.map(project => project.name);
   const project = projects.find(project => project.name === selectedProject);
+  const projectOptions = projects.map(project => ({
+    id: project.id,
+    label: project.name,
+  }));
   return (
     <div style={{ display: "flex", gap: "40px" }}>
       <div className="w-1/3">
         <BigSelectBox
-          optionArray={projectNames}
+          optionArray={projectOptions}
           handleSelectChange={handleSelectChange}
         />
       </div>

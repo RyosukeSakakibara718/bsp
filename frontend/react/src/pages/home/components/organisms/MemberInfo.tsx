@@ -3,6 +3,7 @@ import TableHeader from "../../../../components/molecules/TableHeader";
 import { HOME_MEMBERINFO_TABLE_HEADER } from "../../../../constants/index";
 import { MemberInfoDataProps } from "../../../../types/home";
 import MemberInfoRow from "../molecules/row/MemberInfoRow";
+
 const MemberInfo = ({ MembersData }: MemberInfoDataProps) => {
   /**
    * 参画メンバーの情報を表示を行うテーブルコンポーネント。

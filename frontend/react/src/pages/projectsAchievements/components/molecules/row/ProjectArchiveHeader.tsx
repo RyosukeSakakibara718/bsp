@@ -6,11 +6,13 @@ import TableCaptionRow from "../../../../../components/molecules/row/TableCaptio
 type ProjectsAchieveHeaderProps = {
   between: {
     id: number;
-    label : string;
-  }
-}
+    label: string;
+  };
+};
 
-const ProjectsAchieveHeader: React.FC<ProjectsAchieveHeaderProps> = ({between}) => {
+const ProjectsAchieveHeader: React.FC<ProjectsAchieveHeaderProps> = ({
+  between,
+}) => {
   /**
    * テーブルヘッダーを構成するセルコンポーネント
    *
@@ -27,7 +29,7 @@ const ProjectsAchieveHeader: React.FC<ProjectsAchieveHeaderProps> = ({between}) 
           <th>氏名</th>
           <th>役職</th>
           <th className="border-r border-gray-300 px-4 py-2">原価</th>
-          <MonthNavigator between={between}/>
+          <MonthNavigator between={between} />
         </tr>
       </thead>
     </>

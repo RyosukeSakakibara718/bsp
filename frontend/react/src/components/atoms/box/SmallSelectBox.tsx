@@ -1,23 +1,23 @@
 type OptionList = {
   id: number;
   label: string;
-}
+};
 
 type SmallSelectBoxProps = {
   optionArray: OptionList[];
   labelText?: string;
   between: {
-    id: number
-    label: string
+    id: number;
+    label: string;
   };
   onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
 };
 
 const SmallSelectBox: React.FC<SmallSelectBoxProps> = ({
-  optionArray, 
-  labelText, 
-  between, 
-  onChange
+  optionArray,
+  labelText,
+  between,
+  onChange,
 }) => {
   /**
    * セレクトボックス
@@ -38,7 +38,9 @@ const SmallSelectBox: React.FC<SmallSelectBoxProps> = ({
         onChange={onChange}
       >
         {optionArray.map(value => (
-          <option key={value.id} value={value.id}> {/* value.idを使用 */}
+          <option key={value.id} value={value.id}>
+            {" "}
+            {/* value.idを使用 */}
             {value.label}
           </option>
         ))}
