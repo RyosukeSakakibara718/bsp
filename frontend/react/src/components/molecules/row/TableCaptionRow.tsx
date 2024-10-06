@@ -36,7 +36,8 @@ const TableCaptionRow: React.FC<TableCaptionRowProps> = ({
 
   const handleDeleteClick = () => {
     // TODOここでコメント削除API
-    if (setIsEdit) setIsEdit(!isEdit);
+    alert("削除しました。")
+    
   };
   return (
     <tr>
@@ -60,7 +61,7 @@ const TableCaptionRow: React.FC<TableCaptionRowProps> = ({
                     className="border border-gray-400 rounded-md px-6 py-1"
                     onClick={handleDecideClick}
                   >
-                    決定
+                    保存
                   </button>
                 </>
               ) : (
