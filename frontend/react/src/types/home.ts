@@ -45,3 +45,22 @@ export type Graph = {
   achievement_cost: number;
   estimate_cost: number;
 };
+export type HomeComment = {
+  id: number;
+  comment: string;
+  created_at: string;
+  updated_at: string;
+};
+
+export type HomeCommentProps = {
+  projectId: number;
+};
+
+export type Project = {
+  id: number;
+  name: string;
+  freee_project_code: string;
+  start_date: string;
+  end_date: string;
+  project_manager: string;
+};

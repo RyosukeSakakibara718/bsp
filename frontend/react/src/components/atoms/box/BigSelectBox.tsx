@@ -31,7 +31,9 @@ const BigSelectBox = ({
         onChange={e => handleSelectChange(e.target.value)}
       >
         {optionArray.map(value => (
-          <option key={value.id} value={value.label}>{value.label}</option>
+          <option key={value.id} value={value.label}>
+            {value.label}
+          </option>
         ))}
       </select>
     </>

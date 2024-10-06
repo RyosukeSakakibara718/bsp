@@ -33,7 +33,7 @@ const Home: React.FC = () => {
   const [selectedProject, setSelectedProject] = useState<string>(
     projects[0]?.name,
   );
-
+  const [projectId, setProjectId] = useState<number>(0)
   const [assignmentMember, setAssignmentMember] = useState<Member[]>([]);
   const [foreCast, setForeCast] = useState({
     achievement_person_month: 0,
@@ -81,6 +81,7 @@ const Home: React.FC = () => {
       );
       if (selectedProjectObj) {
         const fetchData = async () => {
+          setProjectId(selectedProjectObj.id)
           const homeData = await getHomeData(selectedProjectObj.id);
           setAssignmentMember(homeData.assignment_members);
           setForeCast(homeData.forecast);
@@ -115,6 +116,7 @@ const Home: React.FC = () => {
       <ChartGraph graph={graph} />
       <Spacer height="40px"></Spacer>
       <CommentBox />
+      <CommentBox projectId={projectId} />
     </div>
   );
 };

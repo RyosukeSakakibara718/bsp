@@ -1,9 +1,9 @@
 import axios from "axios";
 
-export const getHomeData = async (ProjectId: number): Promise<any> => {
+export const getHomeComment = async (ProjectId: number): Promise<any> => {
   try {
     const response = await axios.get(
-      `http://localhost/v1/homeInformation/${ProjectId}`,
+      `http://localhost/v1/projects/${ProjectId}/comments`,
     );
     return response.data;
   } catch (error) {
