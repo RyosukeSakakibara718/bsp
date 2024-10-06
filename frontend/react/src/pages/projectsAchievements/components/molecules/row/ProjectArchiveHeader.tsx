@@ -14,6 +14,7 @@ type ProjectsAchieveHeaderProps = {
   }[];
   handleNext: () => void;
   handlePrev: () => void;
+
 };
 
 const ProjectsAchieveHeader: React.FC<ProjectsAchieveHeaderProps> = ({
@@ -21,6 +22,7 @@ const ProjectsAchieveHeader: React.FC<ProjectsAchieveHeaderProps> = ({
   showPeriod,
   handleNext,
   handlePrev,
+
 }) => {
   /**
    * テーブルヘッダーを構成するセルコンポーネント

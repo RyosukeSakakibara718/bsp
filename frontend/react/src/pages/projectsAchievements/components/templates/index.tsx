@@ -26,6 +26,14 @@ const ProjectsAchievements = () => {
   const [projectData, setProjectData] = useState<ProjectAchievementsData>(
     sampleProjectArchivementsData,
   );
+  /**
+   * 特定の案件のメンバー別の日単位の日単位の稼働時間の登録/編集ができる。
+   * 特定の案件のメンバー別の日/週/月単位の稼働時間と金額を確認できる。
+   *
+   * @component
+   * @param {ProjectsAchievements} props - コンポーネントに渡されるプロパティ。
+   * @returns {JSX.Element} ProjectsAchievementsコンポーネントを返します。
+   */
   const [between, setBetween] = useState<optionsArrayProps>(initialBetween);
   const [currentPage, setCurrentPage] = useState(0);
   const Period = getDatesBetween(
@@ -413,7 +421,7 @@ const ProjectsAchievements = () => {
     <>
       <Spacer height="40px" />
       <div className="text-left">
-        <BigSelectBox optionArray={ProjectName} />
+        <BigSelectBox optionArray={ProjectName} handleSelectChange={() => {}}/>
       </div>
       <Spacer height="20px" />
       <div className="text-right">
