@@ -239,14 +239,14 @@ const MemberTable: React.FC = () => {
           clearSearchValue={clearShowData}
           setShowData={changeShowData}
         />
-        <Spacer height="20px"></Spacer>
+        <Spacer height="20px" />
         <div className="flex justify-end mr-2.5">
           <AddOpenButton
             onOpen={handleOpenAddModal}
             buttonText="メンバーを追加"
           />
         </div>
-        <Spacer height="20px"></Spacer>
+        <Spacer height="20px" />
         <div className="overflow-hidden rounded-lg shadow-md">
           <table className="min-w-full divide-y divide-gray-200">
             <thead className="bg-gray-50">
@@ -272,7 +272,6 @@ const MemberTable: React.FC = () => {
       </div>
       {isAddModalOpen && (
         <div className="fixed inset-0 flex items-center justify-center z-50">
-          <div className="absolute inset-0 bg-black opacity-50"></div>
           <div className="relative bg-white rounded-lg p-8 shadow-lg z-10">
             <AddModal
               onClose={handleCloseAddModal}
@@ -286,7 +285,6 @@ const MemberTable: React.FC = () => {
       )}
       {isEditModalOpen && targetData && (
         <div className="fixed inset-0 flex items-center justify-center z-50">
-          <div className="absolute inset-0 bg-black opacity-50"></div>
           <div className="relative bg-white rounded-lg p-8 shadow-lg z-10">
             <EditModal
               onClose={handleCloseEditModal}
@@ -299,7 +297,6 @@ const MemberTable: React.FC = () => {
       )}
       {isDeleteModalOpen && targetData && (
         <div className="fixed inset-0 flex items-center justify-center z-50">
-          <div className="absolute inset-0 bg-black opacity-50"></div>
           <div className="relative bg-white rounded-lg p-8 shadow-lg z-10">
             <DeleteModal
               onClose={handleCloseDeleteModal}

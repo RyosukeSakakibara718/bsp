@@ -135,7 +135,7 @@ const MemberInfo: React.FC<MemberInfoProps> = ({
               buttonText="メンバーの追加"
               handleClick={handleAddMemberInfoRow}
             />
-            <Spacer height="10px"></Spacer>
+            <Spacer height="10px" />
           </div>
         </div>
       </table>

@@ -123,9 +123,9 @@ const ProjectArchiveBody: React.FC<ProjectArchiveBodyProps> = ({
             })}
           </tr>
           <tr>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
             <td className="border-l border-gray-300">金額</td>
             {showPeriod.map(item => {
               const workCost = member.work_costs.find(

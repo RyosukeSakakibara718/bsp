@@ -448,6 +448,7 @@ const ProjectsAchievements = () => {
               : dataGroupedByMonth.projects.assignment_members
           ).map(member => (
             <ProjectArchiveBody
+              key={member.assignment_member_id}
               showPeriod={showPeriod}
               member={member}
               onWorkTimeChange={handleWorkCostChange}
