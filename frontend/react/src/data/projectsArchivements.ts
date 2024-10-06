@@ -24,24 +24,23 @@ export const sampleProjectArchivementsData = {
   },
 };
 
-
 export const InitialProjectData = {
-  projects : {
+  projects: {
     projects_id: 1,
     assignment_members: [
       {
         assignment_member_id: 1,
         position: 1,
-        work_costs: []
+        work_costs: [],
       },
       {
         assignment_member_id: 2,
         position: 1,
-        work_costs: []
+        work_costs: [],
       },
-    ]
-  }
-}
+    ],
+  },
+};
 
 export const ProjectName = [
   "プロジェクトバランサー",
@@ -51,5 +50,5 @@ export const ProjectName = [
 
 export const initialBetween = {
   id: 1,
-  label: "日毎"
-}
+  label: "日毎",
+};

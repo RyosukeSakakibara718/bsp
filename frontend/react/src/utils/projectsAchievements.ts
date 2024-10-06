@@ -1,4 +1,3 @@
-
 export function countBusinessDaysInMonth(dateString: string) {
   // 引数の形式は "YYYY/MM/DD" を想定
   const date = new Date(dateString);
@@ -15,10 +14,14 @@ export function countBusinessDaysInMonth(dateString: string) {
   // 月初から月末までループして営業日をカウント
   for (let day = firstDay; day <= lastDay; day.setDate(day.getDate() + 1)) {
     const dayOfWeek = day.getDay();
-    const formattedDate = day.toISOString().split('T')[0];
+    const formattedDate = day.toISOString().split("T")[0];
 
     // 月曜日から金曜日であり、祝日リストに含まれていない場合
-    if (dayOfWeek !== 0 && dayOfWeek !== 6 && !holidays.includes(formattedDate)) {
+    if (
+      dayOfWeek !== 0 &&
+      dayOfWeek !== 6 &&
+      !holidays.includes(formattedDate)
+    ) {
       businessDays++;
     }
   }

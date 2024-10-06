@@ -6,12 +6,17 @@ type MonthNavigaterProps = {
   showPeriod: {
     dayOfWeek: number;
     day: string;
-  }[]
+  }[];
   handleNext: () => void;
   handlePrev: () => void;
 };
 
-const MonthNavigater: React.FC<MonthNavigaterProps> = ({ between, showPeriod, handleNext, handlePrev }) => {
+const MonthNavigater: React.FC<MonthNavigaterProps> = ({
+  between,
+  showPeriod,
+  handleNext,
+  handlePrev,
+}) => {
   // 現在の日付から初期値を設定
   return (
     <>
@@ -22,7 +27,7 @@ const MonthNavigater: React.FC<MonthNavigaterProps> = ({ between, showPeriod, ha
       </th>
       {showPeriod.map((date, index) => {
         let style = {};
-        if (between.id == 1) {
+        if (between.id === 1) {
           // 日曜日はdayOfWeekが1、土曜日はdayOfWeekが7
           if (date.dayOfWeek === 1) {
             style = { color: "#EA7777" }; // 日曜日のスタイル
@@ -33,7 +38,7 @@ const MonthNavigater: React.FC<MonthNavigaterProps> = ({ between, showPeriod, ha
         return (
           <th key={index} style={style} className="w-[10%]">
             {date.day}
-            {between.id !== 1 && " ~"}
+            {between.id === 2 && " ~"}
           </th>
         );
       })}
