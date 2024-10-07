@@ -115,7 +115,6 @@ const Home: React.FC = () => {
       <Spacer height="40px"></Spacer>
       <ChartGraph graph={graph} />
       <Spacer height="40px"></Spacer>
-      <CommentBox />
       <CommentBox projectId={projectId} />
     </div>
   );
