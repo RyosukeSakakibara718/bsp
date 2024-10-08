@@ -3,22 +3,23 @@ import React, { useEffect, useState } from "react";
 import { getHomeData } from "../../../../api/home";
 import Spacer from "../../../../components/atoms/Spacer";
 import { getProjectsAll } from "../../../../hooks/useProjects";
-import { Member, Graph } from "../../../../types/home";
+import { Member, Graph, Summary } from "../../../../types/home";
 import ChartGraph from "../libs/chartjs/ChartGraph";
+import ShowTotalAchievements from "../molecules/ShowTotalAchievements";
 import CommentBox from "../organisms/CommentBox";
 import EstimatedLanding from "../organisms/EstimatedLanding";
 import HomeHeader from "../organisms/HomeHeader";
 import MemberInfo from "../organisms/MemberInfo";
 import OrderInfo from "../organisms/OrderInfo";
 
-export interface Project {
+export type Project = {
   id: number;
   name: string;
   freee_project_code: string;
   start_date: string;
   end_date: string;
   project_manager: string;
-}
+};
 
 const Home: React.FC = () => {
   /**
@@ -33,7 +34,7 @@ const Home: React.FC = () => {
   const [selectedProject, setSelectedProject] = useState<string>(
     projects[0]?.name,
   );
-  const [projectId, setProjectId] = useState<number>(0)
+  const [projectId, setProjectId] = useState<number>(0);
   const [assignmentMember, setAssignmentMember] = useState<Member[]>([]);
   const [foreCast, setForeCast] = useState({
     achievement_person_month: 0,
@@ -44,6 +45,13 @@ const Home: React.FC = () => {
     estimate_cost: 0,
     estimate_person_month: "0",
     order_price: 0,
+  });
+  const [summary, setSummary] = useState<Summary>({
+    total_estimate_cost: 0,
+    total_achievement_cost: 0,
+    achievement_person_month: 0,
+    Remaining_person_month: 0,
+    graph: [],
   });
   const [graph, setGraph] = useState<Graph[]>([]);
 
@@ -81,11 +89,12 @@ const Home: React.FC = () => {
       );
       if (selectedProjectObj) {
         const fetchData = async () => {
-          setProjectId(selectedProjectObj.id)
+          setProjectId(selectedProjectObj.id);
           const homeData = await getHomeData(selectedProjectObj.id);
           setAssignmentMember(homeData.assignment_members);
           setForeCast(homeData.forecast);
           setEstimation(homeData.estimation);
+          setSummary(homeData.summary);
           setGraph(homeData.summary.graph);
         };
         fetchData();
@@ -113,7 +122,19 @@ const Home: React.FC = () => {
       <Spacer height="40px"></Spacer>
       <MemberInfo MembersData={assignmentMember} />
       <Spacer height="40px"></Spacer>
-      <ChartGraph graph={graph} />
+      <div className=" rounded-lg border">
+        <div className="w-full flex bgcolor-grey bg-[#EEE3FF] rounded-t-lg">
+          <p className="px-4 py-3 font-bold">サマリ</p>
+        </div>
+        <div className="flex h-[500px] space-x-4">
+          <div className="w-[35%] h-full flex flex-col justify-end rounded-lg px-4 py-10">
+            <ShowTotalAchievements summary={summary} />
+          </div>
+          <div className="w-[65%] h-full py-10 px-4">
+            <ChartGraph graph={graph} />
+          </div>
+        </div>
+      </div>
       <Spacer height="40px"></Spacer>
       <CommentBox projectId={projectId} />
     </div>

@@ -80,10 +80,8 @@ const ChartGraph = ({ graph }: GraphDataProps) => {
   };
 
   return (
-    <div className="container mx-auto mt-8">
-      <div className="bg-white p-6 rounded-lg shadow-md">
-        <Line data={data} options={options} />
-      </div>
+    <div className="rounded-lg border h-full shadow-md">
+      <Line data={data} options={options} />
     </div>
   );
 };

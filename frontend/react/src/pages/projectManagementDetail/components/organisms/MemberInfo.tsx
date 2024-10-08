@@ -104,7 +104,7 @@ const MemberInfo: React.FC<MemberInfoProps> = ({
                 <table className="w-full h-full">
                   <thead className="bg-gray-200">
                     <tr>
-                      <th className="py-2 w-[100%]">　</th>
+                      <th className="py-2 w-[100%]">&nbsp; </th>
                     </tr>
                   </thead>
                   <tbody>

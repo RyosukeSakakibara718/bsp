@@ -11,11 +11,11 @@ import {
   initialProjectInfo,
   requestBody,
 } from "../../../../data/projectDetail";
+import { getMonthsBetweenDates } from "../../../../hooks";
 import { getMemberList } from "../../hooks/projectDetail";
 import MemberInfo from "../organisms/MemberInfo";
 import OutsourcingInfo from "../organisms/OutsourcingInfo";
 import ProjectInfo from "../organisms/ProjectInfo";
-import { getMonthsBetweenDates } from "../../../../hooks";
 
 import type {
   InitialAssignmentMembers,

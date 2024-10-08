@@ -64,3 +64,11 @@ export type Project = {
   end_date: string;
   project_manager: string;
 };
+
+export type Summary = {
+  total_estimate_cost: number;
+  total_achievement_cost: number;
+  achievement_person_month: number;
+  Remaining_person_month: number;
+  graph: Graph[];
+};

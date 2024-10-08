@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+
 import { projectDetailData } from "../../../data/projectDetail";
 
 type MonthNavigaterProps = {
@@ -52,15 +53,15 @@ const MonthNavigater: React.FC<MonthNavigaterProps> = ({ between }) => {
   };
 
   function getDatesBetween(startDate: Date, endDate: Date) {
-    let start = new Date(startDate);
+    const start = new Date(startDate);
     const end = new Date(endDate);
     // 1を日曜日としてそこから7を土曜日と見立てる
     const daysOfWeek = [1, 2, 3, 4, 5, 6, 7];
-    let result = [];
-    let firstDayOfWeek = daysOfWeek[start.getDay()];
+    const result = [];
+    const firstDayOfWeek = daysOfWeek[start.getDay()];
 
     if (firstDayOfWeek !== 1) {
-      let previousSunday = new Date(start);
+      const previousSunday = new Date(start);
       previousSunday.setDate(start.getDate() - (firstDayOfWeek - 1));
 
       for (
@@ -68,8 +69,8 @@ const MonthNavigater: React.FC<MonthNavigaterProps> = ({ between }) => {
         date < start;
         date.setDate(date.getDate() + 1)
       ) {
-        let dayOfWeek = daysOfWeek[date.getDay()];
-        let formattedDate = `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}`;
+        const dayOfWeek = daysOfWeek[date.getDay()];
+        const formattedDate = `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}`;
         result.push({
           dayOfWeek: dayOfWeek,
           day: formattedDate,
@@ -82,8 +83,8 @@ const MonthNavigater: React.FC<MonthNavigaterProps> = ({ between }) => {
       date <= end;
       date.setDate(date.getDate() + 1)
     ) {
-      let dayOfWeek = daysOfWeek[date.getDay()];
-      let formattedDate = `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}`;
+      const dayOfWeek = daysOfWeek[date.getDay()];
+      const formattedDate = `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}`;
       result.push({
         dayOfWeek: dayOfWeek,
         day: formattedDate,
