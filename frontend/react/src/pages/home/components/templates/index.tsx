@@ -8,6 +8,7 @@ import HomeHeader from "../organisms/HomeHeader";
 import MemberInfo from "../organisms/MemberInfo";
 import OrderInfo from "../organisms/OrderInfo";
 import { getProjectsAll } from "../../../../hooks/useProjects";
+import Loading from "../../../../components/molecules/Loading";
 import { Member, Project } from "../../../../types/home";
 
 const Home: React.FC = () => {
@@ -82,7 +83,9 @@ const Home: React.FC = () => {
   }, [selectedProject]);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return (
+      <Loading />
+    );
   }
 
   return (
