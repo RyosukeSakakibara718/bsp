@@ -11,15 +11,9 @@ import EstimatedLanding from "../organisms/EstimatedLanding";
 import HomeHeader from "../organisms/HomeHeader";
 import MemberInfo from "../organisms/MemberInfo";
 import OrderInfo from "../organisms/OrderInfo";
-
-export type Project = {
-  id: number;
-  name: string;
-  freee_project_code: string;
-  start_date: string;
-  end_date: string;
-  project_manager: string;
-};
+import { getProjectsAll } from "../../../../hooks/useProjects";
+import Loading from "../../../../components/molecules/Loading";
+import { Member, Project } from "../../../../types/home";
 
 const Home: React.FC = () => {
   /**
@@ -103,7 +97,9 @@ const Home: React.FC = () => {
   }, [selectedProject]);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return (
+      <Loading />
+    );
   }
 
   return (

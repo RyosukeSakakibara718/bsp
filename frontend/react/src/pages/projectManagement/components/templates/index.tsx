@@ -13,6 +13,7 @@ import { getProjectsAll, deleteProjects } from "../../../../hooks/useProjects";
 import { ProjectData, ProjectDataProps } from "../../../../types/project";
 import DeleteModal from "../molecules/modal/DeleteModal";
 import TableRow from "../molecules/row/TableRow";
+import Loading from "../../../../components/molecules/Loading";
 
 /**
  *  案件の一覧を表示し・検索できるコンポーネント。
@@ -118,8 +119,10 @@ const ProjectManagement: React.FC<ProjectDataProps> = ({ data }) => {
   };
 
   if (loading) {
-    return <div>Loading...</div>;
-  }
+    return (
+      <Loading />
+    );
+  };
 
   return (
     <>

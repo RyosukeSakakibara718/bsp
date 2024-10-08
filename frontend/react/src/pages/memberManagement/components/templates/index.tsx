@@ -17,6 +17,7 @@ import {
 } from "../../../../hooks/useMember";
 
 import type { MemberData } from "../../../../types/member";
+import Loading from "../../../../components/molecules/Loading";
 /**
  * メンバーの一覧を表示し、追加・編集・削除を行うテーブルコンポーネント。
  *
@@ -136,9 +137,10 @@ const MemberTable: React.FC = () => {
    * fetchが完了するまで表示するDOM
    */
   if (loading) {
-    return <div>Loading...</div>;
+    return (
+      <Loading />
+    );
   }
-
   /**
    * 編集モーダル内で値が変更された際にstateを変更する関数
    * @param {string} fieldName - 変更する値のフィールド
