@@ -8,17 +8,8 @@ import HomeHeader from "../organisms/HomeHeader";
 import MemberInfo from "../organisms/MemberInfo";
 import OrderInfo from "../organisms/OrderInfo";
 import { getProjectsAll } from "../../../../hooks/useProjects";
-import { Member } from "../../../../types/home";
 import Loading from "../../../../components/molecules/Loading";
-
-export interface Project {
-  id: number;
-  name: string;
-  freee_project_code: string;
-  start_date: string;
-  end_date: string;
-  project_manager: string;
-}
+import { Member, Project } from "../../../../types/home";
 
 const Home: React.FC = () => {
   /**
@@ -33,7 +24,7 @@ const Home: React.FC = () => {
   const [selectedProject, setSelectedProject] = useState<string>(
     projects[0]?.name,
   );
-
+  const [projectId, setProjectId] = useState<number>(0)
   const [assignmentMember, setAssignmentMember] = useState<Member[]>([]);
   const [foreCast, setForeCast] = useState({
     achievement_person_month: 0,
@@ -80,6 +71,7 @@ const Home: React.FC = () => {
       );
       if (selectedProjectObj) {
         const fetchData = async () => {
+          setProjectId(selectedProjectObj.id)
           const homeData = await getHomeData(selectedProjectObj.id);
           setAssignmentMember(homeData.assignment_members);
           setForeCast(homeData.forecast);
@@ -112,7 +104,7 @@ const Home: React.FC = () => {
       <Spacer height="40px"></Spacer>
       <MemberInfo MembersData={assignmentMember} />
       <Spacer height="40px"></Spacer>
-      <CommentBox />
+      <CommentBox projectId={projectId}/>
     </div>
   );
 };
