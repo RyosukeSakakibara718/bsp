@@ -9,6 +9,7 @@ import MemberInfo from "../organisms/MemberInfo";
 import OrderInfo from "../organisms/OrderInfo";
 import { getProjectsAll } from "../../../../hooks/useProjects";
 import { Member } from "../../../../types/home";
+import Loading from "../../../../components/molecules/Loading";
 
 export interface Project {
   id: number;
@@ -90,7 +91,9 @@ const Home: React.FC = () => {
   }, [selectedProject]);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return (
+      <Loading />
+    );
   }
 
   return (
