@@ -45,6 +45,7 @@ export type Graph = {
   achievement_cost: number;
   estimate_cost: number;
 };
+
 export type HomeComment = {
   id: number;
   comment: string;
@@ -65,7 +66,7 @@ export type Project = {
   project_manager: string;
 };
 
-export type Summary = {
+export type SummaryProps = {
   total_estimate_cost: number;
   total_achievement_cost: number;
   achievement_person_month: number;
