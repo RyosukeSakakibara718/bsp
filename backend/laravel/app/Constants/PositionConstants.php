@@ -1,12 +1,17 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Constants;
 
 class PositionConstants
 {
     const POSITION_PM = 1;
+
     const POSITION_MEMBER = 2;
+
     const POSITION_MGR = 3;
+
     const POSITION_QA = 4;
 
     /**

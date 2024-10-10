@@ -6,13 +6,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Carbon;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 /**
- * 
- *
  * @property int $id
  * @property string|null $freee_project_code freeeプロジェクトコード
  * @property string $name プロジェクト名
@@ -31,6 +29,7 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
  * @property-read int|null $outsources_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\WorkCost> $workCosts
  * @property-read int|null $work_costs_count
+ *
  * @method static \Database\Factories\ProjectFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder|Project newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Project newQuery()
@@ -48,6 +47,7 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
  * @method static \Illuminate\Database\Eloquent\Builder|Project whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Project withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder|Project withoutTrashed()
+ *
  * @mixin \Eloquent
  */
 class Project extends Model
@@ -99,7 +99,7 @@ class Project extends Model
         $achievementPersonMonth = 0;
         foreach ($assignmentMembers as $assignmentMember) {
             $achievementPersonMonth += $assignmentMember->achievementTotalPersonMonth();
-        };
+        }
 
         return round($achievementPersonMonth, 2);
     }
@@ -111,7 +111,7 @@ class Project extends Model
         $achievementCost = 0;
         foreach ($assignmentMembers as $assignmentMember) {
             $achievementCost += $assignmentMember->achievementTotalCost();
-        };
+        }
 
         return round($achievementCost, 0);
     }
@@ -120,6 +120,7 @@ class Project extends Model
     {
         $achievementPersonMonth = $this->achievementPersonMonth();
         $remainingPersonMonth = $this->estimation->estimate_person_month - $achievementPersonMonth;
+
         return round($remainingPersonMonth, 2);
     }
 
@@ -132,7 +133,7 @@ class Project extends Model
         // 残工数
         $remainingPersonMonth = $this->remainingPersonMonth();
         // 着地原価 = 実績原価/実績工数*残工数 + 実績原価
-        if($achievementPersonMonth * $remainingPersonMonth + $achievementCost == 0){
+        if ($achievementPersonMonth * $remainingPersonMonth + $achievementCost == 0) {
             throw new ModelNotFoundException('必要な情報が登録されていません');
         }
         $forecastCost = $achievementCost / $achievementPersonMonth * $remainingPersonMonth + $achievementCost;
@@ -176,7 +177,7 @@ class Project extends Model
 
         $assignmentMembers =
             $this->assignmentMembers()
-            ->with('member', 'monthlyEstimations')->get();
+                ->with('member', 'monthlyEstimations')->get();
 
         $estimateCostsByMonth = [];
 
@@ -220,7 +221,6 @@ class Project extends Model
                 'estimate_cost' => $estimate_cost,
             ];
         }
-
 
         return $result;
     }

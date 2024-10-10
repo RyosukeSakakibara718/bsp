@@ -1,11 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProjectAchievementRequest;
 use App\Http\Resources\ProjectAchievementResource;
-use App\UseCases\ProjectAchievement\UpdateAction;
 use App\UseCases\ProjectAchievement\ShowAction;
+use App\UseCases\ProjectAchievement\UpdateAction;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Log;

@@ -9,8 +9,6 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
- * 
- *
  * @property int $id
  * @property string $name 名前
  * @property int $base_cost 原価
@@ -19,6 +17,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property \Illuminate\Support\Carbon|null $deleted_at
+ *
  * @method static \Database\Factories\MemberFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder|Member newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Member newQuery()
@@ -34,10 +33,13 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Eloquent\Builder|Member find($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Member create($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Member upsert($value, $uniqueBy, $update)
+ *
  * @mixin \Illuminate\Database\Eloquent\Model
+ *
  * @method static \Illuminate\Database\Eloquent\Builder|Member onlyTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder|Member withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder|Member withoutTrashed()
+ *
  * @mixin \Eloquent
  */
 class Member extends Model

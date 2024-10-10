@@ -4,10 +4,9 @@ declare(strict_types=1);
 
 namespace App\Providers;
 
-use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
-
+use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -29,7 +28,7 @@ class AppServiceProvider extends ServiceProvider
                 Log::info('SQL Query', [
                     'sql' => $query->sql,
                     'bindings' => $query->bindings,
-                    'time' => $query->time
+                    'time' => $query->time,
                 ]);
             });
         }

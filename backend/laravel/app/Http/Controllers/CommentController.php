@@ -1,26 +1,28 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CommentRequest;
 use App\Http\Resources\CommentResource;
-use App\Models\Project;
 use App\Models\Comment;
+use App\Models\Project;
+use App\UseCases\Comment\DestroyAction;
+use App\UseCases\Comment\IndexAction;
+use App\UseCases\Comment\ShowAction;
+use App\UseCases\Comment\StoreAction;
+use App\UseCases\Comment\UpdateAction;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-use App\UseCases\Comment\IndexAction;
-use App\UseCases\Comment\StoreAction;
-use App\UseCases\Comment\ShowAction;
-use App\UseCases\Comment\UpdateAction;
-use App\UseCases\Comment\DestroyAction;
 
 class CommentController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index(IndexAction $action, Request $request, Project $project):JsonResponse
+    public function index(IndexAction $action, Request $request, Project $project): JsonResponse
     {
         $comments = $action($project);
 
@@ -40,7 +42,7 @@ class CommentController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(ShowAction $action, Project $project, Comment $comment):JsonResponse
+    public function show(ShowAction $action, Project $project, Comment $comment): JsonResponse
     {
         $comment = $action($project, $comment);
 

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -7,8 +9,6 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
- * 
- *
  * @property int $id
  * @property int $assignment_member_id
  * @property string $target_month 該当月
@@ -18,6 +18,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property \Illuminate\Support\Carbon|null $deleted_at
  * @property-read \App\Models\AssignmentMember $assignmentMember
+ *
  * @method static \Illuminate\Database\Eloquent\Builder|AssignmentMemberMonthlyEstimation newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|AssignmentMemberMonthlyEstimation newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|AssignmentMemberMonthlyEstimation onlyTrashed()
@@ -32,6 +33,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Eloquent\Builder|AssignmentMemberMonthlyEstimation whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|AssignmentMemberMonthlyEstimation withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder|AssignmentMemberMonthlyEstimation withoutTrashed()
+ *
  * @mixin \Eloquent
  */
 class AssignmentMemberMonthlyEstimation extends Model
