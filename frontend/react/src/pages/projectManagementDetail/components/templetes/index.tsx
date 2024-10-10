@@ -24,6 +24,8 @@ import type {
   ProjectInfomation,
   RequestBody,
 } from "../../../../types/project";
+import { useParams } from "react-router-dom";
+import { getProjectManagementDetail } from "../../api/useProjectManagementDetail";
 
 /**
  * 案件の登録・編集を表を行うテーブルコンポーネント。
@@ -35,8 +37,23 @@ import type {
  */
 
 const ProjectDetail: React.FC<{ id?: string }> = () => {
-  // const { id } = useParams<{ id?: string }>();
+  const { id } = useParams<{ id: string }>();
+  const [ response, setResponse ] = useState(null)
 
+  useEffect(() => {
+    if(id) {
+      getProjectManagementDetail(id)
+        .then(members => {
+          if (members !== null) {
+            setResponse(members); // データがnullでない場合にセット
+          }
+        })
+        .catch(error => {
+          console.error("Error fetching member data:", error);
+        });
+    }
+  }, []);
+  
   // TODO詳細ページ、idがあれば編集で、なければ、create
 
   //-----------------------------------------------------案件情報登録エリアの記載-----------------------------------------------------
@@ -275,14 +292,13 @@ const ProjectDetail: React.FC<{ id?: string }> = () => {
    */
   const handleRegister = () => {
     // 登録処理をここに記述
-    console.log("projectInfo: ", projectInfo);
-    console.log("assignmentMembersInfo: ", assignmentMembersInfo);
-    console.log("outsourcingInfo: ", outsourcingInfo);
     console.log("request: ", request);
   };
 
   return (
     <>
+      <button onClick={() => console.log(id)}>id確認</button>
+      <button onClick={() => console.log(response)}>state確認</button>
       <Spacer height="30px" />
       <ProjectInfo
         projectInfo={projectInfo}
