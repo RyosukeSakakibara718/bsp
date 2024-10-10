@@ -1,5 +1,5 @@
 import BigSelectBox from "../../../../components/atoms/box/BigSelectBox";
-import { Project } from "../templates/index";
+import { Project } from "../../../../types/home";
 
 interface HomeHeaderProps {
   projects: Project[];
