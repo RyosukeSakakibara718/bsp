@@ -104,7 +104,7 @@ const MemberInfo: React.FC<MemberInfoProps> = ({
                 <table className="w-full h-full">
                   <thead className="bg-gray-200">
                     <tr>
-                      <th className="py-2 w-[100%]">&nbsp; </th>
+                      <th className="py-2 w-[100%]">&nbsp;</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -135,7 +135,7 @@ const MemberInfo: React.FC<MemberInfoProps> = ({
               buttonText="メンバーの追加"
               handleClick={handleAddMemberInfoRow}
             />
-            <Spacer height="10px"></Spacer>
+            <Spacer height="10px" />
           </div>
         </div>
       </table>

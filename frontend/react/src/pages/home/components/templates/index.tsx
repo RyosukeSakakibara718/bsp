@@ -102,18 +102,18 @@ const Home: React.FC = () => {
 
   return (
     <div>
-      <Spacer height="40px"></Spacer>
+      <Spacer height="40px" />
       <HomeHeader
         projects={projects}
         handleSelectChange={handleSelectChange}
         selectedProject={selectedProject}
       />
-      <Spacer height="40px"></Spacer>
+      <Spacer height="40px"/>
       <div style={{ display: "flex", gap: "40px" }}>
         <OrderInfo estimation={estimation} />
         <EstimatedLanding foreCast={foreCast} />
       </div>
-      <Spacer height="40px"></Spacer>
+      <Spacer height="40px" />
       <MemberInfo MembersData={assignmentMember} />
       <Spacer height="40px"></Spacer>
       <div className=" rounded-lg border">
@@ -131,6 +131,8 @@ const Home: React.FC = () => {
       </div>
       <Spacer height="40px"></Spacer>
       <CommentBox projectId={projectId} />
+      <Spacer height="40px" />
+      <CommentBox projectId={projectId}/>
     </div>
   );
 };

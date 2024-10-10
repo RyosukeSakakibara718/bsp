@@ -1,16 +1,25 @@
 import { useEffect, useState } from "react";
 
 import { projectDetailData } from "../../../data/projectDetail";
-
 type MonthNavigaterProps = {
   between: {
     id: number;
     label: string;
   };
+  showPeriod: {
+    dayOfWeek: number;
+    day: string;
+  }[];
+  handleNext: () => void;
+  handlePrev: () => void;
 };
 
-const MonthNavigater: React.FC<MonthNavigaterProps> = ({ between }) => {
-  // 現在の日付から初期値を設定
+const MonthNavigater: React.FC<MonthNavigaterProps> = ({
+  between,
+  showPeriod,
+  handleNext,
+  handlePrev,
+}) => {
   const [currentPage, setCurrentPage] = useState(0);
   const itemsPerPage = 7;
   const startIndex = currentPage * itemsPerPage;
@@ -131,12 +140,14 @@ const MonthNavigater: React.FC<MonthNavigaterProps> = ({ between }) => {
 
   return (
     <>
-      <button className="p-2 w-[0px]" onClick={handlePrev}>
-        &lt;
-      </button>
+      <th>
+        <button className="p-2 w-[0px]" onClick={handlePrev}>
+          &lt;
+        </button>
+      </th>
       {showPeriod.map((date, index) => {
         let style = {};
-        if (between.id == 1) {
+        if (between.id === 1) {
           // 日曜日はdayOfWeekが1、土曜日はdayOfWeekが7
           if (date.dayOfWeek === 1) {
             style = { color: "#EA7777" }; // 日曜日のスタイル
@@ -147,13 +158,15 @@ const MonthNavigater: React.FC<MonthNavigaterProps> = ({ between }) => {
         return (
           <th key={index} style={style} className="w-[10%]">
             {date.day}
-            {between.id !== 1 && " ~"}
+            {between.id !== 1 && ' ~'}
           </th>
         );
       })}
-      <button className="p-2 w-[0px]" onClick={handleNext}>
-        &gt;
-      </button>
+      <th>
+        <button className="p-2 w-[0px]" onClick={handleNext}>
+          &gt;
+        </button>
+      </th>
     </>
   );
 };

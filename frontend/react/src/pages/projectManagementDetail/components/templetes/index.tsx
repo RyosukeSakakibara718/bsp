@@ -309,7 +309,7 @@ const ProjectDetail: React.FC<{ id?: string }> = () => {
         deleteOutsourcingInfoRow={deleteOutsourcingInfoRow}
         handleAddOutsourcingInfoRow={handleAddOutsourcingInfoRow}
       />
-      <Spacer height="40px"></Spacer>
+      <Spacer height="40px" />
       <div className="justify-center">
         <AddButton buttonText="登録する" handleClick={handleRegister} />
       </div>
