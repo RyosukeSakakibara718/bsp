@@ -325,9 +325,6 @@ const ProjectDetail: React.FC<{ id?: string }> = () => {
   return (
     <>
       <Spacer height="30px" />
-      <button onClick={() => console.log(response)}>response確認</button>
-      <button onClick={() => console.log(request)}>request確認</button>
-      <button onClick={() => console.log(assignmentMembersInfo)}>assignmentMembersInfo確認</button>
       <ProjectInfo
         projectInfo={projectInfo}
         handleProjectInfoInputChange={handleProjectInfoInputChange}
