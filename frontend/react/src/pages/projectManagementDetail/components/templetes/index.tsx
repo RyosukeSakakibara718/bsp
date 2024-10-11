@@ -38,22 +38,8 @@ import { getProjectManagementDetail } from "../../api/useProjectManagementDetail
 
 const ProjectDetail: React.FC<{ id?: string }> = () => {
   const { id } = useParams<{ id: string }>();
-  const [ response, setResponse ] = useState(null)
+  const [response, setResponse] = useState(null);
 
-  useEffect(() => {
-    if(id) {
-      getProjectManagementDetail(id)
-        .then(members => {
-          if (members !== null) {
-            setResponse(members); // データがnullでない場合にセット
-          }
-        })
-        .catch(error => {
-          console.error("Error fetching member data:", error);
-        });
-    }
-  }, []);
-  
   // TODO詳細ページ、idがあれば編集で、なければ、create
 
   //-----------------------------------------------------案件情報登録エリアの記載-----------------------------------------------------
@@ -295,10 +281,42 @@ const ProjectDetail: React.FC<{ id?: string }> = () => {
     console.log("request: ", request);
   };
 
+  useEffect(() => {
+    if (id) {
+      getProjectManagementDetail(id)
+        .then(members => {
+          if (members !== null) {
+            setResponse(members); // データがnullでない場合にセット
+            console.log("APIからのデータ :", members.project.assignment_members);
+            setProjectInfo(prevProjectInfo => ({
+              ...prevProjectInfo,
+              projects_data: {
+                ...prevProjectInfo.projects_data,
+                ...members.project.projects_data,  // 全てのプロパティを展開し、必要に応じて上書き
+                start_date: members.project.projects_data.start_date 
+                  ? new Date(members.project.projects_data.start_date)
+                  : prevProjectInfo.projects_data.start_date,
+                end_date: members.project.projects_data.end_date 
+                  ? new Date(members.project.projects_data.end_date)
+                  : prevProjectInfo.projects_data.end_date,
+              },
+              estimations: {
+                ...prevProjectInfo.estimations,
+                ...members.project.estimations,  // 全てのプロパティを展開して上書き
+              }
+            }));
+            setAssignmentMembersInfo(members.project.assignment_members);
+            setOutsourcingInfo(members.project.outsources)
+          }
+        })
+        .catch(error => {
+          console.error("Error fetching member data:", error);
+        });
+    }
+  }, []);
+
   return (
     <>
-      <button onClick={() => console.log(id)}>id確認</button>
-      <button onClick={() => console.log(response)}>state確認</button>
       <Spacer height="30px" />
       <ProjectInfo
         projectInfo={projectInfo}
