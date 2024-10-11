@@ -29,9 +29,9 @@ class ProjectDetailResource extends JsonResource
                     'end_date' => $this->end_date->format('Y-m-d'),
                 ],
                 'estimations' => [
-                    "order_price" => $this->estimation->order_price,
-                    "estimate_cost" => $this->estimation->estimate_cost,
-                    "estimate_person_month" => $this->estimation->estimate_person_month,
+                    'order_price' => $this->estimation->order_price,
+                    'estimate_cost' => $this->estimation->estimate_cost,
+                    'estimate_person_month' => $this->estimation->estimate_person_month !== null ? floatval($this->estimation->estimate_person_month) : 0,
                 ],
                 'assignment_members' => AssignmentMemberResource::collection($this->assignmentMembers),
                 'outsources' => OutsourceResource::collection($this->outsources)
