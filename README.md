@@ -1,5 +1,5 @@
 1. コンテナ立ち上げ
-docker-compose up -d --build 
+docker-compose up -d --build
 この時に下記のように出ていればOK
 
 ```
