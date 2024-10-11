@@ -25,7 +25,7 @@ import type {
   RequestBody,
 } from "../../../../types/project";
 import { useParams } from "react-router-dom";
-import { getProjectManagementDetail } from "../../api/useProjectManagementDetail";
+import { editProjectManagementDetail, getProjectManagementDetail } from "../../api/useProjectManagementDetail";
 
 /**
  * 案件の登録・編集を表を行うテーブルコンポーネント。
@@ -191,7 +191,7 @@ const ProjectDetail: React.FC<{ id?: string }> = () => {
         return {
           ...member,
           assignment_member_monthly_estimations: updatedEstimations,
-          estaimate_total_person_month: totalPersonMonth, // 合計値を反映
+          estimate_total_person_month: totalPersonMonth, // 合計値を反映
         };
       }),
     );
@@ -278,7 +278,14 @@ const ProjectDetail: React.FC<{ id?: string }> = () => {
    */
   const handleRegister = () => {
     // 登録処理をここに記述
-    console.log("request: ", request);
+    if (id){
+      console.log('idあり: ', id);
+      editProjectManagementDetail(request, id)
+        .catch(error => console.error("Error:", error));
+    }else{
+      console.log(request);
+      editProjectManagementDetail(request)
+    }
   };
 
   useEffect(() => {
@@ -318,6 +325,9 @@ const ProjectDetail: React.FC<{ id?: string }> = () => {
   return (
     <>
       <Spacer height="30px" />
+      <button onClick={() => console.log(response)}>response確認</button>
+      <button onClick={() => console.log(request)}>request確認</button>
+      <button onClick={() => console.log(assignmentMembersInfo)}>assignmentMembersInfo確認</button>
       <ProjectInfo
         projectInfo={projectInfo}
         handleProjectInfoInputChange={handleProjectInfoInputChange}

@@ -73,9 +73,10 @@ const ProjectManagement: React.FC<ProjectDataProps> = ({ data }) => {
     navigate("/projectManagement/detail");
   };
 
-  const handleEditButtonClick = () => {
+  const handleEditButtonClick = (id: number) => {
     // TODO編集先のページのパスを指定
-    navigate("/projectManagement/detail/{}");
+    console.log(`/projectManagement/detail/${id}`);
+    navigate(`/projectManagement/detail/${id}`);
   };
 
   /**
@@ -154,7 +155,7 @@ const ProjectManagement: React.FC<ProjectDataProps> = ({ data }) => {
                   start_date={item.start_date}
                   end_date={item.end_date}
                   project_manager={item.project_manager}
-                  isEditPageOpen={handleEditButtonClick}
+                  isEditPageOpen={() => handleEditButtonClick(item.id)}
                   isDeleteModalOpen={() => handleOpenDeleteModal(index)}
                 />
               ))}
