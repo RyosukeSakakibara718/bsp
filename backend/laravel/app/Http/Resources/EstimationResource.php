@@ -17,7 +17,10 @@ class EstimationResource extends JsonResource
         return [
             'order_price' => $this->order_price,
             'estimate_cost' => $this->estimate_cost,
-            'estimate_person_month' => $this->estimation->estimate_person_month !== null ? floatval($this->estimation->estimate_person_month) : 0,
+            'estimate_person_month' => $this->estimation !== null && $this->estimation->estimate_person_month !== null
+                ? floatval($this->estimation->estimate_person_month)
+                : 0,
         ];
     }
+
 }
