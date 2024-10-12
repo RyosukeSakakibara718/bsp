@@ -20,7 +20,7 @@ class AssignmentMemberMonthlyEstimationResource extends JsonResource
             'id' => $this->id,
             'assignment_member_id' => $this->assignment_member_id,
             'target_month' => $this->target_month,
-            'estimate_person_month' => $this->estimate_person_month,
+            'estimate_person_month' => $this->estimate_person_month !== null ? floatval($this->estimate_person_month) : 0,
         ];
     }
 }

@@ -19,7 +19,8 @@ class EstimationResource extends JsonResource
         return [
             'order_price' => $this->order_price,
             'estimate_cost' => $this->estimate_cost,
-            'estimate_person_month' => $this->estimate_person_month,
+            'estimate_person_month' => $this->estimate_person_month
         ];
     }
+
 }
