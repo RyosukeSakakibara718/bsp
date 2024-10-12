@@ -11,7 +11,7 @@ import {
 import { Line } from "react-chartjs-2";
 
 import "tailwindcss/tailwind.css";
-import { GraphDataProps, Graph } from "../../../../types/home";
+import { GraphDataProps, Graph } from "../../../../../types/home";
 
 ChartJS.register(
   CategoryScale,
@@ -65,7 +65,7 @@ const ChartGraph = ({ graph }: GraphDataProps) => {
     responsive: true,
     plugins: {
       legend: {
-        position: "top",
+        position: "top" as const,
       },
       title: {
         display: true,
