@@ -41,6 +41,7 @@ class AssignmentMemberMonthlyEstimation extends Model
     protected $fillable = [
         'assignment_member_id',
         'target_month',
+        'estimate_cost',
         'estimate_person_month',
     ];
 

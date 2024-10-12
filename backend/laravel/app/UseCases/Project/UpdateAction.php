@@ -63,6 +63,7 @@ class UpdateAction
                                 $assignmentMember->monthlyEstimations()->updateOrCreate(
                                     [
                                         'assignment_member_id' => $assignmentMember->id,
+                                        'estimate_cost' => $monthlyEstimation['estimate_cost'],
                                         'target_month' => $monthlyEstimation['target_month'],
                                     ],
                                     [
