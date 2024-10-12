@@ -2,7 +2,7 @@ import SmallTableTd from "./row/SmallTableTd";
 import ShowTotalCost from "./ShowTotalCost";
 import { SummaryProps } from "../../../../types/home";
 
-const ShowTotalAchievements: React.FC<SummaryProps> = ({ summary }) => {
+const ShowTotalAchievements: React.FC<{ summary: SummaryProps }> = ({ summary }) => {
   return (
     <table className="min-w-full border-separate border-spacing-0 border rounded-lg shadow-md">
       <thead>
