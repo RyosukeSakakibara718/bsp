@@ -52,6 +52,7 @@ class StoreAction
                             foreach ($assignmentMemberData['assignment_member_monthly_estimations'] as $monthlyEstimation) {
                                 $assignmentMember->monthlyEstimations()->create([
                                     'target_month' => $monthlyEstimation['target_month'],
+                                    'estimate_cost' => $monthlyEstimation['estimate_cost'],
                                     'estimate_person_month' => $monthlyEstimation['estimate_person_month'],
                                 ]);
                             }
