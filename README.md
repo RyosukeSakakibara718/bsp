@@ -24,10 +24,17 @@ $ cp backend/laravel/.env.example backend/laravel/.env
 ## 4. apacheコンテナからマイグレーションを行う
 ```
 $ docker-compose exec apache bash
-# php artisan migrate
+# php artisan migrate --seed
     ※ 失敗した場合
     # php artisan migrate:fresh
 # exit
+
+### 自動化
+cd sh
+$ ./migration.sh
+
+permissionエラー時 chmod +x migration.sh
+
 ```
 
 ## 5. dbコンテナからマイグレーションされたテーブルを確認する
@@ -54,6 +61,24 @@ $ docker-compose exec db bash
 
 
 ```
+
+## 6. 開発用のjson-serverを立てる
+```
+% npx json-server --watch data/db.json --port 3100
+db.jsonの箇所について動かしたいjsonを記載
+下記が出たら成功
+
+> react@0.0.0 json-server
+> json-server --watch data/db.json --port 3100
+
+--watch/-w can be omitted, JSON Server 1+ watches for file changes by default
+JSON Server started on PORT :3100
+Press CTRL-C to stop
+Watching data/db.json...
+
+( ˶ˆ ᗜ ˆ˵ )
+```
+
 ## 表示確認
 ### laravel
 http://localhost:80

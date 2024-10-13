@@ -18,19 +18,16 @@ module.exports = {
     ecmaVersion: 12,
     sourceType: "module",
   },
-  plugins: [
-    "react",
-    "@typescript-eslint",
-    "import",
-  ],
+  plugins: ["react", "@typescript-eslint", "import"],
   rules: {
     "react/react-in-jsx-scope": "off",
+    "react/prop-types": "off",
     "react/jsx-no-target-blank": ["error", { allowReferrer: true }],
     "prettier/prettier": "error",
     "react/jsx-filename-extension": [1, { extensions: [".tsx"] }],
     "@typescript-eslint/explicit-module-boundary-types": "off",
     "@typescript-eslint/no-unused-vars": ["error", { argsIgnorePattern: "^_" }],
-    camelcase: ["error", { properties: "always" }],
+    camelcase: "off",
     "no-console": "warn",
     "no-var": "error",
     "prefer-const": "error",
@@ -45,7 +42,7 @@ module.exports = {
           "internal",
           ["parent", "sibling", "index"],
           "object",
-          "type", 
+          "type",
         ],
         "newlines-between": "always",
         alphabetize: {
@@ -54,6 +51,7 @@ module.exports = {
         },
       },
     ],
+    "react/jsx-key": "off",
   },
   settings: {
     react: {
