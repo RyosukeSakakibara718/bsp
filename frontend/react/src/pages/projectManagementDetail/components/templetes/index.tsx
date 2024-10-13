@@ -56,7 +56,12 @@ const ProjectDetail: React.FC<{ id?: string }> = () => {
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
   ) => {
     const { name, value } = e.target;
-
+  
+    // 日付フィールドの変換を行う関数
+    const formatDateToYMD = (date: Date) => {
+      return date.toISOString().split('T')[0]; // YYYY-MM-DD 形式に変換
+    };
+  
     // projects_data フィールドか estimations フィールドかを区別する
     if (name in projectInfo.projects_data) {
       setProjectInfo(prevState => ({
@@ -65,7 +70,7 @@ const ProjectDetail: React.FC<{ id?: string }> = () => {
           ...prevState.projects_data,
           [name]:
             name === "start_date" || name === "end_date"
-              ? new Date(value) // 日付を Date オブジェクトに変換
+              ? formatDateToYMD(new Date(value)) // 日付を YYYY-MM-DD 形式に変換
               : name === "phase" || name === "contract"
                 ? Number(value) // 数値フィールドの場合は Number 型に変換
                 : value, // それ以外はそのまま
@@ -151,23 +156,29 @@ const ProjectDetail: React.FC<{ id?: string }> = () => {
     monthIndex: string,
     value: number,
   ) => {
+    const fixedEstimateCost = 200000; // 固定値としてのestimate_cost
+  
     setAssignmentMembersInfo(prevState =>
       prevState.map((member, index) => {
         if (index !== memberIndex) return member; // 他のメンバーのデータはそのまま保持
-
+  
         // 現在のメンバーの月別データを更新
         const existingEstimationIndex =
           member.assignment_member_monthly_estimations.findIndex(
             estimation => estimation.target_month === monthIndex,
           );
-
+  
         let updatedEstimations;
         if (existingEstimationIndex !== -1) {
           // すでに同じ月のデータがある場合は更新
           updatedEstimations = member.assignment_member_monthly_estimations.map(
             (estimation, i) =>
               i === existingEstimationIndex
-                ? { ...estimation, estimate_person_month: value }
+                ? {
+                    ...estimation,
+                    estimate_person_month: value, // 人月を更新
+                    estimate_cost: fixedEstimateCost, // 固定値としての見積もりコストを設定
+                  }
                 : estimation,
           );
         } else {
@@ -177,16 +188,17 @@ const ProjectDetail: React.FC<{ id?: string }> = () => {
             {
               target_month: monthIndex,
               estimate_person_month: value,
+              estimate_cost: fixedEstimateCost, // 固定値としての見積もりコストを設定
             },
           ];
         }
-
+  
         // 合計値を計算して estimate_total_person_month を更新
         const totalPersonMonth = updatedEstimations.reduce(
           (sum, estimation) => sum + estimation.estimate_person_month,
           0, // 初期値として 0 を指定
         );
-
+  
         // メンバーごとのデータを更新して返す
         return {
           ...member,
@@ -196,6 +208,7 @@ const ProjectDetail: React.FC<{ id?: string }> = () => {
       }),
     );
   };
+  
 
   // 案件開始日~終了日の中に含まれる月を要素として持つ配列
   const months = getMonthsBetweenDates(

@@ -24,7 +24,7 @@ const InputDateColumn: React.FC<InputDateColumnProps> = ({
         <input
           type="date"
           name={name}
-          value={value.toISOString().split("T")[0]}
+          value={value}
           onChange={handleInputChange}
           className="border rounded py-2 w-full text-xl"
         />

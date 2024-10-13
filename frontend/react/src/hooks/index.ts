@@ -15,7 +15,7 @@ export function getMonthsBetweenDates(
     // 現在の年月を "YYYY-MM" の形式で配列に追加
     const year = start.getFullYear();
     const month = String(start.getMonth() + 1).padStart(2, "0"); // 月を2桁に
-    result.push(`${year}/${month}`);
+    result.push(`${year}-${month}`);
 
     // 次の月に進む
     start.setMonth(start.getMonth() + 1);

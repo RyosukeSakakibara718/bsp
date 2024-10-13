@@ -45,7 +45,10 @@ const Outsources: React.FC<OutsourcesProps> = ({
             </td>
           </td>
           <td>
-            <td>
+            <td
+              className={`font-bold px-4 py-3 text-left text-gray-800 w-full`}
+              style={{ display: "flex", alignItems: "center" }}
+            >
               <input
                 type="number"
                 name="estimate_cost"
@@ -57,7 +60,10 @@ const Outsources: React.FC<OutsourcesProps> = ({
             </td>
           </td>
           <td>
-            <td>
+            <td
+              className={`font-bold px-4 py-3 text-left text-gray-800 w-full`}
+              style={{ display: "flex", alignItems: "center" }}
+            >
               <input
                 type="number"
                 name="cost"
