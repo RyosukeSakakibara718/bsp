@@ -81,7 +81,7 @@ class UpdateAction
                     foreach ($request->input('projects.outsources') as $outsourceData) {
                         Outsource::updateOrCreate(
                             [
-                                'id' => $outsourceData['id'],
+                                'id' => $outsourceData['id'] ?? null,
                                 'project_id' => $id,
                             ],
                             [
