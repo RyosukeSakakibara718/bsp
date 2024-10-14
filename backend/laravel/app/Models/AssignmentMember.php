@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models;
 
 use App\Constants\PositionConstants;
@@ -8,8 +10,6 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
- * 
- *
  * @property int $id
  * @property int $project_id
  * @property int $member_id
@@ -25,6 +25,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property-read \App\Models\Project $project
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\WorkCost> $workCosts
  * @property-read int|null $work_costs_count
+ *
  * @method static \Database\Factories\AssignmentMemberFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder|AssignmentMember newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|AssignmentMember newQuery()
@@ -40,6 +41,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Eloquent\Builder|AssignmentMember whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|AssignmentMember withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder|AssignmentMember withoutTrashed()
+ *
  * @mixin \Eloquent
  */
 class AssignmentMember extends Model
@@ -99,7 +101,8 @@ class AssignmentMember extends Model
     {
         $estimationsTotalPersonMonth =
             AssignmentMemberMonthlyEstimation::where('assignment_member_id', $this->member_id)
-            ->sum('estimate_person_month');
+                ->sum('estimate_person_month');
+
         return $estimationsTotalPersonMonth;
     }
 
@@ -107,9 +110,10 @@ class AssignmentMember extends Model
     {
         $totalWorkTime =
             WorkCost::where('assignment_member_id', $this->member_id)
-            ->sum('work_time');
+                ->sum('work_time');
         $totalWorkTime = (float) $totalWorkTime;
         $achievementTotalPersonMonth = round($totalWorkTime / 160, 1);
+
         return $achievementTotalPersonMonth;
     }
 
@@ -117,7 +121,8 @@ class AssignmentMember extends Model
     {
         $totalWorkCost =
             WorkCost::where('assignment_member_id', $this->member_id)
-            ->sum('daily_cost');
+                ->sum('daily_cost');
+
         return $totalWorkCost;
     }
 }

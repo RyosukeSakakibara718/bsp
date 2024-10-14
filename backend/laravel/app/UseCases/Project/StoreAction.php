@@ -5,10 +5,11 @@ declare(strict_types=1);
 namespace App\UseCases\Project;
 
 use App\Http\Requests\ProjectRequest;
-use App\Models\Project;
-use App\Models\Estimation;
 use App\Models\AssignmentMember;
+use App\Models\Estimation;
 use App\Models\Outsource;
+use App\Models\Project;
+use Exception;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
@@ -71,7 +72,7 @@ class StoreAction
                         ]);
                     }
                 }
-            } catch (\Exception $e) {
+            } catch (Exception $e) {
                 Log::error('プロジェクトの保存中にエラーが発生しました。', ['error' => $e->getMessage()]);
                 throw $e; // トランザクションが自動的にロールバックされる
             }

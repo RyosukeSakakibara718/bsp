@@ -1,11 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Resources;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
-use App\Http\Resources\OutsourceResource;
-use App\Http\Resources\AssignmentMemberResource;
 
 class ProjectDetailResource extends JsonResource
 {
@@ -31,10 +31,14 @@ class ProjectDetailResource extends JsonResource
                 'estimations' => [
                     'order_price' => $this->estimation->order_price,
                     'estimate_cost' => $this->estimation->estimate_cost,
-                    'estimate_person_month' => $this->estimation->estimate_person_month !== null ? floatval($this->estimation->estimate_person_month) : 0,
+                    'estimate_person_month' => $this->estimation->estimate_person_month,
                 ],
-                'assignment_members' => AssignmentMemberResource::collection($this->assignmentMembers),
-                'outsources' => OutsourceResource::collection($this->outsources)
+                'assignment_members' => [
+                    AssignmentMemberResource::collection($this->assignmentMembers),
+                ],
+                'outsources' => [
+                    OutsourceResource::collection($this->outsources),
+                ],
             ],
         ];
     }

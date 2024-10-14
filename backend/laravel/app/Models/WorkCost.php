@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -7,8 +9,6 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
- * 
- *
  * @property int $id
  * @property int $project_id
  * @property int $assignment_member_id
@@ -20,6 +20,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property \Illuminate\Support\Carbon|null $deleted_at
  * @property-read \App\Models\AssignmentMember $assignmentMember
  * @property-read \App\Models\Project $project
+ *
  * @method static \Database\Factories\WorkCostFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder|WorkCost newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|WorkCost newQuery()
@@ -36,6 +37,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Eloquent\Builder|WorkCost whereWorkTime($value)
  * @method static \Illuminate\Database\Eloquent\Builder|WorkCost withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder|WorkCost withoutTrashed()
+ *
  * @mixin \Eloquent
  */
 class WorkCost extends Model

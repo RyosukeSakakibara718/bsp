@@ -6,6 +6,7 @@ namespace App\UseCases\ProjectAchievement;
 
 use App\Http\Requests\ProjectAchievementRequest;
 use App\Models\WorkCost;
+use Exception;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
@@ -20,7 +21,7 @@ class UpdateAction
                     foreach ($assignmentMember['work_costs'] as $workCost) {
                         // データを準備してupsert
                         $workCostData = [
-                            'project_id' => $projectId,  
+                            'project_id' => $projectId,
                             'assignment_member_id' => $assignmentMember['assignment_member_id'],
                             'work_date' => $workCost['work_date'],
                             'daily_cost' => $workCost['daily_cost'],
@@ -37,7 +38,7 @@ class UpdateAction
                         Log::info('Upsert successful', ['workCostData' => $workCostData]);
                     }
                 }
-            } catch (\Exception $e) {
+            } catch (Exception $e) {
                 Log::error('Update or Insert failed', ['error' => $e->getMessage()]);
                 throw $e;
             }
