@@ -16,8 +16,8 @@ class HomeAssignmentMemberResource extends JsonResource
     {
         return [
             'member_id' => $this->member_id,
-            'position' => $this->position,
             'name' => $this->getMemberName(),
+            'position' => $this->position,
             'base_cost' => $this->getMemberBaseCost(),
             'estimate_total_person_month' => $this->estimateTotalPersonMonth(),
             'achievement_total_person_month' => $this->achievementTotalPersonMonth(),
