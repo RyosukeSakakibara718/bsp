@@ -3,10 +3,18 @@ import React from "react";
 type InputDateColumnProps = {
   title: string;
   name: string;
-  value: Date;
+  value: string;
   handleInputChange: (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
   ) => void;
+};
+
+const formatDateToYMD = (dateString: string) => {
+  const date = new Date(dateString);
+  const year = date.getFullYear();
+  const month = (date.getMonth() + 1).toString().padStart(2, "0");
+  const day = date.getDate().toString().padStart(2, "0");
+  return `${year}-${month}-${day}`;
 };
 
 const InputDateColumn: React.FC<InputDateColumnProps> = ({
@@ -24,7 +32,7 @@ const InputDateColumn: React.FC<InputDateColumnProps> = ({
         <input
           type="date"
           name={name}
-          value={value}
+          value={formatDateToYMD(value)}
           onChange={handleInputChange}
           className="border rounded py-2 w-full text-xl"
         />
