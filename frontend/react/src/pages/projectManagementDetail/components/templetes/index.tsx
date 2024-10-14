@@ -292,8 +292,6 @@ const ProjectDetail: React.FC<{ id?: string }> = () => {
   const handleRegister = () => {
     // 登録処理をここに記述
     if (id){
-      // console.log(`id: ${id} のrequest: `, request);
-      console.log(`idの値は: ${id}`);
       editProjectManagementDetail(request, Number(id))
     }else{
       console.log(request);
