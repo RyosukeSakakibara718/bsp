@@ -420,7 +420,7 @@ const ProjectsAchievements = () => {
     <>
       <Spacer height="40px" />
       <div className="text-left">
-        <BigSelectBox optionArray={ProjectName} handleSelectChange={() => {}}/>
+        <BigSelectBox optionArray={ProjectName} handleSelectChange={() => {}} />
       </div>
       <Spacer height="20px" />
       <div className="text-right">
