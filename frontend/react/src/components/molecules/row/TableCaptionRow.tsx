@@ -43,13 +43,14 @@ const TableCaptionRow: React.FC<TableCaptionRowProps> = ({
   const handleCancelClick = () => {
     if (setIsEdit) setIsEdit(!isEdit);
   };
+  
   const handleDecideClick = () => {
     if (isNew && projectId){
       handleAddComment?.(projectId);
     }
     else{
       if (commentId){
-        handleSaveComment?<div className=""></div>(commentId)
+        handleSaveComment?.(commentId)
       }
     }
     if (setIsEdit) setIsEdit(!isEdit);
@@ -126,7 +127,7 @@ const TableCaptionRow: React.FC<TableCaptionRowProps> = ({
             <p className="text-lg font-semibold mb-4">
               本当にこのコメントを削除しますか？
             </p>
-            <div className="flex space-x-4">
+            <div className="flex justify-between px-4">
               <button
                 className="bg-red-500 text-white px-4 py-2 rounded-md"
                 onClick={handleDeleteClick}
