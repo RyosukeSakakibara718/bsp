@@ -13,6 +13,22 @@ export const getHomeComment = async (ProjectId: number): Promise<any> => {
   }
 };
 
+export const createHomeComment = async (
+  projectId: number,
+  newComment: string
+): Promise<boolean> => {
+  try {
+    const response = await axios.post(
+      `http://localhost/v1/projects/${projectId}/comments`,
+      { comment: newComment }
+    );
+    return response.status === 201;
+  } catch (error) {
+    console.error("Error updating comment:", error);
+    return false;
+  }
+};
+
 
 export const deleteHomeComment = async (
   projectId: number,

@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { MdOutlineModeEdit, MdDeleteOutline } from "react-icons/md";
-import { deleteHomeComment, } from "../../../api/homeComment";
 
 type TableCaptionRowProps = {
   value: string;
@@ -9,7 +8,10 @@ type TableCaptionRowProps = {
   commentId?: number;
   projectId?: number;
   setIsEdit?: React.Dispatch<React.SetStateAction<boolean>> | undefined;
-  handleSaveComment: (num: number) => void;
+  handleSaveComment?: (num: number) => void;
+  isNew?: boolean;
+  handleAddComment?: (num: number)=>void
+  handleDeleteComment?: (projectId: number, commentId: number)=>void
 };
 
 /**
@@ -27,7 +29,10 @@ const TableCaptionRow: React.FC<TableCaptionRowProps> = ({
   setIsEdit,
   commentId,
   projectId,
-  handleSaveComment
+  handleSaveComment,
+  handleAddComment,
+  isNew,
+  handleDeleteComment,
 }: TableCaptionRowProps): JSX.Element => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -39,19 +44,22 @@ const TableCaptionRow: React.FC<TableCaptionRowProps> = ({
     if (setIsEdit) setIsEdit(!isEdit);
   };
   const handleDecideClick = () => {
-    if (commentId){
-      handleSaveComment(commentId)
+    if (isNew && projectId){
+      handleAddComment?.(projectId);
+    }
+    else{
+      if (commentId){
+        handleSaveComment?<div className=""></div>(commentId)
+      }
     }
     if (setIsEdit) setIsEdit(!isEdit);
   };
 
   const handleDeleteClick = () => {
     if (projectId && commentId) {
-      deleteHomeComment(projectId, commentId).then(() => {
-        setIsModalOpen(false);
-        alert("コメントが削除されました");
-      });
+      handleDeleteComment?.(projectId, commentId); // 安全に呼び出し
     }
+    setIsModalOpen(false); // モーダルを閉じる
   };
 
   return (
@@ -65,7 +73,14 @@ const TableCaptionRow: React.FC<TableCaptionRowProps> = ({
             <span className="font-bold">{value}</span>
             {isHome && (
               <div className="flex space-x-2">
-                {isEdit ? (
+                {isNew ? ( // 新規コメントの場合
+                  <button
+                    className="border border-gray-400 rounded-md px-6 py-1"
+                    onClick={handleDecideClick}
+                  >
+                    保存
+                  </button>
+                ) : isEdit ? ( // 既存コメントの編集モード
                   <>
                     <button
                       className="border border-gray-400 rounded-md px-6 py-1"
