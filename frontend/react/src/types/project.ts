@@ -59,6 +59,7 @@ export type Estimations = {
 export type InitialAssignmentMembers = {
   member_id: number;
   position: number;
+  base_cost: number
   estimate_total_person_month: number;
   assignment_member_monthly_estimations:
     | AssignmentMemberMonthlyEstimations[]

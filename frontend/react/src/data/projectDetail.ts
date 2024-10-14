@@ -101,6 +101,7 @@ export const initialAssignmentMembersArray = [
   {
     member_id: 1,
     position: 1,
+    base_cost: 0,
     estimate_total_person_month: 0,
     assignment_member_monthly_estimations: [],
   },
@@ -109,6 +110,7 @@ export const initialAssignmentMembersArray = [
 export const initialAssignmentMembersInfo = {
   member_id: 1,
   position: 1,
+  base_cost: 0,
   estimate_total_person_month: 0,
   assignment_member_monthly_estimations: [],
 };

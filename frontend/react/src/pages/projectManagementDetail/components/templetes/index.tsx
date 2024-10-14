@@ -156,11 +156,11 @@ const ProjectDetail: React.FC<{ id?: string }> = () => {
     monthIndex: string,
     value: number,
   ) => {
-    const fixedEstimateCost = 200000; // 固定値としてのestimate_cost
-  
     setAssignmentMembersInfo(prevState =>
       prevState.map((member, index) => {
         if (index !== memberIndex) return member; // 他のメンバーのデータはそのまま保持
+  
+        console.log('member変更前: ', member);
   
         // 現在のメンバーの月別データを更新
         const existingEstimationIndex =
@@ -177,7 +177,7 @@ const ProjectDetail: React.FC<{ id?: string }> = () => {
                 ? {
                     ...estimation,
                     estimate_person_month: value, // 人月を更新
-                    estimate_cost: fixedEstimateCost, // 固定値としての見積もりコストを設定
+                    estimate_cost: Math.ceil(member.base_cost * value), // 見積もりコストを整数に切り上げ
                   }
                 : estimation,
           );
@@ -188,7 +188,7 @@ const ProjectDetail: React.FC<{ id?: string }> = () => {
             {
               target_month: monthIndex,
               estimate_person_month: value,
-              estimate_cost: fixedEstimateCost, // 固定値としての見積もりコストを設定
+              estimate_cost: Math.ceil(member.base_cost * value), // 見積もりコストを整数に切り上げ
             },
           ];
         }
@@ -207,7 +207,7 @@ const ProjectDetail: React.FC<{ id?: string }> = () => {
         };
       }),
     );
-  };
+  };  
   
 
   // 案件開始日~終了日の中に含まれる月を要素として持つ配列
@@ -340,6 +340,7 @@ const ProjectDetail: React.FC<{ id?: string }> = () => {
 
   return (
     <>
+      <button onClick={() => console.log(request)}>確認</button>
       <Spacer height="30px" />
       <ProjectInfo
         projectInfo={projectInfo}
