@@ -17,6 +17,7 @@ class AssignmentMemberResource extends JsonResource
         return [
             'member_id' => $this->id,
             'position' => $this->position,
+            'base_cost' => $this->getMemberBaseCost(),
             'estimate_person_month' => $this->estimate_person_month !== null ? floatval($this->estimate_person_month) : 0,
             'assignment_member_monthly_estimations' => AssignmentMemberMonthlyEstimationResource::collection($this->monthlyEstimations),
         ];
