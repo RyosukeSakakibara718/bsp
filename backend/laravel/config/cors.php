@@ -1,19 +1,21 @@
 <?php
 
+declare(strict_types=1);
+
 return [
-  'paths' => ['api/*', 'v1/*'],  // CORSを許可するAPIのパス
+    'paths' => ['api/*', 'v1/*'],  // CORSを許可するAPIのパス
 
-  'allowed_methods' => ['*'],    // 許可するHTTPメソッド（GET, POST, PUT, DELETEなど）
+    'allowed_methods' => ['*'],    // 許可するHTTPメソッド（GET, POST, PUT, DELETEなど）
 
-  'allowed_origins' => ['*'],    // 許可するオリジン（ドメイン）。特定のドメインのみ許可する場合は配列で指定
+    'allowed_origins' => ['*'],    // 許可するオリジン（ドメイン）。特定のドメインのみ許可する場合は配列で指定
 
-  'allowed_origins_patterns' => [],
+    'allowed_origins_patterns' => [],
 
-  'allowed_headers' => ['*'],    // 許可するHTTPヘッダー
+    'allowed_headers' => ['*'],    // 許可するHTTPヘッダー
 
-  'exposed_headers' => [],
+    'exposed_headers' => [],
 
-  'max_age' => 0,
+    'max_age' => 0,
 
-  'supports_credentials' => false,
+    'supports_credentials' => false,
 ];

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Database\Factories;
 
 use App\Models\WorkCost;
@@ -15,7 +17,7 @@ class WorkCostFactory extends Factory
         return [
             'project_id' => \App\Models\Project::factory(),
             'assignment_member_id' => \App\Models\AssignmentMember::factory(),
-            'daily_cost' => $this->faker->numberBetween(20000,20000),
+            'daily_cost' => $this->faker->numberBetween(20000, 20000),
             'work_time' => $this->faker->numberBetween(8, 8) . ' hours',
             'work_date' => $this->faker->date(),
             'created_at' => now(),

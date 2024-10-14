@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
@@ -14,7 +16,7 @@ class CommentRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'comment' => ['required', 'string', 'max:1000']
+            'comment' => ['required', 'string', 'max:1000'],
         ];
     }
 }
