@@ -1,6 +1,11 @@
 import React, { useEffect, useState } from "react";
 import TableCaptionRow from "../../../../../src/components/molecules/row/TableCaptionRow";
-import { createHomeComment, deleteHomeComment, getHomeComment, updateHomeComment } from "../../../../api/homeComment";
+import {
+  createHomeComment,
+  deleteHomeComment,
+  getHomeComment,
+  updateHomeComment,
+} from "../../../../api/homeComment";
 import TextArea from "../../../../components/atoms/box/TextArea";
 import Spacer from "../../../../components/atoms/Spacer";
 import { HomeComment, HomeCommentProps } from "../../../../types/home";
@@ -18,7 +23,7 @@ const CommentBox = ({ projectId }: HomeCommentProps) => {
   const [editStates, setEditStates] = useState<Record<number, boolean>>({});
   const [newComment, setNewComment] = useState<string>("");
   const [isAdding, setIsAdding] = useState(false);
-  const [isNew] = useState(true)
+  const [isNew] = useState(true);
 
   useEffect(() => {
     if (projectId) {
@@ -55,11 +60,7 @@ const CommentBox = ({ projectId }: HomeCommentProps) => {
   const handleSaveComment = async (id: number) => {
     const commentToSave = homeComment.find(comment => comment.id === id);
     if (commentToSave && projectId) {
-      await updateHomeComment(
-        projectId,
-        id,
-        commentToSave.comment,
-      );
+      await updateHomeComment(projectId, id, commentToSave.comment);
     }
   };
   const handleNewCommentChange = (value: string) => {
@@ -106,28 +107,28 @@ const CommentBox = ({ projectId }: HomeCommentProps) => {
       </button>
       {isAdding && (
         <div className="overflow-hidden rounded-lg border-2 my-2">
-        <table className="min-w-full divide-y rounded-lg">
-              <thead>
-                <TableCaptionRow
-                  value={`コメント`}
-                  isHome={true}
-                  projectId={projectId}
-                  handleAddComment={handleAddComment}
-                  isNew={isNew}
-                />
-              </thead>
-              <tbody>
-                <tr>
-                  <td className="p-4">
-                    <TextArea
-                      value={newComment}
-                        onChange={(e) => handleNewCommentChange(e.target.value)}
-                      isEdit={true}
-                    />
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+          <table className="min-w-full divide-y rounded-lg">
+            <thead>
+              <TableCaptionRow
+                value={`コメント`}
+                isHome={true}
+                projectId={projectId}
+                handleAddComment={handleAddComment}
+                isNew={isNew}
+              />
+            </thead>
+            <tbody>
+              <tr>
+                <td className="p-4">
+                  <TextArea
+                    value={newComment}
+                    onChange={e => handleNewCommentChange(e.target.value)}
+                    isEdit={true}
+                  />
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       )}
       {homeComment.map(comment => (

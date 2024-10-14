@@ -15,12 +15,12 @@ export const getHomeComment = async (ProjectId: number): Promise<any> => {
 
 export const createHomeComment = async (
   projectId: number,
-  newComment: string
+  newComment: string,
 ): Promise<boolean> => {
   try {
     const response = await axios.post(
       `http://localhost/v1/projects/${projectId}/comments`,
-      { comment: newComment }
+      { comment: newComment },
     );
     return response.status === 201;
   } catch (error) {
@@ -29,14 +29,13 @@ export const createHomeComment = async (
   }
 };
 
-
 export const deleteHomeComment = async (
   projectId: number,
-  commentId: number
+  commentId: number,
 ): Promise<boolean> => {
   try {
     await axios.delete(
-      `http://localhost/v1/projects/${projectId}/comments/${commentId}`
+      `http://localhost/v1/projects/${projectId}/comments/${commentId}`,
     );
     return true;
   } catch (error) {
@@ -48,12 +47,12 @@ export const deleteHomeComment = async (
 export const updateHomeComment = async (
   projectId: number,
   commentId: number,
-  newComment: string
+  newComment: string,
 ): Promise<boolean> => {
   try {
     const response = await axios.put(
       `http://localhost/v1/projects/${projectId}/comments/${commentId}`,
-      { comment: newComment }
+      { comment: newComment },
     );
     return response.status === 201;
   } catch (error) {
