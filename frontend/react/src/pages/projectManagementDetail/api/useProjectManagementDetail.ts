@@ -16,36 +16,39 @@ export const editProjectManagementDetail = (
   projectDetail: any,
   id?: number,
 ): Promise<boolean> => {
+  console.log('0');
   if(id) {
-    // return fetch(`http://localhost/v1/projects/${id}`, {
-    //   method: "POST",
-    //   headers: {
-    //     "X-HTTP-Method-Override": "PUT",
-    //     "Content-Type": "application/json", // リクエストのContent-TypeをJSONに設定
-    //   },
-    //   body: JSON.stringify(projectDetail), // JavaScriptオブジェクトをJSON文字列に変換してリクエストボディに設定
-    // })
-    //   .then(response => {
-    //     if (!response.ok) {
-    //       throw new Error("Network response was not ok");
-    //     }
-    //     return true;
-    //   })
-    //   .then(data => {
-    //     return data; // 必要に応じてデータを返す
-    //   })
-    //   .catch(error => {
-    //     throw error; // エラーを再スローして呼び出し元でも処理できるようにする
-    //   });
-    
-    
+    console.log('test 1');
+    return fetch(`http://localhost/v1/projects/${id}`, {
+      method: "POST",
+      headers: {
+        "X-HTTP-Method-Override": "PUT",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(projectDetail),
+    })
+      .then(response => {
+        console.log('test 2');
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return true;
+      })
+      .then(data => {
+        console.log('test 3');
+        return data;
+      })
+      .catch(error => {
+        console.log('test 4');
+        throw error;
+      });
   }else{
     return fetch(`http://localhost/v1/projects`, {
       method: "POST",
       headers: {
-        "Content-Type": "application/json", // リクエストのContent-TypeをJSONに設定
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify(projectDetail), // JavaScriptオブジェクトをJSON文字列に変換してリクエストボディに設定
+      body: JSON.stringify(projectDetail),
     })
       .then(response => {
         if (!response.ok) {
@@ -54,11 +57,10 @@ export const editProjectManagementDetail = (
         return true;
       })
       .then(data => {
-        return data; // 必要に応じてデータを返す
+        return data;
       })
       .catch(error => {
-        throw error; // エラーを再スローして呼び出し元でも処理できるようにする
+        throw error;
       });
-    console.log('test下');
   }
 };

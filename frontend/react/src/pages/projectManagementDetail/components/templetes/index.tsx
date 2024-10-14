@@ -46,8 +46,7 @@ const ProjectDetail: React.FC<{ id?: string }> = () => {
   /**
    * 案件情報登録用のstate作成
    */
-  const [projectInfo, setProjectInfo] =
-    useState<ProjectInfomation>(initialProjectInfo);
+  const [projectInfo, setProjectInfo] = useState<ProjectInfomation>(initialProjectInfo);
 
   /**
    * 案件情報登録用のstate変更用関数
@@ -64,6 +63,7 @@ const ProjectDetail: React.FC<{ id?: string }> = () => {
   
     // projects_data フィールドか estimations フィールドかを区別する
     if (name in projectInfo.projects_data) {
+      console.log('projectInfo.projects_data: ', projectInfo.projects_data);
       setProjectInfo(prevState => ({
         ...prevState,
         projects_data: {
@@ -292,10 +292,9 @@ const ProjectDetail: React.FC<{ id?: string }> = () => {
   const handleRegister = () => {
     // 登録処理をここに記述
     if (id){
-      console.log(`id: ${id} のrequest: `, request);
-      console.log(request);
+      // console.log(`id: ${id} のrequest: `, request);
+      console.log(`idの値は: ${id}`);
       editProjectManagementDetail(request, Number(id))
-        .catch(error => console.error("Error:", error));
     }else{
       console.log(request);
       editProjectManagementDetail(request)
@@ -309,16 +308,20 @@ const ProjectDetail: React.FC<{ id?: string }> = () => {
           if (members !== null) {
             setResponse(members); // データがnullでない場合にセット
             console.log("APIからのデータ :", members.project.assignment_members);
+            
+            // 'id' を除外した projects_data を作成
+            const { id: projectId, ...otherProjectData } = members.project.projects_data;
+  
             setProjectInfo(prevProjectInfo => ({
               ...prevProjectInfo,
               projects_data: {
                 ...prevProjectInfo.projects_data,
-                ...members.project.projects_data,  // 全てのプロパティを展開し、必要に応じて上書き
-                start_date: members.project.projects_data.start_date 
-                  ? members.project.projects_data.start_date.split('T')[0]
+                ...otherProjectData,  // 'id' を除いた他のプロパティを展開
+                start_date: otherProjectData.start_date 
+                  ? otherProjectData.start_date.split('T')[0]
                   : prevProjectInfo.projects_data.start_date,
-                end_date: members.project.projects_data.end_date 
-                  ? members.project.projects_data.end_date.split('T')[0]
+                end_date: otherProjectData.end_date 
+                  ? otherProjectData.end_date.split('T')[0]
                   : prevProjectInfo.projects_data.end_date,
               },
               estimations: {
@@ -335,6 +338,7 @@ const ProjectDetail: React.FC<{ id?: string }> = () => {
         });
     }
   }, []);
+  
 
   return (
     <>
