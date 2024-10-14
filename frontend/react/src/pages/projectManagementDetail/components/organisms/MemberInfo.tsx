@@ -94,7 +94,7 @@ const MemberInfo: React.FC<MemberInfoProps> = ({
                     </tr>
                   </thead>
                   <tbody>
-                    {assignmentMembersInfo.map((info) => (
+                    {assignmentMembersInfo.map(info => (
                       <TotalCostArea info={info} />
                     ))}
                   </tbody>

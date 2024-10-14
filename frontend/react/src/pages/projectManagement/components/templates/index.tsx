@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 import AddOpenButton from "../../../../components/atoms/button/AddOpenButton";
 import Spacer from "../../../../components/atoms/Spacer";
+import Loading from "../../../../components/molecules/Loading";
 import SearchBar from "../../../../components/molecules/SearchBar";
 import TableHeader from "../../../../components/molecules/TableHeader";
 import {
@@ -13,7 +14,6 @@ import { getProjectsAll, deleteProjects } from "../../../../hooks/useProjects";
 import { ProjectData, ProjectDataProps } from "../../../../types/project";
 import DeleteModal from "../molecules/modal/DeleteModal";
 import TableRow from "../molecules/row/TableRow";
-import Loading from "../../../../components/molecules/Loading";
 
 /**
  *  案件の一覧を表示し・検索できるコンポーネント。
@@ -120,10 +120,8 @@ const ProjectManagement: React.FC<ProjectDataProps> = ({ data }) => {
   };
 
   if (loading) {
-    return (
-      <Loading />
-    );
-  };
+    return <Loading />;
+  }
 
   return (
     <>

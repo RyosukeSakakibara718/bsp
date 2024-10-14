@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+
+import BigSelectBox from "../../../../components/atoms/box/BigSelectBox";
 import SmallSelectBox from "../../../../components/atoms/box/SmallSelectBox";
 import AddButton from "../../../../components/atoms/button/AddButton";
 import Spacer from "../../../../components/atoms/Spacer";
@@ -19,7 +21,6 @@ import {
 import { countBusinessDaysInMonth } from "../../../../utils/projectsAchievements";
 import ProjectArchiveBody from "../molecules/row/ProjectArchiveBody";
 import ProjectArchiveHeader from "../molecules/row/ProjectArchiveHeader";
-import BigSelectBox from "../../../../components/atoms/box/BigSelectBox";
 
 const ProjectsAchievements = () => {
   const [projectData, setProjectData] = useState<ProjectAchievementsData>(
@@ -420,7 +421,7 @@ const ProjectsAchievements = () => {
     <>
       <Spacer height="40px" />
       <div className="text-left">
-        <BigSelectBox optionArray={ProjectName} handleSelectChange={() => {}}/>
+        <BigSelectBox optionArray={ProjectName} handleSelectChange={() => {}} />
       </div>
       <Spacer height="20px" />
       <div className="text-right">
