@@ -15,6 +15,7 @@ use App\UseCases\Project\UpdateAction;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use phpDocumentor\Reflection\Types\Boolean;
 
 class ProjectController extends Controller
 {
@@ -23,14 +24,18 @@ class ProjectController extends Controller
      */
     public function index(IndexAction $action, Request $request): JsonResponse
     {
+        $fetchAll = filter_var($request->input('fetchAll'), FILTER_VALIDATE_BOOLEAN);
         // プロジェクト名で検索
         $searchQuery = $request->only(['name']);
 
         $cursor = $request->input('cursor');
 
         // IndexActionに検索クエリを渡してプロジェクトを取得
-        $projects = $action($searchQuery, $cursor);
+        $projects = $action($searchQuery, $cursor, $fetchAll);
 
+        if($fetchAll){
+            return response()->json(ProjectResource::collection($projects), 200);
+        }
 
         // 直接返す
         return response()->json([
