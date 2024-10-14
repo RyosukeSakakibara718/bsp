@@ -1,10 +1,13 @@
 import React from "react";
 import { MdOutlineModeEdit, MdDeleteOutline } from "react-icons/md";
+import { deleteHomeComment } from "../../../api/homeComment";
 
 type TableCaptionRowProps = {
   value: string;
   isHome?: boolean;
   isEdit?: boolean;
+  commentId?: number;
+  projectId?: number;
   setIsEdit?: React.Dispatch<React.SetStateAction<boolean>> | undefined;
 };
 
@@ -21,6 +24,8 @@ const TableCaptionRow: React.FC<TableCaptionRowProps> = ({
   isHome,
   isEdit,
   setIsEdit,
+  commentId,
+  projectId,
 }: TableCaptionRowProps): JSX.Element => {
   const handleEditClick = () => {
     if (setIsEdit) setIsEdit(!isEdit);
@@ -35,8 +40,9 @@ const TableCaptionRow: React.FC<TableCaptionRowProps> = ({
   };
 
   const handleDeleteClick = () => {
-    // TODOここでコメント削除API
-    alert("削除しました。");
+    if (projectId && commentId) { 
+      deleteHomeComment(projectId,commentId)
+    }
   };
   return (
     <tr>

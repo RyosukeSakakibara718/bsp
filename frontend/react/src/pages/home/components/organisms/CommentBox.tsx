@@ -66,6 +66,8 @@ const CommentBox = ({ projectId }: HomeCommentProps) => {
                   isHome={true}
                   isEdit={editStates[comment.id]}
                   setIsEdit={() => toggleEditState(comment.id)}
+                  commentId={comment.id}
+                  projectId={projectId}
                 />
               </thead>
               <tbody>
