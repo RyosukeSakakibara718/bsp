@@ -19,10 +19,8 @@ class ProjectAchievementResource extends JsonResource
         return [
             'project' => [
                 'id' => $this->id,
-                'assignment_members' => [
-                    AchievementAssignmentMemberResource::collection($this->assignmentMembers),
-                ],
-            ],
+                'assignment_members' => AchievementAssignmentMemberResource::collection($this->assignmentMembers)
+            ]
         ];
     }
 }
