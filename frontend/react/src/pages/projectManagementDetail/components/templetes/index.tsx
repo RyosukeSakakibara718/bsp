@@ -63,7 +63,6 @@ const ProjectDetail: React.FC<{ id?: string }> = () => {
   
     // projects_data フィールドか estimations フィールドかを区別する
     if (name in projectInfo.projects_data) {
-      console.log('projectInfo.projects_data: ', projectInfo.projects_data);
       setProjectInfo(prevState => ({
         ...prevState,
         projects_data: {
@@ -98,7 +97,7 @@ const ProjectDetail: React.FC<{ id?: string }> = () => {
    * 初回レンダリングにメンバー一覧を取得
    */
   useEffect(() => {
-    getMemberList(setMemberName);
+    getMemberList(setMemberName);    
   }, []);
 
   /**
@@ -160,7 +159,9 @@ const ProjectDetail: React.FC<{ id?: string }> = () => {
       prevState.map((member, index) => {
         if (index !== memberIndex) return member; // 他のメンバーのデータはそのまま保持
   
-        console.log('member変更前: ', member);
+        // 該当するメンバーの base_cost を memberName から取得し、デフォルト値は 0
+        const selectedMember = memberName.find(m => m.id === member.member_id);
+      const baseCost = selectedMember?.base_cost ?? 0;
   
         // 現在のメンバーの月別データを更新
         const existingEstimationIndex =
@@ -177,7 +178,7 @@ const ProjectDetail: React.FC<{ id?: string }> = () => {
                 ? {
                     ...estimation,
                     estimate_person_month: value, // 人月を更新
-                    estimate_cost: Math.ceil(member.base_cost * value), // 見積もりコストを整数に切り上げ
+                    estimate_cost: Math.ceil(baseCost * value), // 見積もりコストを整数に切り上げ
                   }
                 : estimation,
           );
@@ -188,7 +189,7 @@ const ProjectDetail: React.FC<{ id?: string }> = () => {
             {
               target_month: monthIndex,
               estimate_person_month: value,
-              estimate_cost: Math.ceil(member.base_cost * value), // 見積もりコストを整数に切り上げ
+              estimate_cost: Math.ceil(baseCost * value), // 見積もりコストを整数に切り上げ
             },
           ];
         }
@@ -204,10 +205,11 @@ const ProjectDetail: React.FC<{ id?: string }> = () => {
           ...member,
           assignment_member_monthly_estimations: updatedEstimations,
           estimate_total_person_month: totalPersonMonth, // 合計値を反映
+          base_cost: baseCost, 
         };
       }),
     );
-  };  
+  };
   
 
   // 案件開始日~終了日の中に含まれる月を要素として持つ配列
@@ -223,6 +225,7 @@ const ProjectDetail: React.FC<{ id?: string }> = () => {
    */
   const [outsourcingInfo, setOutsourcingInfo] = useState<Outsource[]>([
     {
+      id: undefined,
       name: "",
       estimate_cost: undefined,
       cost: undefined,
@@ -294,7 +297,6 @@ const ProjectDetail: React.FC<{ id?: string }> = () => {
     if (id){
       editProjectManagementDetail(request, Number(id))
     }else{
-      console.log(request);
       editProjectManagementDetail(request)
     }
   };
@@ -303,10 +305,9 @@ const ProjectDetail: React.FC<{ id?: string }> = () => {
     if (id) {
       getProjectManagementDetail(id)
         .then(members => {
+          console.log('members: ', members);
           if (members !== null) {
             setResponse(members); // データがnullでない場合にセット
-            console.log("APIからのデータ :", members.project.assignment_members);
-            
             // 'id' を除外した projects_data を作成
             const { id: projectId, ...otherProjectData } = members.project.projects_data;
   

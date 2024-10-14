@@ -27,11 +27,11 @@ const Outsources: React.FC<OutsourcesProps> = ({
       {formData.map((item, index) => (
         <tr
           key={index}
-          className="font-bold px-4 py-3 text-left border-b border-[#e1cfff] text-gray-800 whitespace-nowrap"
+          className="px-4 py-3 text-left border-b border-[#e1cfff] text-gray-800 whitespace-nowrap"
         >
           <td>
             <td
-              className={`font-bold px-4 py-3 text-left text-gray-800 w-full`}
+              className={`px-4 py-3 text-left text-gray-800 w-full`}
               style={{ display: "flex", alignItems: "center" }}
             >
               <input
@@ -46,7 +46,7 @@ const Outsources: React.FC<OutsourcesProps> = ({
           </td>
           <td>
             <td
-              className={`font-bold px-4 py-3 text-left text-gray-800 w-full`}
+              className={`px-4 py-3 text-left text-gray-800 w-full`}
               style={{ display: "flex", alignItems: "center" }}
             >
               <input
@@ -61,7 +61,7 @@ const Outsources: React.FC<OutsourcesProps> = ({
           </td>
           <td>
             <td
-              className={`font-bold px-4 py-3 text-left text-gray-800 w-full`}
+              className={`px-4 py-3 text-left text-gray-800 w-full`}
               style={{ display: "flex", alignItems: "center" }}
             >
               <input
