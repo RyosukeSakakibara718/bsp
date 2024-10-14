@@ -85,6 +85,7 @@ class UpdateAction
                                 'project_id' => $id,
                             ],
                             [
+                                'name' => $outsourceData['name'],
                                 'estimate_cost' => $outsourceData['estimate_cost'],
                                 'cost' => $outsourceData['cost'],
                             ]
