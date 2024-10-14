@@ -62,7 +62,7 @@ class UpdateAction
                             foreach ($assignmentMemberData['assignment_member_monthly_estimations'] as $monthlyEstimation) {
                                 $assignmentMember->monthlyEstimations()->updateOrCreate(
                                     [
-                                        'assignment_member_id' => AssignmentMember::where('member_id', $assignmentMemberData['member_id'])->id,
+                                        'assignment_member_id' => AssignmentMember::where('member_id', $assignmentMemberData['member_id'])->first()->id,
                                         'target_month' => $monthlyEstimation['target_month'],
                                     ],
                                     [
