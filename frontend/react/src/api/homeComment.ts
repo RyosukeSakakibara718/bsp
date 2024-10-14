@@ -28,3 +28,20 @@ export const deleteHomeComment = async (
     return false;
   }
 };
+
+export const updateHomeComment = async (
+  projectId: number,
+  commentId: number,
+  newComment: string
+): Promise<boolean> => {
+  try {
+    const response = await axios.put(
+      `http://localhost/v1/projects/${projectId}/comments/${commentId}`,
+      { comment: newComment }
+    );
+    return response.status === 201;
+  } catch (error) {
+    console.error("Error updating comment:", error);
+    return false;
+  }
+};

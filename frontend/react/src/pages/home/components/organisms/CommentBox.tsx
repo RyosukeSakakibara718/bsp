@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
-
 import TableCaptionRow from "../../../../../src/components/molecules/row/TableCaptionRow";
-import { getHomeComment } from "../../../../api/homeComment";
+import { getHomeComment, updateHomeComment } from "../../../../api/homeComment";
 import TextArea from "../../../../components/atoms/box/TextArea";
 import Spacer from "../../../../components/atoms/Spacer";
 import { HomeComment, HomeCommentProps } from "../../../../types/home";
@@ -50,6 +49,17 @@ const CommentBox = ({ projectId }: HomeCommentProps) => {
     }));
   };
 
+  const handleSaveComment = async (id: number) => {
+    const commentToSave = homeComment.find(comment => comment.id === id);
+    if (commentToSave && projectId) {
+      await updateHomeComment(
+        projectId,
+        id,
+        commentToSave.comment,
+      );
+    }
+  };
+
   if (loading) {
     return <div>Loading...</div>;
   }
@@ -62,12 +72,13 @@ const CommentBox = ({ projectId }: HomeCommentProps) => {
             <table className="min-w-full divide-y rounded-lg">
               <thead>
                 <TableCaptionRow
-                  value={`コメント (user名2024/01/01)`}
+                  value={`コメント`}
                   isHome={true}
                   isEdit={editStates[comment.id]}
                   setIsEdit={() => toggleEditState(comment.id)}
                   commentId={comment.id}
                   projectId={projectId}
+                  handleSaveComment={handleSaveComment}
                 />
               </thead>
               <tbody>
