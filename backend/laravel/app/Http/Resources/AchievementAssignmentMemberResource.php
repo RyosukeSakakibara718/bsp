@@ -17,9 +17,8 @@ class AchievementAssignmentMemberResource extends JsonResource
         return [
             'member_id' => $this->member_id,
             'position' => $this->position,
-            'work_costs' => [
-                WorkCostResource::collection($this->workCosts)
-            ]
+            'base_cost' => $this->getMemberBaseCost(),
+            'work_costs' => WorkCostResource::collection($this->workCosts)
         ];
     }
 }
