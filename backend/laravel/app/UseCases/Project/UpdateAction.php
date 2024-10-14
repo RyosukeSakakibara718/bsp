@@ -59,10 +59,11 @@ class UpdateAction
 
                         // 月次見積もりデータを更新
                         if (isset($assignmentMemberData['assignment_member_monthly_estimations'])) {
+                            $assignmentMember = AssignmentMember::where('member_id', $assignmentMemberData['member_id'])->first();
                             foreach ($assignmentMemberData['assignment_member_monthly_estimations'] as $monthlyEstimation) {
                                 $assignmentMember->monthlyEstimations()->updateOrCreate(
                                     [
-                                        'assignment_member_id' => AssignmentMember::where('member_id', $assignmentMemberData['member_id'])->first()->id,
+                                        'assignment_member_id' => $assignmentMember->id,
                                         'target_month' => $monthlyEstimation['target_month'],
                                     ],
                                     [
