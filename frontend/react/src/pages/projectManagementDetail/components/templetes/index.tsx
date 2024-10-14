@@ -314,10 +314,10 @@ const ProjectDetail: React.FC<{ id?: string }> = () => {
                 ...prevProjectInfo.projects_data,
                 ...members.project.projects_data,  // 全てのプロパティを展開し、必要に応じて上書き
                 start_date: members.project.projects_data.start_date 
-                  ? new Date(members.project.projects_data.start_date)
+                  ? members.project.projects_data.start_date
                   : prevProjectInfo.projects_data.start_date,
                 end_date: members.project.projects_data.end_date 
-                  ? new Date(members.project.projects_data.end_date)
+                  ? members.project.projects_data.end_date
                   : prevProjectInfo.projects_data.end_date,
               },
               estimations: {
