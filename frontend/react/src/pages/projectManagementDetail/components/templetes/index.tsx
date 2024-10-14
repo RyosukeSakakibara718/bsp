@@ -292,8 +292,9 @@ const ProjectDetail: React.FC<{ id?: string }> = () => {
   const handleRegister = () => {
     // 登録処理をここに記述
     if (id){
-      console.log('idあり: ', id);
-      editProjectManagementDetail(request, id)
+      console.log(`id: ${id} のrequest: `, request);
+      console.log(request);
+      editProjectManagementDetail(request, Number(id))
         .catch(error => console.error("Error:", error));
     }else{
       console.log(request);
@@ -314,10 +315,10 @@ const ProjectDetail: React.FC<{ id?: string }> = () => {
                 ...prevProjectInfo.projects_data,
                 ...members.project.projects_data,  // 全てのプロパティを展開し、必要に応じて上書き
                 start_date: members.project.projects_data.start_date 
-                  ? members.project.projects_data.start_date
+                  ? members.project.projects_data.start_date.split('T')[0]
                   : prevProjectInfo.projects_data.start_date,
                 end_date: members.project.projects_data.end_date 
-                  ? members.project.projects_data.end_date
+                  ? members.project.projects_data.end_date.split('T')[0]
                   : prevProjectInfo.projects_data.end_date,
               },
               estimations: {
