@@ -129,8 +129,6 @@ const Home: React.FC = () => {
       </div>
       <Spacer height="40px"></Spacer>
       <CommentBox projectId={projectId} />
-      <Spacer height="40px" />
-      <CommentBox projectId={projectId} />
     </div>
   );
 };

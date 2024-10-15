@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -7,8 +9,6 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
- * 
- *
  * @property int $id
  * @property int $project_id
  * @property string $name 名前
@@ -18,6 +18,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property \Illuminate\Support\Carbon|null $deleted_at
  * @property-read \App\Models\Project $project
+ *
  * @method static \Illuminate\Database\Eloquent\Builder|Outsource newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Outsource newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Outsource onlyTrashed()
@@ -32,6 +33,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Eloquent\Builder|Outsource whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Outsource withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder|Outsource withoutTrashed()
+ *
  * @mixin \Eloquent
  */
 class Outsource extends Model

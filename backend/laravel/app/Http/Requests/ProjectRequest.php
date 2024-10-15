@@ -48,7 +48,6 @@ class ProjectRequest extends FormRequest
         ];
     }
 
-
     public function messages()
     {
         return [
