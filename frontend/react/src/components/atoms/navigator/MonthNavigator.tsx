@@ -38,7 +38,7 @@ const MonthNavigater: React.FC<MonthNavigaterProps> = ({
         return (
           <th key={index} style={style} className="w-[10%]">
             {date.day}
-            {between.id !== 1 && ' ~'}
+            {between.id !== 1 && " ~"}
           </th>
         );
       })}

@@ -15,7 +15,7 @@ class ShowAction
         // プロジェクトをIDで検索
         $project = Project::find($id);
 
-        if (!$project) {
+        if (! $project) {
             throw new ModelNotFoundException('Project not found');
         }
 

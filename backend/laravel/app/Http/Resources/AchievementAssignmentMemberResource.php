@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Resources;
 
 use Illuminate\Http\Request;
@@ -17,9 +19,7 @@ class AchievementAssignmentMemberResource extends JsonResource
         return [
             'member_id' => $this->member_id,
             'position' => $this->position,
-            'work_costs' => [
-                WorkCostResource::collection($this->workCosts)
-            ]
+            'work_costs' => WorkCostResource::collection($this->workCosts)
         ];
     }
 }

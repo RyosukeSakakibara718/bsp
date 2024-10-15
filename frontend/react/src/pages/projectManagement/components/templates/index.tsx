@@ -119,10 +119,8 @@ const ProjectManagement: React.FC<ProjectDataProps> = ({ data }) => {
   };
 
   if (loading) {
-    return (
-      <Loading />
-    );
-  };
+    return <Loading />;
+  }
 
   return (
     <>

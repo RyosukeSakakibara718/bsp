@@ -137,23 +137,27 @@ const MemberTable: React.FC = () => {
    * fetchが完了するまで表示するDOM
    */
   if (loading) {
-    return (
-      <Loading />
-    );
+    return <Loading />;
   }
   /**
    * 編集モーダル内で値が変更された際にstateを変更する関数
    * @param {string} fieldName - 変更する値のフィールド
    * @param {string | number} value - 変更する値
    */
-  const handleValueChange = (fieldName: string, value: string | number) => {
+  const handleValueChange = (
+    fieldName: string,
+    value: string | number | Date,
+  ) => {
     setTargetData(prevData => ({
       ...prevData,
       [fieldName]: value, // フィールド名をキーとして、新しい値をセット
     }));
   };
 
-  const handleAddValueChange = (fieldName: string, value: string | number) => {
+  const handleAddValueChange = (
+    fieldName: string,
+    value: string | number | Date,
+  ) => {
     setAddData(prevData => ({
       ...prevData,
       [fieldName]: value, // フィールド名をキーとして、新しい値をセット

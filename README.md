@@ -28,6 +28,13 @@ $ docker-compose exec apache bash
     ※ 失敗した場合
     # php artisan migrate:fresh
 # exit
+
+### 自動化
+cd sh
+$ ./migration.sh
+
+permissionエラー時 chmod +x migration.sh
+
 ```
 
 ## 5. dbコンテナからマイグレーションされたテーブルを確認する

@@ -4,10 +4,11 @@ declare(strict_types=1);
 
 namespace App\Http\Requests;
 
-use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Contracts\Validation\Validator;
-use Illuminate\Http\Exceptions\HttpResponseException;
 use Carbon\Carbon;
+use Exception;
+use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Support\Facades\Log;
 
 class ProjectAchievementRequest extends FormRequest
@@ -28,11 +29,11 @@ class ProjectAchievementRequest extends FormRequest
                     try {
                         // work_date の日付形式を YYYY/MM/DD から YYYY-MM-DD に変換
                         $workCost['work_date'] = Carbon::createFromFormat('Y/m/d', $workCost['work_date'])->format('Y-m-d');
-                    } catch (\Exception $e) {
+                    } catch (Exception $e) {
                         // 日付フォーマットが不正な場合にログを記録
                         Log::error('Invalid date format', [
                             'work_date' => $workCost['work_date'],
-                            'error' => $e->getMessage()
+                            'error' => $e->getMessage(),
                         ]);
                     }
                 }

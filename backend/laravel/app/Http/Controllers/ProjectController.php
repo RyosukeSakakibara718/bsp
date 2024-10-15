@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProjectRequest;
-use App\Http\Resources\ProjectResource;
 use App\Http\Resources\ProjectDetailResource;
+use App\Http\Resources\ProjectResource;
 use App\UseCases\Project\DestroyAction;
 use App\UseCases\Project\IndexAction;
 use App\UseCases\Project\ShowAction;
@@ -31,12 +31,11 @@ class ProjectController extends Controller
         // IndexActionに検索クエリを渡してプロジェクトを取得
         $projects = $action($searchQuery, $cursor);
 
-
         // 直接返す
         return response()->json([
             'projects' => ProjectResource::collection($projects),
-            'next_cursor' => $projects->nextCursor(),
-            'previous_cursor' => $projects->previousCursor(),
+            'next_cursor' => $projects->nextCursor() ? $projects->nextCursor()->encode() : null,
+            'previous_cursor' => $projects->previousCursor() ? $projects->previousCursor()->encode() : null,
         ], 200);
     }
 
