@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 
 import AddButton from "../../../../components/atoms/button/AddButton";
 import Spacer from "../../../../components/atoms/Spacer";
@@ -291,15 +291,27 @@ const ProjectDetail: React.FC<{ id?: string }> = () => {
 
   //-----------------------------------------------------------------------------------------------------------------------------
 
+  const navigate = useNavigate();
+
   /**
    * 登録処理
    */
-  const handleRegister = () => {
-    // 登録処理をここに記述
-    if (id) {
-      editProjectManagementDetail(request, Number(id));
-    } else {
-      editProjectManagementDetail(request);
+  const handleRegister = async () => {
+    try {
+      // 登録処理をここに記述
+      if (id) {
+        await editProjectManagementDetail(request, Number(id));
+      } else {
+        await editProjectManagementDetail(request);
+      }
+      if(id){
+        alert('修正が完了しました');
+      }else{
+        alert('登録が完了しました');
+      }
+      navigate('/projectManagement');
+    } catch (error) {
+      console.error('エラーが発生しました', error);
     }
   };
 
@@ -340,6 +352,7 @@ const ProjectDetail: React.FC<{ id?: string }> = () => {
 
   return (
     <>
+      <button onClick={() => console.log(request)}>確認</button>
       <Spacer height="30px" />
       <ProjectInfo
         projectInfo={projectInfo}
@@ -368,7 +381,10 @@ const ProjectDetail: React.FC<{ id?: string }> = () => {
       />
       <Spacer height="40px" />
       <div className="justify-center">
-        <AddButton buttonText="登録する" handleClick={handleRegister} />
+        {id
+        ? <AddButton buttonText="編集する" handleClick={handleRegister} />
+        : <AddButton buttonText="登録する" handleClick={handleRegister} />
+        }
       </div>
     </>
   );

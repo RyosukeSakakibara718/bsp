@@ -55,7 +55,7 @@ const Outsources: React.FC<OutsourcesProps> = ({
                 value={item.estimate_cost}
                 placeholder="¥"
                 onChange={e => handleInputChange(index, e)}
-                className="border rounded py-2 w-fill-available text-xl"
+                className="border rounded p-2 w-fill-available text-xl"
               />
             </td>
           </td>
@@ -70,7 +70,7 @@ const Outsources: React.FC<OutsourcesProps> = ({
                 value={item.cost}
                 placeholder="¥"
                 onChange={e => handleInputChange(index, e)}
-                className="border rounded py-2 w-fill-available text-xl"
+                className="border rounded p-2 w-fill-available text-xl"
               />
             </td>
           </td>

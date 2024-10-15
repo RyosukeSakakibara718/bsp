@@ -34,7 +34,7 @@ const InputDateColumn: React.FC<InputDateColumnProps> = ({
           name={name}
           value={formatDateToYMD(value)}
           onChange={handleInputChange}
-          className="border rounded py-2 w-full text-xl"
+          className="border rounded p-2 w-full text-xl"
         />
       </td>
     </div>
