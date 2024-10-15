@@ -95,9 +95,7 @@ const Home: React.FC = () => {
   }, [selectedProject]);
 
   if (loading) {
-    return (
-      <Loading />
-    );
+    return <Loading />;
   }
 
   return (
@@ -108,7 +106,7 @@ const Home: React.FC = () => {
         handleSelectChange={handleSelectChange}
         selectedProject={selectedProject}
       />
-      <Spacer height="40px"/>
+      <Spacer height="40px" />
       <div style={{ display: "flex", gap: "40px" }}>
         <OrderInfo estimation={estimation} />
         <EstimatedLanding foreCast={foreCast} />
@@ -131,8 +129,6 @@ const Home: React.FC = () => {
       </div>
       <Spacer height="40px"></Spacer>
       <CommentBox projectId={projectId} />
-      <Spacer height="40px" />
-      <CommentBox projectId={projectId}/>
     </div>
   );
 };

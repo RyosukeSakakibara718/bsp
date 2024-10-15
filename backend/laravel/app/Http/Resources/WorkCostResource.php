@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Resources;
 
 use Illuminate\Http\Request;
@@ -17,8 +19,8 @@ class WorkCostResource extends JsonResource
         return [
             'id' => $this->id,
             'daily_cost' => $this->daily_cost,
-            'work_time' => $this->daily_cost,
-            'work_date' => $this->daily_cost,
+            'work_time' => $this->work_time,
+            'work_date' => $this->work_date,
         ];
     }
 }

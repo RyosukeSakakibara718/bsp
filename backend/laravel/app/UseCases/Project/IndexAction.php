@@ -7,7 +7,6 @@ namespace App\UseCases\Project;
 use App\Models\Project;
 use Carbon\Carbon;
 
-
 class IndexAction
 {
     public function __invoke(array $searchQuery = [], $cursor = null, $fetchAll)
@@ -25,8 +24,6 @@ class IndexAction
             ->orderBy('end_date');
 
         if($fetchAll){
-            logger('入れないよー');
-            logger($fetchAll);
             return Project::all();
         }
 
