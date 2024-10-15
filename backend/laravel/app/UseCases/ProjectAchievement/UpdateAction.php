@@ -6,6 +6,7 @@ namespace App\UseCases\ProjectAchievement;
 
 use App\Http\Requests\ProjectAchievementRequest;
 use App\Models\WorkCost;
+use Exception;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
@@ -34,7 +35,7 @@ class UpdateAction
                         Log::info('Upsert successful', ['workCostData' => $workCostData]);
                     }
                 }
-            } catch (\Exception $e) {
+            } catch (Exception $e) {
                 Log::error('Update or Insert failed', ['error' => $e->getMessage()]);
                 throw $e;
             }

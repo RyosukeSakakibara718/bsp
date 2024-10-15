@@ -1,8 +1,7 @@
+import { optionsArrayProps } from "../../../types/project";
+
 type BigSelectBoxProps = {
-  optionArray: {
-    id: number;
-    label: string;
-  }[];
+  optionArray: optionsArrayProps[];
   labelText?: string;
   handleSelectChange: (value: string) => void;
 };
@@ -27,11 +26,13 @@ const BigSelectBox = ({
         className="border-2 rounded-lg pl-5 pr-20 py-3 text-left"
         name="dateSelect"
         id="dateSelect"
-        defaultValue={optionArray[0]}
+        defaultValue={optionArray[0]?.label}
         onChange={e => handleSelectChange(e.target.value)}
       >
         {optionArray.map(value => (
-          <option value={value}>{value}</option>
+          <option key={value.id} value={value.label}>
+            {value.label}
+          </option>
         ))}
       </select>
     </>

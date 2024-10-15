@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace Database\Seeders;
 
+use App\Constants\PositionConstants;
 use App\Models\AssignmentMember;
+use App\Models\AssignmentMemberMonthlyEstimation;
 use App\Models\Member;
 use App\Models\Project;
 use App\Models\WorkCost;
-use App\Models\AssignmentMemberMonthlyEstimation;
-use App\Constants\PositionConstants;
-use Illuminate\Database\Seeder;
 use Carbon\Carbon;
+use Illuminate\Database\Seeder;
 
 class AssignmentMemberTableSeeder extends Seeder
 {
@@ -62,7 +62,7 @@ class AssignmentMemberTableSeeder extends Seeder
                         'assignment_member_id' => $assignmentMember->id,
                         'target_month' => $currentDate->format('Y/m'), // "YYYY/MM"の形式
                         'estimate_person_month' => $estimate_person_month,
-                        'estimate_cost' => round($estimate_person_month*$base_cost, 0),
+                        'estimate_cost' => round($estimate_person_month * $base_cost, 0),
                         'created_at' => Carbon::now(),
                         'updated_at' => Carbon::now(),
                     ]);

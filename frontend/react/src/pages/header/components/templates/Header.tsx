@@ -26,6 +26,9 @@ const Header: React.FC = () => {
           <Link to="/memberManagement" className="hover:text-gray-300">
             メンバー管理
           </Link>
+          <Link to="/projectsAchievements" className="hover:text-gray-300">
+            案件実績入力
+          </Link>
           <Link to="/logout" className="hover:text-gray-300">
             ログアウト
           </Link>

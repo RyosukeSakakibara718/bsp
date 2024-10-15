@@ -5,10 +5,11 @@ declare(strict_types=1);
 namespace App\UseCases\Project;
 
 use App\Http\Requests\ProjectRequest;
-use App\Models\Project;
-use App\Models\Estimation;
 use App\Models\AssignmentMember;
+use App\Models\Estimation;
 use App\Models\Outsource;
+use App\Models\Project;
+use Exception;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
@@ -63,6 +64,7 @@ class UpdateAction
                                 $assignmentMember->monthlyEstimations()->updateOrCreate(
                                     [
                                         'assignment_member_id' => $assignmentMember->id,
+                                        'estimate_cost' => $monthlyEstimation['estimate_cost'],
                                         'target_month' => $monthlyEstimation['target_month'],
                                     ],
                                     [
@@ -89,7 +91,7 @@ class UpdateAction
                         );
                     }
                 }
-            } catch (\Exception $e) {
+            } catch (Exception $e) {
                 Log::error('プロジェクトの更新中にエラーが発生しました。', ['error' => $e->getMessage()]);
                 throw $e; // トランザクションが自動的にロールバックされます
             }

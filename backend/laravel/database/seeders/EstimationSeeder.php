@@ -1,12 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use App\Models\Project;
 use App\Models\Estimation;
-use Illuminate\Support\Carbon;
+use App\Models\Project;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Carbon;
 
 class EstimationSeeder extends Seeder
 {

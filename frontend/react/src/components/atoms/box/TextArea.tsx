@@ -1,7 +1,30 @@
-const TextArea = () => {
+// TextArea コンポーネント
+const TextArea = ({
+  value,
+  onChange,
+  isEdit,
+}: {
+  value: string;
+  onChange?: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
+  isEdit: boolean;
+}) => {
   return (
     <>
-      <textarea className="p-2 rounded-md w-full" rows={4} />
+      {isEdit ? (
+        <textarea
+          className="p-2 w-full"
+          rows={4}
+          value={value}
+          onChange={onChange}
+        />
+      ) : (
+        <textarea
+          className="p-2 w-full focus:outline-none cursor-default"
+          rows={4}
+          value={value}
+          readOnly
+        />
+      )}
     </>
   );
 };

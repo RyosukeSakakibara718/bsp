@@ -13,6 +13,7 @@ import { getProjectsAll, deleteProjects } from "../../../../hooks/useProjects";
 import { ProjectData, ProjectDataProps } from "../../../../types/project";
 import DeleteModal from "../molecules/modal/DeleteModal";
 import TableRow from "../molecules/row/TableRow";
+import Loading from "../../../../components/molecules/Loading";
 
 /**
  *  案件の一覧を表示し・検索できるコンポーネント。
@@ -118,7 +119,7 @@ const ProjectManagement: React.FC<ProjectDataProps> = ({ data }) => {
   };
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <Loading />;
   }
 
   return (
@@ -130,14 +131,14 @@ const ProjectManagement: React.FC<ProjectDataProps> = ({ data }) => {
           clearSearchValue={clearShowData}
           setShowData={changeShowData}
         />
-        <Spacer height="20px"></Spacer>
+        <Spacer height="20px" />
         <div className="flex justify-end mr-2.5">
           <AddOpenButton
             onOpen={handleAddButtonClick}
             buttonText="案件を追加"
           />
         </div>
-        <Spacer height="20px"></Spacer>
+        <Spacer height="20px" />
         <div className="overflow-hidden rounded-lg shadow-md">
           <table className="min-w-full divide-y divide-gray-200">
             <thead className="bg-gray-50">
@@ -161,7 +162,6 @@ const ProjectManagement: React.FC<ProjectDataProps> = ({ data }) => {
       </div>
       {isDeleteModalOpen && targetData && (
         <div className="fixed inset-0 flex items-center justify-center z-50">
-          <div className="absolute inset-0 bg-black opacity-50"></div>
           <div className="relative bg-white rounded-lg p-8 shadow-lg z-10">
             <DeleteModal
               handleDelete={handleDeleteProjects}

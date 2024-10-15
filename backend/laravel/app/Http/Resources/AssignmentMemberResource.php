@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Resources;
 
 use Illuminate\Http\Request;
@@ -17,7 +19,7 @@ class AssignmentMemberResource extends JsonResource
         return [
             'member_id' => $this->id,
             'position' => $this->position,
-            'estimate_person_month' => $this->estimate_total_person_month,
+            'estimate_person_month' => $this->estimate_person_month !== null ? floatval($this->estimate_person_month) : 0,
             'assignment_member_monthly_estimations' => AssignmentMemberMonthlyEstimationResource::collection($this->monthlyEstimations),
         ];
     }

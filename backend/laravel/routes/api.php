@@ -6,7 +6,7 @@ use App\Http\Controllers\MemberController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\ProjectAchievementController;
+use App\Http\Controllers\ProjectAc
 use Illuminate\Support\Facades\Route;
 
 Route::apiResource('members', MemberController::class);
@@ -15,3 +15,8 @@ Route::apiResource('projects.comments', CommentController::class);
 
 Route::get('/homeInformation/{id}', HomeController::class);
 Route::apiResource('projectsAchievements', ProjectAchievementController::class);
+Route::get('projectsAchievements/{id}', [ProjectAchievementController::class, 'show']);
+Route::put('projectsAchievements', [ProjectAchievementController::class, 'update']);
+Route::apiResource('projects.comments', CommentController::class);
+
+Route::get('/homeInformation/{id}', HomeController::class);

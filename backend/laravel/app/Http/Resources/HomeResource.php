@@ -1,10 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Resources;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
-use App\Http\Resources\HomeAssignmentMemberResource;
 
 class HomeResource extends JsonResource
 {
@@ -32,7 +33,7 @@ class HomeResource extends JsonResource
                 'total_achievement_cost' => $this->achievementCost(),
                 'achievement_person_month' => $this->achievementPersonMonth(),
                 'Remaining_person_month' => $this->remainingPersonMonth(),
-                'graph' => $this->graph()
+                'graph' => $this->graph(),
             ],
             'assignment_members' => HomeAssignmentMemberResource::collection($this->assignmentMembers),
             'outsources' => $this->outsources,

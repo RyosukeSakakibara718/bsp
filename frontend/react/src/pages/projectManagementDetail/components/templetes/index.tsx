@@ -11,11 +11,11 @@ import {
   initialProjectInfo,
   requestBody,
 } from "../../../../data/projectDetail";
+import { getMonthsBetweenDates } from "../../../../hooks";
 import { getMemberList } from "../../hooks/projectDetail";
 import MemberInfo from "../organisms/MemberInfo";
 import OutsourcingInfo from "../organisms/OutsourcingInfo";
 import ProjectInfo from "../organisms/ProjectInfo";
-import { getMonthsBetweenDates } from "../../../../hooks";
 
 import type {
   InitialAssignmentMembers,
@@ -309,7 +309,7 @@ const ProjectDetail: React.FC<{ id?: string }> = () => {
         deleteOutsourcingInfoRow={deleteOutsourcingInfoRow}
         handleAddOutsourcingInfoRow={handleAddOutsourcingInfoRow}
       />
-      <Spacer height="40px"></Spacer>
+      <Spacer height="40px" />
       <div className="justify-center">
         <AddButton buttonText="登録する" handleClick={handleRegister} />
       </div>
