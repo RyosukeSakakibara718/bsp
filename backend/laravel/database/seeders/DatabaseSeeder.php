@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Database\Seeders;
 
+// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
+use App\Models\WorkCost;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -17,9 +20,9 @@ class DatabaseSeeder extends Seeder
             ProjectTableSeeder::class,
             MemberTableSeeder::class,
             AssignmentMemberTableSeeder::class,
-            WorkCostTableSeeder::class,
             CommentSeeder::class,
             EstimationSeeder::class,
+            WorkCostTableSeeder::class
         ]);
     }
 }

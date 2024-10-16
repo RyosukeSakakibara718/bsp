@@ -26,13 +26,7 @@ class ProjectAchievementController extends Controller
 
     public function update(ProjectAchievementRequest $request, int $id, UpdateAction $action): JsonResponse
     {
-        Log::info('Updating project achievement', ['id' => $id]);
-
-        // リクエストデータを取得し、日付を必要に応じて変換
-        $data = $request->all();
-
-        // 更新処理を実行
-        $action($request->merge($data), $id);
+        $action($request->all(), $id);  // ここで$requestをそのまま渡す
 
         return response()->json([], 204);
     }

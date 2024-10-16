@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\UseCases\ProjectAchievement;
 
-use App\Http\Requests\ProjectAchievementRequest;
 use App\Models\WorkCost;
 use Exception;
 use Illuminate\Support\Facades\DB;
@@ -12,14 +11,12 @@ use Illuminate\Support\Facades\Log;
 
 class UpdateAction
 {
-    public function __invoke(ProjectAchievementRequest $request, int $projectId): void
+    public function __invoke(array $requestData, int $projectId): void
     {
-        DB::transaction(function () use ($request, $projectId) {
+        DB::transaction(function () use ($requestData, $projectId) {
             try {
-                // 各メンバーのワークコストをループ処理
-                foreach ($request->validated()['projects']['assignment_members'] as $assignmentMember) {
+                foreach ($requestData['projects']['assignment_members'] as $assignmentMember) {
                     foreach ($assignmentMember['work_costs'] as $workCost) {
-                        // データを準備してupsert
                         $workCostData = [
                             'project_id' => $projectId,
                             'assignment_member_id' => $assignmentMember['assignment_member_id'],
@@ -28,11 +25,10 @@ class UpdateAction
                             'work_time' => $workCost['work_time'],
                         ];
 
-                        // upsert処理
                         WorkCost::upsert(
-                            [$workCostData],  // データの配列
-                            ['project_id', 'assignment_member_id', 'work_date'],  // 一意キー
-                            ['daily_cost', 'work_time']  // 更新するカラム
+                            [$workCostData],
+                            ['project_id', 'assignment_member_id', 'work_date'],
+                            ['daily_cost', 'work_time']
                         );
 
                         Log::info('Upsert successful', ['workCostData' => $workCostData]);
