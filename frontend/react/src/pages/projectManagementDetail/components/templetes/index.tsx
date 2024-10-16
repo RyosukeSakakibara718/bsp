@@ -352,7 +352,6 @@ const ProjectDetail: React.FC<{ id?: string }> = () => {
 
   return (
     <>
-      <button onClick={() => console.log(request)}>確認</button>
       <Spacer height="30px" />
       <ProjectInfo
         projectInfo={projectInfo}

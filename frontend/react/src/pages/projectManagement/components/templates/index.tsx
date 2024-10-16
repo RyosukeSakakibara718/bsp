@@ -75,7 +75,6 @@ const ProjectManagement: React.FC<ProjectDataProps> = ({ data }) => {
 
   const handleEditButtonClick = (id: number) => {
     // TODO編集先のページのパスを指定
-    console.log(`/projectManagement/detail/${id}`);
     navigate(`/projectManagement/detail/${id}`);
   };
 
