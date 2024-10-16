@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\UseCases\ProjectAchievement;
 
-use App\Http\Requests\ProjectAchievementRequest;
 use App\Models\WorkCost;
 use Exception;
 use Illuminate\Support\Facades\DB;
@@ -12,11 +11,11 @@ use Illuminate\Support\Facades\Log;
 
 class UpdateAction
 {
-    public function __invoke(ProjectAchievementRequest $request, int $projectId): void
+    public function __invoke(array $requestData, int $projectId): void
     {
-        DB::transaction(function () use ($request, $projectId) {
+        DB::transaction(function () use ($requestData, $projectId) {
             try {
-                foreach ($request->validated()['projects']['assignment_members'] as $assignmentMember) {
+                foreach ($requestData['projects']['assignment_members'] as $assignmentMember) {
                     foreach ($assignmentMember['work_costs'] as $workCost) {
                         $workCostData = [
                             'project_id' => $projectId,
