@@ -17,6 +17,7 @@ class OutsourceResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
+            'id' => $this->id,
             'name' => $this->name,
             'estimate_cost' => $this->estimate_cost,
             'cost' => $this->cost,

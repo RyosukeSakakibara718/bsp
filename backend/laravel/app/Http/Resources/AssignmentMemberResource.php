@@ -17,8 +17,9 @@ class AssignmentMemberResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'member_id' => $this->id,
+            'member_id' => $this->member_id,
             'position' => $this->position,
+            'base_cost' => $this->getMemberBaseCost(),
             'estimate_person_month' => $this->estimate_person_month !== null ? floatval($this->estimate_person_month) : 0,
             'assignment_member_monthly_estimations' => AssignmentMemberMonthlyEstimationResource::collection($this->monthlyEstimations),
         ];

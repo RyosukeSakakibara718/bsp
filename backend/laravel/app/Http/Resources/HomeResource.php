@@ -36,7 +36,7 @@ class HomeResource extends JsonResource
                 'graph' => $this->graph(),
             ],
             'assignment_members' => HomeAssignmentMemberResource::collection($this->assignmentMembers),
-            'outsources' => $this->outsources,
+            'outsources' => OutsourceResource::collection($this->outsources),
         ];
     }
 }

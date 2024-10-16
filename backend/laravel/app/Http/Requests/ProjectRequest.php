@@ -37,7 +37,7 @@ class ProjectRequest extends FormRequest
             'projects.assignment_members.*.estimate_total_person_month' => ['required', 'numeric', 'min:0', 'regex:/^\d+(\.\d{1,2})?$/'], // 人月の小数点2桁まで
 
             // 月次見積情報
-            'projects.assignment_members.*.assignment_member_monthly_estimations.*.target_month' => ['required', 'string', 'regex:/^\d{4}-\d{2}$/'], // YYYY-MM形式
+            'projects.assignment_members.*.assignment_member_monthly_estimations.*.target_month' => ['required', 'string', 'regex:/^\d{4}\/\d{2}$/'], // YYYY/MM形式
             'projects.assignment_members.*.assignment_member_monthly_estimations.*.estimate_cost' => ['required', 'integer', 'min:0'],
             'projects.assignment_members.*.assignment_member_monthly_estimations.*.estimate_person_month' => ['required', 'numeric', 'min:0', 'regex:/^\d+(\.\d{1,2})?$/'],
 

@@ -60,14 +60,15 @@ class UpdateAction
 
                         // 月次見積もりデータを更新
                         if (isset($assignmentMemberData['assignment_member_monthly_estimations'])) {
+                            $assignmentMember = AssignmentMember::where('member_id', $assignmentMemberData['member_id'])->where('project_id', $id)->first();
                             foreach ($assignmentMemberData['assignment_member_monthly_estimations'] as $monthlyEstimation) {
                                 $assignmentMember->monthlyEstimations()->updateOrCreate(
                                     [
                                         'assignment_member_id' => $assignmentMember->id,
-                                        'estimate_cost' => $monthlyEstimation['estimate_cost'],
                                         'target_month' => $monthlyEstimation['target_month'],
                                     ],
                                     [
+                                        'estimate_cost' => $monthlyEstimation['estimate_cost'],
                                         'estimate_person_month' => $monthlyEstimation['estimate_person_month'],
                                     ]
                                 );
@@ -81,10 +82,11 @@ class UpdateAction
                     foreach ($request->input('projects.outsources') as $outsourceData) {
                         Outsource::updateOrCreate(
                             [
+                                'id' => $outsourceData['id'] ?? null,
                                 'project_id' => $id,
-                                'name' => $outsourceData['name'],
                             ],
                             [
+                                'name' => $outsourceData['name'],
                                 'estimate_cost' => $outsourceData['estimate_cost'],
                                 'cost' => $outsourceData['cost'],
                             ]
