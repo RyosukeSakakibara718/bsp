@@ -381,7 +381,7 @@ const ProjectDetail: React.FC<{ id?: string }> = () => {
       <Spacer height="40px" />
       <div className="justify-center">
         {id
-        ? <AddButton buttonText="編集する" handleClick={handleRegister} />
+        ? <AddButton buttonText="保存する" handleClick={handleRegister} />
         : <AddButton buttonText="登録する" handleClick={handleRegister} />
         }
       </div>
