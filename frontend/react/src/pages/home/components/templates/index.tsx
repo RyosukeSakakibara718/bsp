@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 
 import { getHomeData } from "../../../../api/home";
 import Spacer from "../../../../components/atoms/Spacer";
+import Loading from "../../../../components/molecules/Loading";
+import { getProjectsAll } from "../../../../hooks/useProjects";
 import { Member, Graph, SummaryProps, Project } from "../../../../types/home";
 import ChartGraph from "../libs/chartjs/ChartGraph";
 import ShowTotalAchievements from "../molecules/ShowTotalAchievements";
@@ -10,8 +12,6 @@ import EstimatedLanding from "../organisms/EstimatedLanding";
 import HomeHeader from "../organisms/HomeHeader";
 import MemberInfo from "../organisms/MemberInfo";
 import OrderInfo from "../organisms/OrderInfo";
-import { getProjectsAll } from "../../../../hooks/useProjects";
-import Loading from "../../../../components/molecules/Loading";
 
 const Home: React.FC = () => {
   /**

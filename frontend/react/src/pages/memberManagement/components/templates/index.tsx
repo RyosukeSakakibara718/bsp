@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 
 import AddOpenButton from "../../../../components/atoms/button/AddOpenButton";
 import Spacer from "../../../../components/atoms/Spacer";
+import Loading from "../../../../components/molecules/Loading";
 import AddModal from "../../../../components/molecules/modal/AddModal";
 import DeleteModal from "../../../../components/molecules/modal/DeleteModal";
 import EditModal from "../../../../components/molecules/modal/EditModal";
@@ -17,7 +18,6 @@ import {
 } from "../../../../hooks/useMember";
 
 import type { MemberData } from "../../../../types/member";
-import Loading from "../../../../components/molecules/Loading";
 /**
  * メンバーの一覧を表示し、追加・編集・削除を行うテーブルコンポーネント。
  *

@@ -15,6 +15,7 @@ export const getMemberList = (
       const memberName = members.map(member => ({
         id: member.id,
         name: member.name,
+        base_cost: member.base_cost,
         label: member.name,
       }));
       handleChange(memberName);

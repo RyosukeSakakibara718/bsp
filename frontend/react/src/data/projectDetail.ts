@@ -17,7 +17,7 @@ export const projectDetailData = {
       {
         member_id: 1,
         position: 1,
-        estaimate_total_person_month: 4,
+        estimate_total_person_month: 4,
         assignment_member_monthly_estimations: [
           {
             target_month: 5,
@@ -40,7 +40,7 @@ export const projectDetailData = {
       {
         member_id: 2,
         position: 1,
-        estaimate_total_person_month: 6,
+        estimate_total_person_month: 6,
         assignment_member_monthly_estimations: [
           {
             target_month: 5,
@@ -87,8 +87,10 @@ export const initialProjectInfo = {
     phase: 1,
     freee_project_code: "",
     contract: 1,
-    start_date: new Date(), // 現在の日付
-    end_date: new Date(new Date().setMonth(new Date().getMonth() + 20)),
+    start_date: new Date().toISOString().split("T")[0], // 現在の日付
+    end_date: new Date(new Date().setMonth(new Date().getMonth() + 20))
+      .toISOString()
+      .split("T")[0],
   },
   estimations: {
     order_price: undefined,
@@ -101,7 +103,8 @@ export const initialAssignmentMembersArray = [
   {
     member_id: 1,
     position: 1,
-    estaimate_total_person_month: 0,
+    base_cost: 0,
+    estimate_total_person_month: 0,
     assignment_member_monthly_estimations: [],
   },
 ];
@@ -109,7 +112,8 @@ export const initialAssignmentMembersArray = [
 export const initialAssignmentMembersInfo = {
   member_id: 1,
   position: 1,
-  estaimate_total_person_month: 0,
+  base_cost: 0,
+  estimate_total_person_month: 0,
   assignment_member_monthly_estimations: [],
 };
 
@@ -150,7 +154,7 @@ export const requestBody = {
       {
         member_id: 0,
         position: 0,
-        estaimate_total_person_month: 0,
+        estimate_total_person_month: 0,
         assignment_member_monthly_estimations: [
           {
             target_month: 0,

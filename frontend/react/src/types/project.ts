@@ -13,6 +13,7 @@ export type ProjectDataProps = {
 export type OptionList = {
   id: number;
   name: string;
+  base_cost?: number;
   label: string;
 };
 
@@ -46,8 +47,8 @@ export type ProjectsData = {
   phase: number | undefined;
   freee_project_code: string;
   contract: number | undefined;
-  start_date: Date;
-  end_date: Date;
+  start_date: string;
+  end_date: string;
 };
 
 export type Estimations = {
@@ -59,7 +60,8 @@ export type Estimations = {
 export type InitialAssignmentMembers = {
   member_id: number;
   position: number;
-  estaimate_total_person_month: number;
+  base_cost: number;
+  estimate_total_person_month: number;
   assignment_member_monthly_estimations:
     | AssignmentMemberMonthlyEstimations[]
     | [];
@@ -71,6 +73,7 @@ export type AssignmentMemberMonthlyEstimations = {
 };
 
 export type Outsource = {
+  id?: number;
   name: string;
   estimate_cost: number | undefined;
   cost: number | undefined;
