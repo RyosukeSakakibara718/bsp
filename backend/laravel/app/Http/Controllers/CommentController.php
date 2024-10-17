@@ -56,7 +56,7 @@ class CommentController extends Controller
     {
         $action($request, $project, $comment);
 
-        return response()->json([], 201);
+        return response()->json([], 204);
     }
 
     /**

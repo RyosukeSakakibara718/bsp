@@ -9,7 +9,7 @@ use Carbon\Carbon;
 
 class IndexAction
 {
-    public function __invoke(array $searchQuery = [], $cursor = null)
+    public function __invoke(array $searchQuery = [], $cursor = null, $fetchAll)
     {
 
         $query = Project::query();
@@ -22,6 +22,10 @@ class IndexAction
         // 現在以降の終了日でフィルタリングし、終了日が最も近い順にソート
         $query->where('end_date', '>=', Carbon::now())
             ->orderBy('end_date');
+
+        if($fetchAll){
+            return Project::all();
+        }
 
         // カーソルによるページネーション
         $projects = $query->cursorPaginate(10, ['*'], 'cursor', $cursor);
