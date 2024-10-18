@@ -9,7 +9,6 @@ export const getProjectsAchievements = (id: number): Promise<ProjectAchievements
       return response.json();
     })
     .then(data => {
-      console.log('data.projects: ', data.project);
       return data;
     });
 };
