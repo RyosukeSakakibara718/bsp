@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 import AddOpenButton from "../../../../components/atoms/button/AddOpenButton";
 import Spacer from "../../../../components/atoms/Spacer";
+import Loading from "../../../../components/molecules/Loading";
 import SearchBar from "../../../../components/molecules/SearchBar";
 import TableHeader from "../../../../components/molecules/TableHeader";
 import {
@@ -13,7 +14,6 @@ import { getProjectsAll, deleteProjects } from "../../../../hooks/useProjects";
 import { ProjectData } from "../../../../types/project";
 import DeleteModal from "../molecules/modal/DeleteModal";
 import TableRow from "../molecules/row/TableRow";
-import Loading from "../../../../components/molecules/Loading";
 
 /**
  *  案件の一覧を表示し・検索できるコンポーネント。
@@ -75,9 +75,9 @@ const ProjectManagement= () => {
     navigate("/projectManagement/detail");
   };
 
-  const handleEditButtonClick = () => {
+  const handleEditButtonClick = (id: number) => {
     // TODO編集先のページのパスを指定
-    navigate("/projectManagement/detail/{}");
+    navigate(`/projectManagement/detail/${id}`);
   };
 
   /**
@@ -154,7 +154,7 @@ const ProjectManagement= () => {
                   start_date={item.start_date}
                   end_date={item.end_date}
                   project_manager={item.project_manager}
-                  isEditPageOpen={handleEditButtonClick}
+                  isEditPageOpen={() => handleEditButtonClick(item.id)}
                   isDeleteModalOpen={() => handleOpenDeleteModal(index)}
                 />
               ))}

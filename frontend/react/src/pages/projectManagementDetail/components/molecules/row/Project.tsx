@@ -76,7 +76,7 @@ const Project: React.FC<ProjectProps> = ({ formData, handleInputChange }) => {
               title={"見積工数"}
               name="estimate_person_month"
               value={formData.estimations.estimate_person_month}
-              moneyFlug={true}
+              costFlug={true}
               handleInputChange={handleInputChange}
             />
           </ProjectInfoRow>

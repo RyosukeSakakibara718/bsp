@@ -27,11 +27,11 @@ const Outsources: React.FC<OutsourcesProps> = ({
       {formData.map((item, index) => (
         <tr
           key={index}
-          className="font-bold px-4 py-3 text-left border-b border-[#e1cfff] text-gray-800 whitespace-nowrap"
+          className="px-4 py-3 text-left border-b border-[#e1cfff] text-gray-800 whitespace-nowrap"
         >
           <td>
             <td
-              className={`font-bold px-4 py-3 text-left text-gray-800 w-full`}
+              className={`px-4 py-3 text-left text-gray-800 w-full`}
               style={{ display: "flex", alignItems: "center" }}
             >
               <input
@@ -45,26 +45,32 @@ const Outsources: React.FC<OutsourcesProps> = ({
             </td>
           </td>
           <td>
-            <td>
+            <td
+              className={`px-4 py-3 text-left text-gray-800 w-full`}
+              style={{ display: "flex", alignItems: "center" }}
+            >
               <input
                 type="number"
                 name="estimate_cost"
                 value={item.estimate_cost}
                 placeholder="¥"
                 onChange={e => handleInputChange(index, e)}
-                className="border rounded py-2 w-fill-available text-xl"
+                className="border rounded p-2 w-fill-available text-xl"
               />
             </td>
           </td>
           <td>
-            <td>
+            <td
+              className={`px-4 py-3 text-left text-gray-800 w-full`}
+              style={{ display: "flex", alignItems: "center" }}
+            >
               <input
                 type="number"
                 name="cost"
                 value={item.cost}
                 placeholder="¥"
                 onChange={e => handleInputChange(index, e)}
-                className="border rounded py-2 w-fill-available text-xl"
+                className="border rounded p-2 w-fill-available text-xl"
               />
             </td>
           </td>

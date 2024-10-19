@@ -5,6 +5,7 @@ type InputNumberColumnProps = {
   name: string;
   value: number | undefined;
   moneyFlug?: boolean;
+  costFlug?: boolean;
   handleInputChange: (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
   ) => void;
@@ -15,6 +16,7 @@ const InputNumberColumn: React.FC<InputNumberColumnProps> = ({
   name,
   value,
   moneyFlug,
+  costFlug,
   handleInputChange,
 }) => (
   <div className="flex py-2">
@@ -27,9 +29,9 @@ const InputNumberColumn: React.FC<InputNumberColumnProps> = ({
           type="number"
           name={name}
           value={value}
-          placeholder={moneyFlug ? "¥" : ""}
+          placeholder={moneyFlug ? "¥" : costFlug? "人/日":""}
           onChange={handleInputChange}
-          className="border rounded py-2 w-fill-available text-xl"
+          className="border rounded p-2 w-fill-available text-xl"
         />
       </td>
     </div>
