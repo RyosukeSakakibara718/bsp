@@ -1,7 +1,7 @@
 const apiUrl = import.meta.env.VITE_API_URL;
 
 export const getProjectsAll = (): Promise<[]> => {
-  return fetch("${apiUrl}/v1/projects")
+  return fetch(`${apiUrl}/v1/projects`)
     .then(response => {
       if (!response.ok) {
         throw new Error("Network response was not ok");
