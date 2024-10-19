@@ -44,6 +44,9 @@ class UpdateAction
                     'estimate_person_month' => $request->input('projects.estimations.estimate_person_month'),
                 ]);
 
+                // 割り当てメンバーのIDを保持
+                $memberIds = [];
+
                 // 割り当てメンバーとその月次見積もりデータを更新
                 if ($request->has('projects.assignment_members')) {
                     foreach ($request->input('projects.assignment_members') as $assignmentMemberData) {
@@ -58,11 +61,17 @@ class UpdateAction
                             ]
                         );
 
+                        // 更新・作成したメンバーのIDを記録
+                        $memberIds[] = $assignmentMember->id;
+
+                        // 月次見積もりデータのIDを保持
+                        $monthlyEstimationIds = [];
+
                         // 月次見積もりデータを更新
                         if (isset($assignmentMemberData['assignment_member_monthly_estimations'])) {
                             $assignmentMember = AssignmentMember::where('member_id', $assignmentMemberData['member_id'])->where('project_id', $id)->first();
                             foreach ($assignmentMemberData['assignment_member_monthly_estimations'] as $monthlyEstimation) {
-                                $assignmentMember->monthlyEstimations()->updateOrCreate(
+                                $assignmentMemberMonthlyEstimation = $assignmentMember->monthlyEstimations()->updateOrCreate(
                                     [
                                         'assignment_member_id' => $assignmentMember->id,
                                         'target_month' => $monthlyEstimation['target_month'],
@@ -72,15 +81,28 @@ class UpdateAction
                                         'estimate_person_month' => $monthlyEstimation['estimate_person_month'],
                                     ]
                                 );
+                                $monthlyEstimationIds[] = $assignmentMemberMonthlyEstimation->id;
                             }
+                            // リクエストにない月次見積もりを削除
+                            $assignmentMember->monthlyEstimations()
+                                ->whereNotIn('id', $monthlyEstimationIds)
+                                ->delete();
                         }
                     }
+
+                    // リクエストにないメンバーを削除
+                    AssignmentMember::where('project_id', $id)
+                        ->whereNotIn('id', $memberIds)
+                        ->delete();
                 }
+
+                // 外注情報のIDを保持
+                $outsourceIds = [];
 
                 // 外注情報を更新
                 if ($request->has('projects.outsources')) {
                     foreach ($request->input('projects.outsources') as $outsourceData) {
-                        Outsource::updateOrCreate(
+                        $outsource = Outsource::updateOrCreate(
                             [
                                 'id' => $outsourceData['id'] ?? null,
                                 'project_id' => $id,
@@ -91,7 +113,15 @@ class UpdateAction
                                 'cost' => $outsourceData['cost'],
                             ]
                         );
+
+                        // 更新・作成した外注情報のIDを記録
+                        $outsourceIds[] = $outsource->id;
                     }
+
+                    // リクエストにない外注情報を削除
+                    Outsource::where('project_id', $id)
+                        ->whereNotIn('id', $outsourceIds)
+                        ->delete();
                 }
             } catch (Exception $e) {
                 Log::error('プロジェクトの更新中にエラーが発生しました。', ['error' => $e->getMessage()]);
