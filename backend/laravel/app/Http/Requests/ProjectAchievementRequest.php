@@ -47,10 +47,10 @@ class ProjectAchievementRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'projects.project_id' => 'required|integer|exists:projects,id',
-            'projects.assignment_members.*.assignment_member_id' => 'required|integer|exists:assignment_members,id',
+            'projects.id' => 'required|integer|exists:projects,id',
+            'projects.assignment_members.*.member_id' => 'required|integer|exists:assignment_members,id',
             'projects.assignment_members.*.work_costs.*.work_date' => 'required|date_format:Y-m-d',
-            'projects.assignment_members.*.work_costs.*.work_time' => 'required|numeric|min:0',
+            'projects.assignment_members.*.work_costs.*.work_time' => 'required|date_format:H:i:s',
             'projects.assignment_members.*.work_costs.*.daily_cost' => 'required|numeric|min:0',
         ];
     }
@@ -58,12 +58,12 @@ class ProjectAchievementRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'projects.project_id.required' => 'プロジェクトIDは必須です。',
-            'projects.project_id.integer' => 'プロジェクトIDは整数である必要があります。',
-            'projects.project_id.exists' => '指定されたプロジェクトが存在しません。',
-            'projects.assignment_members.*.assignment_member_id.required' => 'アサインメントメンバーIDは必須です。',
-            'projects.assignment_members.*.assignment_member_id.integer' => 'アサインメントメンバーIDは整数である必要があります。',
-            'projects.assignment_members.*.assignment_member_id.exists' => '指定されたアサインメントメンバーが存在しません。',
+            'projects.id.required' => 'プロジェクトIDは必須です。',
+            'projects.id.integer' => 'プロジェクトIDは整数である必要があります。',
+            'projects.id.exists' => '指定されたプロジェクトが存在しません。',
+            'projects.assignment_members.*.member_id.required' => 'アサインメントメンバーIDは必須です。',
+            'projects.assignment_members.*.member_id.integer' => 'アサインメントメンバーIDは整数である必要があります。',
+            'projects.assignment_members.*.member_id.exists' => '指定されたアサインメントメンバーが存在しません。',
             'projects.assignment_members.*.work_costs.*.work_date.required' => '作業日は必須です。',
             'projects.assignment_members.*.work_costs.*.work_date.date_format' => '作業日の形式は「YYYY-MM-DD」である必要があります。',
             'projects.assignment_members.*.work_costs.*.work_time.required' => '作業時間は必須です。',
