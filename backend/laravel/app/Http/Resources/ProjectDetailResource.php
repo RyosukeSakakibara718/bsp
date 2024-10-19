@@ -24,21 +24,17 @@ class ProjectDetailResource extends JsonResource
                     'name' => $this->name,
                     'phase' => $this->phase,
                     'freee_project_code' => $this->freee_project_code,
-                    'contract' => $this->contract,
-                    'start_date' => $this->start_date->format('Y-m-d'),
-                    'end_date' => $this->end_date->format('Y-m-d'),
+                    "contract" => $this->contract,
+                    'start_date' => $this->start_date,
+                    'end_date' => $this->end_date,
                 ],
                 'estimations' => [
                     'order_price' => $this->estimation->order_price,
                     'estimate_cost' => $this->estimation->estimate_cost,
                     'estimate_person_month' => $this->estimation->estimate_person_month,
                 ],
-                'assignment_members' => [
-                    AssignmentMemberResource::collection($this->assignmentMembers),
-                ],
-                'outsources' => [
-                    OutsourceResource::collection($this->outsources),
-                ],
+                'assignment_members' => AssignmentMemberResource::collection($this->assignmentMembers),
+                'outsources' => OutsourceResource::collection($this->outsources),
             ],
         ];
     }
