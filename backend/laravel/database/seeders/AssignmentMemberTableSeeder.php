@@ -28,6 +28,7 @@ class AssignmentMemberTableSeeder extends Seeder
 
         foreach ($futureProjects as $projectData) {
             $project = Project::create(array_merge($projectData, [
+                'company_name' => fake()->company(),
                 'contract' => rand(1, 3),
                 'phase' => rand(1, 5),
                 'created_at' => Carbon::now(),

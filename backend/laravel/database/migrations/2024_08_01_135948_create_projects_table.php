@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('freee_project_code', 50)->nullable()->comment('freeeプロジェクトコード');
             $table->string('name', 255)->comment('プロジェクト名');
+            $table->string('company_name', 255)->comment('会社名');
             $table->smallInteger('contract')->comment('契約');
             $table->smallInteger('phase')->comment('工程');
             $table->date('start_date')->comment('プロジェクト開始日');

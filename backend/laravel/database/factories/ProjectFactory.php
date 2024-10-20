@@ -24,9 +24,11 @@ class ProjectFactory extends Factory
      */
     public function definition(): array
     {
+        // Project->estimations&(assignmentMember->assignment_member_monthly_estimations)&outsources
         return [
             'freee_project_code' => $this->faker->regexify('PRJ[0-9]{5}'),
             'name' => $this->faker->words(3, true),
+            'company_name' => fake()->company(),
             'contract' => $this->faker->numberBetween(1, 3),
             'phase' => $this->faker->numberBetween(1, 5),
             'start_date' => $this->faker->date('Y-m-d', 'now'),
