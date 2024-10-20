@@ -160,55 +160,50 @@ const ProjectsAchievements = () => {
     workDate: string,
     workTime: string,
   ) => {
-    setProjectData((prevData) => {
+    setProjectData(prevData => {
       return {
         ...prevData,
         project: {
           ...prevData.project,
           assignment_members: prevData.project.assignment_members.map(
-            (member) => {
+            member => {
               if (member.member_id === memberId) {
-                // 営業日数を取得
                 const businessDays = countBusinessDaysInMonth(workDate);
-  
-                // 時間を10進数に変換
-                const workTimeDecimal: number = convertWorkTimeToDecimal(workTime);
-  
-                // daily_cost を計算（workTimeDecimalが0でも計算される）
-                const dailyCost = workTimeDecimal === 0 ? 0 : Math.ceil(
+                const workTimeDecimal: number =
+                  convertWorkTimeToDecimal(workTime);
+                const dailyCost = Math.ceil(
                   (member.base_cost / businessDays) * workTimeDecimal,
                 );
-  
-                // 日曜日の日時を取得
+
                 const workWeek = getSundayOfWeek(workDate);
-  
-                // 月の部分だけを取得 (YYYY/MM形式)
                 const workMonth = getMonthYear(workDate);
-  
-                // 既存の work_costs を確認して、同じ日付があるかどうかをチェック
+
                 const existingCostIndex = member.work_costs.findIndex(
-                  (cost) => cost.work_date === workDate,
+                  cost => cost.work_date === workDate,
                 );
-  
+
                 if (existingCostIndex !== -1) {
-                  // 日付が見つかった場合は、その要素を更新する
-                  const updatedWorkCosts = member.work_costs.map((cost, index) => {
-                    if (index === existingCostIndex) {
-                      return {
-                        ...cost,
-                        work_time: workTime,
-                        daily_cost: dailyCost,
-                      };
-                    }
-                    return cost;
-                  });
-  
+                  const updatedWorkCosts = member.work_costs
+                    .map((cost, index) => {
+                      if (index === existingCostIndex) {
+                        const workTimeDecimal = convertWorkTimeToDecimal(workTime)
+                        return workTimeDecimal === 0
+                          ? null
+                          : {
+                              ...cost,
+                              work_time: workTime,
+                              daily_cost: dailyCost,
+                            };
+                      }
+                      return cost;
+                    })
+                    .filter(Boolean) as WorkCost[];
+
                   return {
                     ...member,
                     work_costs: updatedWorkCosts,
                   };
-                } else {
-                  // 新しいエントリを追加
+                } else if (workTimeDecimal !== 0) {
                   return {
                     ...member,
                     work_costs: [
@@ -230,7 +225,7 @@ const ProjectsAchievements = () => {
         },
       };
     });
-  };  
+  };
 
   const handleChangeBetween = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const selectedId = Number(e.target.value);
