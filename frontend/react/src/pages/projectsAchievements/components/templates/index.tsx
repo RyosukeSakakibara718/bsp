@@ -25,7 +25,7 @@ import ProjectArchiveBody from "../molecules/row/ProjectArchiveBody";
 import ProjectArchiveHeader from "../molecules/row/ProjectArchiveHeader";
 import { getProjectManagementDetail } from "../../../projectManagementDetail/api/useProjectManagementDetail";
 import { getProjectsAll } from "../../../../hooks/useProjects";
-import { getProjectsAchievements } from "../../api/useProjectsAchievements";
+import { editProjectsAchievements, getProjectsAchievements } from "../../api/useProjectsAchievements";
 
 const ProjectsAchievements = () => {
   const [projectData, setProjectData] = useState<ProjectAchievementsData>(
@@ -40,8 +40,7 @@ const ProjectsAchievements = () => {
   const endIndex = startIndex + itemsPerPage;
   const [projectList, setProjectList] = useState<OptionList[]>(ProjectName);
   const [currentProject, setCurrentProject] = useState<OptionList>();
-  const [currentProjectDetail, setCurrentProjectDetail] =
-    useState(projectDetailData);
+  const [currentProjectDetail, setCurrentProjectDetail] = useState(projectDetailData);
 
   useEffect(() => {
     getProjectsAll()
@@ -63,8 +62,7 @@ const ProjectsAchievements = () => {
 
   useEffect(() => {
     if (currentProject) {
-      getProjectsAchievements(currentProject.id).then(Achievements => {
-      });
+      getProjectsAchievements(currentProject.id)
     }
   }, [currentProject]);
 
@@ -237,7 +235,8 @@ const ProjectsAchievements = () => {
     }
   };
 
-  const handleRegister = () => {
+
+  const handleRegister = async () => {
     const updatedProjectData = JSON.parse(JSON.stringify(projectData));
 
     updatedProjectData.project.assignment_members.forEach(
@@ -248,7 +247,15 @@ const ProjectsAchievements = () => {
         });
       },
     );
-    console.log(updatedProjectData);
+    try {
+      if (currentProject){
+        await editProjectsAchievements(updatedProjectData, currentProject.id)
+      }
+      alert('登録が完了しました')
+      window.location.reload();
+    } catch (error) {
+      console.error('エラーが発生しました', error);
+    }
   };
 
   useEffect(() => {
