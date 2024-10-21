@@ -26,7 +26,7 @@ class ProjectFactory extends Factory
     {
         // Project->estimations&(assignmentMember->assignment_member_monthly_estimations)&outsources
         return [
-            'freee_project_code' => $this->faker->regexify('PRJ[0-9]{5}'),
+            'freee_project_code' => $this->faker->regexify('[0-9]{2}-[0-9]{2}-[0-9]{5}'),
             'name' => $this->faker->words(3, true),
             'company_name' => fake()->company(),
             'contract' => $this->faker->numberBetween(1, 3),
