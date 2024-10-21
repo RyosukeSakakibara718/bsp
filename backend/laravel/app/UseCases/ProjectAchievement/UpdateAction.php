@@ -42,15 +42,25 @@ class UpdateAction
 
             $requestWorkCostDates = collect($assignmentMember['work_costs'])->pluck('work_date')->toArray();
 
-            $existingWorkCosts = $assignmentMemberData->workCosts;
+            WorkCost::where('assignment_member_id', $assignmentMemberData->id)
+                ->whereNotIn('work_date', $requestWorkCostDates)
+                ->delete();
 
-            $existingWorkCosts->whereNotIn('work_date', $requestWorkCostDates)->each(function ($workCost) {
-                $workCost->delete();
-            });
+            $workCostData = collect($assignmentMember['work_costs'])->map(function ($workCost) use ($projectId, $assignmentMemberData) {
+                return [
+                    'project_id' => $projectId,
+                    'assignment_member_id' => $assignmentMemberData->id,
+                    'work_date' => $workCost['work_date'],
+                    'daily_cost' => $workCost['daily_cost'],
+                    'work_time' => $workCost['work_time'],
+                ];
+            })->toArray();
 
-            foreach ($assignmentMember['work_costs'] as $workCost) {
-                $this->upsertWorkCost($projectId, $assignmentMemberData->id, $workCost);
-            }
+            WorkCost::upsert(
+                $workCostData,
+                ['project_id', 'assignment_member_id', 'work_date'],
+                ['daily_cost', 'work_time']
+            );
         }
     }
 
@@ -70,34 +80,9 @@ class UpdateAction
 
         if (is_null($assignmentMember)) {
             $memberName = Member::findOrFail($memberId)->name;
-            throw new Exception("このプロジェクトに{$memberName}さんはアサインされていません。", 404);
+            throw new Exception("このプロジェクトに{$memberName}さんはアサインされていません。",404);
         }
 
         return $assignmentMember;
-    }
-
-    /**
-     * Upsert work cost data for an assignment member
-     *
-     * @param int $projectId
-     * @param int $assignmentMemberId
-     * @param array $workCost
-     * @return void
-     */
-    private function upsertWorkCost(int $projectId, int $assignmentMemberId, array $workCost): void
-    {
-        $workCostData = [
-            'project_id' => $projectId,
-            'assignment_member_id' => $assignmentMemberId,
-            'work_date' => $workCost['work_date'],
-            'daily_cost' => $workCost['daily_cost'],
-            'work_time' => $workCost['work_time'],
-        ];
-
-        WorkCost::upsert(
-            [$workCostData],
-            ['project_id', 'assignment_member_id', 'work_date'],
-            ['daily_cost', 'work_time']
-        );
     }
 }
