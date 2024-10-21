@@ -57,6 +57,7 @@ class Project extends Model
     protected $fillable = [
         'freee_project_code',
         'name',
+        'company_name',
         'contract',
         'phase',
         'start_date',
