@@ -29,12 +29,11 @@ const Header: React.FC = () => {
           <Link to="/projectsAchievements" className="hover:text-gray-300">
             案件実績入力
           </Link>
-          <Link to="/logout" className="hover:text-gray-300">
+          {/* <Link to="/logout" className="hover:text-gray-300">
             ログアウト
-          </Link>
+          </Link> */}
         </nav>
       </div>
-      <div>{sampleUserData[0].name}</div>
     </header>
   );
 };

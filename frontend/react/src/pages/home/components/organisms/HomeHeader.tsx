@@ -24,7 +24,7 @@ const HomeHeader = ({
   }));
   return (
     <div style={{ display: "flex", gap: "40px" }}>
-      <div className="w-1/3">
+      <div className="w-1/3 flex">
         <BigSelectBox
           optionArray={projectOptions}
           handleSelectChange={handleSelectChange}

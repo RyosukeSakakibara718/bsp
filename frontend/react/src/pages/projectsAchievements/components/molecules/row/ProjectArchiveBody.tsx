@@ -7,7 +7,6 @@ import {
   Period,
   ProjectsAchievementsMember,
 } from "../../../../../types/project";
-import { countBusinessDaysInMonth } from "../../../../../utils/projectsAchievements";
 import { MemberData } from "../../../../../types/member";
 
 type ProjectArchiveBodyProps = {
@@ -17,6 +16,7 @@ type ProjectArchiveBodyProps = {
     memberId: number,
     workDate: string,
     workTime: string,
+    work_cost: number
   ) => void;
   between: optionsArrayProps;
 };
@@ -68,7 +68,7 @@ const ProjectArchiveBody: React.FC<ProjectArchiveBodyProps> = ({
     let amount = 0;
 
     if (between === 1) {
-      amount = Math.ceil((member.base_cost / (20 * 8)) * workTime); // 通常の処理
+      amount = Math.ceil((member.base_cost / 20 / 8) * workTime); // 通常の処理
     } else if (between === 2) {
       amount =
         member.work_costs.find(cost => cost.work_week === item.day)
@@ -126,10 +126,12 @@ const ProjectArchiveBody: React.FC<ProjectArchiveBodyProps> = ({
                     onChange={e => {
                       const decimalWorkTime = Number(e.target.value); // 入力値を小数点に変換
                       const formattedWorkTime = convertDecimalToWorkTime(decimalWorkTime); // 8 -> 08:00:00 に変換
+                      const work_cost = Math.ceil(decimalWorkTime * member.base_cost / 20 / 8)
                       onWorkTimeChange(
                         member.member_id,
                         item.day,
                         formattedWorkTime,
+                        work_cost
                       );
                     }}
                     disabled={between.id !== 1}

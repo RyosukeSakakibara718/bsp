@@ -20,7 +20,6 @@ import {
   OptionList,
   ProjectData,
 } from "../../../../types/project";
-import { countBusinessDaysInMonth } from "../../../../utils/projectsAchievements";
 import ProjectArchiveBody from "../molecules/row/ProjectArchiveBody";
 import ProjectArchiveHeader from "../molecules/row/ProjectArchiveHeader";
 import { getProjectManagementDetail } from "../../../projectManagementDetail/api/useProjectManagementDetail";
@@ -157,6 +156,7 @@ const ProjectsAchievements = () => {
     memberId: number,
     workDate: string,
     workTime: string,
+    workCost: number,
   ) => {
     setProjectData(prevData => {
       return {
@@ -166,13 +166,8 @@ const ProjectsAchievements = () => {
           assignment_members: prevData.project.assignment_members.map(
             member => {
               if (member.member_id === memberId) {
-                const businessDays = countBusinessDaysInMonth(workDate);
                 const workTimeDecimal: number =
                   convertWorkTimeToDecimal(workTime);
-                const dailyCost = Math.ceil(
-                  (member.base_cost / businessDays) * workTimeDecimal,
-                );
-
                 const workWeek = getSundayOfWeek(workDate);
                 const workMonth = getMonthYear(workDate);
 
@@ -190,7 +185,7 @@ const ProjectsAchievements = () => {
                           : {
                               ...cost,
                               work_time: workTime,
-                              daily_cost: dailyCost,
+                              daily_cost: workCost,
                             };
                       }
                       return cost;
@@ -207,7 +202,7 @@ const ProjectsAchievements = () => {
                     work_costs: [
                       ...member.work_costs,
                       {
-                        daily_cost: dailyCost,
+                        daily_cost: workCost,
                         work_time: workTime,
                         work_date: workDate,
                         work_week: workWeek,
