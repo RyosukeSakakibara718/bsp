@@ -8,8 +8,11 @@ use App\Models\Member;
 
 class IndexAction
 {
-    public function __invoke($searchQuery = [], $cursor = null, $fetchAll)
+    public function __invoke($request, $fetchAll)
     {
+        $searchQuery = $request->only(['name']);
+        $cursor = $request->input('cursor');
+
         $query = Member::query()
             ->searchByName($searchQuery['name'] ?? null)
             ->orderBy('id');
