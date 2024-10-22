@@ -46,14 +46,17 @@ const ProjectsAchievements = () => {
     useState(projectDetailData);
 
   useEffect(() => {
-    getProjectsAll()
+    getProjectsAll(true)
       .then(projects => {
         if (projects !== null) {
-          const ProjectName = (projects.projects as ProjectData[]).map(project => ({
+          console.log(projects)
+          const ProjectName = (projects as ProjectData[]).map(project => ({
             id: project.id,
             name: project.name,
             label: project.name,
           }));
+
+          console.log('ProjectName: ', ProjectName);
           setProjectList(ProjectName);
           setCurrentProject(ProjectName[0]);
         }
