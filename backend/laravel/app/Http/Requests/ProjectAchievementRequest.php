@@ -36,7 +36,7 @@ class ProjectAchievementRequest extends FormRequest
             'project.assignment_members.*.member_id.integer' => 'アサインメントメンバーIDは整数である必要があります。',
             'project.assignment_members.*.member_id.exists' => '指定されたアサインメントメンバーが存在しません。',
             'project.assignment_members.*.work_costs.*.work_date.required' => '作業日は必須です。',
-            'project.assignment_members.*.work_costs.*.work_date.date_format' => '作業日の形式は「YYYY-MM-DD」である必要があります。',
+            'project.assignment_members.*.work_costs.*.work_date.date_format' => '作業日の形式は「YYYY/MM/DD」である必要があります。',
             'project.assignment_members.*.work_costs.*.work_time.required' => '作業時間は必須です。',
             'project.assignment_members.*.work_costs.*.work_time.numeric' => '作業時間は数値である必要があります。',
             'project.assignment_members.*.work_costs.*.work_time.min' => '作業時間は0以上である必要があります。',
