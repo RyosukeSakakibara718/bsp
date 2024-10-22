@@ -116,7 +116,7 @@ const ProjectArchiveBody: React.FC<ProjectArchiveBodyProps> = ({
               const workCost = getWorkCost(member, item, between.id);
               const workTime = workCost
                 ? convertWorkTimeToDecimal(workCost.work_time) // 08:00:00 -> 8 のように変換
-                : 0;
+                : undefined;
               return (
                 <td className="py-[10px]" key={item.day}>
                   <input
@@ -124,7 +124,7 @@ const ProjectArchiveBody: React.FC<ProjectArchiveBodyProps> = ({
                     className="border border-gray-300 w-[70%] h-[32px] rounded"
                     type="number"
                     value={workTime}
-                    step="0.1" // 0.5刻みで変更可能にする
+                    step="1" // 1刻みで変更可能にする
                     onChange={e => {
                       const decimalWorkTime = Number(e.target.value); // 入力値を小数点に変換
                       const formattedWorkTime = convertDecimalToWorkTime(decimalWorkTime); // 8 -> 08:00:00 に変換
