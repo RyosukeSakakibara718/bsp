@@ -58,14 +58,20 @@ export type HomeCommentProps = {
 };
 
 export type Project = {
+  projects: ProjectInfo[];
+  next_cursor: string | null;
+  previous_cursor: string | null;
+};
+
+export type ProjectInfo =  {
   id: number;
-  company_name: string;
-  name: string;
   freee_project_code: string;
+  name: string;
+  company_name: string;
   start_date: string;
   end_date: string;
   project_manager: string;
-};
+}
 
 export type SummaryProps = {
   total_estimate_cost: number;

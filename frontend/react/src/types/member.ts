@@ -7,5 +7,7 @@ export type MemberData = {
 };
 
 export type MemberTableProps = {
-  data: MemberData[]; // data は MemberData 型の配列
+  members: MemberData[]; // data は MemberData 型の配列
+  next_cursor: string | null,
+  previous_cursor: string | null
 };

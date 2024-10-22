@@ -49,7 +49,7 @@ const ProjectsAchievements = () => {
     getProjectsAll()
       .then(projects => {
         if (projects !== null) {
-          const ProjectName = (projects as ProjectData[]).map(project => ({
+          const ProjectName = (projects.projects as ProjectData[]).map(project => ({
             id: project.id,
             name: project.name,
             label: project.name,

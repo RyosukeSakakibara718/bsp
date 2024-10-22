@@ -34,11 +34,11 @@ const ShowTotalAchievements: React.FC<{ summary: SummaryProps }> = ({
         />
         <SmallTableTd
           label={"実績工数"}
-          value={`${summary.achievement_person_month}人日`}
+          value={`${summary.achievement_person_month}人月`}
         />
         <SmallTableTd
           label={"残工数"}
-          value={`${summary.Remaining_person_month}人日`}
+          value={`${summary.Remaining_person_month}人月`}
         />
       </tbody>
     </table>

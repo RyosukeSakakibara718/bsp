@@ -8,6 +8,7 @@ import {
   Period,
   ProjectsAchievementsMember,
 } from "../../../../../types/project";
+import { log } from "node:console";
 
 type ProjectArchiveBodyProps = {
   showPeriod: Period[];
@@ -43,10 +44,11 @@ const ProjectArchiveBody: React.FC<ProjectArchiveBodyProps> = ({
   const [memberList, setMemberList] = useState<MemberData[]>();
 
   useEffect(() => {
-    getMemberAll()
+    getMemberAll(true)
       .then(members => {
+        console.log(members);
         if (members !== null) {
-          setMemberList(members);
+          setMemberList(members.members);
         }
       })
       .catch(error => {
@@ -101,10 +103,10 @@ const ProjectArchiveBody: React.FC<ProjectArchiveBodyProps> = ({
 
   return (
     <>
-      {memberInfo && rank && (
+      { rank && (
         <tbody>
           <tr>
-            <td>{memberInfo.name}</td>
+            <td>{memberInfo?.name}</td>
             <td>{rank.name}</td>
             <td>¥{member.base_cost.toLocaleString()}</td>{" "}
             <td className="border-l border-gray-300">時間</td>

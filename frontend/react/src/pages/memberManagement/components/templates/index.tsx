@@ -18,6 +18,7 @@ import {
 } from "../../../../hooks/useMember";
 
 import type { MemberData } from "../../../../types/member";
+import { PagenationButton } from "../../../../components/atoms/button/PagenationButton";
 /**
  * メンバーの一覧を表示し、追加・編集・削除を行うテーブルコンポーネント。
  *
@@ -44,6 +45,8 @@ const MemberTable: React.FC = () => {
   const [searchValue, setSearchValue] = useState("");
   const [targetData, setTargetData] = useState<MemberData>(initialFormData);
   const [addData, setAddData] = useState<MemberData>(initialFormData);
+  const [ nextPagenationParams, setNextPagenationParams ] = useState<string | null>()
+  const [ previousPagenationParams, setPreviousPagenationParams ] = useState<string | null>()
 
   // モーダルオープン時の表示用
 
@@ -51,8 +54,11 @@ const MemberTable: React.FC = () => {
     getMemberAll()
       .then(members => {
         if (members !== null) {
-          setMemberData(members); // データがnullでない場合にセット
-          setShowData(members);
+          console.log('members.data! :', members.next_cursor);
+          setMemberData(members.members); // データがnullでない場合にセット
+          setShowData(members.members);
+          setNextPagenationParams(members.next_cursor)
+          setPreviousPagenationParams(members.previous_cursor)
         }
         setLoading(false); // ローディングを終了
       })
@@ -112,6 +118,7 @@ const MemberTable: React.FC = () => {
    * 検索条件に一致するメンバーをフィルタリング
    * @returns {Array} フィルタリングされたメンバーリスト
    */
+  console.log(memberData);
   const filteredMembers = memberData.filter(member =>
     Object.values(member).some(value =>
       value.toString().toLowerCase().includes(searchValue.toLowerCase()),
@@ -172,8 +179,8 @@ const MemberTable: React.FC = () => {
         getMemberAll()
           .then(members => {
             if (members !== null) {
-              setMemberData(members); // データがnullでない場合にセット
-              setShowData(members);
+              setMemberData(members.members); // データがnullでない場合にセット
+              setShowData(members.members);
             }
             setLoading(false); // ローディングを終了
           })
@@ -196,8 +203,8 @@ const MemberTable: React.FC = () => {
         getMemberAll()
           .then(members => {
             if (members !== null) {
-              setMemberData(members); // データがnullでない場合にセット
-              setShowData(members);
+              setMemberData(members.members); // データがnullでない場合にセット
+              setShowData(members.members);
             }
             setLoading(false); // ローディングを終了
           })
@@ -220,8 +227,8 @@ const MemberTable: React.FC = () => {
         getMemberAll()
           .then(members => {
             if (members !== null) {
-              setMemberData(members); // データがnullでない場合にセット
-              setShowData(members);
+              setMemberData(members.members); // データがnullでない場合にセット
+              setShowData(members.members);
             }
             setLoading(false); // ローディングを終了
           })
@@ -235,6 +242,36 @@ const MemberTable: React.FC = () => {
         // エラー時の処理
       });
   };
+
+  const goNextMember = () => {
+    if(nextPagenationParams){
+      getMemberAll(nextPagenationParams)
+      .then(members => {
+        if (members !== null) {
+          setMemberData(members.members); // データがnullでない場合にセット
+          setShowData(members.members);
+          setNextPagenationParams(members.next_cursor)
+          setPreviousPagenationParams(members.previous_cursor)
+        }
+        setLoading(false); // ローディングを終了
+      })
+    }
+  }
+
+  const previousNextMember = () => {
+    if(previousPagenationParams){
+      getMemberAll(previousPagenationParams)
+      .then(members => {
+        if (members !== null) {
+          setMemberData(members.members); // データがnullでない場合にセット
+          setShowData(members.members);
+          setNextPagenationParams(members.next_cursor)
+          setPreviousPagenationParams(members.previous_cursor)
+        }
+        setLoading(false); // ローディングを終了
+      })
+    }
+  }
 
   return (
     <>
@@ -274,6 +311,11 @@ const MemberTable: React.FC = () => {
               })}
             </tbody>
           </table>
+        </div>
+        <Spacer height="20px" />
+        <div className="flex justify-evenly">
+          <PagenationButton value={'← Previous'} onClick={previousNextMember}/>
+          <PagenationButton value={' Next →'} onClick={goNextMember}/>
         </div>
       </div>
       {isAddModalOpen && (

@@ -7,7 +7,7 @@ const TableTd = ({ text }: TextProps) => {
       if (value > 10000) {
         return `¥${value.toLocaleString()}`;
       }
-      return `${value} 人/日`;
+      return `${value} 人月`;
     }
     return value;
   };
