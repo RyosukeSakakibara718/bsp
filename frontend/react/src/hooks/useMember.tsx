@@ -1,8 +1,9 @@
 import type { MemberData } from "../types/member";
 const apiUrl = import.meta.env.VITE_API_URL;
 
-export const getMemberAll = (): Promise<MemberData[]> => {
-  return fetch(`${apiUrl}/v1/members`)
+export const getMemberAll = (fetchAll?: boolean): Promise<MemberData[]> => {
+  const url = fetchAll ? `${apiUrl}/v1/members?fetchAll=true` : `${apiUrl}/v1/members`;
+  return fetch(url)
     .then(response => {
       if (!response.ok) {
         throw new Error("Network response was not ok");
@@ -13,6 +14,7 @@ export const getMemberAll = (): Promise<MemberData[]> => {
       return data.members; // members プロパティにアクセスして返す
     });
 };
+
 
 export const editMember = (
   id: number,
