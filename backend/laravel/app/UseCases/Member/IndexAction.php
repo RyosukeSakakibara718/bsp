@@ -10,18 +10,22 @@ class IndexAction
 {
     public function __invoke($searchQuery = [], $cursor = null, $fetchAll)
     {
-        $query = Member::query();
+        $query = Member::query()
+            ->searchByName($searchQuery['name'] ?? null)
+            ->orderBy('id');
 
-        if (isset($searchQuery['name'])) {
-            $query->where('name', 'like', '%' . $searchQuery['name'] . '%');
-        }
+        return $fetchAll
+            ? $this->fetchAllMembers($query)
+            : $this->paginateMembers($query, $cursor);
+    }
 
-        if($fetchAll){
-            return $query->orderby('id')->get();
-        }
+    private function fetchAllMembers($query)
+    {
+        return $query->get();
+    }
 
-        $members = $query->orderby('id')->cursorPaginate(10, ['*'], 'cursor', $cursor);
-
-        return $members;
+    private function paginateMembers($query, ?string $cursor)
+    {
+        return $query->cursorPaginate(10, ['*'], 'cursor', $cursor);
     }
 }
