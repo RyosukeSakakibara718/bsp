@@ -20,7 +20,7 @@ class ProjectAchievementRequest extends FormRequest
         return [
             'project.id' => 'required|integer|exists:projects,id',
             'project.assignment_members.*.member_id' => 'required|integer|exists:assignment_members,id',
-            'project.assignment_members.*.work_costs.*.work_date' => 'required|date_format:Y/m/d',
+            'project.assignment_members.*.work_costs.*.work_date' => 'required|date_format:Y/n/j',
             'project.assignment_members.*.work_costs.*.work_time' => 'required|date_format:H:i:s',
             'project.assignment_members.*.work_costs.*.daily_cost' => 'required|numeric|min:0',
         ];
