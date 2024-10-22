@@ -20,6 +20,7 @@ class HomeResource extends JsonResource
             'id' => $this->id,
             'freee_project_code' => $this->freee_project_code,
             'name' => $this->name,
+            'company_name' => $this->company_name,
             'start_date' => $this->start_date->format('Y-m-d'),
             'end_date' => $this->end_date->format('Y-m-d'),
             'estimation' => EstimationResource::make($this->estimation),
