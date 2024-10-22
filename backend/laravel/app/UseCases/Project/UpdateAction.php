@@ -35,7 +35,7 @@ class UpdateAction
                         ],
                     ],
                     ['id'],
-                    ['freee_project_code', 'name', 'contract', 'phase', 'start_date', 'end_date']
+                    ['freee_project_code', 'name', 'company_name', 'contract', 'phase', 'start_date', 'end_date']
                 );
 
                 // 見積情報を更新
