@@ -1,6 +1,7 @@
 export type ProjectData = {
   id: number;
   name: string;
+  company_name: string;
   freee_project_code? :string;
   start_date: string;
   end_date: string;
@@ -13,7 +14,7 @@ export type ProjectDataProps = {
 
 export type OptionList = {
   id: number;
-  name: string;
+  name?: string;
   base_cost?: number;
   label: string;
 };

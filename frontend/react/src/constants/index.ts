@@ -3,6 +3,7 @@ import { OptionList } from "../types/project";
 export const PROJEÇT_MANAGEMENT_TABLE_HEADER = [
   "案件ID",
   "案件名",
+  "会社名",
   "期間",
   "PM",
   "操作",

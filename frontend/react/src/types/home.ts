@@ -59,6 +59,7 @@ export type HomeCommentProps = {
 
 export type Project = {
   id: number;
+  company_name: string;
   name: string;
   freee_project_code: string;
   start_date: string;

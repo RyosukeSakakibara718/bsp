@@ -151,6 +151,7 @@ const ProjectManagement= () => {
                 <TableRow
                   id={item.id}
                   name={item.name}
+                  company_name={item.company_name}
                   start_date={item.start_date}
                   end_date={item.end_date}
                   project_manager={item.project_manager}
