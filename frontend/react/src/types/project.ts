@@ -2,7 +2,7 @@ export type ProjectData = {
   id: number;
   name: string;
   company_name: string;
-  freee_project_code? :string;
+  freee_project_code?: string;
   start_date: string;
   end_date: string;
   project_manager: string;
@@ -125,7 +125,8 @@ export type AssignmentMember = {
 };
 
 export type ProjectAchievementsData = {
-  project: { // projectsをprojectに変更
+  project: {
+    // projectsをprojectに変更
     id: number; // projects_idをidに変更
     assignment_members: AssignmentMember[];
   };

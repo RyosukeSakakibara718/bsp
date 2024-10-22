@@ -24,7 +24,9 @@ const TableRow: React.FC<TableRowProps> = ({
     <tr className="hover:bg-customPurple transition-colors duration-200">
       <TableRowColumn width="5%">{id}</TableRowColumn>
       <TableRowColumn width="25%">{name}</TableRowColumn>
-      <TableRowColumn width="25%">{company_name? company_name: '会社名を登録してください'}</TableRowColumn>
+      <TableRowColumn width="25%">
+        {company_name ? company_name : "会社名を登録してください"}
+      </TableRowColumn>
       <TableRowColumn width="25%">
         {start_date} ~ {end_date}
       </TableRowColumn>

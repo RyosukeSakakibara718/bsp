@@ -2,12 +2,12 @@ import { useEffect, useState } from "react";
 
 import { RANK } from "../../../../../constants";
 import { getMemberAll } from "../../../../../hooks/useMember";
+import { MemberData } from "../../../../../types/member";
 import {
   optionsArrayProps,
   Period,
   ProjectsAchievementsMember,
 } from "../../../../../types/project";
-import { MemberData } from "../../../../../types/member";
 
 type ProjectArchiveBodyProps = {
   showPeriod: Period[];
@@ -16,14 +16,14 @@ type ProjectArchiveBodyProps = {
     memberId: number,
     workDate: string,
     workTime: string,
-    work_cost: number
+    work_cost: number,
   ) => void;
   between: optionsArrayProps;
 };
 
 // 08:00:00 や 08:30:00 を小数形式に変換する関数
 const convertWorkTimeToDecimal = (workTime: string): number => {
-  const [hours, minutes] = workTime.split(':').map(Number); // 時間と分を分解して数値に変換
+  const [hours, minutes] = workTime.split(":").map(Number); // 時間と分を分解して数値に変換
   return hours + minutes / 60; // 時間と分を小数形式に変換
 };
 
@@ -31,7 +31,7 @@ const convertWorkTimeToDecimal = (workTime: string): number => {
 const convertDecimalToWorkTime = (decimal: number): string => {
   const hours = Math.floor(decimal);
   const minutes = Math.round((decimal - hours) * 60);
-  return `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:00`;
+  return `${String(hours).padStart(2, "0")}:${String(minutes).padStart(2, "0")}:00`;
 };
 
 const ProjectArchiveBody: React.FC<ProjectArchiveBodyProps> = ({
@@ -54,9 +54,7 @@ const ProjectArchiveBody: React.FC<ProjectArchiveBodyProps> = ({
       });
   }, []);
 
-  const memberInfo = memberList?.find(
-    item => item.id === member.member_id,
-  );
+  const memberInfo = memberList?.find(item => item.id === member.member_id);
   const rank = RANK.find(item => item.id === member.position);
 
   const calculateAmount = (
@@ -125,13 +123,16 @@ const ProjectArchiveBody: React.FC<ProjectArchiveBodyProps> = ({
                     step="1" // 1刻みで変更可能にする
                     onChange={e => {
                       const decimalWorkTime = Number(e.target.value); // 入力値を小数点に変換
-                      const formattedWorkTime = convertDecimalToWorkTime(decimalWorkTime); // 8 -> 08:00:00 に変換
-                      const work_cost = Math.ceil(decimalWorkTime * member.base_cost / 20 / 8)
+                      const formattedWorkTime =
+                        convertDecimalToWorkTime(decimalWorkTime); // 8 -> 08:00:00 に変換
+                      const work_cost = Math.ceil(
+                        (decimalWorkTime * member.base_cost) / 20 / 8,
+                      );
                       onWorkTimeChange(
                         member.member_id,
                         item.day,
                         formattedWorkTime,
-                        work_cost
+                        work_cost,
                       );
                     }}
                     disabled={between.id !== 1}

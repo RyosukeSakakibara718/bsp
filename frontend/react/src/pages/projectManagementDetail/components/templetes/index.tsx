@@ -29,7 +29,6 @@ import type {
   ProjectInfomation,
   RequestBody,
 } from "../../../../types/project";
-import { log } from "node:console";
 
 /**
  * 案件の登録・編集を表を行うテーブルコンポーネント。
@@ -298,7 +297,6 @@ const ProjectDetail: React.FC<{ id?: string }> = () => {
    * 登録処理
    */
   const handleRegister = async () => {
-    console.log(request)
     try {
       // 登録処理をここに記述
       if (id) {
@@ -306,14 +304,14 @@ const ProjectDetail: React.FC<{ id?: string }> = () => {
       } else {
         await editProjectManagementDetail(request);
       }
-      if(id){
-        alert('修正が完了しました');
-      }else{
-        alert('登録が完了しました');
+      if (id) {
+        alert("修正が完了しました");
+      } else {
+        alert("登録が完了しました");
       }
-      navigate('/projectManagement');
+      navigate("/projectManagement");
     } catch (error) {
-      console.error('エラーが発生しました', error);
+      console.error("エラーが発生しました", error);
     }
   };
 
@@ -382,10 +380,11 @@ const ProjectDetail: React.FC<{ id?: string }> = () => {
       />
       <Spacer height="40px" />
       <div className="justify-center">
-        {id
-        ? <AddButton buttonText="保存する" handleClick={handleRegister} />
-        : <AddButton buttonText="登録する" handleClick={handleRegister} />
-        }
+        {id ? (
+          <AddButton buttonText="保存する" handleClick={handleRegister} />
+        ) : (
+          <AddButton buttonText="登録する" handleClick={handleRegister} />
+        )}
       </div>
     </>
   );

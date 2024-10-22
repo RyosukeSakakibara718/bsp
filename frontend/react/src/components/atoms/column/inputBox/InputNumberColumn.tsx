@@ -29,7 +29,7 @@ const InputNumberColumn: React.FC<InputNumberColumnProps> = ({
           type="number"
           name={name}
           value={value}
-          placeholder={moneyFlug ? "¥" : costFlug? "人/日":""}
+          placeholder={moneyFlug ? "¥" : costFlug ? "人/日" : ""}
           onChange={handleInputChange}
           className="border rounded p-2 w-fill-available text-xl"
         />

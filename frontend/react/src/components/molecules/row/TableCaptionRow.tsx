@@ -10,8 +10,8 @@ type TableCaptionRowProps = {
   setIsEdit?: React.Dispatch<React.SetStateAction<boolean>> | undefined;
   handleSaveComment?: (num: number) => void;
   isNew?: boolean;
-  handleAddComment?: (num: number)=>void
-  handleDeleteComment?: (projectId: number, commentId: number)=>void
+  handleAddComment?: (num: number) => void;
+  handleDeleteComment?: (projectId: number, commentId: number) => void;
 };
 
 /**
@@ -43,14 +43,13 @@ const TableCaptionRow: React.FC<TableCaptionRowProps> = ({
   const handleCancelClick = () => {
     if (setIsEdit) setIsEdit(!isEdit);
   };
-  
+
   const handleDecideClick = () => {
-    if (isNew && projectId){
+    if (isNew && projectId) {
       handleAddComment?.(projectId);
-    }
-    else{
-      if (commentId){
-        handleSaveComment?.(commentId)
+    } else {
+      if (commentId) {
+        handleSaveComment?.(commentId);
       }
     }
     if (setIsEdit) setIsEdit(!isEdit);

@@ -23,7 +23,7 @@ import TableRow from "../molecules/row/TableRow";
  * @param {Array} props.data - メンバーのデータリスト。
  * @returns {JSX.Element} ProjectManagementコンポーネントを返します。
  */
-const ProjectManagement= () => {
+const ProjectManagement = () => {
   // TODO PMの中身実装
   const [showData, setShowData] = useState<ProjectData[]>([]);
   const [projectsData, setProjectsData] = useState<ProjectData[]>([]);
@@ -41,7 +41,7 @@ const ProjectManagement= () => {
         if (projects !== null) {
           setProjectsData(projects);
           setShowData(projects);
-          setOriginalData(projects)
+          setOriginalData(projects);
         }
         setLoading(false); // ローディングを終了
       })

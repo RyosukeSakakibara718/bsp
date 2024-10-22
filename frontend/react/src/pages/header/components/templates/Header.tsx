@@ -2,7 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 import logo from "./onepiece20_santaisyou.png";
-import { sampleUserData } from "../../../../data/user";
 /**
  * 画面のヘッダーを表示するコンポーネント。
  *
