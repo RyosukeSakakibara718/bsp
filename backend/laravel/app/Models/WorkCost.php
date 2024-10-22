@@ -42,7 +42,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  */
 class WorkCost extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory;
 
     protected $fillable = [
         'project_id',
@@ -72,6 +72,6 @@ class WorkCost extends Model
     // アクセサ: work_date を Y/m/d 形式で表示
     public function getWorkDateAttribute($value)
     {
-        return \Carbon\Carbon::parse($value)->format('Y/m/d');
+        return \Carbon\Carbon::parse($value)->format('Y/n/j');
     }
 }
