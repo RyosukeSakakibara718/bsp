@@ -49,14 +49,11 @@ const ProjectsAchievements = () => {
     getProjectsAll(true)
       .then(projects => {
         if (projects !== null) {
-          console.log(projects)
           const ProjectName = (projects as ProjectData[]).map(project => ({
             id: project.id,
             name: project.name,
             label: project.name,
           }));
-
-          console.log('ProjectName: ', ProjectName);
           setProjectList(ProjectName);
           setCurrentProject(ProjectName[0]);
         }

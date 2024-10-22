@@ -118,7 +118,6 @@ const MemberTable: React.FC = () => {
    * 検索条件に一致するメンバーをフィルタリング
    * @returns {Array} フィルタリングされたメンバーリスト
    */
-  console.log(memberData);
   const filteredMembers = memberData.filter(member =>
     Object.values(member).some(value =>
       value.toString().toLowerCase().includes(searchValue.toLowerCase()),

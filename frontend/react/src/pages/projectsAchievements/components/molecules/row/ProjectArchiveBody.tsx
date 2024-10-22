@@ -46,7 +46,6 @@ const ProjectArchiveBody: React.FC<ProjectArchiveBodyProps> = ({
   useEffect(() => {
     getMemberAll(true)
       .then(members => {
-        console.log(members);
         if (members !== null) {
           setMemberList(members.members);
         }
