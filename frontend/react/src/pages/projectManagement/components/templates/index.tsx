@@ -203,8 +203,16 @@ const ProjectManagement = () => {
         </div>
         <Spacer height="20px" />
         <div className="flex justify-evenly">
-          <PagenationButton value={"← Previous"} onClick={previousNextMember} />
-          <PagenationButton value={" Next →"} onClick={goNextMember} />
+          <PagenationButton
+            value={"← Previous"}
+            onClick={previousNextMember}
+            isAblePagenation={previousPagenationParams}
+          />
+          <PagenationButton
+            value={" Next →"}
+            onClick={goNextMember}
+            isAblePagenation={nextPagenationParams}
+          />
         </div>
       </div>
       {isDeleteModalOpen && targetData && (

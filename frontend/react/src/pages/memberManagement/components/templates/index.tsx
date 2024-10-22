@@ -45,8 +45,12 @@ const MemberTable: React.FC = () => {
   const [searchValue, setSearchValue] = useState("");
   const [targetData, setTargetData] = useState<MemberData>(initialFormData);
   const [addData, setAddData] = useState<MemberData>(initialFormData);
-  const [ nextPagenationParams, setNextPagenationParams ] = useState<string | null>()
-  const [ previousPagenationParams, setPreviousPagenationParams ] = useState<string | null>()
+  const [nextPagenationParams, setNextPagenationParams] = useState<
+    string | null
+  >();
+  const [previousPagenationParams, setPreviousPagenationParams] = useState<
+    string | null
+  >();
 
   // モーダルオープン時の表示用
 
@@ -54,11 +58,11 @@ const MemberTable: React.FC = () => {
     getMemberAll()
       .then(members => {
         if (members !== null) {
-          console.log('members.data! :', members.next_cursor);
+          console.log("members.data! :", members.next_cursor);
           setMemberData(members.members); // データがnullでない場合にセット
           setShowData(members.members);
-          setNextPagenationParams(members.next_cursor)
-          setPreviousPagenationParams(members.previous_cursor)
+          setNextPagenationParams(members.next_cursor);
+          setPreviousPagenationParams(members.previous_cursor);
         }
         setLoading(false); // ローディングを終了
       })
@@ -243,34 +247,32 @@ const MemberTable: React.FC = () => {
   };
 
   const goNextMember = () => {
-    if(nextPagenationParams){
-      getMemberAll(nextPagenationParams)
-      .then(members => {
+    if (nextPagenationParams) {
+      getMemberAll(nextPagenationParams).then(members => {
         if (members !== null) {
           setMemberData(members.members); // データがnullでない場合にセット
           setShowData(members.members);
-          setNextPagenationParams(members.next_cursor)
-          setPreviousPagenationParams(members.previous_cursor)
+          setNextPagenationParams(members.next_cursor);
+          setPreviousPagenationParams(members.previous_cursor);
         }
         setLoading(false); // ローディングを終了
-      })
+      });
     }
-  }
+  };
 
   const previousNextMember = () => {
-    if(previousPagenationParams){
-      getMemberAll(previousPagenationParams)
-      .then(members => {
+    if (previousPagenationParams) {
+      getMemberAll(previousPagenationParams).then(members => {
         if (members !== null) {
           setMemberData(members.members); // データがnullでない場合にセット
           setShowData(members.members);
-          setNextPagenationParams(members.next_cursor)
-          setPreviousPagenationParams(members.previous_cursor)
+          setNextPagenationParams(members.next_cursor);
+          setPreviousPagenationParams(members.previous_cursor);
         }
         setLoading(false); // ローディングを終了
-      })
+      });
     }
-  }
+  };
 
   return (
     <>
@@ -313,8 +315,16 @@ const MemberTable: React.FC = () => {
         </div>
         <Spacer height="20px" />
         <div className="flex justify-evenly">
-          <PagenationButton value={'← Previous'} onClick={previousNextMember}/>
-          <PagenationButton value={' Next →'} onClick={goNextMember}/>
+          <PagenationButton
+            value={"← Previous"}
+            onClick={previousNextMember}
+            isAblePagenation={previousPagenationParams}
+          />
+          <PagenationButton
+            value={" Next →"}
+            onClick={goNextMember}
+            isAblePagenation={nextPagenationParams}
+          />
         </div>
       </div>
       {isAddModalOpen && (
