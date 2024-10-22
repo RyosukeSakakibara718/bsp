@@ -46,11 +46,12 @@ export type AssignmentMembers = {
 
 export type ProjectsData = {
   name: string;
+  company_name: string;
   phase: number | undefined;
   freee_project_code: string;
   contract: number | undefined;
-  start_date: string;
-  end_date: string;
+  start_date: Date;
+  end_date: Date;
 };
 
 export type Estimations = {

@@ -3,7 +3,7 @@ import React from "react";
 type InputDateColumnProps = {
   title: string;
   name: string;
-  value: string;
+  value: Date;
   handleInputChange: (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
   ) => void;
