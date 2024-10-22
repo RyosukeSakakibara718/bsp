@@ -22,6 +22,7 @@ class ProjectDetailResource extends JsonResource
                 'projects_data' => [
                     'id' => $this->id,
                     'name' => $this->name,
+                    'company_name' => $this->company_name,
                     'phase' => $this->phase,
                     'freee_project_code' => $this->freee_project_code,
                     "contract" => $this->contract,

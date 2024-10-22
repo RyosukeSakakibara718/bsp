@@ -11,6 +11,7 @@ import {
   ProjectName,
   initialBetween,
 } from "../../../../data/projectsArchivements";
+import { getProjectsAll } from "../../../../hooks/useProjects";
 import {
   AssignmentMember,
   optionsArrayProps,
@@ -20,12 +21,13 @@ import {
   OptionList,
   ProjectData,
 } from "../../../../types/project";
-import { countBusinessDaysInMonth } from "../../../../utils/projectsAchievements";
+import { getProjectManagementDetail } from "../../../projectManagementDetail/api/useProjectManagementDetail";
+import {
+  editProjectsAchievements,
+  getProjectsAchievements,
+} from "../../api/useProjectsAchievements";
 import ProjectArchiveBody from "../molecules/row/ProjectArchiveBody";
 import ProjectArchiveHeader from "../molecules/row/ProjectArchiveHeader";
-import { getProjectManagementDetail } from "../../../projectManagementDetail/api/useProjectManagementDetail";
-import { getProjectsAll } from "../../../../hooks/useProjects";
-import { editProjectsAchievements, getProjectsAchievements } from "../../api/useProjectsAchievements";
 
 const ProjectsAchievements = () => {
   const [projectData, setProjectData] = useState<ProjectAchievementsData>(
@@ -40,10 +42,11 @@ const ProjectsAchievements = () => {
   const endIndex = startIndex + itemsPerPage;
   const [projectList, setProjectList] = useState<OptionList[]>(ProjectName);
   const [currentProject, setCurrentProject] = useState<OptionList>();
-  const [currentProjectDetail, setCurrentProjectDetail] = useState(projectDetailData);
+  const [currentProjectDetail, setCurrentProjectDetail] =
+    useState(projectDetailData);
 
   useEffect(() => {
-    getProjectsAll()
+    getProjectsAll(true)
       .then(projects => {
         if (projects !== null) {
           const ProjectName = (projects as ProjectData[]).map(project => ({
@@ -62,7 +65,7 @@ const ProjectsAchievements = () => {
 
   useEffect(() => {
     if (currentProject) {
-      getProjectsAchievements(currentProject.id)
+      getProjectsAchievements(currentProject.id);
     }
   }, [currentProject]);
 
@@ -87,9 +90,7 @@ const ProjectsAchievements = () => {
   const getMonthYear = (date: string) => {
     const dateObj = new Date(date);
     const year = dateObj.getFullYear();
-    const month = (dateObj.getMonth() + 1)
-      .toString()
-      .padStart(2, "0");
+    const month = (dateObj.getMonth() + 1).toString().padStart(2, "0");
     return `${year}/${month}`;
   };
 
@@ -157,6 +158,7 @@ const ProjectsAchievements = () => {
     memberId: number,
     workDate: string,
     workTime: string,
+    workCost: number,
   ) => {
     setProjectData(prevData => {
       return {
@@ -166,13 +168,8 @@ const ProjectsAchievements = () => {
           assignment_members: prevData.project.assignment_members.map(
             member => {
               if (member.member_id === memberId) {
-                const businessDays = countBusinessDaysInMonth(workDate);
                 const workTimeDecimal: number =
                   convertWorkTimeToDecimal(workTime);
-                const dailyCost = Math.ceil(
-                  (member.base_cost / businessDays) * workTimeDecimal,
-                );
-
                 const workWeek = getSundayOfWeek(workDate);
                 const workMonth = getMonthYear(workDate);
 
@@ -184,13 +181,14 @@ const ProjectsAchievements = () => {
                   const updatedWorkCosts = member.work_costs
                     .map((cost, index) => {
                       if (index === existingCostIndex) {
-                        const workTimeDecimal = convertWorkTimeToDecimal(workTime)
+                        const workTimeDecimal =
+                          convertWorkTimeToDecimal(workTime);
                         return workTimeDecimal === 0
                           ? null
                           : {
                               ...cost,
                               work_time: workTime,
-                              daily_cost: dailyCost,
+                              daily_cost: workCost,
                             };
                       }
                       return cost;
@@ -207,7 +205,7 @@ const ProjectsAchievements = () => {
                     work_costs: [
                       ...member.work_costs,
                       {
-                        daily_cost: dailyCost,
+                        daily_cost: workCost,
                         work_time: workTime,
                         work_date: workDate,
                         work_week: workWeek,
@@ -235,7 +233,6 @@ const ProjectsAchievements = () => {
     }
   };
 
-
   const handleRegister = async () => {
     const updatedProjectData = JSON.parse(JSON.stringify(projectData));
 
@@ -248,13 +245,13 @@ const ProjectsAchievements = () => {
       },
     );
     try {
-      if (currentProject){
-        await editProjectsAchievements(updatedProjectData, currentProject.id)
+      if (currentProject) {
+        await editProjectsAchievements(updatedProjectData, currentProject.id);
       }
-      alert('登録が完了しました')
+      alert("登録が完了しました");
       window.location.reload();
     } catch (error) {
-      console.error('エラーが発生しました', error);
+      console.error("エラーが発生しました", error);
     }
   };
 
@@ -436,7 +433,11 @@ const ProjectsAchievements = () => {
   const formatWorkMonth = (dateStr: string) => {
     // 日付が "YYYY/MM/DD" 形式であることを前提に分割して、年と月を取得
     const [year, month] = dateStr.split("/");
-    return `${year}/${month}`; // "YYYY/MM" の形式で返す
+
+    // 月をゼロ埋めして2桁にする
+    const paddedMonth = month.padStart(2, "0");
+
+    return `${year}/${paddedMonth}`; // "YYYY/MM" の形式で返す
   };
 
   const groupByWorkMonth = (projectData: ProjectAchievementsData) => {

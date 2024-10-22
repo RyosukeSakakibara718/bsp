@@ -2,7 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 import logo from "./onepiece20_santaisyou.png";
-import { sampleUserData } from "../../../../data/user";
 /**
  * 画面のヘッダーを表示するコンポーネント。
  *
@@ -29,12 +28,11 @@ const Header: React.FC = () => {
           <Link to="/projectsAchievements" className="hover:text-gray-300">
             案件実績入力
           </Link>
-          <Link to="/logout" className="hover:text-gray-300">
+          {/* <Link to="/logout" className="hover:text-gray-300">
             ログアウト
-          </Link>
+          </Link> */}
         </nav>
       </div>
-      <div>{sampleUserData[0].name}</div>
     </header>
   );
 };

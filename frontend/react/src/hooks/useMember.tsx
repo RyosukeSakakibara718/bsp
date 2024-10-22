@@ -1,8 +1,29 @@
-import type { MemberData } from "../types/member";
+import type { MemberData, MemberTableProps } from "../types/member";
 const apiUrl = import.meta.env.VITE_API_URL;
 
-export const getMemberAll = (): Promise<MemberData[]> => {
-  return fetch(`${apiUrl}/v1/members`)
+export const getMemberAll = (fetchAllOrCursor?: string | boolean): Promise<MemberTableProps> => {
+  let  url = `${apiUrl}/v1/members`
+  if(typeof(fetchAllOrCursor) === "boolean"){
+    url = `${apiUrl}/v1/members?fetchAll=true`
+  }else if(fetchAllOrCursor){
+    url = `${apiUrl}/v1/members?cursor=${fetchAllOrCursor}`;
+  }
+
+  return fetch(url)
+    .then(response => {
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      return response.json();
+    })
+    .then(data => {
+      return data; // members プロパティにアクセスして返す
+    });
+};
+
+export const getMemberAll01 = (fetchAll?: boolean): Promise<MemberData[]> => {
+  const url = fetchAll ? `${apiUrl}/v1/members?fetchAll=true` : `${apiUrl}/v1/members`;
+  return fetch(url)
     .then(response => {
       if (!response.ok) {
         throw new Error("Network response was not ok");
@@ -13,6 +34,7 @@ export const getMemberAll = (): Promise<MemberData[]> => {
       return data.members; // members プロパティにアクセスして返す
     });
 };
+
 
 export const editMember = (
   id: number,

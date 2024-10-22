@@ -84,13 +84,12 @@ export const projectDetailData = {
 export const initialProjectInfo = {
   projects_data: {
     name: "",
+    company_name: "",
     phase: 1,
     freee_project_code: "",
     contract: 1,
-    start_date: new Date().toISOString().split("T")[0], // 現在の日付
-    end_date: new Date(new Date().setMonth(new Date().getMonth() + 20))
-      .toISOString()
-      .split("T")[0],
+    start_date: new Date(), // 現在の日付
+    end_date: new Date(new Date().setMonth(new Date().getMonth() + 20)),
   },
   estimations: {
     order_price: undefined,
@@ -139,6 +138,7 @@ export const requestBody = {
   projects: {
     projects_data: {
       name: "",
+      company_name: "",
       phase: undefined,
       freee_project_code: "",
       contract: undefined,
@@ -155,6 +155,7 @@ export const requestBody = {
         member_id: 0,
         position: 0,
         estimate_total_person_month: 0,
+        base_cost: 0,
         assignment_member_monthly_estimations: [
           {
             target_month: 0,

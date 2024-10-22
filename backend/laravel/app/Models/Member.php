@@ -69,4 +69,12 @@ class Member extends Model
     protected $casts = [
         'base_cost_start_date' => 'date:Y-m-d',
     ];
+
+    public function scopeSearchByName($query, $name)
+    {
+        if (!empty($name)) {
+            return $query->where('name', 'like', '%' . $name . '%');
+        }
+        return $query;
+    }
 }

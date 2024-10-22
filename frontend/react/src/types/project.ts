@@ -1,7 +1,8 @@
 export type ProjectData = {
   id: number;
   name: string;
-  freee_project_code? :string;
+  company_name: string;
+  freee_project_code?: string;
   start_date: string;
   end_date: string;
   project_manager: string;
@@ -13,7 +14,7 @@ export type ProjectDataProps = {
 
 export type OptionList = {
   id: number;
-  name: string;
+  name?: string;
   base_cost?: number;
   label: string;
 };
@@ -45,11 +46,12 @@ export type AssignmentMembers = {
 
 export type ProjectsData = {
   name: string;
+  company_name: string;
   phase: number | undefined;
   freee_project_code: string;
   contract: number | undefined;
-  start_date: string;
-  end_date: string;
+  start_date: Date;
+  end_date: Date;
 };
 
 export type Estimations = {
@@ -123,7 +125,8 @@ export type AssignmentMember = {
 };
 
 export type ProjectAchievementsData = {
-  project: { // projectsをprojectに変更
+  project: {
+    // projectsをprojectに変更
     id: number; // projects_idをidに変更
     assignment_members: AssignmentMember[];
   };

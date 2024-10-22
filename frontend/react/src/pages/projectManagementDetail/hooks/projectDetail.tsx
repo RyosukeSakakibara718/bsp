@@ -12,7 +12,7 @@ export const getMemberList = (
 ): void => {
   getMemberAll()
     .then(members => {
-      const memberName = members.map(member => ({
+      const memberName = members.members.map(member => ({
         id: member.id,
         name: member.name,
         base_cost: member.base_cost,

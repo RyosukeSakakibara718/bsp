@@ -2,13 +2,13 @@ import { useEffect, useState } from "react";
 
 import { RANK } from "../../../../../constants";
 import { getMemberAll } from "../../../../../hooks/useMember";
+import { MemberData } from "../../../../../types/member";
 import {
   optionsArrayProps,
   Period,
   ProjectsAchievementsMember,
 } from "../../../../../types/project";
-import { countBusinessDaysInMonth } from "../../../../../utils/projectsAchievements";
-import { MemberData } from "../../../../../types/member";
+import { log } from "node:console";
 
 type ProjectArchiveBodyProps = {
   showPeriod: Period[];
@@ -17,13 +17,14 @@ type ProjectArchiveBodyProps = {
     memberId: number,
     workDate: string,
     workTime: string,
+    work_cost: number,
   ) => void;
   between: optionsArrayProps;
 };
 
 // 08:00:00 や 08:30:00 を小数形式に変換する関数
 const convertWorkTimeToDecimal = (workTime: string): number => {
-  const [hours, minutes] = workTime.split(':').map(Number); // 時間と分を分解して数値に変換
+  const [hours, minutes] = workTime.split(":").map(Number); // 時間と分を分解して数値に変換
   return hours + minutes / 60; // 時間と分を小数形式に変換
 };
 
@@ -31,7 +32,7 @@ const convertWorkTimeToDecimal = (workTime: string): number => {
 const convertDecimalToWorkTime = (decimal: number): string => {
   const hours = Math.floor(decimal);
   const minutes = Math.round((decimal - hours) * 60);
-  return `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:00`;
+  return `${String(hours).padStart(2, "0")}:${String(minutes).padStart(2, "0")}:00`;
 };
 
 const ProjectArchiveBody: React.FC<ProjectArchiveBodyProps> = ({
@@ -43,10 +44,10 @@ const ProjectArchiveBody: React.FC<ProjectArchiveBodyProps> = ({
   const [memberList, setMemberList] = useState<MemberData[]>();
 
   useEffect(() => {
-    getMemberAll()
+    getMemberAll(true)
       .then(members => {
         if (members !== null) {
-          setMemberList(members);
+          setMemberList(members.members);
         }
       })
       .catch(error => {
@@ -54,14 +55,11 @@ const ProjectArchiveBody: React.FC<ProjectArchiveBodyProps> = ({
       });
   }, []);
 
-  const memberInfo = memberList?.find(
-    item => item.id === member.member_id,
-  );
+  const memberInfo = memberList?.find(item => item.id === member.member_id);
   const rank = RANK.find(item => item.id === member.position);
 
   const calculateAmount = (
     workTime: number,
-    workDate: string,
     between: number,
     member: ProjectsAchievementsMember,
     item: Period,
@@ -69,8 +67,7 @@ const ProjectArchiveBody: React.FC<ProjectArchiveBodyProps> = ({
     let amount = 0;
 
     if (between === 1) {
-      const businessDays = countBusinessDaysInMonth(workDate);
-      amount = Math.ceil((member.base_cost / businessDays) * workTime); // 通常の処理
+      amount = Math.ceil((member.base_cost / 20 / 8) * workTime); // 通常の処理
     } else if (between === 2) {
       amount =
         member.work_costs.find(cost => cost.work_week === item.day)
@@ -105,10 +102,10 @@ const ProjectArchiveBody: React.FC<ProjectArchiveBodyProps> = ({
 
   return (
     <>
-      {memberInfo && rank && (
+      { rank && (
         <tbody>
           <tr>
-            <td>{memberInfo.name}</td>
+            <td>{memberInfo?.name}</td>
             <td>{rank.name}</td>
             <td>¥{member.base_cost.toLocaleString()}</td>{" "}
             <td className="border-l border-gray-300">時間</td>
@@ -127,11 +124,16 @@ const ProjectArchiveBody: React.FC<ProjectArchiveBodyProps> = ({
                     step="1" // 1刻みで変更可能にする
                     onChange={e => {
                       const decimalWorkTime = Number(e.target.value); // 入力値を小数点に変換
-                      const formattedWorkTime = convertDecimalToWorkTime(decimalWorkTime); // 8 -> 08:00:00 に変換
+                      const formattedWorkTime =
+                        convertDecimalToWorkTime(decimalWorkTime); // 8 -> 08:00:00 に変換
+                      const work_cost = Math.ceil(
+                        (decimalWorkTime * member.base_cost) / 20 / 8,
+                      );
                       onWorkTimeChange(
                         member.member_id,
                         item.day,
                         formattedWorkTime,
+                        work_cost,
                       );
                     }}
                     disabled={between.id !== 1}
@@ -153,7 +155,6 @@ const ProjectArchiveBody: React.FC<ProjectArchiveBodyProps> = ({
               // 金額に表示する合計金額
               const amount = calculateAmount(
                 workCost ? convertWorkTimeToDecimal(workCost.work_time) : 0,
-                item.day,
                 between.id,
                 member,
                 item,

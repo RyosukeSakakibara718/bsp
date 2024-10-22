@@ -8,16 +8,27 @@ use App\Models\Member;
 
 class IndexAction
 {
-    public function __invoke($searchQuery = [], $cursor = null)
+    public function __invoke($request, $fetchAll)
     {
-        $query = Member::query();
+        $searchQuery = $request->only(['name']);
+        $cursor = $request->input('cursor');
 
-        if (isset($searchQuery['name'])) {
-            $query->where('name', 'like', '%' . $searchQuery['name'] . '%');
-        }
+        $query = Member::query()
+            ->searchByName($searchQuery['name'] ?? null)
+            ->orderBy('id');
 
-        $members = $query->orderby('id')->cursorPaginate(10, ['*'], 'cursor', $cursor);
+        return $fetchAll
+            ? $this->fetchAllMembers($query)
+            : $this->paginateMembers($query, $cursor);
+    }
 
-        return $members;
+    private function fetchAllMembers($query)
+    {
+        return $query->get();
+    }
+
+    private function paginateMembers($query, ?string $cursor)
+    {
+        return $query->cursorPaginate(10, ['*'], 'cursor', $cursor);
     }
 }

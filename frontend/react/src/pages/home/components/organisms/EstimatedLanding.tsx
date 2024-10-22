@@ -41,7 +41,7 @@ const EstimatedLanding = ({ foreCast }: OrderInfoDataProps) => {
             <tr>
               <TableLabelTd
                 label="予測工数"
-                value={`${foreCast.achievement_person_month} 人/日`}
+                value={`${foreCast.achievement_person_month} 人月`}
               />
             </tr>
           </>

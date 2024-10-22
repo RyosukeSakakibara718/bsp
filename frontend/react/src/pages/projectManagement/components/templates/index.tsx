@@ -14,6 +14,7 @@ import { getProjectsAll, deleteProjects } from "../../../../hooks/useProjects";
 import { ProjectData } from "../../../../types/project";
 import DeleteModal from "../molecules/modal/DeleteModal";
 import TableRow from "../molecules/row/TableRow";
+import { PagenationButton } from "../../../../components/atoms/button/PagenationButton";
 
 /**
  *  案件の一覧を表示し・検索できるコンポーネント。
@@ -23,7 +24,7 @@ import TableRow from "../molecules/row/TableRow";
  * @param {Array} props.data - メンバーのデータリスト。
  * @returns {JSX.Element} ProjectManagementコンポーネントを返します。
  */
-const ProjectManagement= () => {
+const ProjectManagement = () => {
   // TODO PMの中身実装
   const [showData, setShowData] = useState<ProjectData[]>([]);
   const [projectsData, setProjectsData] = useState<ProjectData[]>([]);
@@ -34,14 +35,22 @@ const ProjectManagement= () => {
 
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [targetData, setTargetData] = useState<ProjectData>();
+  const [nextPagenationParams, setNextPagenationParams] = useState<
+    string | null
+  >();
+  const [previousPagenationParams, setPreviousPagenationParams] = useState<
+    string | null
+  >();
 
   const getProjectsData = () => {
     getProjectsAll()
       .then(projects => {
         if (projects !== null) {
-          setProjectsData(projects);
-          setShowData(projects);
-          setOriginalData(projects)
+          setProjectsData(projects.projects);
+          setShowData(projects.projects);
+          setOriginalData(projects.projects);
+          setNextPagenationParams(projects.next_cursor);
+          setPreviousPagenationParams(projects.previous_cursor);
         }
         setLoading(false); // ローディングを終了
       })
@@ -124,6 +133,36 @@ const ProjectManagement= () => {
     return <Loading />;
   }
 
+  const goNextMember = () => {
+    if (nextPagenationParams) {
+      getProjectsAll(nextPagenationParams).then(projects => {
+        if (projects !== null) {
+          setProjectsData(projects.projects);
+          setShowData(projects.projects);
+          setOriginalData(projects.projects);
+          setNextPagenationParams(projects.next_cursor);
+          setPreviousPagenationParams(projects.previous_cursor);
+        }
+        setLoading(false); // ローディングを終了
+      });
+    }
+  };
+
+  const previousNextMember = () => {
+    if (previousPagenationParams) {
+      getProjectsAll(previousPagenationParams).then(projects => {
+        if (projects !== null) {
+          setProjectsData(projects.projects);
+          setShowData(projects.projects);
+          setOriginalData(projects.projects);
+          setNextPagenationParams(projects.next_cursor);
+          setPreviousPagenationParams(projects.previous_cursor);
+        }
+        setLoading(false); // ローディングを終了
+      });
+    }
+  };
+
   return (
     <>
       <div className="shadow-lg rounded-lg overflow-hidden p-8">
@@ -151,6 +190,7 @@ const ProjectManagement= () => {
                 <TableRow
                   id={item.id}
                   name={item.name}
+                  company_name={item.company_name}
                   start_date={item.start_date}
                   end_date={item.end_date}
                   project_manager={item.project_manager}
@@ -160,6 +200,19 @@ const ProjectManagement= () => {
               ))}
             </tbody>
           </table>
+        </div>
+        <Spacer height="20px" />
+        <div className="flex justify-evenly">
+          <PagenationButton
+            value={"← Previous"}
+            onClick={previousNextMember}
+            isAblePagenation={previousPagenationParams}
+          />
+          <PagenationButton
+            value={" Next →"}
+            onClick={goNextMember}
+            isAblePagenation={nextPagenationParams}
+          />
         </div>
       </div>
       {isDeleteModalOpen && targetData && (

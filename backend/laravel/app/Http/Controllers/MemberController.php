@@ -22,10 +22,13 @@ class MemberController extends Controller
      */
     public function index(IndexAction $action, Request $request): JsonResponse
     {
-        $searchQuery = $request->only(['name']);
-        $cursor = $request->input('cursor');
+        $fetchAll = filter_var($request->input('fetchAll'), FILTER_VALIDATE_BOOLEAN);
 
-        $members = $action($searchQuery, $cursor);
+        $members = $action($request, $fetchAll);
+
+        if($fetchAll){
+            return response()->json(['members' => MemberResource::collection($members)], 200);
+        }
 
         return response()->json([
             'members' => MemberResource::collection($members),

@@ -1,8 +1,8 @@
 import BigSelectBox from "../../../../components/atoms/box/BigSelectBox";
-import { Project } from "../../../../types/home";
+import { ProjectInfo } from "../../../../types/home";
 
 type HomeHeaderProps = {
-  projects: Project[];
+  projects: ProjectInfo[];
   handleSelectChange: (value: string) => void;
   selectedProject: string;
 };
@@ -24,13 +24,13 @@ const HomeHeader = ({
   }));
   return (
     <div style={{ display: "flex", gap: "40px" }}>
-      <div className="w-1/3">
+      <div className="w-1/3 flex">
         <BigSelectBox
           optionArray={projectOptions}
           handleSelectChange={handleSelectChange}
         />
       </div>
-      <p className="pl-5 pr-20 py-3 text-left w-1/3">株式会社インプル</p>
+      <p className="pl-5 pr-20 py-3 text-left w-1/3">{project?.company_name}</p>
       <p className="pl-5 pr-20 py-3 text-left w-1/3">{`期間:${project?.start_date.replace(/-/g, "/")}~${project?.end_date.replace(/-/g, "/")}`}</p>
     </div>
   );

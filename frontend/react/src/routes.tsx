@@ -16,10 +16,7 @@ const AppRoutes: React.FC = () => {
       <Route path="/" element={<Navigate to="/home" />} />
       <Route path="/home" element={<Home />} />
       <Route path="/memberManagement" element={<MemberTable />} />
-      <Route
-        path="/projectManagement"
-        element={<ProjectManagement />}
-      />
+      <Route path="/projectManagement" element={<ProjectManagement />} />
       <Route
         path="/projectManagement/detail/:id?"
         element={<ProjectDetail />}

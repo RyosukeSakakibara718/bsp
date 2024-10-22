@@ -4,7 +4,7 @@ import { getHomeData } from "../../../../api/home";
 import Spacer from "../../../../components/atoms/Spacer";
 import Loading from "../../../../components/molecules/Loading";
 import { getProjectsAll } from "../../../../hooks/useProjects";
-import { Member, Graph, SummaryProps, Project } from "../../../../types/home";
+import { Member, Graph, SummaryProps, Project, ProjectInfo } from "../../../../types/home";
 import ChartGraph from "../libs/chartjs/ChartGraph";
 import ShowTotalAchievements from "../molecules/ShowTotalAchievements";
 import CommentBox from "../organisms/CommentBox";
@@ -21,7 +21,7 @@ const Home: React.FC = () => {
    * @returns {JSX.Element} Homeコンポーネントを返します。
    */
 
-  const [projects, setProjects] = useState<Project[]>([]);
+  const [projects, setProjects] = useState<ProjectInfo[]>([]);
   const [loading, setLoading] = useState(true);
   const [selectedProject, setSelectedProject] = useState<string>(
     projects[0]?.name,
@@ -53,9 +53,9 @@ const Home: React.FC = () => {
 
   useEffect(() => {
     getProjectsAll()
-      .then((projects: Project[]) => {
+      .then((projects: Project) => {
         if (projects !== null) {
-          setProjects(projects);
+          setProjects(projects.projects);
         }
         setLoading(false);
       })

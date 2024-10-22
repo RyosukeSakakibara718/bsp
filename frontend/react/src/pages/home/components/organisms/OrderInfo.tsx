@@ -41,7 +41,7 @@ const OrderInfo = ({ estimation }: EstimateDataProps) => {
             <tr>
               <TableLabelTd
                 label="見積工数"
-                value={`${estimation.estimate_person_month} 人/日`}
+                value={`${estimation.estimate_person_month} 人月`}
               />
             </tr>
           </>

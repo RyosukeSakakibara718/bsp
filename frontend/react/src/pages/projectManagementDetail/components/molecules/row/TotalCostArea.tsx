@@ -13,7 +13,7 @@ const TotalCostArea: React.FC<TotalCostAreaProps> = ({ info }) => {
             {info.estimate_total_person_month
               ? info.estimate_total_person_month.toFixed(1)
               : 0}{" "}
-            人/月
+            人月
           </p>
         </div>
       </td>

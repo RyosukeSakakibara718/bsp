@@ -304,14 +304,14 @@ const ProjectDetail: React.FC<{ id?: string }> = () => {
       } else {
         await editProjectManagementDetail(request);
       }
-      if(id){
-        alert('修正が完了しました');
-      }else{
-        alert('登録が完了しました');
+      if (id) {
+        alert("修正が完了しました");
+      } else {
+        alert("登録が完了しました");
       }
-      navigate('/projectManagement');
+      navigate("/projectManagement");
     } catch (error) {
-      console.error('エラーが発生しました', error);
+      console.error("エラーが発生しました", error);
     }
   };
 
@@ -380,10 +380,11 @@ const ProjectDetail: React.FC<{ id?: string }> = () => {
       />
       <Spacer height="40px" />
       <div className="justify-center">
-        {id
-        ? <AddButton buttonText="保存する" handleClick={handleRegister} />
-        : <AddButton buttonText="登録する" handleClick={handleRegister} />
-        }
+        {id ? (
+          <AddButton buttonText="保存する" handleClick={handleRegister} />
+        ) : (
+          <AddButton buttonText="登録する" handleClick={handleRegister} />
+        )}
       </div>
     </>
   );

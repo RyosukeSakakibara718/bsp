@@ -20,6 +20,7 @@ class ProjectRequest extends FormRequest
         return [
             // 案件情報
             'projects.projects_data.name' => ['required', 'string', 'max:255'],
+            'projects.projects_data.company_name' => ['required', 'string', 'max:255'],
             'projects.projects_data.contract' => ['required', 'integer', 'min:1'],
             'projects.projects_data.phase' => ['required', 'integer', 'min:1'],
             'projects.projects_data.start_date' => ['required', 'date', 'date_format:Y-m-d'],
@@ -53,6 +54,8 @@ class ProjectRequest extends FormRequest
         return [
             'name.required' => 'プロジェクト名は必須項目です。',
             'name.max' => 'プロジェクト名は255文字以内で入力してください。',
+            'company_name.required' => '会社名は必須項目です。',
+            'company_name.max' => '会社名は255文字以内で入力してください。',
             'freee_project_code.max' => 'プロジェクトコードは50文字以内で入力してください。',
             'contract.required' => '契約は必須項目です。',
             'contract.integer' => '契約は整数でなければなりません。',

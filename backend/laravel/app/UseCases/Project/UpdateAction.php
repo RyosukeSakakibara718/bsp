@@ -27,6 +27,7 @@ class UpdateAction
                             'id' => $id,
                             'freee_project_code' => $request->input('projects.projects_data.freee_project_code'),
                             'name' => $request->input('projects.projects_data.name'),
+                            'company_name' => $request->input('projects.projects_data.company_name'),
                             'contract' => $request->input('projects.projects_data.contract'),
                             'phase' => $request->input('projects.projects_data.phase'),
                             'start_date' => $request->input('projects.projects_data.start_date'),
@@ -34,7 +35,7 @@ class UpdateAction
                         ],
                     ],
                     ['id'],
-                    ['freee_project_code', 'name', 'contract', 'phase', 'start_date', 'end_date']
+                    ['freee_project_code', 'name', 'company_name', 'contract', 'phase', 'start_date', 'end_date']
                 );
 
                 // 見積情報を更新
