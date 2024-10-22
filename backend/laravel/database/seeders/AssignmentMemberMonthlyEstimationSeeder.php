@@ -23,7 +23,7 @@ class AssignmentMemberMonthlyEstimationSeeder extends Seeder
 
                 AssignmentMemberMonthlyEstimation::create([
                     'assignment_member_id' => $assignmentMember->id,
-                    'target_month' => $currentMonth->format('Y-m'),
+                    'target_month' => $currentMonth->format('Y/m'),
                     'estimate_person_month' => $monthlyEstimation->estimate_person_month,
                     'estimate_cost' => $estimateCost,
                 ]);
