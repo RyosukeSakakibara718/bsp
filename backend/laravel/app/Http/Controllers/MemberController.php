@@ -29,7 +29,7 @@ class MemberController extends Controller
         $members = $action($searchQuery, $cursor, $fetchAll);
 
         if($fetchAll){
-            return response()->json(MemberResource::collection($members), 200);
+            return response()->json(['members' => MemberResource::collection($members)], 200);
         }
 
         return response()->json([
