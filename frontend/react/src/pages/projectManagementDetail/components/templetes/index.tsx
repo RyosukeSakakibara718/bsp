@@ -29,6 +29,7 @@ import type {
   ProjectInfomation,
   RequestBody,
 } from "../../../../types/project";
+import { log } from "node:console";
 
 /**
  * 案件の登録・編集を表を行うテーブルコンポーネント。
@@ -297,6 +298,7 @@ const ProjectDetail: React.FC<{ id?: string }> = () => {
    * 登録処理
    */
   const handleRegister = async () => {
+    console.log(request)
     try {
       // 登録処理をここに記述
       if (id) {

@@ -61,7 +61,6 @@ const ProjectArchiveBody: React.FC<ProjectArchiveBodyProps> = ({
 
   const calculateAmount = (
     workTime: number,
-    workDate: string,
     between: number,
     member: ProjectsAchievementsMember,
     item: Period,
@@ -69,8 +68,7 @@ const ProjectArchiveBody: React.FC<ProjectArchiveBodyProps> = ({
     let amount = 0;
 
     if (between === 1) {
-      const businessDays = countBusinessDaysInMonth(workDate);
-      amount = Math.ceil((member.base_cost / businessDays) * workTime); // 通常の処理
+      amount = Math.ceil((member.base_cost / (20 * 8)) * workTime); // 通常の処理
     } else if (between === 2) {
       amount =
         member.work_costs.find(cost => cost.work_week === item.day)
@@ -153,7 +151,6 @@ const ProjectArchiveBody: React.FC<ProjectArchiveBodyProps> = ({
               // 金額に表示する合計金額
               const amount = calculateAmount(
                 workCost ? convertWorkTimeToDecimal(workCost.work_time) : 0,
-                item.day,
                 between.id,
                 member,
                 item,
