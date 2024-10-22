@@ -58,7 +58,6 @@ const MemberTable: React.FC = () => {
     getMemberAll()
       .then(members => {
         if (members !== null) {
-          console.log("members.data! :", members.next_cursor);
           setMemberData(members.members); // データがnullでない場合にセット
           setShowData(members.members);
           setNextPagenationParams(members.next_cursor);
