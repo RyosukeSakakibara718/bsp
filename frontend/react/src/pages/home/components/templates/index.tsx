@@ -55,6 +55,7 @@ const Home: React.FC = () => {
     getProjectsAll()
       .then((projects: Project) => {
         if (projects !== null) {
+          console.log(projects.projects)
           setProjects(projects.projects);
         }
         setLoading(false);
@@ -111,8 +112,6 @@ const Home: React.FC = () => {
         <OrderInfo estimation={estimation} />
         <EstimatedLanding foreCast={foreCast} />
       </div>
-      <Spacer height="40px" />
-      <MemberInfo MembersData={assignmentMember} />
       <Spacer height="40px"></Spacer>
       <div className=" rounded-lg border">
         <div className="w-full flex bgcolor-grey bg-[#EEE3FF] rounded-t-lg">
@@ -127,6 +126,8 @@ const Home: React.FC = () => {
           </div>
         </div>
       </div>
+      <Spacer height="40px" />
+      <MemberInfo MembersData={assignmentMember} />
       <Spacer height="40px"></Spacer>
       <CommentBox projectId={projectId} />
     </div>
