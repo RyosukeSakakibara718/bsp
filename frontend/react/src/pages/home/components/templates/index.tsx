@@ -107,11 +107,6 @@ const Home: React.FC = () => {
         handleSelectChange={handleSelectChange}
         selectedProject={selectedProject}
       />
-      <Spacer height="40px" />
-      <div style={{ display: "flex", gap: "40px" }}>
-        <OrderInfo estimation={estimation} />
-        <EstimatedLanding foreCast={foreCast} />
-      </div>
       <Spacer height="40px"></Spacer>
       <div className=" rounded-lg border">
         <div className="w-full flex bgcolor-grey bg-[#EEE3FF] rounded-t-lg">
@@ -125,6 +120,11 @@ const Home: React.FC = () => {
             <ChartGraph graph={graph} />
           </div>
         </div>
+      </div>
+      <Spacer height="40px" />
+      <div style={{ display: "flex", gap: "40px" }}>
+        <OrderInfo estimation={estimation} />
+        <EstimatedLanding foreCast={foreCast} />
       </div>
       <Spacer height="40px" />
       <MemberInfo MembersData={assignmentMember} />

@@ -26,12 +26,14 @@ const Project: React.FC<ProjectProps> = ({ formData, handleInputChange }) => {
               name="name"
               value={formData.projects_data.name}
               handleInputChange={handleInputChange}
+              required={true}
             />
             <InputStringColumn
               title={"会社名"}
               name="company_name"
               value={formData.projects_data.company_name}
               handleInputChange={handleInputChange}
+              required={true}
             />
           </ProjectInfoRow>
           <ProjectInfoRow>
@@ -40,6 +42,7 @@ const Project: React.FC<ProjectProps> = ({ formData, handleInputChange }) => {
               name="freee_project_code"
               value={formData.projects_data.freee_project_code}
               handleInputChange={handleInputChange}
+              required={false}
             />
             <SelectBoxColumn
               title={"作業フェーズ"}
@@ -62,6 +65,7 @@ const Project: React.FC<ProjectProps> = ({ formData, handleInputChange }) => {
               value={formData.estimations.order_price}
               moneyFlug={true}
               handleInputChange={handleInputChange}
+              required={true}
             />
           </ProjectInfoRow>
           <ProjectInfoRow>
@@ -77,6 +81,7 @@ const Project: React.FC<ProjectProps> = ({ formData, handleInputChange }) => {
               value={formData.estimations.estimate_cost}
               moneyFlug={true}
               handleInputChange={handleInputChange}
+              required={true}
             />
           </ProjectInfoRow>
           <ProjectInfoRow>
@@ -93,6 +98,7 @@ const Project: React.FC<ProjectProps> = ({ formData, handleInputChange }) => {
               value={formData.estimations.estimate_person_month}
               costFlug={true}
               handleInputChange={handleInputChange}
+              required={true}
             />
           </ProjectInfoRow>
         </tbody>
