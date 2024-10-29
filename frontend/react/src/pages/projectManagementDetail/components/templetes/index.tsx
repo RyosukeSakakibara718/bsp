@@ -289,7 +289,7 @@ const ProjectDetail: React.FC<{ id?: string }> = () => {
     });
   }, [projectInfo, assignmentMembersInfo, outsourcingInfo]);
 
-  //-----------------------------------------------------------------------------------------------------------------------------
+  //----------------------------------------------------------登録に関する記載------------------------------------------------------
 
   const navigate = useNavigate();
 
@@ -297,6 +297,12 @@ const ProjectDetail: React.FC<{ id?: string }> = () => {
    * 登録処理
    */
   const handleRegister = async () => {
+    if (inputCheck.length > 0) {
+      setIsShowValidationMessage(true);
+      return;
+    } else {
+      setIsShowValidationMessage(false);
+    }
     try {
       // 登録処理をここに記述
       if (id) {
@@ -350,8 +356,72 @@ const ProjectDetail: React.FC<{ id?: string }> = () => {
     }
   }, []);
 
+  const [inputCheck, setInputCheck] = useState<string[]>([]);
+  const [isShowValidationMessage, setIsShowValidationMessage] =
+    useState<boolean>(false);
+
+  useEffect(() => {
+    // チェック用関数
+    const updateMessage = (condition: boolean, message: string) => {
+      setInputCheck(prev => {
+        if (condition) {
+          // 条件が満たされていない場合にメッセージを追加
+          if (!prev.includes(message)) {
+            return [...prev, message];
+          }
+        } else {
+          // 条件が満たされている場合にメッセージを削除
+          return prev.filter(msg => msg !== message);
+        }
+        return prev;
+      });
+    };
+
+    // 各フィールドのチェック
+    updateMessage(
+      !request.projects.projects_data.name,
+      "案件名を記入してください",
+    );
+    updateMessage(
+      !request.projects.projects_data.company_name,
+      "会社名を記入してください",
+    );
+    updateMessage(
+      !request.projects.estimations.estimate_cost,
+      "見積も原価を記入してください",
+    );
+    updateMessage(
+      !request.projects.estimations.estimate_person_month,
+      "見積工数を記入してください",
+    );
+    updateMessage(
+      !request.projects.estimations.order_price,
+      "受注額を記入してください",
+    );
+  }, [
+    request.projects.projects_data.name,
+    request.projects.projects_data.company_name,
+    request.projects.estimations.estimate_cost,
+    request.projects.estimations.estimate_person_month,
+    request.projects.estimations.order_price,
+  ]);
+
   return (
     <>
+      {isShowValidationMessage ? (
+        <>
+          <Spacer height="30px" />
+          <div className="flex justify-center">
+            <div className="w-[40%]">
+              {inputCheck.map((item, index) => (
+                <p key={index} className="text-red-500 p-[2px]">
+                  {item}
+                </p>
+              ))}
+            </div>
+          </div>
+        </>
+      ) : null}
       <Spacer height="30px" />
       <ProjectInfo
         projectInfo={projectInfo}

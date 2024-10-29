@@ -34,7 +34,8 @@ const CostArea: React.FC<CostAreaProps> = ({
             <input
               type="number"
               name="target_month"
-              value={estimation ? estimation.estimate_person_month : ""}
+              min={0}
+              value={estimation?.estimate_person_month || ""}
               className="border border-gray-300 w-[70px] h-[32px] rounded"
               onChange={e =>
                 handleInputChange(
