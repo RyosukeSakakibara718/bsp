@@ -122,6 +122,7 @@ const ProjectArchiveBody: React.FC<ProjectArchiveBodyProps> = ({
                     type="number"
                     value={workTime}
                     step="1" // 1刻みで変更可能にする
+                    min={0}
                     onChange={e => {
                       const decimalWorkTime = Number(e.target.value); // 入力値を小数点に変換
                       const formattedWorkTime =
