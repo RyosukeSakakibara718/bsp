@@ -6,6 +6,7 @@ import DeleteButton from "../../atoms/button/DeleteButton";
 import TableRowColumn from "../../atoms/column/TableRowColumn";
 import Spacer from "../../atoms/Spacer";
 import TableHeader from "../TableHeader";
+import { memberColumnsWithoutId } from "../../../data/members";
 
 type MemberTableProps = {
   onClose: () => void;
@@ -44,7 +45,7 @@ const DeleteModal: React.FC<MemberTableProps> = ({
           <div className="bg-white shadow-md rounded-lg overflow-hidden">
             <table className="min-w-full border-collapse">
               <thead>
-                <TableHeader />
+                <TableHeader columns={memberColumnsWithoutId} />
               </thead>
               <tbody className="bg-customPurple">
                 <TableRowColumn width="25%">{data.name}</TableRowColumn>

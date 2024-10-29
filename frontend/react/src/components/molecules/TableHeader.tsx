@@ -3,7 +3,7 @@ import React from "react";
 import TableHeaderColumn from "../atoms/column/TableHeaderColumn";
 
 type TableHeaderProps = {
-  columns?: Array<string>;
+  columns: Array<string>;
 };
 
 const TableHeader: React.FC<TableHeaderProps> = ({ columns }) => {

@@ -107,6 +107,7 @@ const MemberTable: React.FC = () => {
    * 追加モーダルを開く
    */
   const handleOpenAddModal = () => {
+    setAddData(initialFormData);
     seAddeteModalOpen(true);
   };
 

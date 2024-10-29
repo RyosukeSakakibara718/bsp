@@ -55,7 +55,6 @@ const Home: React.FC = () => {
     getProjectsAll()
       .then((projects: Project) => {
         if (projects !== null) {
-          console.log(projects.projects)
           setProjects(projects.projects);
         }
         setLoading(false);
