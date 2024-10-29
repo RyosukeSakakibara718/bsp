@@ -4,6 +4,8 @@ type AddTableColumnProps = {
   width?: string;
   onChange: (value: string | number) => void;
   inputType?: string;
+  inputCheck?: boolean;
+  isAbleToSubmit?: boolean
 };
 
 /**
@@ -18,6 +20,8 @@ const AddTableColumn: React.FC<AddTableColumnProps> = ({
   width,
   onChange,
   inputType,
+  inputCheck,
+  isAbleToSubmit
 }) => {
   const [value, setValue] = useState("");
 
@@ -50,7 +54,10 @@ const AddTableColumn: React.FC<AddTableColumnProps> = ({
         type={inputType ? inputType : "text"}
         value={value}
         onChange={handleChange}
-        className="bg-customPurple w-full px-2 py-2 border border-black rounded-md box-border text-base text-gray-800 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200 placeholder-gray-400"
+        min={inputType === "number" ? 0 : undefined}
+        className={`bg-customPurple w-full px-2 py-2 border rounded-md box-border text-base text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-200 placeholder-gray-400 ${
+          !inputCheck && !isAbleToSubmit ? "border-red-500" : "border-black"
+        }`}
       />
     </th>
   );

@@ -5,6 +5,8 @@ type EditTableColumnProps = {
   initialValue: string | number;
   onChange: (value: string) => void;
   inputType?: string;
+  inputCheck: boolean;
+  isAbleToSubmit: boolean;
 };
 
 /**
@@ -21,6 +23,8 @@ const EditTableColumn: React.FC<EditTableColumnProps> = ({
   initialValue,
   onChange,
   inputType,
+  inputCheck,
+  isAbleToSubmit,
 }) => {
   const [value, setValue] = useState(initialValue);
 
@@ -45,7 +49,10 @@ const EditTableColumn: React.FC<EditTableColumnProps> = ({
         type={inputType ? inputType : "text"}
         value={value}
         onChange={handleChange}
-        className="bg-customPurple w-full px-2 py-2 border border-black rounded-md box-border text-base text-gray-800 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200 placeholder-gray-400"
+        min={inputType === "number" ? 0 : undefined}
+        className={`bg-customPurple w-full px-2 py-2 border rounded-md box-border text-base text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-200 placeholder-gray-400 ${
+          !inputCheck && !isAbleToSubmit ? "border-red-500" : "border-black"
+        }`}
       />
     </th>
   );

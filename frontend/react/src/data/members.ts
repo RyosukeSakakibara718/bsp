@@ -28,3 +28,14 @@ export const sampleMembersData = [
     base_cost_start_date: "2024/07/18",
   },
 ];
+
+export const memberColumns = ["ID", "名前", "等級", "原価", "開始日"];
+
+export const memberColumnsWithoutId = ["名前", "等級", "原価", "開始日"];
+
+export const initialInputCheckProps = {
+  name: false,
+  rank: false,
+  base_cost: false,
+  base_cost_start_date: false,
+};

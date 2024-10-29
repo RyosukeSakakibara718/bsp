@@ -1,7 +1,6 @@
 import React from "react";
 
 type DecideButtonProps = {
-  onClose: () => void;
   handleSubmitEditData: () => void;
 };
 
@@ -15,11 +14,9 @@ type DecideButtonProps = {
  * @returns {JSX.Element} 決定用のボタン要素を返します。
  */
 const DecideButton: React.FC<DecideButtonProps> = ({
-  onClose,
   handleSubmitEditData,
 }) => {
   const hundleSubmit = () => {
-    onClose();
     handleSubmitEditData ? handleSubmitEditData() : null;
   };
   return (

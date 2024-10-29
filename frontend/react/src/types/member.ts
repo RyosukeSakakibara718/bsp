@@ -11,3 +11,11 @@ export type MemberTableProps = {
   next_cursor: string | null,
   previous_cursor: string | null
 };
+
+
+export type inputCheckProps = {
+  name:boolean,
+  rank: boolean,
+  base_cost: boolean,
+  base_cost_start_date: boolean
+}

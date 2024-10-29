@@ -1,11 +1,12 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
-import { MemberData } from "../../../types/member";
+import { inputCheckProps, MemberData } from "../../../types/member";
 import CancelButton from "../../atoms/button/CancelButton";
 import DecideButton from "../../atoms/button/DecideButton";
 import Spacer from "../../atoms/Spacer";
 import EditTableRow from "../row/EditTableRow";
 import TableHeader from "../TableHeader";
+import { initialInputCheckProps, memberColumnsWithoutId } from "../../../data/members";
 
 type MemberTableProps = {
   onClose: () => void;
@@ -38,16 +39,44 @@ const EditModal: React.FC<MemberTableProps> = ({
    * @param {string} value - 新しい値。
    */
 
+  const [inputCheck, setInputCheck] = useState<inputCheckProps>(initialInputCheckProps)
+  const [ isAbleToSubmit, setIsAbleToSubmit ] = useState<boolean>(true)
+
+  useEffect(() => {
+    setInputCheck({
+      name: editData.name.trim() !== "", 
+      rank: editData.rank > 0,
+      base_cost: editData.base_cost > 0,
+      base_cost_start_date: editData.base_cost_start_date.trim() !== "",
+    });
+  }, [editData]);
+
+  const handleCheckEditData = () => {
+    if (Object.values(inputCheck).every(Boolean) === true) {
+      handleSubmitEditData()
+      onClose()
+    }else {
+      setIsAbleToSubmit(false)
+    }
+  }
+
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50 z-50">
       <div className="bg-white shadow-lg rounded-lg p-6 w-full max-w-3xl mx-auto">
         <div className="mb-4 text-left">
           <p className="text-2xl font-extrabold px-5">編集</p>
         </div>
+        {Object.values(inputCheck).every(Boolean) !== true &&
+        !isAbleToSubmit ? (
+          <>
+            <p className="text-red-500">入力項目を確認してください</p>
+            <Spacer height={"20px"} />
+          </>
+        ) : null}
         <div className="mx-5 grid shadow-lg rounded-lg overflow-hidden">
           <table className="min-w-full border-collapse">
             <thead>
-              <TableHeader />
+              <TableHeader columns={memberColumnsWithoutId} />
             </thead>
             <tbody>
               {editData && (
@@ -58,6 +87,8 @@ const EditModal: React.FC<MemberTableProps> = ({
                   base_cost={editData.base_cost}
                   base_cost_start_date={editData.base_cost_start_date}
                   onValueChange={handleValueChange}
+                  inputCheck={inputCheck}
+                  isAbleToSubmit={isAbleToSubmit}
                 />
               )}
             </tbody>
@@ -67,8 +98,7 @@ const EditModal: React.FC<MemberTableProps> = ({
         <div className="flex justify-center">
           <div className="flex space-x-4">
             <DecideButton
-              onClose={() => onClose()}
-              handleSubmitEditData={handleSubmitEditData}
+              handleSubmitEditData={handleCheckEditData}
             />
             <CancelButton onClose={() => onClose()} />
           </div>
